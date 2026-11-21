@@ -190,6 +190,7 @@ select.inp{appearance:auto}
 .og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .og .opt{margin-bottom:0;font-size:15px;padding:16px 18px}
 @media (max-width:600px){.og{grid-template-columns:1fr}}
+@media (max-width:700px){.qz{padding:0 20px}}
 /* paywall */
 .lk{display:inline-flex;align-items:center;gap:6px}
 .tab.lockd{color:var(--mute)}
@@ -538,14 +539,154 @@ const CONSEIL = {
   infirmier:{'pro-assp':[1,'Avec un bac pro ASSP, tu peux passer par l’aide-soignance avant l’IFSI, ou candidater directement.'],'st2s':[0,'Le bac ST2S est l’un des profils les plus courants en IFSI.'],'cap':[1,'Avec un CAP, la voie de l’aide-soignance est la plus adaptée pour commencer.'],'sup':[2,'En réorientation, l’IFSI en apprentissage permet d’être payé pendant la formation.']},
   electricien:{'pro-elec':[2,'Avec un bac pro électricité, le BTS Électrotechnique en alternance est la suite logique.'],'cap':[1,'Après un CAP, le bac pro te permet d’évoluer vers plus de responsabilités.'],'sti2d':[2,'Avec un bac STI2D, le BTS Électrotechnique t’ouvre les postes de technicien.'],'g-sci':[2,'Avec un bac général scientifique, le BTS Électrotechnique est accessible directement.']}
 };
-const QUIZ = [
-  {q:'Quelle formation suis-tu en ce moment ?', profil:true, o:PROFILS.map(p=>[p[0],p[1]])},
-  {q:'Tu préfères passer ta journée à…', o:[['Aider ou soigner des gens',{infirmier:2,medecin:2,kine:2,psychologue:1}],['Argumenter et convaincre',{avocat:2,commercial:2,prof:1}],['Réparer, construire ou coder',{electricien:2,ingenieur:2,developpeur:2}],['Bouger, être sur le terrain',{sport:2,policier:2,kine:1}],['M’occuper d’animaux',{veterinaire:4}]]},
-  {q:'Ta matière la plus forte ?', o:[['SES, philo, histoire',{avocat:2,psychologue:1,prof:1,commercial:1}],['SVT, biologie',{medecin:2,veterinaire:2,infirmier:2,kine:1}],['Maths, physique, techno',{ingenieur:2,developpeur:2,electricien:2,comptable:1}],['Sport',{sport:3,kine:1,policier:1}],['Français, arts, communication',{communitymanager:3,prof:1}]]},
-  {q:'Tu te vois travailler…', o:[['Dans un bureau ou au tribunal',{avocat:2,comptable:2,commercial:1}],['À l’hôpital ou en cabinet',{infirmier:2,medecin:2,kine:2,psychologue:2,veterinaire:1}],['Sur le terrain ou dehors',{electricien:2,policier:2,sport:2}],['Avec des enfants',{prof:3,sport:1,psychologue:1}],['Derrière un écran',{developpeur:2,communitymanager:2,ingenieur:1}]]},
-  {q:'Combien d’années d’études après le bac ?', o:[['2 ans maximum',{electricien:2,commercial:2,policier:2,sport:1,communitymanager:1,developpeur:1}],['Environ 3 ans',{infirmier:2,developpeur:1,communitymanager:1,sport:1}],['5 ans, ça me va',{ingenieur:2,kine:2,psychologue:2,prof:2,avocat:1}],['Le plus long ne me fait pas peur',{medecin:3,veterinaire:2,comptable:2,avocat:1}],['Je ne sais pas encore',{}]]},
-  {q:'En groupe, tu es plutôt…', o:[['Celui qui prend la parole',{avocat:1,commercial:1,prof:1}],['Celui qui écoute et rassure',{infirmier:1,psychologue:2}],['Celui qui passe à l’action',{electricien:1,policier:1,sport:1}],['Celui qui organise',{comptable:1,ingenieur:1,communitymanager:1}]]}
+// ===== QUIZ ADAPTATIF =====
+const DOM_BASE = {sante:{medecin:2,infirmier:2,kine:2,psychologue:2}, loi:{avocat:2,policier:2}, tech:{ingenieur:2,developpeur:2,electricien:2}, biz:{commercial:2,comptable:2}, sport:{sport:3,kine:1}, educ:{prof:3,sport:1,psychologue:1}, animaux:{veterinaire:3}, com:{communitymanager:3,commercial:1}};
+const UNIVERS = [
+  ['Soigner et prendre soin des autres','sante'],
+  ['Défendre, protéger, faire respecter la loi','loi'],
+  ['Inventer, construire ou coder','tech'],
+  ['Vendre, gérer, faire tourner une entreprise','biz'],
+  ['Le sport et le corps','sport'],
+  ['Transmettre et accompagner les jeunes','educ'],
+  ['Les animaux','animaux'],
+  ['Communiquer et créer du contenu','com']
 ];
+const SPE = [
+  ['Maths',{ingenieur:2,developpeur:1,comptable:1},'maths'],
+  ['Physique-chimie',{ingenieur:2,medecin:1,kine:1,veterinaire:1},'pc'],
+  ['SVT',{medecin:2,veterinaire:2,infirmier:1,kine:1},'svt'],
+  ['SES',{commercial:2,comptable:1,avocat:1},'ses'],
+  ['HGGSP',{avocat:2,policier:1,prof:1},'hggsp'],
+  ['HLP (humanités, philo)',{psychologue:2,avocat:1,prof:1},'hlp'],
+  ['Langues (LLCER, AMC)',{communitymanager:1,prof:1,commercial:1},'llcer'],
+  ['NSI (numérique)',{developpeur:3,ingenieur:1},'nsi'],
+  ['Sciences de l’ingénieur',{ingenieur:3,electricien:1},'si'],
+  ['Arts',{communitymanager:2},'arts'],
+  ['Éducation physique (EPPCS)',{sport:3,kine:1},'eppcs'],
+  ['Biologie-écologie',{veterinaire:2,ingenieur:1},'bioeco']
+];
+const FOLLOW = {
+  sante:{q:'Dans le soin, tu te vois plutôt…', o:[['Diagnostiquer et décider du traitement',{medecin:5}],['Être auprès des patients tous les jours',{infirmier:5}],['Rééduquer le corps par le mouvement',{kine:5}],['Écouter et aider à aller mieux dans sa tête',{psychologue:5}]]},
+  loi:{q:'Pour faire respecter la loi, tu préfères…', o:[['Plaider et conseiller des clients',{avocat:5}],['Être sur le terrain pour protéger les gens',{policier:5}],['Enquêter et résoudre des affaires',{policier:4,avocat:1}]]},
+  tech:{q:'Dans la tech, ce qui te plaît le plus…', o:[['Concevoir des projets innovants (énergie, transports, robots…)',{ingenieur:5}],['Créer des applis, des sites, des jeux',{developpeur:5}],['Travailler de tes mains sur des installations',{electricien:5}]]},
+  biz:{q:'Dans l’entreprise, tu te vois plutôt…', o:[['Négocier et convaincre des clients',{commercial:5}],['Gérer les chiffres et conseiller des patrons',{comptable:5}],['Faire connaître une marque',{communitymanager:3,commercial:2}]]},
+  sport:{q:'Dans le sport, tu préfères…', o:[['Coacher des gens en salle ou en club',{sport:5}],['Enseigner le sport à des élèves',{sport:5},'eps'],['Soigner les sportifs blessés',{kine:5}]]},
+  educ:{q:'Avec les jeunes, tu te vois…', o:[['Enseigner aux enfants en primaire',{prof:5}],['Enseigner le sport',{sport:5},'eps'],['Aider ceux qui sont en difficulté',{psychologue:4,prof:1}]]},
+  animaux:{q:'Avec les animaux, tu es prêt(e) à…', o:[['Faire de longues études pour les soigner et les opérer',{veterinaire:5}],['Les soigner, mais avec des études plus courtes',{veterinaire:2},'vetcourt']]},
+  com:{q:'Dans la communication, ce qui t’attire…', o:[['Gérer les réseaux sociaux d’une marque',{communitymanager:5}],['Créer des vidéos et du contenu',{communitymanager:5}],['Vendre et faire la promo d’un produit',{commercial:3,communitymanager:2}]]}
+};
+const Q = {
+  voie:{q:'Tu es dans quelle voie en ce moment ?', sub:'On adapte les questions suivantes à ton parcours.', grid:true, o:[['Bac général',{},'gen'],['Bac technologique',{},'techno'],['Bac professionnel',{},'pro'],['CAP',{},'cap'],['Déjà dans le supérieur, je me réoriente',{},'sup']]},
+  spe:{q:'Quelles sont tes spécialités ?', sub:'Choisis-en 2 ou 3 (celles que tu as ou que tu vas prendre).', grid:true, multi:[2,3], o:SPE},
+  spefav:{q:'Parmi tes spécialités, laquelle tu préfères vraiment ?', sub:'Celle où tu prends le plus de plaisir, pas forcément ta meilleure note.', dyn:a=>a.spe.map(i=>SPE[i])},
+  techno:{q:'Quel bac technologique ?', grid:true, o:[['STMG',{commercial:2,comptable:2,avocat:1,communitymanager:1},'stmg'],['STI2D',{ingenieur:2,electricien:2,developpeur:1},'sti2d'],['ST2S',{infirmier:3,psychologue:1},'st2s'],['STL',{ingenieur:1,infirmier:1,medecin:1},'stl'],['STD2A',{communitymanager:2},'std2a'],['STHR',{commercial:1},'sthr'],['STAV',{veterinaire:2},'stav']]},
+  stmg:{q:'Ta spécialité de terminale STMG ?', sub:'Si tu es en 1re, choisis celle qui t’attire.', o:[['Gestion et finance',{comptable:3}],['Mercatique (marketing)',{commercial:3,communitymanager:2}],['Ressources humaines et communication',{psychologue:1,communitymanager:1,avocat:1}],['Systèmes d’information de gestion',{developpeur:3}]]},
+  stmgfav:{q:'En STMG, la matière qui te plaît le plus ?', o:[['Droit',{avocat:3,policier:1}],['Économie',{commercial:1,comptable:1}],['Management',{commercial:2}],['Ma spécialité de terminale',{}]]},
+  sti2d:{q:'Ta spécialité en STI2D ?', o:[['Systèmes d’information et numérique (SIN)',{developpeur:3,ingenieur:1}],['Énergies et environnement (EE)',{electricien:2,ingenieur:2}],['Innovation technologique et éco-conception (ITEC)',{ingenieur:3}],['Architecture et construction (AC)',{ingenieur:2,electricien:1}]]},
+  st2s:{q:'En ST2S, ce que tu préfères ?', o:[['La biologie et le corps humain',{infirmier:2,medecin:1,kine:1}],['Le social et l’accompagnement des personnes',{psychologue:2,infirmier:1,prof:1}]]},
+  pro:{q:'Ton bac pro est dans quel domaine ?', grid:true, o:[['Commerce, vente',{commercial:3},'pro-com'],['Électricité, énergie, industrie',{electricien:3,ingenieur:1},'pro-elec'],['Santé, social (ASSP)',{infirmier:3},'pro-assp'],['Métiers de la sécurité',{policier:4},'pro-secu'],['Gestion, administration',{comptable:2},'pro-ges'],['Informatique, réseaux (CIEL)',{developpeur:2,electricien:1},'pro-ciel'],['Autre domaine',{},'pro-autre']]},
+  cap:{q:'Ton CAP est dans quel domaine ?', o:[['Vente, commerce',{commercial:2}],['Électricité, bâtiment',{electricien:3}],['Petite enfance, aide à la personne',{infirmier:1,prof:1}],['Autre domaine',{}]]},
+  supdom:{q:'Dans quel domaine sont tes études actuelles ?', sub:'Pas d’inquiétude : beaucoup de gens changent complètement de voie.', grid:true, o:[['Commerce, gestion',{commercial:1,comptable:1}],['Droit',{avocat:1}],['Sciences, informatique',{ingenieur:1,developpeur:1}],['Santé, social',{infirmier:1,psychologue:1}],['Lettres, langues, sciences humaines',{prof:1,psychologue:1,communitymanager:1}],['Autre',{}]]},
+  univers:{q:'Quel univers t’attire le plus ?', sub:'Fie-toi à ton envie, pas à ce qu’on attend de toi.', grid:true, o:UNIVERS.map(u=>[u[0],{},u[1]])},
+  follow:{dyn:a=>FOLLOW[UNIVERS[a.univers][1]].o, title:a=>FOLLOW[UNIVERS[a.univers][1]].q},
+  univers2:{q:'Et en deuxième choix ?', sub:'Ça nous aide à te proposer des pistes de secours.', grid:true, dyn:a=>UNIVERS.map((u,i)=>[u[0],{},u[1],i]).filter(x=>x[3]!==a.univers).concat([['Aucun autre',{},'none']])},
+  duree:{title:a=>['cap','sup'].includes(Q.voie.o[a.voie][2])?'Combien d’années d’études tu es prêt(e) à faire encore ?':'Combien d’années d’études après le bac, ça te va ?', o:[['2 ans maximum',{},2],['Environ 3 ans',{},3],['5 ans, pas de souci',{},5],['Autant qu’il faut pour le métier que je veux',{},99]]},
+  argent:{q:'Être payé pendant tes études (alternance), c’est…', o:[['Indispensable pour moi',{},2],['Ce serait un vrai plus',{},1],['Pas une priorité',{},0]]},
+  niveau:{q:'Tes résultats en ce moment, honnêtement ?', sub:'Ça ne ferme aucune porte : ça nous aide à te conseiller le chemin le plus réaliste.', o:[['Très bons',{},2],['Corrects',{},1],['Fragiles, je dois progresser',{},0]]}
+};
+function flow(a){
+  const f=['voie']; const v=a.voie===undefined?null:Q.voie.o[a.voie][2];
+  if(v==='gen'){ f.push('spe'); if(a.spe&&a.spe.length) f.push('spefav'); }
+  if(v==='techno'){ f.push('techno'); const t=a.techno===undefined?null:Q.techno.o[a.techno][2];
+    if(t==='stmg') f.push('stmg','stmgfav'); if(t==='sti2d') f.push('sti2d'); if(t==='st2s') f.push('st2s'); }
+  if(v==='pro') f.push('pro');
+  if(v==='cap') f.push('cap');
+  if(v==='sup') f.push('supdom');
+  f.push('univers'); if(a.univers!==undefined) f.push('follow');
+  f.push('univers2','duree','argent','niveau');
+  return f;
+}
+const qOpts=(id,a)=>Q[id].dyn?Q[id].dyn(a):Q[id].o;
+const qTitle=(id,a)=>Q[id].title?Q[id].title(a):Q[id].q;
+
+// Durée minimale pour exercer, et attributs des chemins
+const MIN_ANS = {medecin:9,veterinaire:6,comptable:8,avocat:7,ingenieur:5,psychologue:5,kine:5,prof:5,infirmier:3,developpeur:2,commercial:2,communitymanager:2,sport:1,electricien:2,policier:1};
+function contexte(a){
+  const g=id=>a[id]===undefined?null:qOpts(id,a)[a[id]];
+  const v=g('voie')[2], t=g('techno'), pro=g('pro');
+  const spe=(a.spe||[]).map(i=>SPE[i][2]);
+  let prof='sup';
+  if(v==='gen'){ prof = spe.some(s=>['svt','bioeco'].includes(s))?'g-bio':spe.some(s=>['maths','pc','nsi','si'].includes(s))?'g-sci':'g-lit'; }
+  else if(v==='techno') prof=t?t[2]:'techno';
+  else if(v==='pro') prof=pro?pro[2]:'pro';
+  else if(v==='cap') prof='cap';
+  const fol=g('follow');
+  return {voie:v, prof, spe, duree:g('duree')[2], pay:g('argent')[2], lvl:g('niveau')[2], tag:fol&&fol[2]};
+}
+function scorer(a){
+  const sc=Object.fromEntries(Object.keys(METIERS).map(k=>[k,0])), why={};
+  const add=(w,label,m=1)=>{for(const k in w){sc[k]+=w[k]*m; if(w[k]*m>=1.5&&label)(why[k]=why[k]||[]).push([label,w[k]*m]);}};
+  const LBL={spefav:'ta spécialité préférée, ',techno:'ton bac ',stmg:'ta spécialité ',stmgfav:'ton goût pour la matière ',sti2d:'ta spécialité ',st2s:'ton intérêt pour ',pro:'ton bac pro ',cap:'ton CAP ',supdom:'tes études en '};
+  flow(a).forEach(id=>{
+    if(a[id]===undefined||['univers','univers2','duree','argent','niveau','voie'].includes(id)) return;
+    if(id==='spe'){ a.spe.forEach(i=>add(SPE[i][1],'ta spécialité '+SPE[i][0])); return; }
+    const o=qOpts(id,a)[a[id]]; add(o[1],(LBL[id]||'ta réponse ')+'« '+o[0]+' »', id==='spefav'?1.5:1);
+  });
+  const u1=UNIVERS[a.univers]; add(DOM_BASE[u1[1]],'ton attirance pour « '+u1[0].toLowerCase()+' »',1.5);
+  const u2=qOpts('univers2',a)[a.univers2]; if(u2&&u2[2]!=='none') add(DOM_BASE[u2[2]],'ton 2e choix « '+u2[0].toLowerCase()+' »',0.75);
+  const c=contexte(a);
+  for(const k in sc){ if(MIN_ANS[k]>c.duree+1) sc[k]-= (MIN_ANS[k]-c.duree>=4?4:2); }
+  return {sc,why,c};
+}
+function recoChemin(k,c,a){
+  const r=(i,t)=>[i,t];
+  const pro=['cap'].includes(c.voie)||c.voie==='pro';
+  switch(k){
+    case 'avocat': return c.voie==='gen'&&c.lvl===2? r(1,'Avec de très bons résultats en général, une double licence ou un IEP te démarque.') : r(0,'La licence de droit à la fac est la voie la plus directe, accessible depuis tous les bacs.');
+    case 'infirmier': if(c.pay===2) return r(2,'Tu veux être payé : l’IFSI en apprentissage existe dans certains instituts.');
+      if(c.voie==='cap'||(c.prof==='pro-assp'&&c.lvl===0)) return r(1,'Commencer par le diplôme d’aide-soignant est une entrée progressive et solide.');
+      return r(0,'Avec ton profil, tu peux candidater directement en IFSI sur Parcoursup.');
+    case 'electricien': if(c.voie==='cap') return r(1,'Après un CAP, le bac pro te fait évoluer vers plus de responsabilités.');
+      if(c.voie==='pro'||c.voie==='gen'||c.voie==='techno') return r(2,'Avec le bac, le BTS Électrotechnique en alternance est la meilleure suite.');
+      return r(0,'Le CAP est le moyen le plus rapide de travailler.');
+    case 'medecin': return c.lvl===2? r(0,'Avec de très bons résultats, le PASS est la voie la plus courante.') : r(1,'La L.AS te laisse une vraie licence en cas d’échec et deux chances d’entrer en médecine.');
+    case 'ingenieur': if(c.voie==='techno'||c.pay===2||c.lvl===0) return r(2,'Le BUT puis l’école d’ingé en alternance : concret, progressif et payé.');
+      if(c.voie==='gen'&&c.lvl===2&&c.spe.includes('maths')) return r(0,'Avec maths et de très bons résultats, la prépa t’ouvre les meilleures écoles.');
+      return r(1,'Une école post-bac t’évite le stress des concours de prépa.');
+    case 'psychologue': return r(0,'La licence puis le master de psycho à la fac, c’est la voie officielle vers le titre.');
+    case 'sport': if(c.tag==='eps') return r(2,'Tu veux enseigner : licence STAPS puis le concours de prof d’EPS.');
+      if(c.duree<=2||c.pay===2||pro) return r(0,'Le BPJEPS est court, souvent en alternance et ne demande pas le bac.');
+      return r(1,'La licence STAPS t’ouvre le plus de portes dans le sport.');
+    case 'kine': return (c.spe.includes('eppcs')||UNIVERS[a.univers][1]==='sport')? r(1,'Tu aimes le sport : certains instituts de kiné recrutent après une 1re année de STAPS.') : r(0,'Le PASS ou une L.AS est la voie d’accès la plus courante.');
+    case 'commercial': if(c.duree<=2||c.pay===2||c.voie==='pro'||c.voie==='cap') return r(0,'Le BTS NDRC ou MCO en alternance : 2 ans, payé, et tu travailles vite.');
+      if(c.duree>=5&&c.lvl>=1) return r(2,'Tu es prêt à faire 5 ans : l’école de commerce vise des postes mieux payés.');
+      return r(1,'Le BUT TC est complet et gratuit, avec la possibilité de continuer ensuite.');
+    case 'comptable': if(c.voie==='sup') return r(2,'Depuis le supérieur, le master CCA à la fac est un bon raccourci.');
+      if(c.prof==='stmg'||c.voie==='pro'||c.pay===2||c.lvl===0) return r(1,'Commencer par un BTS CG ou un BUT GEA te permet de travailler vite, puis de continuer.');
+      return r(0,'Le DCG est la voie directe vers l’expertise comptable.');
+    case 'developpeur': if(c.voie==='cap'||c.voie==='sup') return r(2,'L’école 42 est gratuite et accessible sans condition de diplôme, dès 18 ans.');
+      if(c.duree<=2||c.pay===2) return r(0,'Le BTS SIO en alternance : 2 ans et payé.');
+      return r(1,'Le BUT informatique est complet et reconnu par les entreprises.');
+    case 'prof': return c.voie==='sup'? r(2,'Avec une licence, tu peux passer le concours en reconversion.') : r(0,'La nouvelle licence professorat des écoles prépare directement au métier.');
+    case 'veterinaire': return c.lvl===2? r(0,'Avec de très bons résultats, tente le concours post-bac sur Parcoursup.') : r(1,'La prépa BCPST te donne plus de temps pour te préparer au concours.');
+    case 'policier': if(c.voie==='cap') return r(0,'Policier adjoint est accessible sans le bac et te permet de passer ensuite le concours.');
+      return r(1,'Avec le bac, tu peux passer le concours de gardien de la paix.');
+    case 'communitymanager': if(c.duree<=2||c.pay===2) return r(0,'Le BTS Communication en alternance : rapide et payé.');
+      return r(1,'Le BUT MMI te forme à la vidéo, au graphisme et aux réseaux.');
+  }
+  return r(0,'');
+}
+function alertes(k,c){
+  const n=[];
+  if(MIN_ANS[k]>c.duree+1) n.push('Il faut au moins '+MIN_ANS[k]+' ans d’études pour ce métier, plus que ce que tu as indiqué.');
+  if(k==='medecin'&&c.voie==='gen'&&!c.spe.some(s=>['svt','pc'].includes(s))) n.push('La plupart des admis ont pris SVT ou physique-chimie : pas obligatoire, mais prépare bien les sciences.');
+  if(['medecin','veterinaire','kine'].includes(k)&&c.voie==='techno'&&!['st2s','stl'].includes(c.prof)) n.push('Depuis ton bac, cette voie est très sélective : vise une L.AS ou des formations où ton profil est attendu.');
+  if(k==='ingenieur'&&c.voie==='gen'&&!c.spe.includes('maths')) n.push('Les écoles d’ingénieurs attendent en général la spécialité maths (ou l’option maths complémentaires).');
+  if(['medecin','veterinaire'].includes(k)&&c.lvl===0) n.push('Formation très sélective : garde toujours un plan B dans tes vœux Parcoursup.');
+  if(k==='veterinaire'&&c.tag==='vetcourt') n.push('Pour des études plus courtes, regarde aussi le métier d’auxiliaire vétérinaire.');
+  return n;
+}
+
 
 const st = {chemin:0, ecType:'all', ecVille:'', ecF:'droit', qi:0, ans:[], tab:'msg', tone:'formel'};
 const app = document.getElementById('app');
@@ -597,7 +738,7 @@ function home(){
   </div></section>
 
   <section style="padding:0 0 80px"><div class="wrap">
-    <div class="quizb"><div><h2>Pas encore d'idée de métier ?</h2><p>Réponds à 6 questions, on te propose des pistes parmi 15 métiers adaptées à ta formation actuelle.</p></div>
+    <div class="quizb"><div><h2>Pas encore d'idée de métier ?</h2><p>Réponds à une dizaine de questions adaptées à ton bac, on te propose des pistes parmi 15 métiers adaptées à ta formation actuelle.</p></div>
     <a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div>
   </div></section>`;
 }
@@ -751,28 +892,50 @@ function paiement(){
 }
 
 function quiz(){
-  if(st.qi>=QUIZ.length){
-    const sc = Object.fromEntries(Object.keys(METIERS).map(k=>[k,0]));
-    const prof = PROFILS[st.ans[0]] || PROFILS[0];
-    st.ans.forEach((a,i)=>{const w=QUIZ[i].o[a][1];for(const k in w)sc[k]+=w[k];});
-    const max = Math.max(1,...Object.values(sc));
-    const r = Object.entries(sc).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const a=st.qa||(st.qa={}); const f=flow(a);
+  if(st.qi>=f.length){
+    const {sc,why,c}=scorer(a);
+    const r=Object.entries(sc).sort((x,y)=>y[1]-x[1]);
+    const max=Math.max(1,r[0][1]); let n=r.slice(0,3).filter(([k,v],i)=>i<2||v>=max*0.45).length; const top=r.slice(0,n), more=r.slice(n,n+4);
+    const pl={gen:'Bac général',techno:'Bac technologique',pro:'Bac professionnel',cap:'CAP',sup:'Réorientation'}[c.voie];
+    const det=c.voie==='gen'?' · '+c.spe.map(s=>SPE.find(x=>x[2]===s)[0]).join(', '):c.voie==='techno'&&a.techno!==undefined?' · '+Q.techno.o[a.techno][0]:'';
     return `<div class="wrap page fade"><div class="qz">
       <div class="crumb">Quiz · Résultats</div>
       <h1>Les métiers qui te ressemblent</h1>
-      <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${prof[0]}</b></p>
-      ${r.map(([k,v],i)=>{const c=(CONSEIL[k]||{})[prof[2]];const ch=c?c[0]:0;return `<div class="card" style="margin-bottom:12px"><div class="res"><div style="flex:1"><h3 style="font-size:19px">${METIERS[k].nom}${i===0?' <span class="pill" style="margin-left:8px;font-size:12px">Meilleur match</span>':''}</h3><p style="margin:4px 0 0;color:var(--ink2);font-size:14px">${METIERS[k].resume}</p>${c?`<p style="margin:8px 0 0;font-size:14px;color:var(--gold-d);font-weight:500">${c[1]}</p>`:''}<div class="bar2"><i style="width:${Math.round(v/max*100)}%"></i></div></div><a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Chemin conseillé : ${ch+1}</a></div></div>`}).join('')}
-      <button class="btn btn-o" id="rq" style="margin-top:10px">Refaire le quiz</button>
+      <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${pl}${det}</b></p>
+      ${top.map(([k,v],i)=>{const [ch,rs]=recoChemin(k,c,a);const al=alertes(k,c);const w=[...new Set((why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,2);
+        return `<div class="card" style="margin-bottom:14px"><div class="res"><div style="flex:1">
+        <h3 style="font-size:19px">${METIERS[k].nom}${i===0?' <span class="pill" style="margin-left:8px;font-size:12px">Meilleur match</span>':''}</h3>
+        <p style="margin:4px 0 0;color:var(--ink2);font-size:14px">${METIERS[k].resume}</p>
+        ${w.length?`<p style="margin:10px 0 0;font-size:14px"><b>Pourquoi :</b> ${w.join(' et ')}.</p>`:''}
+        <p style="margin:8px 0 0;font-size:14px;color:var(--gold-d);font-weight:500">Chemin conseillé : ${METIERS[k].chemins[ch].nom}. ${rs}</p>
+        ${al.map(x=>`<p style="margin:8px 0 0;font-size:13px;color:#9A3412">⚠ ${x}</p>`).join('')}
+        <div class="bar2"><i style="width:${Math.max(8,Math.round(v/max*100))}%"></i></div></div>
+        <a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Voir le chemin ${ch+1}</a></div></div>`}).join('')}
+      <p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
+      <div class="sugg" style="margin:0">${more.map(([k])=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom}</a>`).join('')}</div>
+      <button class="btn btn-o" id="rq" style="margin-top:22px">Refaire le quiz</button>
     </div></div>`;
   }
-  const q = QUIZ[st.qi];
+  const id=f[st.qi], q=Q[id], opts=qOpts(id,a), multi=q.multi, sel=a[id];
+  const isOn=i=>multi?(st.qm||[]).includes(i):sel===i;
   return `<div class="wrap page fade"><div class="qz">
-    <div class="crumb">Quiz orientation · Question ${st.qi+1} sur ${QUIZ.length}</div>
-    <div class="prog"><i style="width:${(st.qi)/QUIZ.length*100}%"></i></div>
-    <h1>${q.q}</h1>
-    ${q.profil?`<div class="og">${q.o.map((o,i)=>`<button class="opt ${st.ans[st.qi]===i?'on':''}" data-o="${i}">${o[0]}</button>`).join('')}</div>`:q.o.map((o,i)=>`<button class="opt ${st.ans[st.qi]===i?'on':''}" data-o="${i}">${o[0]} ${IC.arrow}</button>`).join('')}
-    ${st.qi>0?`<button class="btn btn-o" id="qb" style="margin-top:8px">Question précédente</button>`:''}
+    <div class="crumb">Quiz orientation · Question ${st.qi+1}</div>
+    <div class="prog"><i style="width:${Math.min(95,st.qi/(f.length+(a.univers===undefined?1:0)+(a.voie===undefined?2:0))*100)}%"></i></div>
+    <h1>${qTitle(id,a)}</h1>
+    ${q.sub?`<p style="color:var(--ink2);margin:-12px 0 20px">${q.sub}</p>`:''}
+    ${q.grid||multi?`<div class="og">${opts.map((o,i)=>`<button class="opt ${isOn(i)?'on':''}" data-o="${i}">${o[0]}${multi&&isOn(i)?' ✓':''}</button>`).join('')}</div>`:opts.map((o,i)=>`<button class="opt ${isOn(i)?'on':''}" data-o="${i}">${o[0]} ${IC.arrow}</button>`).join('')}
+    ${multi?`<button class="btn btn-p" id="qv" style="margin-top:16px" ${(st.qm||[]).length<multi[0]?'disabled':''}>Valider (${(st.qm||[]).length} choisie${(st.qm||[]).length>1?'s':''})</button>`:''}
+    ${st.qi>0?`<button class="btn btn-o" id="qb" style="margin-top:16px;margin-left:${multi?'8px':'0'}">Question précédente</button>`:''}
   </div></div>`;
+}
+function qAnswer(id,val){
+  const prev=JSON.stringify(st.qa[id]); st.qa[id]=val; const changed=prev!==JSON.stringify(val); const keep=new Set(flow(st.qa));
+  // nettoie les réponses devenues incohérentes
+  for(let i=0;i<4;i++){ for(const k in st.qa) if(!keep.has(k)) delete st.qa[k]; flow(st.qa).forEach(x=>keep.add(x)); }
+  if(changed&&id==='univers'){ delete st.qa.follow; if(st.qa.univers2!==undefined) delete st.qa.univers2; }
+  if(changed&&id==='spe'){ delete st.qa.spefav; }
+  st.qi++; st.qm=null; rerender(); scrollTo(0,0);
 }
 
 function route(){
@@ -783,7 +946,7 @@ function route(){
   if(h.startsWith('metier-')){ html = metier(h.slice(7)); r='metier'; }
   else if(h==='ecoles'){ html = hasPlan()? ecoles() : lockedPage('Écoles','Écoles et formations','Publiques et privées, prix selon le diplôme, chances d’admission.','Trouve les écoles qui te correspondent','Compare les établissements publics et privés près de chez toi, leurs prix et leurs chances d’admission.',G); r='ecoles'; }
   else if(h==='assistant'){ html = hasPlan()? assistant() : lockedPage('Assistant','Assistant de rédaction','Messages aux écoles et lettres de motivation.','Écris aux écoles en un clic','Génère des messages prêts à envoyer et fais-toi aider pour tes lettres de motivation.',G); r='assistant'; }
-  else if(h==='quiz'){ html = hasPlan()? quiz() : lockedPage('Quiz','Quiz d’orientation','6 questions, dont ta formation actuelle.','Pas d’idée de métier ?','Le quiz te propose des métiers et le chemin conseillé selon ta formation actuelle.',G); r='quiz'; }
+  else if(h==='quiz'){ html = hasPlan()? quiz() : lockedPage('Quiz','Quiz d’orientation','Des questions adaptées à ton bac et à tes envies.','Pas d’idée de métier ?','Le quiz te propose des métiers et le chemin conseillé selon ta formation actuelle.',G); r='quiz'; }
   else if(h==='paiement'){ html = paiement(); r='paiement'; }
   else html = home();
   app.innerHTML = html;
@@ -822,10 +985,13 @@ function bind(){
   const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
   const gl=document.getElementById('golettre'); if(gl) gl.onclick=()=>{st.tab='lettre';};
-  document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{st.ans[st.qi]=+b.dataset.o;st.qi++;rerender();scrollTo(0,0);});
-  const qb=document.getElementById('qb'); if(qb) qb.onclick=()=>{st.qi--;rerender();};
+  document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const a=st.qa||(st.qa={});const id=flow(a)[st.qi];const i=+b.dataset.o;
+    if(Q[id].multi){st.qm=st.qm||[];if(st.qm.includes(i))st.qm=st.qm.filter(x=>x!==i);else if(st.qm.length<Q[id].multi[1])st.qm.push(i);rerender(true);}
+    else qAnswer(id,i);});
+  const qv=document.getElementById('qv'); if(qv) qv.onclick=()=>{const id=flow(st.qa)[st.qi];qAnswer(id,[...st.qm].sort((x,y)=>x-y));};
+  const qb=document.getElementById('qb'); if(qb) qb.onclick=()=>{st.qi--;const id=flow(st.qa)[st.qi];st.qm=Q[id].multi?[...(st.qa[id]||[])]:null;rerender();};
   document.querySelectorAll('[data-chs]').forEach(a=>a.addEventListener('click',()=>{st.chemin=+a.dataset.chs;}));
-  const rq=document.getElementById('rq'); if(rq) rq.onclick=()=>{st.qi=0;st.ans=[];rerender();};
+  const rq=document.getElementById('rq'); if(rq) rq.onclick=()=>{st.qi=0;st.qa={};st.qm=null;rerender();};
 }
 function readForm(){
   const ae=document.getElementById('ae'), afo=document.getElementById('afo'), at=document.getElementById('at');
