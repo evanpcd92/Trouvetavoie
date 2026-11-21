@@ -273,6 +273,8 @@ select.inp{appearance:auto}
 @keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="demo"><b>Version démo</b> · les données chiffrées sont en cours d'intégration depuis les sources officielles</div>
@@ -1733,7 +1735,7 @@ document.querySelector('nav.main a[data-r="metier"]').addEventListener('click',(
   if(a==='off') localStorage.removeItem('ttv_test');
   if(localStorage.getItem('ttv_test')==='1'){st.paid=true;st.plan='complet';st.mail='test';}
 }catch(e){}})();
-addEventListener('hashchange',()=>{route();scrollTo(0,0);});
+addEventListener('hashchange',()=>{route();scrollTo(0,0);try{const r='/'+(location.hash.replace('#','')||'accueil');window.va('pageview',{route:r,path:r});}catch(e){}});
 route();
 </script>
 </body>
