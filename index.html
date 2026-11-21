@@ -1176,38 +1176,138 @@ function metier(key){
     </div></div>`;
 }
 
+const FNAMES_ALL = {droit:'Licence et bachelor de droit', ifsi:'Instituts de soins infirmiers', elec:'Formations en électricité', medecine:'PASS et L.AS', inge:'Écoles d’ingénieurs et prépas', psycho:'Licences de psychologie', staps:'STAPS et BPJEPS', kine:'Instituts de kinésithérapie', commerce:'BTS, BUT et écoles de commerce', compta:'DCG, BTS CG et BUT GEA', info:'Formations en informatique', prof:'Licences professorat des écoles', veto:'Écoles vétérinaires', police:'Concours police et gendarmerie', com:'Formations en communication', pharma:"Études de pharmacie", maieutique:"Études de sage-femme", dentaire:"Études dentaires", ortho:"Centres de formation en orthophonie", ifas:"Instituts de formation d’aides-soignants", dees:"Écoles de travail social", archi:"Écoles d’architecture", pilote:"Formations de pilote", journalisme:"Écoles de journalisme", design:"Formations en design graphique", cuisine:"Formations en cuisine", auto:"Formations en mécanique automobile", pompier:"Concours de sapeur-pompier", armee:"Recrutement dans l’armée", marketing:"Formations en marketing"};
+// ===== ÉCOLES : données officielles Parcoursup (open data MESR, session 2025) =====
+const PS_API = ['https://data.enseignementsup-recherche.gouv.fr','https://data.education.gouv.fr'];
+const PS_DS = 'fr-esr-parcoursup';
+// Pour chaque formation du site : requêtes dans les données Parcoursup (filière + mots-clés)
+const PSQ = {
+  droit:[{fili:'Licence',kw:'droit'}],
+  ifsi:[{fili:'IFSI',kw:'infirmier'}],
+  elec:[{fili:'BTS',kw:'électrotechnique'}],
+  medecine:[{fili:'PASS',kw:'PASS'},{fili:'Licence_Las',kw:'accès santé'}],
+  inge:[{fili:'Ecole d\'Ingénieur',kw:'ingénieur'},{fili:'CPGE',kw:'MPSI'}],
+  psycho:[{fili:'Licence',kw:'psychologie'}],
+  staps:[{fili:'Licence',kw:'STAPS'}],
+  kine:[{fili:'PASS',kw:'PASS'},{fili:'Licence',kw:'STAPS'}],
+  commerce:[{fili:'BTS',kw:'négociation digitalisation'},{fili:'BUT',kw:'techniques de commercialisation'}],
+  compta:[{fili:'BTS',kw:'comptabilité gestion'},{fili:'BUT',kw:'gestion des entreprises et des administrations'},{fili:'',kw:'DCG'}],
+  info:[{fili:'BTS',kw:'services informatiques aux organisations'},{fili:'BUT',kw:'informatique'}],
+  prof:[{fili:'Licence',kw:'sciences de l\'éducation'},{fili:'',kw:'professorat des écoles'}],
+  veto:[{fili:'',kw:'vétérinaire'}],
+  com:[{fili:'BUT',kw:'multimédia internet'},{fili:'BTS',kw:'communication'}],
+  pharma:[{fili:'PASS',kw:'PASS'},{fili:'Licence_Las',kw:'accès santé'}], maieutique:[{fili:'PASS',kw:'PASS'},{fili:'Licence_Las',kw:'accès santé'}], dentaire:[{fili:'PASS',kw:'PASS'},{fili:'Licence_Las',kw:'accès santé'}],
+  ortho:[{fili:'',kw:'orthophonie'}],
+  dees:[{fili:'',kw:'éducateur spécialisé'}],
+  archi:[{fili:'',kw:'architecture'}],
+  journalisme:[{fili:'BUT',kw:'journalisme'}],
+  design:[{fili:'',kw:'DN MADE graphisme'}],
+  cuisine:[{fili:'BTS',kw:'management hôtellerie restauration'}],
+  auto:[{fili:'BTS',kw:'maintenance des véhicules'}],
+  marketing:[{fili:'BUT',kw:'techniques de commercialisation'}]
+};
+const PS_NONE = {police:'Le recrutement se fait par concours ou sélection de la police et de la gendarmerie, pas sur Parcoursup.',ifas:'Les instituts de formation d’aides-soignants recrutent sur dossier et entretien, en dehors de Parcoursup.',pilote:'Les formations de pilote (ENAC, écoles privées, armée) recrutent par concours ou sélection propre, hors Parcoursup.',pompier:'Les pompiers sont recrutés par concours ou engagement, hors Parcoursup.',armee:'L’armée recrute dans les centres d’information (CIRFA), hors Parcoursup.'};
+const REGIONS = ['Ile-de-France','Auvergne-Rhône-Alpes','Bourgogne-Franche-Comté','Bretagne','Centre-Val de Loire','Corse','Grand Est','Hauts-de-France','Normandie','Nouvelle-Aquitaine','Occitanie','Pays de la Loire','Provence-Alpes-Côte d\'Azur','Guadeloupe','Martinique','Guyane','La Réunion','Mayotte','Toute la France'];
+const PS_CACHE = {};
+const nrm = t => (t||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’']/g,' ');
+async function psGet(params){
+  let last;
+  for(const host of PS_API){
+    try{
+      const u = `${host}/api/explore/v2.1/catalog/datasets/${PS_DS}/records?`+new URLSearchParams(params).toString();
+      const r = await fetch(u); if(r.ok) return (await r.json()).results||[]; last = r.status;
+      if(r.status===400) throw new Error('400');
+    }catch(e){ last = e.message; if(last==='400') throw e; }
+  }
+  throw new Error('réseau '+last);
+}
+const qs = v => '"'+String(v).replace(/"/g,'\\"')+'"';
+const PS_PEND = {};
+function psSearch(f, region){ const key=f+'|'+region; if(PS_CACHE[key]) return Promise.resolve(PS_CACHE[key]); return PS_PEND[key] || (PS_PEND[key]=psSearch0(f,region).finally(()=>{delete PS_PEND[key];})); }
+async function psSearch0(f, region){
+  const key = f+'|'+region;
+  const reqs = PSQ[f]||[]; let all=[];
+  for(const q of reqs){
+    const conds=[]; if(q.fili) conds.push(`fili=${qs(q.fili)}`);
+    const words=[...(q.kw?[q.kw]:[]), ...(region&&region!=='Toute la France'?[region]:[])];
+    let rows=null;
+    // 1) recherche plein texte côté serveur
+    try{ rows = await psGet({where:[...conds, ...words.map(w=>qs(w))].join(' and ')||'true', limit:100, order_by:'capa_fin desc'}); }
+    catch(e){ rows=null; }
+    if(!rows||!rows.length){
+      // 2) repli : filtre par filière seulement, puis tri par mots-clés dans le navigateur
+      rows=[]; try{ for(let off=0; off<500; off+=100){ const part = await psGet({where:conds.join(' and ')||'true', limit:100, offset:off}); rows.push(...part); if(part.length<100) break; } }catch(e){}
+    }
+    if(!rows.length && q.fili && words.length){ // 3) repli : recherche par mots-clés sans la filière
+      try{ rows = await psGet({where:words.map(w=>qs(w)).join(' and '), limit:100}); }catch(e){ rows=[]; }
+    }
+    rows = rows.filter(r=>{ const t=nrm(Object.values(r).join(' ')); return words.every(w=>nrm(w).split(/\s+/).filter(x=>x.length>2).every(x=>t.includes(x))); });
+    all.push(...rows);
+  }
+  const seen=new Set(); all=all.filter(r=>{const id=r.cod_aff_form||((r.g_ea_lib_vx||'')+(r.lib_for_voe_ins||'')+(r.fil_lib_voe_acc||'')); if(seen.has(id)) return false; seen.add(id); return true;});
+  PS_CACHE[key]=all; return all;
+}
+function psCard(r){
+  const nom=r.g_ea_lib_vx||r.etablissement||'Établissement', ville=[r.ville_etab,r.dep_lib].filter(Boolean).join(' · ');
+  const pub=/^public/i.test(r.contrat_etab||''), form=r.lib_for_voe_ins||r.form_lib_voe_acc||'', det=r.fil_lib_voe_acc&&!form.includes(r.fil_lib_voe_acc)?r.fil_lib_voe_acc:'';
+  const ta = r.taux_acces_ens!=null&&r.taux_acces_ens!==''? Math.round(+r.taux_acces_ens)+' %' : 'Non communiqué';
+  const lien = r.lien_form_psup || 'https://www.parcoursup.gouv.fr';
+  return `<div class="card sc">
+    <div><span class="tag ${pub?'t-pub':'t-pri'}">${pub?'PUBLIC':'PRIVÉ'}</span><span class="meta">${esc(form)}${det?' · '+esc(det):''}</span>
+      <h3>${esc(nom)}</h3><div class="meta">${esc(ville)}${r.contrat_etab&&!pub?' · '+esc(r.contrat_etab):''}</div>
+      <div class="stats">
+        <div class="stat"><span>Taux d’accès 2025</span><b>${ta}</b></div>
+        <div class="stat"><span>Places</span><b>${r.capa_fin??'—'}</b></div>
+        <div class="stat"><span>Candidats</span><b>${r.voe_tot!=null?(+r.voe_tot).toLocaleString('fr-FR'):'—'}</b></div>
+      </div></div>
+    <div class="acts"><a class="btn btn-p" href="#assistant" data-ecole="${esc(nom)}" data-form="${esc(form)}">Contacter</a>
+      <a class="btn btn-o" href="${esc(lien)}" target="_blank" rel="noopener">Voir sur Parcoursup</a></div>
+  </div>`;
+}
+function psRender(){
+  const box=document.getElementById('eclist'); if(!box) return;
+  const f=st.ecF;
+  if(PS_NONE[f]){ box.innerHTML=`<div class="card empty"><h3 class="ph" style="font-size:22px;margin-bottom:6px">Hors Parcoursup</h3><p>${PS_NONE[f]}</p></div>`; return; }
+  if(!PSQ[f]){ box.innerHTML=`<div class="card empty"><p>Pas encore de données pour cette formation.</p></div>`; return; }
+  const key=f+'|'+st.ecReg, data=PS_CACHE[key];
+  if(!data){ box.innerHTML=`<div class="card empty"><p>Chargement des données officielles Parcoursup…</p></div>`;
+    psSearch(f, st.ecReg).then(()=>{ if(st.ecF===f) psRender(); }).catch(e=>{ box.innerHTML=`<div class="card empty"><h3 class="ph" style="font-size:20px;margin-bottom:6px">Données Parcoursup indisponibles pour le moment</h3><p>Le serveur open data ne répond pas (${esc(e.message)}). Réessaie dans un instant, ou consulte directement <a href="https://www.parcoursup.gouv.fr" target="_blank" rel="noopener">parcoursup.gouv.fr</a>.</p></div>`; });
+    return; }
+  const v=nrm(st.ecVille);
+  let list=data.filter(r=>(st.ecType==='all'||(st.ecType==='pub')===/^public/i.test(r.contrat_etab||'')) && (!v||nrm([r.ville_etab,r.dep_lib,r.g_ea_lib_vx].join(' ')).includes(v)));
+  const tx=r=>r.taux_acces_ens==null||r.taux_acces_ens===''?-1:+r.taux_acces_ens;
+  if(st.ecSort==='acces') list.sort((a,b)=>tx(b)-tx(a)); else if(st.ecSort==='select') list.sort((a,b)=>(tx(a)<0?999:tx(a))-(tx(b)<0?999:tx(b))); else list.sort((a,b)=>(+b.capa_fin||0)-(+a.capa_fin||0));
+  const shown=list.slice(0,st.ecN||20);
+  box.innerHTML = list.length? `<p class="note" style="margin:0 0 12px">${list.length} formation${list.length>1?'s':''} trouvée${list.length>1?'s':''}</p>`+shown.map(psCard).join('')+(list.length>shown.length?`<button class="btn btn-o" id="ecmore" style="width:100%">Afficher plus</button>`:'')
+    : `<div class="card empty"><p>Aucune formation trouvée avec ces filtres. Essaie une autre région ou retire le filtre de ville.</p></div>`;
+  const m=document.getElementById('ecmore'); if(m) m.onclick=()=>{st.ecN=(st.ecN||20)+20;psRender();};
+  box.querySelectorAll('[data-ecole]').forEach(a=>a.addEventListener('click',()=>{st.ecole=a.dataset.ecole;st.form=a.dataset.form;st.tab='msg';}));
+}
 function ecoles(){
-  const fNames = {droit:'Licence et bachelor de droit', ifsi:'Instituts de soins infirmiers', elec:'Formations en électricité', medecine:'PASS et L.AS', inge:'Écoles d’ingénieurs et prépas', psycho:'Licences de psychologie', staps:'STAPS et BPJEPS', kine:'Instituts de kinésithérapie', commerce:'BTS, BUT et écoles de commerce', compta:'DCG, BTS CG et BUT GEA', info:'Formations en informatique', prof:'Licences professorat des écoles', veto:'Écoles vétérinaires', police:'Concours police et gendarmerie', com:'Formations en communication', pharma:"Études de pharmacie", maieutique:"Études de sage-femme", dentaire:"Études dentaires", ortho:"Centres de formation en orthophonie", ifas:"Instituts de formation d’aides-soignants", dees:"Écoles de travail social", archi:"Écoles d’architecture", pilote:"Formations de pilote", journalisme:"Écoles de journalisme", design:"Formations en design graphique", cuisine:"Formations en cuisine", auto:"Formations en mécanique automobile", pompier:"Concours de sapeur-pompier", armee:"Recrutement dans l’armée", marketing:"Formations en marketing"};
-  const v = norm(st.ecVille);
-  const list = ECOLES.filter(e=>e.f===st.ecF && (st.ecType==='all'||e.type===st.ecType) && (!v || norm(e.ville).includes(v) || norm(e.nom).includes(v)));
+  st.ecReg = st.ecReg || 'Ile-de-France'; st.ecSort = st.ecSort || 'places';
+  const fNames = FNAMES_ALL;
+  setTimeout(psRender,0);
   return `<div class="wrap page fade">
     <div class="crumb"><a href="#accueil">Accueil</a> / Écoles</div>
-    <div class="ptitle"><div><h1>Écoles et formations</h1><p>${fNames[st.ecF]} · Île-de-France</p></div></div>
+    <div class="ptitle"><div><h1>Écoles et formations</h1><p>${fNames[st.ecF]||''} · données officielles Parcoursup</p></div></div>
     <div class="filters">
       <label class="sr" for="ecf">Formation</label>
       <select class="inp" id="ecf">${Object.keys(fNames).map(k=>`<option value="${k}" ${k===st.ecF?'selected':''}>${fNames[k]}</option>`).join('')}</select>
+      <label class="sr" for="ecr">Région</label>
+      <select class="inp" id="ecr">${REGIONS.map(r=>`<option ${r===st.ecReg?'selected':''}>${r}</option>`).join('')}</select>
       <div class="seg" role="group" aria-label="Statut">${[['all','Toutes'],['pub','Public'],['pri','Privé']].map(t=>`<button class="${st.ecType===t[0]?'on':''}" data-et="${t[0]}">${t[1]}</button>`).join('')}</div>
+      <label class="sr" for="ecs">Trier</label>
+      <select class="inp" id="ecs">${[['places','Plus de places'],['acces','Plus accessibles'],['select','Plus sélectives']].map(x=>`<option value="${x[0]}" ${st.ecSort===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select>
       <label class="sr" for="ecv">Ville</label>
-      <input class="inp" id="ecv" placeholder="Filtrer par ville" value="${esc(st.ecVille)}" style="flex:1;max-width:260px">
+      <input class="inp" id="ecv" placeholder="Ville ou département" value="${esc(st.ecVille)}" style="flex:1;max-width:220px">
     </div>
-    <div id="eclist">${list.length? list.map(e=>`
-      <div class="card sc">
-        <div><span class="tag ${e.type==='pub'?'t-pub':'t-pri'}">${e.type==='pub'?'PUBLIC':'PRIVÉ'}</span><span class="meta">${e.formation}</span>
-          <h3>${e.nom}</h3><div class="meta">${e.ville} · Candidature : ${e.voie}</div>
-          <div class="stats">
-            <div class="stat"><span>${e.type==='pub'?'Frais':'Prix selon le diplôme'}</span><b>${e.frais}</b></div>
-            ${e.alt?`<div class="stat"><span>Alternance</span><b>${e.alt}</b></div>`:''}
-            <div class="stat"><span>Taux d'accès</span><b>${e.type==='pub'?'Bientôt (données Parcoursup)':'Non publié'}</b></div>
-            <div class="stat"><span>Taux de réussite</span><b>${e.type==='pub'?'À venir':'Non publié'}</b></div>
-          </div></div>
-        <div class="acts"><a class="btn btn-p" href="#assistant" data-ecole="${esc(e.nom)}">Contacter</a>
-          <a class="btn btn-o" href="https://www.parcoursup.gouv.fr">Postuler</a></div>
-      </div>`).join('') : `<div class="card empty"><h3 class="ph" style="font-size:22px;margin-bottom:6px">Formations en cours d'ajout</h3><p>Cette liste sera bientôt disponible.</p></div>`}</div>
+    <div id="eclist"></div>
+    <p class="note">Source : Parcoursup 2025, données ouvertes du ministère de l’Enseignement supérieur (mise à jour du 9 mars 2026), hors apprentissage. <b>Taux d’accès</b> : part des candidats qui étaient classés assez haut pour recevoir une proposition. Ce n’est pas une garantie pour 2027.</p>
     <h2 class="ph" style="font-size:26px;margin-top:44px">Combien ça coûte, selon le diplôme ?</h2>
     <p style="color:var(--ink2);margin:6px 0 0">Les prix du privé varient beaucoup : demande toujours la grille tarifaire officielle de l'école.</p>
     <div class="tbx"><table class="ptab"><thead><tr><th>Diplôme</th><th>Établissement</th><th>Prix par an</th><th>À savoir</th></tr></thead>
     <tbody>${PRIX.map(p=>`<tr><td><b>${p[0]}</b></td><td>${p[1]}</td><td><b>${p[2]}</b></td><td style="color:var(--ink2)">${p[3]}</td></tr>`).join('')}</tbody></table></div>
-    <p class="note">Fourchettes indicatives constatées en 2025-2026 (Diplomeo, L'Étudiant). Les taux d'admission et de réussite sont affichés seulement avec leur source et leur année.</p>
+    <p class="note">Fourchettes indicatives constatées en 2025-2026 (Diplomeo, L'Étudiant).</p>
   </div>`;
 }
 
@@ -1583,9 +1683,11 @@ function bind(){
   document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{st.chemin=0;location.hash=b.dataset.go;scrollTo(0,0);});
   document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{const i=+b.dataset.ch;if(!hasPlan()&&i>0){st.lockCh=i;}else{st.lockCh=0;st.chemin=i;}rerender(true);});
   document.querySelectorAll('[data-f]').forEach(a=>a.addEventListener('click',()=>{st.ecF=a.dataset.f;}));
-  document.querySelectorAll('[data-et]').forEach(b=>b.onclick=()=>{st.ecType=b.dataset.et;rerender(true);});
-  const ecf=document.getElementById('ecf'); if(ecf) ecf.onchange=()=>{st.ecF=ecf.value;rerender(true);};
-  const ecv=document.getElementById('ecv'); if(ecv) ecv.oninput=()=>{st.ecVille=ecv.value;const p=ecv.selectionStart;rerender(true);const n=document.getElementById('ecv');n.focus();n.setSelectionRange(p,p);};
+  document.querySelectorAll('[data-et]').forEach(b=>b.onclick=()=>{st.ecType=b.dataset.et;document.querySelectorAll('[data-et]').forEach(x=>x.classList.toggle('on',x===b));psRender();});
+  const ecf=document.getElementById('ecf'); if(ecf) ecf.onchange=()=>{st.ecF=ecf.value;st.ecN=20;rerender(true);};
+  const ecr=document.getElementById('ecr'); if(ecr) ecr.onchange=()=>{st.ecReg=ecr.value;st.ecN=20;psRender();};
+  const ecs=document.getElementById('ecs'); if(ecs) ecs.onchange=()=>{st.ecSort=ecs.value;psRender();};
+  const ecv=document.getElementById('ecv'); if(ecv) ecv.oninput=()=>{st.ecVille=ecv.value;psRender();};
   document.querySelectorAll('[data-ecole]').forEach(a=>a.addEventListener('click',()=>{st.ecole=a.dataset.ecole;st.form='la licence de droit';st.tab='msg';}));
   document.querySelectorAll('[data-tb]').forEach(b=>b.onclick=()=>{readForm();st.tab=b.dataset.tb;rerender(true);});
   const af=document.getElementById('af'); if(af) af.addEventListener('submit',e=>{e.preventDefault();readForm();rerender(true);});
