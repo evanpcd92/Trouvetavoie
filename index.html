@@ -245,7 +245,7 @@ select.inp{appearance:auto}
 <footer>
   <div class="wrap ft">
     <div><b style="color:var(--ink)">trouvetavoie</b> · un outil d'aide à la décision. Il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
-    <div>Sources : Parcoursup, Onisep, CNB, établissements <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
+    <div>Sources : Parcoursup, Onisep, CNB, établissements <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
   </div>
 </footer>
 
@@ -834,6 +834,12 @@ function readForm(){
 const burger=document.getElementById('burger');
 burger.onclick=()=>{const n=document.getElementById('nav');n.classList.toggle('open');burger.setAttribute('aria-expanded',n.classList.contains('open'));};
 document.querySelector('nav.main a[data-r="metier"]').addEventListener('click',()=>{st.chemin=0;});
+// Accès test : ouvrir le site avec ?acces=evan2027 (désactiver avec ?acces=off)
+(function(){try{const a=new URLSearchParams(location.search).get('acces');
+  if(a==='evan2027') localStorage.setItem('ttv_test','1');
+  if(a==='off') localStorage.removeItem('ttv_test');
+  if(localStorage.getItem('ttv_test')==='1'){st.paid=true;st.plan='complet';st.mail='test';}
+}catch(e){}})();
 addEventListener('hashchange',()=>{route();scrollTo(0,0);});
 route();
 </script>
