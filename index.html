@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>trouvetavoie — tous les chemins vers ton futur métier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0E1630; --ink2:#3E4766; --mute:#5E6782; --line:#E4E7EF; --bg:#F7F8FB; --card:#FFFFFF;
+  --gold:#FFC93C; --gold-d:#8A6200; --navy:#0E1630; --pink:#E8436A; --blue:#2F5BEA; --green:#14804A;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.ph{font-family:Poppins,Inter,sans-serif;letter-spacing:-.02em;line-height:1.15;margin:0}
+a{color:var(--blue)}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.demo{background:var(--navy);color:#D7DCEB;font-size:13px;text-align:center;padding:7px 16px}
+.demo b{color:var(--gold)}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{font-family:Poppins,sans-serif;font-weight:700;font-size:22px;color:var(--ink);text-decoration:none;letter-spacing:-.03em;display:flex;align-items:center;gap:9px}
+.logo .mk{width:30px;height:30px;border-radius:9px;background:var(--navy);display:grid;place-items:center}
+.logo span{color:var(--gold-d)}
+nav.main{display:flex;gap:4px;align-items:center}
+nav.main a{text-decoration:none;color:var(--ink2);font-weight:500;font-size:15px;padding:9px 14px;border-radius:10px}
+nav.main a:hover,nav.main a.on{background:var(--bg);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;cursor:pointer;text-decoration:none;font-weight:600;border-radius:12px;height:46px;padding:0 20px;font-size:15px;transition:transform .15s,box-shadow .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-p{background:var(--navy);color:#fff}
+.btn-p:hover{box-shadow:0 8px 20px rgba(14,22,48,.2)}
+.btn-g{background:var(--gold);color:var(--navy)}
+.btn-o{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn-o:hover{border-color:#C9CEDC}
+.burger{display:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;align-items:center;justify-content:center}
+@media (max-width:860px){
+  nav.main{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;align-items:stretch;padding:10px 16px 16px;border-bottom:1px solid var(--line)}
+  nav.main.open{display:flex}
+  .burger{display:inline-flex}
+  .hd .btn-p{display:none}
+}
+
+/* home */
+.hero{padding:72px 0 56px}
+.hero-g{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#FFF4D1;color:var(--gold-d);font-weight:600;font-size:13px;padding:6px 12px;border-radius:999px}
+.hero h1{font-size:54px;margin:18px 0 16px}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,var(--gold) 62%)}
+.lead{font-size:18px;color:var(--ink2);max-width:520px;margin:0}
+.search{margin-top:30px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:8px;display:grid;grid-template-columns:1.4fr 1fr auto;gap:6px;box-shadow:0 12px 32px rgba(14,22,48,.07)}
+.fld{display:flex;flex-direction:column;padding:6px 14px;border-radius:14px}
+.fld+.fld{border-left:1px solid var(--line)}
+.fld label{font-size:12px;font-weight:600;color:var(--mute)}
+.fld input{border:none;outline:none;background:transparent;font-size:16px;padding:2px 0;min-width:0}
+.search .btn{height:56px;border-radius:14px;padding:0 24px;white-space:nowrap}
+.sugg{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;align-items:center;font-size:14px;color:var(--mute)}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:500;cursor:pointer;color:var(--ink)}
+.chip:hover{border-color:var(--ink)}
+.err{color:var(--pink);font-size:14px;margin-top:10px;min-height:20px}
+.mock{background:var(--navy);border-radius:28px;padding:26px;color:#fff;box-shadow:0 30px 60px rgba(14,22,48,.25);position:relative}
+.mock .t{font-size:13px;color:#AAB3CF}
+.mock h3{font-size:24px;margin:2px 0 18px}
+.mstep{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px solid rgba(255,255,255,.08)}
+.mstep .n{width:30px;height:30px;flex:none;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:14px}
+.mstep b{display:block;font-weight:600}
+.mstep small{color:#AAB3CF;font-size:13px}
+.float{position:absolute;background:#fff;color:var(--ink);border-radius:14px;padding:10px 14px;font-size:13px;font-weight:600;box-shadow:0 12px 30px rgba(14,22,48,.18);display:flex;gap:8px;align-items:center}
+.float.a{right:-18px;top:-18px}
+.float.b{left:-22px;bottom:30px}
+.dot{width:8px;height:8px;border-radius:50%}
+@media (max-width:960px){
+  .hero-g{grid-template-columns:1fr}
+  .hero h1{font-size:40px}
+  .float.a{right:8px}.float.b{left:8px}
+}
+@media (max-width:600px){
+  .search{grid-template-columns:1fr}
+  .fld+.fld{border-left:none;border-top:1px solid var(--line)}
+  .hero{padding:40px 0}
+  .hero h1{font-size:34px}
+}
+section.blk{padding:72px 0}
+.sh{max-width:640px;margin-bottom:36px}
+.sh .k{font-size:13px;font-weight:600;color:var(--gold-d);text-transform:uppercase;letter-spacing:.08em}
+.sh h2{font-size:36px;margin:8px 0 10px}
+.sh p{color:var(--ink2);margin:0}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+@media (max-width:960px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.g3,.g4{grid-template-columns:1fr}.sh h2{font-size:28px}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px}
+.ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px}
+.card h3{font-size:19px;margin-bottom:6px}
+.card p{margin:0;color:var(--ink2);font-size:15px}
+.num{font-family:Poppins,sans-serif;font-weight:700;font-size:15px;color:var(--gold-d);margin-bottom:10px}
+.quizb{background:var(--navy);border-radius:28px;padding:44px;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.quizb h2{font-size:32px}
+.quizb p{color:#C3C9DD;margin:8px 0 0}
+footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mute);font-size:14px;background:#fff}
+.ft{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* inner pages */
+.page{padding:40px 0 80px}
+.crumb{font-size:14px;color:var(--mute);margin-bottom:14px}
+.crumb a{color:var(--mute);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+.ptitle{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.ptitle h1{font-size:42px}
+.ptitle p{margin:8px 0 0;color:var(--ink2)}
+.tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);padding:6px;border-radius:16px;width:max-content;max-width:100%;overflow-x:auto;margin-bottom:22px}
+.tab{border:none;background:transparent;padding:10px 16px;border-radius:11px;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink2);white-space:nowrap}
+.tab.on{background:var(--navy);color:#fff}
+.lay{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+@media (max-width:900px){.lay{grid-template-columns:1fr}}
+.tl{position:relative;margin-top:8px}
+.st{display:flex;gap:18px;position:relative;padding-bottom:26px}
+.st:not(:last-child)::before{content:"";position:absolute;left:19px;top:42px;bottom:0;width:2px;background:var(--line)}
+.st .n{width:40px;height:40px;flex:none;border-radius:50%;background:#FFF4D1;color:var(--gold-d);display:grid;place-items:center;font-weight:700;font-family:Poppins,sans-serif}
+.st h3{font-size:18px}
+.st .d{font-size:13px;font-weight:600;color:var(--blue);margin:2px 0 4px}
+.st p{margin:0;color:var(--ink2);font-size:15px}
+.kv{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;gap:12px}
+.kv:last-of-type{border-bottom:none}
+.kv span{color:var(--mute)}
+.kv b{font-weight:600;text-align:right}
+.note{font-size:13px;color:var(--mute);margin-top:14px}
+.callout{background:#FFF4D1;border-radius:14px;padding:14px 16px;font-size:14px;color:#5C4300;margin-top:18px}
+
+/* schools */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:22px}
+.seg{display:flex;background:#fff;border:1px solid var(--line);border-radius:12px;padding:4px}
+.seg button{border:none;background:transparent;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink2)}
+.seg button.on{background:var(--navy);color:#fff}
+.inp{height:46px;border:1px solid var(--line);border-radius:12px;padding:0 14px;background:#fff;font-size:15px;min-width:0}
+.sc{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:center}
+.sc+.sc{margin-top:14px}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;padding:4px 9px;border-radius:7px;margin-right:8px}
+.t-pub{background:#E6EDFF;color:#1F44B8}
+.t-pri{background:#FDE7EC;color:#A3203F}
+.sc h3{font-size:18px;margin:10px 0 2px}
+.meta{color:var(--mute);font-size:14px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.stat{background:var(--bg);border-radius:12px;padding:9px 13px;font-size:13px;min-width:120px}
+.stat span{display:block;color:var(--mute);font-size:12px}
+.stat b{font-weight:600}
+.acts{display:flex;flex-direction:column;gap:8px}
+@media (max-width:700px){.sc{grid-template-columns:1fr}.acts{flex-direction:row}.acts .btn{flex:1}}
+.empty{text-align:center;padding:48px 24px;color:var(--ink2)}
+
+/* assistant */
+.as{display:grid;grid-template-columns:380px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:900px){.as{grid-template-columns:1fr}}
+.frm label{display:block;font-size:13px;font-weight:600;color:var(--ink2);margin:14px 0 6px}
+.frm .inp,.frm select{width:100%}
+select.inp{appearance:auto}
+.out{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.out .bar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line);gap:10px;flex-wrap:wrap}
+.out textarea{width:100%;min-height:360px;border:none;outline:none;resize:vertical;padding:20px;font-size:15px;line-height:1.65;background:#fff}
+.lock{margin:0 18px 18px;background:var(--navy);color:#fff;border-radius:14px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.lock p{margin:0;font-size:14px;color:#C3C9DD}
+.ok{color:var(--green);font-size:14px;font-weight:600}
+
+/* pricing / pay */
+.ptab{width:100%;border-collapse:collapse;font-size:15px}
+.ptab th,.ptab td{text-align:left;padding:13px 14px;border-bottom:1px solid var(--line)}
+.ptab th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);font-weight:600}
+.ptab td b{font-weight:600}
+.tbx{overflow-x:auto;background:#fff;border:1px solid var(--line);border-radius:var(--r);margin-top:28px}
+.pay{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start}
+@media (max-width:900px){.pay{grid-template-columns:1fr}}
+.offer{display:flex;gap:16px;align-items:flex-start;cursor:pointer;border:1.5px solid var(--line);border-radius:16px;padding:18px;background:#fff;margin-bottom:12px;width:100%;text-align:left}
+.offer.on{border-color:var(--navy);background:#F3F5FB}
+.offer .rd{width:20px;height:20px;border-radius:50%;border:2px solid #B9BFD0;flex:none;margin-top:3px;display:grid;place-items:center}
+.offer.on .rd{border-color:var(--navy)}
+.offer.on .rd::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--navy)}
+.offer h3{font-size:17px}
+.offer ul{margin:6px 0 0;padding-left:18px;color:var(--ink2);font-size:14px}
+.offer .pr{margin-left:auto;font-family:Poppins,sans-serif;font-weight:700;font-size:20px;white-space:nowrap}
+.pm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}
+.pm button{height:48px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:14px;cursor:pointer}
+.pm button.on{border-color:var(--navy);background:#F3F5FB}
+.sum .kv b{font-family:Poppins,sans-serif}
+.secure{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-top:12px}
+.og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.og .opt{margin-bottom:0;font-size:15px;padding:16px 18px}
+@media (max-width:600px){.og{grid-template-columns:1fr}}
+/* paywall */
+.lk{display:inline-flex;align-items:center;gap:6px}
+.tab.lockd{color:var(--mute)}
+.tab.lockd svg{opacity:.7}
+.pw{position:relative;border-radius:var(--r);overflow:hidden}
+.pw .ghost{filter:blur(6px);opacity:.55;pointer-events:none;user-select:none}
+.pw .over{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(rgba(247,248,251,.2),rgba(247,248,251,.85))}
+.pwc{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px;max-width:440px;text-align:center;box-shadow:0 20px 50px rgba(14,22,48,.12)}
+.pwc h2{font-size:24px;margin:12px 0 8px}
+.pwc p{color:var(--ink2);margin:0 0 18px;font-size:15px}
+.pwc ul{text-align:left;margin:0 0 20px;padding-left:20px;color:var(--ink2);font-size:14px}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+.b-free{background:#E4F5EC;color:var(--green)}
+.b-prem{background:var(--navy);color:var(--gold)}
+/* quiz */
+.qz{max-width:680px;margin:0 auto}
+.prog{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0 28px}
+.prog i{display:block;height:100%;background:var(--gold);border-radius:99px;transition:width .3s}
+.qz h1{font-size:34px;margin-bottom:24px}
+.opt{width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px 20px;font-size:16px;font-weight:500;cursor:pointer;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;transition:border-color .15s}
+.opt:hover{border-color:#B9BFD0}
+.opt.on{border-color:var(--navy);background:#F3F5FB}
+.res{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.bar2{height:6px;background:var(--line);border-radius:9px;margin-top:8px;overflow:hidden}
+.bar2 i{display:block;height:100%;background:var(--navy)}
+.fade{animation:fd .35s ease}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="demo"><b>Version démo</b> · les données chiffrées sont en cours d'intégration depuis les sources officielles</div>
+<header>
+  <div class="wrap hd">
+    <a class="logo" href="#accueil" aria-label="trouvetavoie, accueil">
+      <span class="mk" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFC93C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15.5,8.5 13.5,13.5 8.5,15.5 10.5,10.5" fill="#FFC93C"/></svg></span>
+      <b style="font-weight:700">trouve<span>tavoie</span></b>
+    </a>
+    <nav class="main" id="nav" aria-label="Navigation principale">
+      <a href="#metier-avocat" data-r="metier">Métiers</a>
+      <a href="#ecoles" data-r="ecoles" class="lk">Écoles <span class="nl"></span></a>
+      <a href="#quiz" data-r="quiz" class="lk">Quiz orientation <span class="nl"></span></a>
+      <a href="#assistant" data-r="assistant" class="lk">Assistant lettres <span class="nl"></span></a>
+      <a href="#paiement" data-r="paiement">Tarifs</a>
+    </nav>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-p" href="#accueil" onclick="setTimeout(()=>document.getElementById('q')&&document.getElementById('q').focus(),50)">Commencer</a>
+      <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+</header>
+<main id="app"></main>
+<footer>
+  <div class="wrap ft">
+    <div><b style="color:var(--ink)">trouvetavoie</b> · un outil d'aide à la décision. Il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
+    <div>Sources : Parcoursup, Onisep, CNB, établissements <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
+  </div>
+</footer>
+
+<script>
+const IC = {
+  school:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10l9-5 9 5-9 5-9-5z"/><path d="M7 12v5c3 2 7 2 10 0v-5"/></svg>',
+  chart:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="20" x2="5" y2="12"/><line x1="12" y1="20" x2="12" y2="6"/><line x1="19" y1="20" x2="19" y2="14"/></svg>',
+  mail:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3,7 12,13 21,7"/></svg>',
+  pen:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><line x1="13.5" y1="6.5" x2="17.5" y2="10.5"/></svg>',
+  arrow:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13,6 19,12 13,18"/></svg>',
+  lock:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  search:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>'
+};
+
+const METIERS = {
+  avocat:{nom:'Avocat', formation:'droit', resume:'Défendre, conseiller et représenter des personnes ou des entreprises.',
+    infos:[['Durée après le bac','≈ 7 ans'],['Diplôme pour exercer','CAPA'],['Niveau requis','Master 2 de droit'],['Voie Parcoursup','Licence de droit']],
+    sources:'CNB, Onisep, meilleurs-masters.com',
+    chemins:[
+      {nom:'La voie classique', sous:'Université puis école d’avocats', steps:[
+        ['Licence de droit','3 ans','À l’université, accessible sur Parcoursup.'],
+        ['Master 1 de droit','1 an','Les 60 premiers crédits d’un master suffisent pour passer l’examen d’entrée.'],
+        ['Examen d’entrée au CRFPA','1 session par an','Souvent préparé à l’IEJ de ta fac ou en prépa privée.'],
+        ['École d’avocats','18 mois','6 mois de cours, 6 mois de projet personnel, 6 mois de stage en cabinet.'],
+        ['CAPA','Examen final','Le Master 2 doit être obtenu avant de le passer.']]},
+      {nom:'Le profil double', sous:'Double licence ou Sciences Po', steps:[
+        ['Double licence ou IEP','3 à 5 ans','Droit + économie, langues, histoire… ou un Institut d’études politiques.'],
+        ['Master de droit','1 à 2 ans','Indispensable : le Master 2 en droit (ou équivalent) est exigé pour exercer.'],
+        ['Examen CRFPA puis école d’avocats','≈ 2 ans','Même examen et même formation que la voie classique.']]},
+      {nom:'La passerelle', sous:'Juriste d’entreprise d’abord', steps:[
+        ['Master de droit','5 ans','Licence + master, comme pour la voie classique.'],
+        ['Juriste en entreprise','8 ans d’expérience','Tu travailles dans le service juridique d’une entreprise.'],
+        ['Accès à la profession','Sur dossier','Après 8 ans de pratique, une dispense permet de devenir avocat sans l’école d’avocats.']]}
+    ]},
+  infirmier:{nom:'Infirmier', formation:'ifsi', resume:'Soigner, surveiller et accompagner les patients, à l’hôpital ou en libéral.',
+    infos:[['Durée après le bac','3 ans'],['Diplôme pour exercer','Diplôme d’État d’infirmier'],['Grade','Licence'],['Voie Parcoursup','IFSI']],
+    sources:'Onisep, Parcoursup',
+    chemins:[
+      {nom:'Direct en IFSI', sous:'Après le bac, via Parcoursup', steps:[
+        ['Institut de formation en soins infirmiers','3 ans','Cours et nombreux stages à l’hôpital et en structures de soins.'],
+        ['Diplôme d’État','Fin de 3e année','Il te permet d’exercer partout en France.']]},
+      {nom:'Par l’aide-soignance', sous:'Une entrée progressive', steps:[
+        ['Diplôme d’aide-soignant','≈ 1 an','Formation en institut, accessible sans le bac.'],
+        ['Expérience professionnelle','Quelques années','Tu travailles comme aide-soignant.'],
+        ['IFSI en formation continue','3 ans','Accès réservé aux personnes ayant de l’expérience.']]},
+      {nom:'En apprentissage', sous:'Payé pendant tes études', steps:[
+        ['IFSI en apprentissage','3 ans','Proposé par certains instituts : alternance entre cours et employeur.'],
+        ['Diplôme d’État','Fin de 3e année','Même diplôme que la voie classique.']]}
+    ]},
+  electricien:{nom:'Électricien', formation:'elec', resume:'Installer, raccorder et dépanner les installations électriques.',
+    infos:[['Durée de formation','2 à 5 ans'],['Diplôme de base','CAP Électricien'],['Pour évoluer','BTS Électrotechnique'],['Alternance','Très courante']],
+    sources:'Onisep',
+    chemins:[
+      {nom:'Le CAP', sous:'Le plus rapide pour travailler', steps:[
+        ['CAP Électricien','2 ans','En lycée professionnel ou en apprentissage.'],
+        ['Premier emploi','—','Électricien d’équipement ou d’installation.']]},
+      {nom:'Le bac pro', sous:'Plus de responsabilités', steps:[
+        ['Bac pro Métiers de l’électricité','3 ans','Installations, réseaux et équipements connectés.'],
+        ['Emploi ou poursuite d’études','—','Possibilité d’enchaîner sur un BTS.']]},
+      {nom:'Le BTS', sous:'Après un bac général, techno ou pro', steps:[
+        ['BTS Électrotechnique','2 ans','Accessible sur Parcoursup, souvent en alternance.'],
+        ['Technicien ou chef d’équipe','—','Encadrement de chantiers et études techniques.']]}
+    ]}
+};
+const ALIAS = {avocate:'avocat',avocat:'avocat',infirmiere:'infirmier',infirmier:'infirmier',electricien:'electricien',electricienne:'electricien'};
+const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+
+const ECOLES = [
+  {nom:'Université Paris 1 Panthéon-Sorbonne', ville:'Paris 5e', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
+  {nom:'Université Paris-Panthéon-Assas', ville:'Paris 6e', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
+  {nom:'Université Paris Nanterre', ville:'Nanterre (92)', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
+  {nom:'Université Paris-Saclay · Faculté Jean Monnet', ville:'Sceaux (92)', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
+  {nom:'Université Sorbonne Paris Nord', ville:'Villetaneuse (93)', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
+  {nom:'École privée de droit (exemple)', ville:'Île-de-France', type:'pri', f:'droit', formation:'Bachelor Droit (bac+3)', frais:'3 000 – 8 000 €/an', alt:'Possible en 3e année', voie:'Dossier de l’école'},
+  {nom:'Lycées publics avec BTS Électrotechnique', ville:'Île-de-France', type:'pub', f:'elec', formation:'BTS Électrotechnique', frais:'Gratuit', voie:'Parcoursup'},
+  {nom:'École privée de BTS (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'BTS Électrotechnique', frais:'1 000 – 7 000 €/an', alt:'0 € en alternance', voie:'Dossier ou Parcoursup'},
+  {nom:'CFA du bâtiment (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'CAP Électricien en apprentissage', frais:'0 € + salaire', alt:'Formation payée par l’employeur', voie:'Inscription au CFA'}
+];
+const PRIX = [
+  ['Licence', 'Université publique', '178 €/an (2025-26)', 'Droits nationaux, exonérés pour les boursiers'],
+  ['BTS', 'Lycée public', 'Gratuit', 'Pas de droits de scolarité'],
+  ['BTS', 'École privée', '1 000 – 7 000 €/an et plus', 'Variable selon l’école et la ville'],
+  ['Bachelor (bac+3)', 'École privée', '3 000 – 8 000 €/an', 'Parfois plus dans les grandes écoles'],
+  ['Toutes formations', 'En alternance', '0 € pour toi', 'Frais payés par l’employeur et son OPCO, et tu es salarié']
+];
+
+const PROFILS = [
+  ['Bac général · maths, physique',{electricien:1},'g-sci'],
+  ['Bac général · SES, HGGSP, HLP, langues',{avocat:2},'g-lit'],
+  ['Bac général · SVT, biologie',{infirmier:2},'g-bio'],
+  ['Bac STMG',{avocat:1},'stmg'],
+  ['Bac STI2D',{electricien:2},'sti2d'],
+  ['Bac ST2S',{infirmier:2},'st2s'],
+  ['Bac pro commerce, vente',{},'pro-com'],
+  ['Bac pro électricité, industrie',{electricien:3},'pro-elec'],
+  ['Bac pro santé, social (ASSP)',{infirmier:2},'pro-assp'],
+  ['CAP',{electricien:1},'cap'],
+  ['Déjà dans le supérieur, je me réoriente',{},'sup']
+];
+const CONSEIL = {
+  avocat:{'stmg':[0,'Avec un bac STMG, la licence de droit est accessible : mise sur la rédaction et l’expression écrite.'],'pro-com':[1,'Depuis un bac pro, la licence de droit est exigeante : un BTS ou une remise à niveau peut t’aider à y arriver.'],'cap':[1,'Depuis un CAP, vise d’abord un bac, puis des études de droit.'],'sup':[1,'En réorientation, une double licence ou une entrée en L1 de droit sont possibles.']},
+  infirmier:{'pro-assp':[1,'Avec un bac pro ASSP, tu peux passer par l’aide-soignance avant l’IFSI, ou candidater directement.'],'st2s':[0,'Le bac ST2S est l’un des profils les plus courants en IFSI.'],'cap':[1,'Avec un CAP, la voie de l’aide-soignance est la plus adaptée pour commencer.'],'sup':[2,'En réorientation, l’IFSI en apprentissage permet d’être payé pendant la formation.']},
+  electricien:{'pro-elec':[2,'Avec un bac pro électricité, le BTS Électrotechnique en alternance est la suite logique.'],'cap':[1,'Après un CAP, le bac pro te permet d’évoluer vers plus de responsabilités.'],'sti2d':[2,'Avec un bac STI2D, le BTS Électrotechnique t’ouvre les postes de technicien.'],'g-sci':[2,'Avec un bac général scientifique, le BTS Électrotechnique est accessible directement.']}
+};
+const QUIZ = [
+  {q:'Quelle formation suis-tu en ce moment ?', profil:true, o:PROFILS.map(p=>[p[0],p[1]])},
+  {q:'Tu préfères passer ta journée à…', o:[['Aider ou soigner des gens',{infirmier:2}],['Argumenter et convaincre',{avocat:2}],['Réparer ou construire',{electricien:2}],['Analyser des documents',{avocat:1}]]},
+  {q:'Ta matière la plus forte ?', o:[['SES, philo, histoire',{avocat:2}],['SVT, biologie',{infirmier:2}],['Physique, techno',{electricien:2}],['Un peu de tout',{}]]},
+  {q:'Tu te vois travailler…', o:[['Dans un bureau ou au tribunal',{avocat:2}],['À l’hôpital ou chez les patients',{infirmier:2}],['Sur des chantiers',{electricien:2}],['Peu importe',{}]]},
+  {q:'Combien d’années d’études après le bac ?', o:[['2 ans maximum',{electricien:2}],['Environ 3 ans',{infirmier:2}],['5 ans ou plus, ça me va',{avocat:2}],['Je ne sais pas encore',{}]]},
+  {q:'En groupe, tu es plutôt…', o:[['Celui qui prend la parole',{avocat:1}],['Celui qui écoute et rassure',{infirmier:1}],['Celui qui passe à l’action',{electricien:1}],['Celui qui organise',{}]]}
+];
+
+const st = {chemin:0, ecType:'all', ecVille:'', ecF:'droit', qi:0, ans:[], tab:'msg', tone:'formel'};
+const app = document.getElementById('app');
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function home(){
+  return `
+  <section class="hero"><div class="wrap hero-g">
+    <div class="fade">
+      <span class="pill">Spécial Parcoursup 2027</span>
+      <h1>Choisis ton métier.<br>On te montre <em>tous les chemins</em>.</h1>
+      <p class="lead">Études, écoles publiques et privées, chances d'admission, coûts et démarches : tout ce qu'il faut pour décider, au même endroit.</p>
+      <form class="search" id="sf" role="search">
+        <div class="fld"><label for="q">Métier visé</label><input id="q" autocomplete="off" placeholder="avocat, infirmier, électricien…"></div>
+        <div class="fld"><label for="v">Ta ville</label><input id="v" autocomplete="off" placeholder="Paris, Lyon…"></div>
+        <button class="btn btn-p" type="submit">${IC.search} Voir les chemins</button>
+      </form>
+      <div class="err" id="err" role="status"></div>
+      <div class="sugg">Populaires : ${Object.keys(METIERS).map(k=>`<button class="chip" data-go="metier-${k}">${METIERS[k].nom}</button>`).join('')}</div>
+    </div>
+    <div class="mock fade" aria-hidden="true">
+      <div class="float a"><span class="dot" style="background:var(--green)"></span>3 parcours trouvés</div>
+      <div class="t">Pour devenir</div><h3>Avocat</h3>
+      <div class="mstep"><span class="n">1</span><div><b>Licence de droit</b><small>3 ans · via Parcoursup</small></div></div>
+      <div class="mstep"><span class="n">2</span><div><b>Master de droit</b><small>M1 pour l'examen, M2 avant le CAPA</small></div></div>
+      <div class="mstep"><span class="n">3</span><div><b>Examen CRFPA</b><small>Entrée en école d'avocats</small></div></div>
+      <div class="mstep"><span class="n">4</span><div><b>École d'avocats + CAPA</b><small>18 mois, dont 6 de stage</small></div></div>
+      <div class="float b"><span class="dot" style="background:var(--gold)"></span>Lettre de motivation prête</div>
+    </div>
+  </div></section>
+
+  <section class="blk" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+    <div class="sh"><div class="k">Comment ça marche</div><h2>De l'idée au dossier, en 3 étapes</h2></div>
+    <div class="g3">
+      <div class="card"><div class="num">01</div><h3>Tape ton métier <span class="badge b-free" style="vertical-align:middle">Gratuit</span></h3><p>Tu découvres gratuitement le chemin principal pour y arriver.</p></div>
+      <div class="card"><div class="num">02</div><h3>Compare les chemins</h3><p>Études, durée, alternance, coûts : chaque parcours est expliqué simplement.</p></div>
+      <div class="card"><div class="num">03</div><h3>Prépare tes candidatures</h3><p>Trouve les écoles, contacte-les et rédige tes lettres de motivation.</p></div>
+    </div>
+  </div></section>
+
+  <section class="blk"><div class="wrap">
+    <div class="sh"><div class="k">Fonctionnalités</div><h2>Tout ce que Parcoursup ne te dit pas</h2><p>Des infos sourcées, mises à jour, et des outils pour passer à l'action.</p></div>
+    <div class="g4">
+      <div class="card"><div class="ic" style="background:#E6EDFF;color:#1F44B8">${IC.school}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Écoles publiques et privées</h3><p>Y compris les formations hors Parcoursup, avec statut, ville et frais.</p></div>
+      <div class="card"><div class="ic" style="background:#FFF4D1;color:var(--gold-d)">${IC.chart}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Chances d'admission</h3><p>Taux d'accès et taux de réussite par formation, avec leur source et leur année.</p></div>
+      <div class="card"><div class="ic" style="background:#E4F5EC;color:var(--green)">${IC.mail}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Messages aux écoles</h3><p>Un e-mail prêt à envoyer en un clic, dans le ton que tu choisis.</p></div>
+      <div class="card"><div class="ic" style="background:#FDE7EC;color:#A3203F">${IC.pen}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Lettres de motivation</h3><p>Une aide pour rédiger ton projet de formation motivé pour chaque vœu.</p></div>
+    </div>
+  </div></section>
+
+  <section style="padding:0 0 80px"><div class="wrap">
+    <div class="quizb"><div><h2>Pas encore d'idée de métier ?</h2><p>Réponds à 6 questions, on te propose des pistes adaptées à ta formation actuelle.</p></div>
+    <a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div>
+  </div></section>`;
+}
+
+function metier(key){
+  const m = METIERS[key];
+  if(!m) return `<div class="wrap page"><div class="card empty"><h2 class="ph" style="font-size:26px;margin-bottom:8px">Ce métier arrive bientôt</h2><p>On ajoute de nouveaux métiers chaque semaine.</p><a class="btn btn-p" href="#accueil" style="margin-top:12px">Retour à l'accueil</a></div></div>`;
+  if(!hasPlan() && st.chemin>0) st.chemin=0;
+  const c = m.chemins[st.chemin] || m.chemins[0];
+  return `<div class="wrap page fade">
+    <div class="crumb"><a href="#accueil">Accueil</a> / Métiers / ${m.nom}</div>
+    <div class="ptitle"><div><h1>Devenir ${m.nom.toLowerCase()}</h1><p>${m.resume}</p></div>
+      <a class="btn btn-o" href="#ecoles" data-f="${m.formation}">Voir les écoles ${IC.arrow}</a></div>
+    <div class="tabs" role="tablist">${m.chemins.map((x,i)=>{const lk=!hasPlan()&&i>0;return `<button class="tab ${i===st.chemin?'on':''} ${lk?'lockd':''}" role="tab" aria-selected="${i===st.chemin}" data-ch="${i}">${lk?IC.lock+' ':''}Chemin ${i+1}${lk?'':' · '+x.nom}</button>`}).join('')}</div>
+    <div class="lay">
+      <div>
+      ${st.lockCh?paywall('Débloque les '+m.chemins.length+' chemins','En gratuit, tu vois le chemin principal. Les autres voies (alternance, passerelles, double cursus…) sont réservées à la version premium.','<div class="card" style="min-height:420px"><h2 class="ph" style="font-size:24px">'+m.chemins[st.lockCh].nom+'</h2><p>'+m.chemins[st.lockCh].sous+'</p>'+m.chemins[st.lockCh].steps.map(x=>'<p><b>'+x[0]+'</b><br>'+x[2]+'</p>').join('')+'</div>'):`<div class="card"><h2 class="ph" style="font-size:24px">${c.nom}${!hasPlan()?' <span class="badge b-free" style="vertical-align:middle;margin-left:6px">Gratuit</span>':''}</h2><p style="color:var(--mute);margin:4px 0 24px">${c.sous}</p>
+        <div class="tl">${c.steps.map((s,i)=>`<div class="st"><span class="n">${i+1}</span><div><h3>${s[0]}</h3><div class="d">${s[1]}</div><p>${s[2]}</p></div></div>`).join('')}</div>
+        ${!hasPlan()?`<div class="callout" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>${m.chemins.length-1} autres chemins existent pour ce métier.</span><a class="btn btn-p" href="#paiement" style="height:40px">${IC.lock} Les débloquer</a></div>`:''}
+      </div>`}
+      </div>
+      <aside class="card"><h3 style="font-size:17px;margin-bottom:6px">L'essentiel</h3>
+        ${m.infos.map(k=>`<div class="kv"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}
+        <div class="callout">Tu veux contacter une école ou préparer ta lettre ? L'assistant t'aide à rédiger.</div>
+        <a class="btn btn-p" href="#assistant" style="width:100%;margin-top:14px">Ouvrir l'assistant</a>
+        <div class="note">Sources : ${m.sources}</div>
+      </aside>
+    </div></div>`;
+}
+
+function ecoles(){
+  const fNames = {droit:'Licence et bachelor de droit', ifsi:'Instituts de soins infirmiers', elec:'Formations en électricité'};
+  const v = norm(st.ecVille);
+  const list = ECOLES.filter(e=>e.f===st.ecF && (st.ecType==='all'||e.type===st.ecType) && (!v || norm(e.ville).includes(v) || norm(e.nom).includes(v)));
+  return `<div class="wrap page fade">
+    <div class="crumb"><a href="#accueil">Accueil</a> / Écoles</div>
+    <div class="ptitle"><div><h1>Écoles et formations</h1><p>${fNames[st.ecF]} · Île-de-France</p></div></div>
+    <div class="filters">
+      <label class="sr" for="ecf">Formation</label>
+      <select class="inp" id="ecf">${Object.keys(fNames).map(k=>`<option value="${k}" ${k===st.ecF?'selected':''}>${fNames[k]}</option>`).join('')}</select>
+      <div class="seg" role="group" aria-label="Statut">${[['all','Toutes'],['pub','Public'],['pri','Privé']].map(t=>`<button class="${st.ecType===t[0]?'on':''}" data-et="${t[0]}">${t[1]}</button>`).join('')}</div>
+      <label class="sr" for="ecv">Ville</label>
+      <input class="inp" id="ecv" placeholder="Filtrer par ville" value="${esc(st.ecVille)}" style="flex:1;max-width:260px">
+    </div>
+    <div id="eclist">${list.length? list.map(e=>`
+      <div class="card sc">
+        <div><span class="tag ${e.type==='pub'?'t-pub':'t-pri'}">${e.type==='pub'?'PUBLIC':'PRIVÉ'}</span><span class="meta">${e.formation}</span>
+          <h3>${e.nom}</h3><div class="meta">${e.ville} · Candidature : ${e.voie}</div>
+          <div class="stats">
+            <div class="stat"><span>${e.type==='pub'?'Frais':'Prix selon le diplôme'}</span><b>${e.frais}</b></div>
+            ${e.alt?`<div class="stat"><span>Alternance</span><b>${e.alt}</b></div>`:''}
+            <div class="stat"><span>Taux d'accès</span><b>${e.type==='pub'?'Source Parcoursup':'Non publié'}</b></div>
+            <div class="stat"><span>Taux de réussite</span><b>${e.type==='pub'?'À venir':'Non publié'}</b></div>
+          </div></div>
+        <div class="acts"><a class="btn btn-p" href="#assistant" data-ecole="${esc(e.nom)}">Contacter</a>
+          <a class="btn btn-o" href="https://www.parcoursup.gouv.fr">Postuler</a></div>
+      </div>`).join('') : `<div class="card empty"><h3 class="ph" style="font-size:22px;margin-bottom:6px">Formations en cours d'ajout</h3><p>Cette liste sera bientôt disponible.</p></div>`}</div>
+    <h2 class="ph" style="font-size:26px;margin-top:44px">Combien ça coûte, selon le diplôme ?</h2>
+    <p style="color:var(--ink2);margin:6px 0 0">Les prix du privé varient beaucoup : demande toujours la grille tarifaire officielle de l'école.</p>
+    <div class="tbx"><table class="ptab"><thead><tr><th>Diplôme</th><th>Établissement</th><th>Prix par an</th><th>À savoir</th></tr></thead>
+    <tbody>${PRIX.map(p=>`<tr><td><b>${p[0]}</b></td><td>${p[1]}</td><td><b>${p[2]}</b></td><td style="color:var(--ink2)">${p[3]}</td></tr>`).join('')}</tbody></table></div>
+    <p class="note">Fourchettes indicatives constatées en 2025-2026 (Diplomeo, L'Étudiant). Les taux d'admission et de réussite sont affichés seulement avec leur source et leur année.</p>
+  </div>`;
+}
+
+function draft(){
+  const e = st.ecole || '[nom de l’école]';
+  const f = st.form || 'la licence de droit';
+  const T = {
+    formel:`Madame, Monsieur,\n\nActuellement en terminale, je souhaite candidater en ${f} à ${e}. Afin de préparer au mieux mon dossier, pourriez-vous m'indiquer les dates de vos prochaines journées portes ouvertes, ainsi que la possibilité d'échanger avec un étudiant de la formation ?\n\nJe vous remercie par avance pour votre réponse.\n\nCordialement,\n[Prénom Nom]`,
+    simple:`Bonjour,\n\nJe suis en terminale et ${f} à ${e} m'intéresse beaucoup. Est-ce qu'une journée portes ouvertes est prévue cette année ? Et serait-il possible de discuter avec un étudiant de la formation ?\n\nMerci beaucoup pour votre aide !\n\n[Prénom]`,
+    direct:`Bonjour,\n\nEn terminale, je vise ${f} à ${e}. Pourriez-vous me donner les dates des portes ouvertes ?\n\nMerci,\n[Prénom]`
+  };
+  const L = `Projet de formation motivé — ${f}, ${e}\n\nDepuis [le moment ou l'expérience qui t'a donné envie], je souhaite devenir [métier]. ${f.charAt(0).toUpperCase()+f.slice(1)} à ${e} m'attire particulièrement pour [un point précis : option, stage, association, partenariat].\n\nMon parcours m'a permis de développer [qualité 1] et [qualité 2], notamment grâce à [exemple concret : stage, engagement, projet].\n\nJe suis prêt(e) à m'investir pleinement dans cette formation, qui correspond à mon projet de [objectif professionnel].`;
+  return st.tab==='msg' ? T[st.tone] : L;
+}
+function assistant(){
+  return `<div class="wrap page fade">
+    <div class="crumb"><a href="#accueil">Accueil</a> / Assistant</div>
+    <div class="ptitle"><div><h1>Assistant de rédaction</h1><p>Un brouillon prêt en quelques secondes. Tu relis, tu ajustes, tu envoies toi-même.</p></div></div>
+    <div class="as">
+      <form class="card frm" id="af">
+        <div class="seg" role="group" aria-label="Type de texte" style="width:100%">${[['msg','Message à l’école'],['lettre','Lettre de motivation']].map(t=>`<button type="button" style="flex:1" class="${st.tab===t[0]?'on':''}" data-tb="${t[0]}">${t[1]}</button>`).join('')}</div>
+        <label for="ae">École</label><input class="inp" id="ae" value="${esc(st.ecole||'')}" placeholder="Ex. Université Paris Nanterre">
+        <label for="afo">Formation</label><input class="inp" id="afo" value="${esc(st.form||'')}" placeholder="Ex. la licence de droit">
+        ${st.tab==='msg'?`<label for="at">Ton</label><select class="inp" id="at">${[['formel','Formel'],['simple','Simple'],['direct','Direct']].map(t=>`<option value="${t[0]}" ${st.tone===t[0]?'selected':''}>${t[1]}</option>`).join('')}</select>`:''}
+        <button class="btn btn-p" type="submit" style="width:100%;margin-top:18px">Générer le brouillon</button>
+      </form>
+      <div class="out">
+        <div class="bar"><b>${st.tab==='msg'?'E-mail à l’école':'Projet de formation motivé'}</b>
+          <div style="display:flex;gap:10px;align-items:center"><span class="ok" id="cpok" role="status"></span><button class="btn btn-o" id="cp" style="height:40px">Copier</button></div></div>
+        <label class="sr" for="txt">Brouillon</label>
+        <textarea id="txt">${esc(draft())}</textarea>
+        ${st.tab==='lettre'&&st.plan!=='complet'?`<div class="lock"><div><b>Lettre complète pour 5 vœux</b><p>Personnalisée selon ton profil et chaque formation.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
+      </div>
+    </div></div>`;
+}
+
+const OFFERS = {
+  essentiel:{nom:'Essentiel', prix:4.99, items:['Les 3 chemins pour chaque métier','Écoles publiques et privées, prix et chances d’admission','Quiz d’orientation','Messages aux écoles illimités']},
+  complet:{nom:'Complet', prix:9.99, items:['Tout l’Essentiel','5 lettres de motivation personnalisées','Accès jusqu’à la fin de Parcoursup 2027']}
+};
+const hasPlan = () => !!st.plan;
+function paywall(title, desc, ghost){
+  return `<div class="pw"><div class="ghost" aria-hidden="true">${ghost}</div>
+    <div class="over"><div class="pwc"><span class="badge b-prem">${IC.lock} Premium</span>
+      <h2>${title}</h2><p>${desc}</p>
+      <ul><li>Les 3 chemins pour chaque métier</li><li>Écoles, prix selon le diplôme et chances d’admission</li><li>Quiz d’orientation et messages aux écoles</li></ul>
+      <a class="btn btn-p" href="#paiement" style="width:100%">Débloquer dès 4,99 €</a>
+      <p style="font-size:13px;color:var(--mute);margin:12px 0 0">Paiement unique, sans abonnement</p></div></div></div>`;
+}
+function lockedPage(crumb, h1, sub, title, desc, ghost){
+  return `<div class="wrap page fade"><div class="crumb"><a href="#accueil">Accueil</a> / ${crumb}</div>
+    <div class="ptitle"><div><h1>${h1}</h1><p>${sub}</p></div></div>${paywall(title, desc, ghost)}</div>`;
+}
+const eur = n => n.toFixed(2).replace('.',',')+' €';
+function paiement(){
+  const o = OFFERS[st.offer||'complet'];
+  if(st.paid) return `<div class="wrap page fade"><div class="qz"><div class="card" style="text-align:center;padding:44px 28px">
+    <div class="ic" style="background:#E4F5EC;color:var(--green);margin:0 auto 18px;width:60px;height:60px;border-radius:50%"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5,12 10,17 19,7"/></svg></div>
+    <h1 style="font-size:30px;margin-bottom:8px">Merci, c'est débloqué</h1>
+    <p style="color:var(--ink2);margin:0 0 6px">${o.nom} · ${eur(o.prix)}</p>
+    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">Paiement de démonstration : aucun montant n'a été débité. Le reçu serait envoyé à ${esc(st.mail)}.</p>
+    <a class="btn btn-p" href="#assistant" id="golettre">Rédiger ma lettre</a>
+    <a class="btn btn-o" href="#paiement" id="pback" style="margin-left:6px">Revenir aux offres</a>
+  </div></div></div>`;
+  return `<div class="wrap page fade">
+    <div class="crumb"><a href="#accueil">Accueil</a> / Tarifs</div>
+    <div class="ptitle"><div><h1>Passe à la vitesse supérieure</h1><p>Paiement unique, sans abonnement. Tu choisis, tu paies, c'est débloqué.</p></div></div>
+    <form class="pay" id="pf" novalidate>
+      <div>
+        ${Object.entries(OFFERS).map(([k,v])=>`<button type="button" class="offer ${(st.offer||'complet')===k?'on':''}" data-of="${k}"><span class="rd"></span><div><h3>${v.nom}${k==='complet'?' <span class="pill" style="font-size:11px;margin-left:6px">Le plus choisi</span>':''}</h3><ul>${v.items.map(i=>`<li>${i}</li>`).join('')}</ul></div><span class="pr">${eur(v.prix)}</span></button>`).join('')}
+        <div class="card" style="margin-top:8px">
+          <label for="pmail" style="font-size:13px;font-weight:600;color:var(--ink2)">E-mail pour recevoir ton accès</label>
+          <input class="inp" id="pmail" type="email" placeholder="toi@exemple.fr" style="width:100%;margin-top:6px" value="${esc(st.mail||'')}">
+          <div style="font-size:13px;font-weight:600;color:var(--ink2);margin-top:16px">Moyen de paiement</div>
+          <div class="pm" role="group" aria-label="Moyen de paiement">${[['cb','Carte bancaire'],['apple','Apple Pay'],['google','Google Pay']].map(p=>`<button type="button" class="${(st.pm||'cb')===p[0]?'on':''}" data-pm="${p[0]}">${p[1]}</button>`).join('')}</div>
+          <p class="note">Tu seras redirigé vers la page sécurisée de notre prestataire de paiement. Aucune donnée bancaire n'est saisie sur trouvetavoie.</p>
+          <div class="err" id="perr" role="status"></div>
+        </div>
+      </div>
+      <aside class="card sum">
+        <h3 style="font-size:17px;margin-bottom:6px">Récapitulatif</h3>
+        <div class="kv"><span>${o.nom}</span><b>${eur(o.prix)}</b></div>
+        <div class="kv"><span>Dont TVA (20 %)</span><b>${eur(o.prix - o.prix/1.2)}</b></div>
+        <div class="kv" style="font-size:17px"><span style="color:var(--ink);font-weight:600">Total</span><b>${eur(o.prix)}</b></div>
+        <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:52px">Payer ${eur(o.prix)}</button>
+        <div class="secure"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé · Démo, aucun débit</div>
+      </aside>
+    </form></div>`;
+}
+
+function quiz(){
+  if(st.qi>=QUIZ.length){
+    const sc = {avocat:0,infirmier:0,electricien:0};
+    const prof = PROFILS[st.ans[0]] || PROFILS[0];
+    st.ans.forEach((a,i)=>{const w=QUIZ[i].o[a][1];for(const k in w)sc[k]+=w[k];});
+    const max = Math.max(1,...Object.values(sc));
+    const r = Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+    return `<div class="wrap page fade"><div class="qz">
+      <div class="crumb">Quiz · Résultats</div>
+      <h1>Les métiers qui te ressemblent</h1>
+      <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${prof[0]}</b></p>
+      ${r.map(([k,v],i)=>{const c=(CONSEIL[k]||{})[prof[2]];const ch=c?c[0]:0;return `<div class="card" style="margin-bottom:12px"><div class="res"><div style="flex:1"><h3 style="font-size:19px">${METIERS[k].nom}${i===0?' <span class="pill" style="margin-left:8px;font-size:12px">Meilleur match</span>':''}</h3><p style="margin:4px 0 0;color:var(--ink2);font-size:14px">${METIERS[k].resume}</p>${c?`<p style="margin:8px 0 0;font-size:14px;color:var(--gold-d);font-weight:500">${c[1]}</p>`:''}<div class="bar2"><i style="width:${Math.round(v/max*100)}%"></i></div></div><a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Chemin conseillé : ${ch+1}</a></div></div>`}).join('')}
+      <button class="btn btn-o" id="rq" style="margin-top:10px">Refaire le quiz</button>
+    </div></div>`;
+  }
+  const q = QUIZ[st.qi];
+  return `<div class="wrap page fade"><div class="qz">
+    <div class="crumb">Quiz orientation · Question ${st.qi+1} sur ${QUIZ.length}</div>
+    <div class="prog"><i style="width:${(st.qi)/QUIZ.length*100}%"></i></div>
+    <h1>${q.q}</h1>
+    ${q.profil?`<div class="og">${q.o.map((o,i)=>`<button class="opt ${st.ans[st.qi]===i?'on':''}" data-o="${i}">${o[0]}</button>`).join('')}</div>`:q.o.map((o,i)=>`<button class="opt ${st.ans[st.qi]===i?'on':''}" data-o="${i}">${o[0]} ${IC.arrow}</button>`).join('')}
+    ${st.qi>0?`<button class="btn btn-o" id="qb" style="margin-top:8px">Question précédente</button>`:''}
+  </div></div>`;
+}
+
+function route(){
+  const h = location.hash.replace('#','') || 'accueil';
+  let html, r='';
+  if(!h.startsWith('metier-')) st.lockCh=0;
+  const G = '<div class="card" style="min-height:460px">'+'<div style="height:22px;width:60%;background:#E4E7EF;border-radius:8px;margin-bottom:18px"></div>'.repeat(1)+'<div style="height:90px;background:#EEF0F5;border-radius:14px;margin-bottom:14px"></div>'.repeat(4)+'</div>';
+  if(h.startsWith('metier-')){ html = metier(h.slice(7)); r='metier'; }
+  else if(h==='ecoles'){ html = hasPlan()? ecoles() : lockedPage('Écoles','Écoles et formations','Publiques et privées, prix selon le diplôme, chances d’admission.','Trouve les écoles qui te correspondent','Compare les établissements publics et privés près de chez toi, leurs prix et leurs chances d’admission.',G); r='ecoles'; }
+  else if(h==='assistant'){ html = hasPlan()? assistant() : lockedPage('Assistant','Assistant de rédaction','Messages aux écoles et lettres de motivation.','Écris aux écoles en un clic','Génère des messages prêts à envoyer et fais-toi aider pour tes lettres de motivation.',G); r='assistant'; }
+  else if(h==='quiz'){ html = hasPlan()? quiz() : lockedPage('Quiz','Quiz d’orientation','6 questions, dont ta formation actuelle.','Pas d’idée de métier ?','Le quiz te propose des métiers et le chemin conseillé selon ta formation actuelle.',G); r='quiz'; }
+  else if(h==='paiement'){ html = paiement(); r='paiement'; }
+  else html = home();
+  app.innerHTML = html;
+  document.querySelectorAll('nav.main a').forEach(a=>a.classList.toggle('on',a.dataset.r===r));
+  document.querySelectorAll('nav.main .nl').forEach(n=>n.innerHTML=hasPlan()?'':IC.lock);
+  const rs=document.getElementById('reset'); if(rs) rs.style.display=hasPlan()?'inline':'none';
+  document.getElementById('nav').classList.remove('open');
+  bind();
+}
+function rerender(keepScroll){ const y=scrollY; route(); if(keepScroll) scrollTo(0,y); }
+
+function bind(){
+  const sf = document.getElementById('sf');
+  if(sf) sf.addEventListener('submit',e=>{
+    e.preventDefault();
+    const k = ALIAS[norm(document.getElementById('q').value)];
+    const err = document.getElementById('err');
+    if(!document.getElementById('q').value.trim()){ err.textContent='Tape un métier pour commencer.'; return; }
+    if(k){ st.chemin=0; location.hash='metier-'+k; scrollTo(0,0); }
+    else err.textContent = 'Ce métier arrive bientôt. Pour la démo, essaie avocat, infirmier ou électricien.';
+  });
+  document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{st.chemin=0;location.hash=b.dataset.go;scrollTo(0,0);});
+  document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{const i=+b.dataset.ch;if(!hasPlan()&&i>0){st.lockCh=i;}else{st.lockCh=0;st.chemin=i;}rerender(true);});
+  document.querySelectorAll('[data-f]').forEach(a=>a.addEventListener('click',()=>{st.ecF=a.dataset.f;}));
+  document.querySelectorAll('[data-et]').forEach(b=>b.onclick=()=>{st.ecType=b.dataset.et;rerender(true);});
+  const ecf=document.getElementById('ecf'); if(ecf) ecf.onchange=()=>{st.ecF=ecf.value;rerender(true);};
+  const ecv=document.getElementById('ecv'); if(ecv) ecv.oninput=()=>{st.ecVille=ecv.value;const p=ecv.selectionStart;rerender(true);const n=document.getElementById('ecv');n.focus();n.setSelectionRange(p,p);};
+  document.querySelectorAll('[data-ecole]').forEach(a=>a.addEventListener('click',()=>{st.ecole=a.dataset.ecole;st.form='la licence de droit';st.tab='msg';}));
+  document.querySelectorAll('[data-tb]').forEach(b=>b.onclick=()=>{readForm();st.tab=b.dataset.tb;rerender(true);});
+  const af=document.getElementById('af'); if(af) af.addEventListener('submit',e=>{e.preventDefault();readForm();rerender(true);});
+  const at=document.getElementById('at'); if(at) at.onchange=()=>{readForm();rerender(true);};
+  const cp=document.getElementById('cp'); if(cp) cp.onclick=async()=>{const ok=document.getElementById('cpok');try{await navigator.clipboard.writeText(document.getElementById('txt').value);ok.textContent='Copié';}catch(e){document.getElementById('txt').select();ok.textContent='Sélectionné, fais Ctrl+C';}};
+  document.querySelectorAll('[data-of]').forEach(b=>b.onclick=()=>{st.offer=b.dataset.of;rerender(true);});
+  document.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{st.pm=b.dataset.pm;rerender(true);});
+  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}st.paid=true;st.mail=m.value;st.plan=st.offer||'complet';rerender();scrollTo(0,0);});
+  const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
+  const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
+  const gl=document.getElementById('golettre'); if(gl) gl.onclick=()=>{st.tab='lettre';};
+  document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{st.ans[st.qi]=+b.dataset.o;st.qi++;rerender();scrollTo(0,0);});
+  const qb=document.getElementById('qb'); if(qb) qb.onclick=()=>{st.qi--;rerender();};
+  document.querySelectorAll('[data-chs]').forEach(a=>a.addEventListener('click',()=>{st.chemin=+a.dataset.chs;}));
+  const rq=document.getElementById('rq'); if(rq) rq.onclick=()=>{st.qi=0;st.ans=[];rerender();};
+}
+function readForm(){
+  const ae=document.getElementById('ae'), afo=document.getElementById('afo'), at=document.getElementById('at');
+  if(ae) st.ecole=ae.value.trim(); if(afo) st.form=afo.value.trim(); if(at) st.tone=at.value;
+}
+const burger=document.getElementById('burger');
+burger.onclick=()=>{const n=document.getElementById('nav');n.classList.toggle('open');burger.setAttribute('aria-expanded',n.classList.contains('open'));};
+document.querySelector('nav.main a[data-r="metier"]').addEventListener('click',()=>{st.chemin=0;});
+addEventListener('hashchange',()=>{route();scrollTo(0,0);});
+route();
+</script>
+</body>
+</html>
