@@ -587,7 +587,51 @@ const Q = {
   pro:{q:'Ton bac pro est dans quel domaine ?', grid:true, o:[['Commerce, vente',{commercial:3},'pro-com'],['Électricité, énergie, industrie',{electricien:3,ingenieur:1},'pro-elec'],['Santé, social (ASSP)',{infirmier:3},'pro-assp'],['Métiers de la sécurité',{policier:4},'pro-secu'],['Gestion, administration',{comptable:2},'pro-ges'],['Informatique, réseaux (CIEL)',{developpeur:2,electricien:1},'pro-ciel'],['Autre domaine',{},'pro-autre']]},
   cap:{q:'Ton CAP est dans quel domaine ?', o:[['Vente, commerce',{commercial:2}],['Électricité, bâtiment',{electricien:3}],['Petite enfance, aide à la personne',{infirmier:1,prof:1}],['Autre domaine',{}]]},
   supdom:{q:'Dans quel domaine sont tes études actuelles ?', sub:'Pas d’inquiétude : beaucoup de gens changent complètement de voie.', grid:true, o:[['Commerce, gestion',{commercial:1,comptable:1}],['Droit',{avocat:1}],['Sciences, informatique',{ingenieur:1,developpeur:1}],['Santé, social',{infirmier:1,psychologue:1}],['Lettres, langues, sciences humaines',{prof:1,psychologue:1,communitymanager:1}],['Autre',{}]]},
-  univers:{q:'Quel univers t’attire le plus ?', sub:'Fie-toi à ton envie, pas à ce qu’on attend de toi.', grid:true, o:UNIVERS.map(u=>[u[0],{},u[1]])},
+  samedi:{q:'Un samedi sans rien de prévu, tu fais quoi ?', sub:'La première idée qui te vient.', grid:true, o:[
+    ['🏋️ Sport, muscu ou match avec les potes',{sport:3,kine:1,policier:1}],
+    ['🎮 Gaming, ou bidouiller sur l’ordi',{developpeur:3,ingenieur:1}],
+    ['📱 Tourner et monter des vidéos',{communitymanager:3}],
+    ['🛠️ Réparer ou construire un truc',{electricien:3,ingenieur:2}],
+    ['🤝 Aider quelqu’un ou faire du bénévolat',{infirmier:2,psychologue:2,prof:1}],
+    ['💸 Revendre des sneakers, monter un petit business',{commercial:3,comptable:1}],
+    ['🐶 Promener ou garder des animaux',{veterinaire:4}],
+    ['🎬 Une série policière ou un documentaire de procès',{avocat:2,policier:2}]]},
+  contenus:{q:'Sur TikTok ou YouTube, tu tombes souvent sur…', grid:true, o:[
+    ['🚑 Urgences, médecine, le corps humain',{medecin:3,infirmier:2,kine:1}],
+    ['⚖️ Procès, affaires criminelles, faits divers',{avocat:3,policier:2}],
+    ['💻 Tech, IA, gaming, setups',{developpeur:3,ingenieur:2}],
+    ['📈 Business, argent, entrepreneurs',{commercial:3,comptable:2}],
+    ['💪 Sport, muscu, nutrition',{sport:3,kine:2}],
+    ['🧠 Psycho, relations, développement perso',{psychologue:4}],
+    ['🐾 Animaux, refuges, soins vétérinaires',{veterinaire:4}],
+    ['🎨 Créateurs, montage, tendances',{communitymanager:4}]]},
+  qualites:{q:'Tes deux plus grosses qualités ?', sub:'Choisis-en exactement 2, celles que tes potes diraient de toi.', grid:true, multi:[2,2], o:[
+    ['🗣️ Je sais convaincre',{commercial:2,avocat:2}],
+    ['🫶 J’écoute vraiment les gens',{psychologue:2,infirmier:2}],
+    ['🧩 J’adore résoudre des problèmes',{ingenieur:2,developpeur:2}],
+    ['🧊 Je garde mon sang-froid',{policier:2,medecin:2,infirmier:1}],
+    ['✨ Je suis créatif',{communitymanager:2,ingenieur:1}],
+    ['📊 Je suis rigoureux et organisé',{comptable:3,medecin:1}],
+    ['⚡ J’ai de l’énergie à revendre',{sport:2,policier:1,electricien:1}],
+    ['🧑‍🏫 J’aime expliquer aux autres',{prof:3,sport:1}]]},
+  motiv:{q:'Ce qui te ferait lever le matin pour aller bosser ?', o:[
+    ['Me sentir utile, aider ou sauver des gens',{infirmier:2,medecin:2,policier:1,psychologue:1}],
+    ['Bien gagner ma vie',{commercial:2,comptable:2,avocat:1,developpeur:1,medecin:1}],
+    ['Créer ou construire quelque chose',{ingenieur:2,developpeur:2,communitymanager:1,electricien:1}],
+    ['Faire respecter la justice',{avocat:3,policier:3}],
+    ['Transmettre et voir les autres progresser',{prof:3,sport:2}],
+    ['Être libre et indépendant',{developpeur:1,communitymanager:1,sport:1,kine:1,electricien:1}],
+    ['Avoir un emploi stable et sûr',{prof:2,policier:2,infirmier:1}]]},
+  nope:{q:'Et ce que tu ne supportes vraiment pas ?', sub:'Choisis-en jusqu’à 3, ou valide directement si rien ne te bloque.', grid:true, multi:[0,3], neg:true, o:[
+    ['🩸 Le sang et les hôpitaux',{medecin:-5,infirmier:-5,kine:-2,veterinaire:-3}],
+    ['🪑 Rester assis toute la journée',{comptable:-3,developpeur:-3,avocat:-1}],
+    ['🎤 Parler devant un groupe',{avocat:-3,prof:-3,commercial:-2,sport:-1}],
+    ['🌙 Travailler la nuit ou le week-end',{infirmier:-3,policier:-3,medecin:-2}],
+    ['🎯 La pression des objectifs de vente',{commercial:-5}],
+    ['⚔️ Les conflits et les situations tendues',{policier:-4,avocat:-2}],
+    ['🌧️ Bosser dehors par tous les temps',{electricien:-3,policier:-2}],
+    ['🔢 Les maths et les chiffres',{comptable:-4,ingenieur:-4,developpeur:-2}]]},
+  univers:{q:'Au final, quel univers t’attire le plus ?', sub:'Fie-toi à ton envie, pas à ce qu’on attend de toi.', grid:true, o:UNIVERS.map(u=>[u[0],{},u[1]])},
   follow:{dyn:a=>FOLLOW[UNIVERS[a.univers][1]].o, title:a=>FOLLOW[UNIVERS[a.univers][1]].q},
   univers2:{q:'Et en deuxième choix ?', sub:'Ça nous aide à te proposer des pistes de secours.', grid:true, dyn:a=>UNIVERS.map((u,i)=>[u[0],{},u[1],i]).filter(x=>x[3]!==a.univers).concat([['Aucun autre',{},'none']])},
   duree:{title:a=>['cap','sup'].includes(Q.voie.o[a.voie][2])?'Combien d’années d’études tu es prêt(e) à faire encore ?':'Combien d’années d’études après le bac, ça te va ?', o:[['2 ans maximum',{},2],['Environ 3 ans',{},3],['5 ans, pas de souci',{},5],['Autant qu’il faut pour le métier que je veux',{},99]]},
@@ -602,8 +646,8 @@ function flow(a){
   if(v==='pro') f.push('pro');
   if(v==='cap') f.push('cap');
   if(v==='sup') f.push('supdom');
-  f.push('univers'); if(a.univers!==undefined) f.push('follow');
-  f.push('univers2','duree','argent','niveau');
+  f.push('samedi','contenus','qualites','motiv','univers'); if(a.univers!==undefined) f.push('follow');
+  f.push('nope','duree','argent','niveau');
   return f;
 }
 const qOpts=(id,a)=>Q[id].dyn?Q[id].dyn(a):Q[id].o;
@@ -626,14 +670,14 @@ function contexte(a){
 function scorer(a){
   const sc=Object.fromEntries(Object.keys(METIERS).map(k=>[k,0])), why={};
   const add=(w,label,m=1)=>{for(const k in w){sc[k]+=w[k]*m; if(w[k]*m>=1.5&&label)(why[k]=why[k]||[]).push([label,w[k]*m]);}};
-  const LBL={spefav:'ta spécialité préférée, ',techno:'ton bac ',stmg:'ta spécialité ',stmgfav:'ton goût pour la matière ',sti2d:'ta spécialité ',st2s:'ton intérêt pour ',pro:'ton bac pro ',cap:'ton CAP ',supdom:'tes études en '};
+  const LBL={qualites:'ta qualité ',samedi:'ton samedi idéal ',contenus:'ce que tu regardes ',motiv:'ce qui te motive ',spefav:'ta spécialité préférée, ',techno:'ton bac ',stmg:'ta spécialité ',stmgfav:'ton goût pour la matière ',sti2d:'ta spécialité ',st2s:'ton intérêt pour ',pro:'ton bac pro ',cap:'ton CAP ',supdom:'tes études en '};
   flow(a).forEach(id=>{
     if(a[id]===undefined||['univers','univers2','duree','argent','niveau','voie'].includes(id)) return;
     if(id==='spe'){ a.spe.forEach(i=>add(SPE[i][1],'ta spécialité '+SPE[i][0])); return; }
-    const o=qOpts(id,a)[a[id]]; add(o[1],(LBL[id]||'ta réponse ')+'« '+o[0]+' »', id==='spefav'?1.5:1);
+    if(Array.isArray(a[id])){ a[id].forEach(i=>{const o=Q[id].o[i]; add(o[1],(LBL[id]||'ta réponse ')+'« '+o[0].replace(/^\S+\s/,'')+' »');}); return; }
+    const o=qOpts(id,a)[a[id]]; add(o[1],(LBL[id]||'ta réponse ')+'« '+o[0].replace(/^[^\wÀ-ÿ’«]+/,'')+' »', id==='spefav'?1.5:1);
   });
   const u1=UNIVERS[a.univers]; add(DOM_BASE[u1[1]],'ton attirance pour « '+u1[0].toLowerCase()+' »',1.5);
-  const u2=qOpts('univers2',a)[a.univers2]; if(u2&&u2[2]!=='none') add(DOM_BASE[u2[2]],'ton 2e choix « '+u2[0].toLowerCase()+' »',0.75);
   const c=contexte(a);
   for(const k in sc){ if(MIN_ANS[k]>c.duree+1) sc[k]-= (MIN_ANS[k]-c.duree>=4?4:2); }
   return {sc,why,c};
@@ -676,8 +720,9 @@ function recoChemin(k,c,a){
   }
   return r(0,'');
 }
-function alertes(k,c){
+function alertes(k,c,a){
   const n=[];
+  (a&&a.nope||[]).forEach(i=>{const o=Q.nope.o[i]; if((o[1][k]||0)<=-3) n.push('Tu as dit ne pas supporter « '+o[0].replace(/^\S+\s/,'').toLowerCase()+' » : c’est une vraie partie de ce métier, renseigne-toi bien.');});
   if(MIN_ANS[k]>c.duree+1) n.push('Il faut au moins '+MIN_ANS[k]+' ans d’études pour ce métier, plus que ce que tu as indiqué.');
   if(k==='medecin'&&c.voie==='gen'&&!c.spe.some(s=>['svt','pc'].includes(s))) n.push('La plupart des admis ont pris SVT ou physique-chimie : pas obligatoire, mais prépare bien les sciences.');
   if(['medecin','veterinaire','kine'].includes(k)&&c.voie==='techno'&&!['st2s','stl'].includes(c.prof)) n.push('Depuis ton bac, cette voie est très sélective : vise une L.AS ou des formations où ton profil est attendu.');
@@ -903,7 +948,7 @@ function quiz(){
       <div class="crumb">Quiz · Résultats</div>
       <h1>Les métiers qui te ressemblent</h1>
       <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${pl}${det}</b></p>
-      ${top.map(([k,v],i)=>{const [ch,rs]=recoChemin(k,c,a);const al=alertes(k,c);const w=[...new Set((why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,2);
+      ${top.map(([k,v],i)=>{const [ch,rs]=recoChemin(k,c,a);const al=alertes(k,c,a);const w=[...new Set((why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,2);
         return `<div class="card" style="margin-bottom:14px"><div class="res"><div style="flex:1">
         <h3 style="font-size:19px">${METIERS[k].nom}${i===0?' <span class="pill" style="margin-left:8px;font-size:12px">Meilleur match</span>':''}</h3>
         <p style="margin:4px 0 0;color:var(--ink2);font-size:14px">${METIERS[k].resume}</p>
@@ -925,7 +970,7 @@ function quiz(){
     <h1>${qTitle(id,a)}</h1>
     ${q.sub?`<p style="color:var(--ink2);margin:-12px 0 20px">${q.sub}</p>`:''}
     ${q.grid||multi?`<div class="og">${opts.map((o,i)=>`<button class="opt ${isOn(i)?'on':''}" data-o="${i}">${o[0]}${multi&&isOn(i)?' ✓':''}</button>`).join('')}</div>`:opts.map((o,i)=>`<button class="opt ${isOn(i)?'on':''}" data-o="${i}">${o[0]} ${IC.arrow}</button>`).join('')}
-    ${multi?`<button class="btn btn-p" id="qv" style="margin-top:16px" ${(st.qm||[]).length<multi[0]?'disabled':''}>Valider (${(st.qm||[]).length} choisie${(st.qm||[]).length>1?'s':''})</button>`:''}
+    ${multi?`<button class="btn btn-p" id="qv" style="margin-top:16px" ${(st.qm||[]).length<multi[0]?'disabled':''}>${multi[0]===0&&!(st.qm||[]).length?'Rien de tout ça':'Valider ('+(st.qm||[]).length+(multi[0]===multi[1]?'/'+multi[1]:'')+')'}</button>`:''}
     ${st.qi>0?`<button class="btn btn-o" id="qb" style="margin-top:16px;margin-left:${multi?'8px':'0'}">Question précédente</button>`:''}
   </div></div>`;
 }
@@ -933,7 +978,7 @@ function qAnswer(id,val){
   const prev=JSON.stringify(st.qa[id]); st.qa[id]=val; const changed=prev!==JSON.stringify(val); const keep=new Set(flow(st.qa));
   // nettoie les réponses devenues incohérentes
   for(let i=0;i<4;i++){ for(const k in st.qa) if(!keep.has(k)) delete st.qa[k]; flow(st.qa).forEach(x=>keep.add(x)); }
-  if(changed&&id==='univers'){ delete st.qa.follow; if(st.qa.univers2!==undefined) delete st.qa.univers2; }
+  if(changed&&id==='univers'){ delete st.qa.follow; }
   if(changed&&id==='spe'){ delete st.qa.spefav; }
   st.qi++; st.qm=null; rerender(); scrollTo(0,0);
 }
