@@ -308,9 +308,197 @@ const METIERS = {
       {nom:'Le BTS', sous:'Après un bac général, techno ou pro', steps:[
         ['BTS Électrotechnique','2 ans','Accessible sur Parcoursup, souvent en alternance.'],
         ['Technicien ou chef d’équipe','—','Encadrement de chantiers et études techniques.']]}
+    ]},
+  medecin:{nom:'Médecin', formation:'medecine', resume:'Diagnostiquer, soigner et suivre les patients, en cabinet ou à l’hôpital.',
+    infos:[['Durée après le bac','9 à 12 ans'],['Diplôme pour exercer','DE de docteur en médecine'],['Accès','PASS ou L.AS'],['Voie Parcoursup','PASS, L.AS']],
+    sources:'Onisep, ministère de l’Enseignement supérieur',
+    chemins:[
+      {nom:'Le PASS', sous:'Parcours d’accès spécifique santé', steps:[
+        ['PASS','1 an','Une majeure santé et une mineure d’une autre discipline. Si tu valides ta mineure sans être admis, tu peux continuer en L2 et retenter ta chance.'],
+        ['Fin du 1er cycle','2 ans','Cours de sciences médicales et premiers stages.'],
+        ['2e cycle (externat)','3 ans','Stages à l’hôpital. Les examens de fin de cycle déterminent ta spécialité et ta ville d’internat.'],
+        ['Internat et thèse','3 à 5 ans','Tu es rémunéré. Médecine générale : 4 ans. Le diplôme d’État est délivré après la thèse.']]},
+      {nom:'La L.AS', sous:'Une licence avec une option santé', steps:[
+        ['Licence avec option santé','1 à 3 ans','Droit, biologie, psycho, STAPS… Tu peux candidater en médecine en fin de L1, L2 ou L3 (deux chances au maximum).'],
+        ['Entrée en médecine','Sur classement','Mêmes études ensuite que par le PASS.'],
+        ['Externat, internat et thèse','≈ 9 ans','Le parcours est identique à partir de l’entrée en médecine.']]},
+      {nom:'L’étranger', sous:'Belgique, Espagne, Roumanie, Portugal…', steps:[
+        ['Études de médecine dans l’Union européenne','6 ans et plus','Sélection propre à chaque pays. Souvent payant et dans une autre langue.'],
+        ['Diplôme reconnu en France','—','Un diplôme de médecin obtenu dans l’Union européenne permet d’exercer en France.'],
+        ['Spécialisation','Selon le pays','Vérifie bien les règles avant de partir : coût total, langue et retour en France.']]}
+    ]},
+  ingenieur:{nom:'Ingénieur', formation:'inge', resume:'Concevoir, améliorer et piloter des projets techniques : énergie, informatique, transports, industrie…',
+    infos:[['Durée après le bac','5 ans'],['Diplôme','Titre d’ingénieur (habilité CTI)'],['Bacs conseillés','Général maths/physique, STI2D'],['Voie Parcoursup','Prépas, écoles post-bac, BUT']],
+    sources:'Onisep, CTI',
+    chemins:[
+      {nom:'La prépa', sous:'La voie des grandes écoles', steps:[
+        ['Classe prépa scientifique','2 ans','MPSI, PCSI, PTSI… ou TSI si tu as un bac STI2D.'],
+        ['Concours','Fin de 2e année','Ton classement décide de ton école.'],
+        ['École d’ingénieurs','3 ans','Spécialisation, stages et souvent un semestre à l’étranger.']]},
+      {nom:'L’école post-bac', sous:'Directement après le bac', steps:[
+        ['Cycle préparatoire intégré','2 ans','Dans l’école : INSA, UT, Polytech ou écoles privées. Recrutement sur dossier ou concours (Avenir, Puissance Alpha, Geipi Polytech…).'],
+        ['Cycle ingénieur','3 ans','Sans concours à passer entre les deux. Écoles publiques à frais réduits, écoles privées plus chères.']]},
+      {nom:'Le BUT puis l’école', sous:'Plus concret, souvent en alternance', steps:[
+        ['BUT','3 ans','GEII, GMP, informatique, génie civil… Diplôme bac+3 déjà reconnu par les entreprises.'],
+        ['Admission parallèle','Sur dossier','Les écoles d’ingénieurs recrutent des diplômés de BUT.'],
+        ['Cycle ingénieur','3 ans','Souvent possible en apprentissage : tu es payé et l’école est financée.']]}
+    ]},
+  psychologue:{nom:'Psychologue', formation:'psycho', resume:'Écouter, évaluer et accompagner les personnes en difficulté psychologique.',
+    infos:[['Durée après le bac','5 ans'],['Titre','Psychologue (titre protégé)'],['Niveau requis','Master de psychologie + stage'],['Voie Parcoursup','Licence de psychologie']],
+    sources:'Onisep, Mon Master',
+    chemins:[
+      {nom:'La fac', sous:'Licence puis master de psychologie', steps:[
+        ['Licence de psychologie','3 ans','Beaucoup de théorie, de biologie et de statistiques.'],
+        ['Master de psychologie','2 ans','Sélection à l’entrée du M1 (plateforme Mon Master). Clinique, travail, neuropsychologie, éducation…'],
+        ['Stage professionnel et titre','Pendant le master','Le master et le stage te donnent le droit d’utiliser le titre de psychologue.']]},
+      {nom:'Psychologue de l’Éducation nationale', sous:'Travailler avec les élèves', steps:[
+        ['Licence et master de psychologie','5 ans','Même parcours que la voie classique.'],
+        ['Concours PsyEN','1 session par an','Concours de la fonction publique.'],
+        ['Année de formation rémunérée','1 an','Puis poste en école, collège ou lycée.']]},
+      {nom:'L’école privée habilitée', sous:'Une autre façon de se former', steps:[
+        ['École de psychologie','5 ans','Quelques écoles privées délivrent un diplôme qui donne le titre de psychologue. Formation payante.'],
+        ['Point de vigilance','—','Avant de t’inscrire, vérifie que le diplôme donne bien le titre : beaucoup de formations privées ne le donnent pas.']]}
+    ]},
+  sport:{nom:'Coach sportif', formation:'staps', resume:'Entraîner, faire progresser et enseigner le sport, en salle, en club ou à l’école.',
+    infos:[['Durée de formation','1 à 5 ans'],['Diplômes','BPJEPS, licence STAPS, CAPEPS'],['Alternance','Très courante (BPJEPS)'],['Voie Parcoursup','Licence STAPS']],
+    sources:'Onisep, devenirenseignant.gouv.fr',
+    chemins:[
+      {nom:'Le BPJEPS', sous:'Le plus rapide pour coacher', steps:[
+        ['BPJEPS','≈ 1 an','Diplôme d’État d’éducateur sportif, souvent en alternance. Pas besoin du bac, mais des tests d’entrée physiques.'],
+        ['Coach en salle ou indépendant','—','Spécialités possibles : forme, sports collectifs, activités aquatiques…']]},
+      {nom:'La licence STAPS', sous:'Entraînement et préparation physique', steps:[
+        ['Licence STAPS','3 ans','Parcours entraînement sportif ou activité physique adaptée et santé.'],
+        ['Éducateur, entraîneur ou préparateur physique','—','Possibilité de poursuivre en master.']]},
+      {nom:'Prof d’EPS', sous:'Enseigner le sport au collège et au lycée', steps:[
+        ['Licence STAPS','3 ans','Parcours éducation et motricité.'],
+        ['CAPEPS','Fin de licence','Depuis la réforme de 2026, le concours se passe à bac+3.'],
+        ['Master enseignement rémunéré','2 ans','Formation en alternance dans un établissement, avec un salaire.']]}
+    ]},
+  kine:{nom:'Kinésithérapeute', formation:'kine', resume:'Rééduquer le corps après une blessure, une opération ou une maladie.',
+    infos:[['Durée après le bac','5 ans'],['Diplôme pour exercer','DE de masseur-kinésithérapeute'],['Grade','Master'],['Voie Parcoursup','PASS, L.AS, STAPS']],
+    sources:'Onisep',
+    chemins:[
+      {nom:'Par le PASS ou une L.AS', sous:'La voie la plus courante', steps:[
+        ['PASS ou L.AS','1 an','Tu choisis la filière kiné selon ton classement.'],
+        ['Institut de formation en kinésithérapie (IFMK)','4 ans','Cours et stages. Instituts publics peu chers, certains privés à plusieurs milliers d’euros par an.'],
+        ['Diplôme d’État','Fin de 4e année','Tu peux exercer en libéral, en hôpital ou en club.']]},
+      {nom:'Par la STAPS', sous:'Si tu aimes le sport', steps:[
+        ['L1 STAPS','1 an','Certains IFMK recrutent après la 1re année de STAPS. Vérifie quelle université est liée à quel institut.'],
+        ['IFMK','4 ans','Même formation que par le PASS.']]},
+      {nom:'L’étranger', sous:'Belgique, Espagne…', steps:[
+        ['Études de kiné dans l’Union européenne','4 ans et plus','Places limitées pour les non-résidents (tirage au sort en Belgique).'],
+        ['Retour en France','Démarches','Diplôme reconnu en France, avec une demande d’autorisation d’exercice.']]}
+    ]},
+  commercial:{nom:'Commercial', formation:'commerce', resume:'Trouver des clients, négocier et vendre des produits ou des services.',
+    infos:[['Durée de formation','2 à 5 ans'],['Diplômes','BTS NDRC/MCO, BUT TC, école de commerce'],['Alternance','Très courante'],['Voie Parcoursup','BTS, BUT, bachelors']],
+    sources:'Onisep',
+    chemins:[
+      {nom:'Le BTS', sous:'Rapide et souvent en alternance', steps:[
+        ['BTS NDRC ou MCO','2 ans','Négociation, relation client, vente. Gratuit en lycée public, payé en alternance.'],
+        ['Commercial ou conseiller de vente','—','Possibilité d’ajouter 1 an de bachelor ou de licence pro.']]},
+      {nom:'Le BUT TC', sous:'Techniques de commercialisation', steps:[
+        ['BUT Techniques de commercialisation','3 ans','À l’IUT. Marketing, vente, commerce international.'],
+        ['Emploi ou poursuite','—','Chargé de clientèle, commercial, ou entrée en école de commerce.']]},
+      {nom:'L’école de commerce', sous:'Pour viser des postes à responsabilité', steps:[
+        ['Bachelor post-bac ou prépa ECG','2 à 4 ans','Bachelor directement après le bac, ou prépa puis concours.'],
+        ['Programme grande école','2 à 3 ans','Frais souvent élevés, sauf en alternance.'],
+        ['Business developer, responsable grands comptes','—','Postes bien rémunérés, souvent avec variable.']]}
+    ]},
+  comptable:{nom:'Expert-comptable', formation:'compta', resume:'Tenir et contrôler les comptes des entreprises, et les conseiller sur leur gestion.',
+    infos:[['Durée après le bac','≈ 8 ans'],['Diplômes','DCG, DSCG, DEC'],['Stage','3 ans, rémunéré'],['Voie Parcoursup','DCG, BUT GEA, BTS CG']],
+    sources:'Onisep, Ordre des experts-comptables',
+    chemins:[
+      {nom:'La voie DCG', sous:'La filière expertise comptable', steps:[
+        ['DCG','3 ans','Diplôme de comptabilité et de gestion (grade licence). En lycée public ou en alternance.'],
+        ['DSCG','2 ans','Diplôme supérieur (grade master).'],
+        ['Stage et diplôme d’expert-comptable (DEC)','3 ans','Stage rémunéré en cabinet, puis examen final.']]},
+      {nom:'BTS ou BUT d’abord', sous:'Commencer par un diplôme court', steps:[
+        ['BTS CG ou BUT GEA','2 à 3 ans','Tu peux déjà travailler comme comptable.'],
+        ['DCG avec dispenses','1 à 2 ans','Certaines épreuves du DCG sont dispensées.'],
+        ['DSCG puis stage et DEC','5 ans','Même fin de parcours que la voie DCG.']]},
+      {nom:'La fac', sous:'Master CCA', steps:[
+        ['Licence de gestion','3 ans','À l’université.'],
+        ['Master comptabilité-contrôle-audit (CCA)','2 ans','Donne des dispenses pour le DSCG.'],
+        ['Stage et DEC','3 ans','Stage rémunéré en cabinet.']]}
+    ]},
+  developpeur:{nom:'Développeur informatique', formation:'info', resume:'Créer des sites, des applications et des logiciels.',
+    infos:[['Durée de formation','2 à 5 ans'],['Diplômes','BTS SIO, BUT info, école d’ingé'],['Alternance','Très courante'],['Voie Parcoursup','BTS SIO, BUT informatique']],
+    sources:'Onisep, école 42',
+    chemins:[
+      {nom:'Le BTS SIO', sous:'Option SLAM (développement)', steps:[
+        ['BTS Services informatiques aux organisations','2 ans','Gratuit en lycée public, souvent en alternance.'],
+        ['Développeur junior','—','Ou 1 an de plus en licence pro ou bachelor.']]},
+      {nom:'Le BUT informatique', sous:'Plus complet', steps:[
+        ['BUT informatique','3 ans','À l’IUT : développement, bases de données, projets en équipe.'],
+        ['Développeur ou école d’ingénieurs','—','Admission parallèle possible en école d’ingénieurs.']]},
+      {nom:'L’école 42', sous:'Gratuite et sans condition de diplôme', steps:[
+        ['La piscine','4 semaines','Sélection intensive par projets, accessible dès 18 ans.'],
+        ['Formation par projets','≈ 2 à 5 ans','Pas de profs ni de cours magistraux : tu apprends en réalisant des projets.']]}
+    ]},
+  prof:{nom:'Professeur des écoles', formation:'prof', resume:'Enseigner toutes les matières aux enfants de maternelle et d’élémentaire.',
+    infos:[['Durée après le bac','5 ans'],['Concours','CRPE, à bac+3'],['Ensuite','Master rémunéré de 2 ans'],['Voie Parcoursup','Licence professorat des écoles (LPE)']],
+    sources:'devenirenseignant.gouv.fr, Onisep',
+    chemins:[
+      {nom:'La licence professorat des écoles', sous:'Nouvelle depuis la rentrée 2026', steps:[
+        ['Licence professorat des écoles (LPE)','3 ans','Formation pensée pour le métier, accessible sur Parcoursup.'],
+        ['CRPE','Fin de licence','Les diplômés de la LPE pourront passer directement les épreuves orales du concours.'],
+        ['Master enseignement et éducation','2 ans','Formation rémunérée avec des stages en classe.']]},
+      {nom:'Une autre licence', sous:'Lettres, maths, sciences de l’éducation…', steps:[
+        ['Licence au choix','3 ans','Toutes les licences permettent de passer le concours.'],
+        ['CRPE','Fin de licence','Le concours se passe à bac+3 depuis 2026.'],
+        ['Master enseignement et éducation','2 ans','Rémunéré, puis tu deviens titulaire.']]},
+      {nom:'La reconversion', sous:'Après d’autres études ou un emploi', steps:[
+        ['Une licence minimum','—','Le concours est ouvert aux personnes en reconversion qui ont au moins une licence.'],
+        ['CRPE puis formation rémunérée','2 ans','Même formation que les étudiants.']]}
+    ]},
+  veterinaire:{nom:'Vétérinaire', formation:'veto', resume:'Soigner les animaux de compagnie, d’élevage ou sauvages.',
+    infos:[['Durée après le bac','6 à 7 ans'],['Diplôme','DE de docteur vétérinaire'],['Écoles publiques','4 en France'],['Voie Parcoursup','Concours post-bac']],
+    sources:'Onisep, écoles nationales vétérinaires',
+    chemins:[
+      {nom:'Post-bac', sous:'Directement après le bac', steps:[
+        ['Concours commun post-bac','Sur Parcoursup','Dossier puis entretien, pour les 4 écoles publiques (Alfort, Lyon, Nantes, Toulouse). Très sélectif.'],
+        ['École nationale vétérinaire','6 ans','Formation complète jusqu’au diplôme d’État.']]},
+      {nom:'La prépa BCPST', sous:'La voie historique', steps:[
+        ['Prépa BCPST','2 ans','Biologie, chimie, physique, sciences de la Terre.'],
+        ['Concours vétérinaire','Fin de prépa','Ton classement décide de ton école.'],
+        ['École nationale vétérinaire','5 ans','Jusqu’au diplôme d’État.']]},
+      {nom:'L’école privée', sous:'UniLaSalle Rouen', steps:[
+        ['École vétérinaire privée','6 ans','Accessible après le bac, sur dossier.'],
+        ['Point de vigilance','—','Frais de scolarité très élevés : plusieurs dizaines de milliers d’euros au total.']]}
+    ]},
+  policier:{nom:'Policier ou gendarme', formation:'police', resume:'Protéger les personnes et les biens, enquêter et faire respecter la loi.',
+    infos:[['Recrutement','Sur concours'],['Formation','Rémunérée, en école'],['Sans le bac','Policier adjoint'],['Avec le bac','Gardien de la paix, gendarme']],
+    sources:'devenirpolicier.fr, gendarmerie nationale, Onisep',
+    chemins:[
+      {nom:'Policier adjoint', sous:'Accessible sans diplôme', steps:[
+        ['Sélection','Tests et entretien','Ouvert aux 18-30 ans, sans condition de diplôme.'],
+        ['Formation rémunérée','Quelques mois','Puis contrat de 3 ans, renouvelable.'],
+        ['Concours interne','—','Tu peux ensuite passer le concours de gardien de la paix.']]},
+      {nom:'Gardien de la paix', sous:'Avec le bac', steps:[
+        ['Concours de gardien de la paix','1 session par an','Épreuves écrites, sportives et oral.'],
+        ['École de police','≈ 1 an','Formation rémunérée.'],
+        ['Policier titulaire','—','Évolution possible vers officier par concours.']]},
+      {nom:'Gendarme', sous:'Avec le bac, statut militaire', steps:[
+        ['Concours de sous-officier de gendarmerie','1 à 2 sessions par an','Épreuves écrites, sportives et entretien.'],
+        ['École de gendarmerie','Plusieurs mois','Formation rémunérée.'],
+        ['Gendarme','—','Logé en caserne, nombreuses spécialités possibles.']]}
+    ]},
+  communitymanager:{nom:'Community manager', formation:'com', resume:'Gérer les réseaux sociaux d’une marque, créer du contenu et animer une communauté.',
+    infos:[['Durée de formation','2 à 5 ans'],['Diplômes','BTS Com, BUT MMI, bachelor'],['Alternance','Très courante'],['Ce qui compte','Ton portfolio']],
+    sources:'Onisep',
+    chemins:[
+      {nom:'Le BTS Communication', sous:'Rapide', steps:[
+        ['BTS Communication','2 ans','Gratuit en lycée public, possible en alternance.'],
+        ['Bachelor ou licence pro','1 an','Spécialisation réseaux sociaux et marketing digital.']]},
+      {nom:'Le BUT MMI', sous:'Métiers du multimédia et de l’internet', steps:[
+        ['BUT MMI','3 ans','À l’IUT : vidéo, graphisme, web, stratégie de communication.'],
+        ['Community manager ou créateur de contenu','—','Poursuite possible en master.']]},
+      {nom:'La fac ou le bachelor', sous:'Information-communication', steps:[
+        ['Licence information-communication ou bachelor privé','3 ans','Licence à la fac (droits nationaux) ou bachelor en école (payant, sauf en alternance).'],
+        ['Master ou premier emploi','—','Ton compte et tes réalisations comptent autant que le diplôme.']]}
     ]}
 };
-const ALIAS = {avocate:'avocat',avocat:'avocat',infirmiere:'infirmier',infirmier:'infirmier',electricien:'electricien',electricienne:'electricien'};
+const ALIAS = {'avocat':'avocat','avocate':'avocat','infirmier':'infirmier','infirmiere':'infirmier','electricien':'electricien','electricienne':'electricien','medecin':'medecin','docteur':'medecin','medecine':'medecin','generaliste':'medecin','ingenieur':'ingenieur','ingenieure':'ingenieur','inge':'ingenieur','psychologue':'psychologue','psy':'psychologue','psycho':'psychologue','coach sportif':'sport','coach':'sport','prof de sport':'sport','professeur de sport':'sport','prof d eps':'sport','prof d’eps':'sport','prof eps':'sport','educateur sportif':'sport','staps':'sport','entraineur':'sport','kine':'kine','kinesitherapeute':'kine','kinesi':'kine','commercial':'commercial','commerciale':'commercial','vendeur':'commercial','vendeuse':'commercial','business developer':'commercial','commerce':'commercial','expert-comptable':'comptable','expert comptable':'comptable','comptable':'comptable','experte-comptable':'comptable','developpeur':'developpeur','developpeuse':'developpeur','developpeur informatique':'developpeur','dev':'developpeur','informaticien':'developpeur','programmeur':'developpeur','informatique':'developpeur','professeur des ecoles':'prof','prof des ecoles':'prof','instituteur':'prof','institutrice':'prof','professeur':'prof','prof':'prof','enseignant':'prof','maitresse':'prof','veterinaire':'veterinaire','veto':'veterinaire','policier':'policier','policiere':'policier','police':'policier','gendarme':'policier','policier ou gendarme':'policier','gardien de la paix':'policier','community manager':'communitymanager','cm':'communitymanager','reseaux sociaux':'communitymanager','influenceur':'communitymanager','influenceuse':'communitymanager','createur de contenu':'communitymanager'};
 const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
 
 const ECOLES = [
@@ -333,16 +521,16 @@ const PRIX = [
 ];
 
 const PROFILS = [
-  ['Bac général · maths, physique',{electricien:1},'g-sci'],
-  ['Bac général · SES, HGGSP, HLP, langues',{avocat:2},'g-lit'],
-  ['Bac général · SVT, biologie',{infirmier:2},'g-bio'],
-  ['Bac STMG',{avocat:1},'stmg'],
-  ['Bac STI2D',{electricien:2},'sti2d'],
-  ['Bac ST2S',{infirmier:2},'st2s'],
-  ['Bac pro commerce, vente',{},'pro-com'],
+  ['Bac général · maths, physique',{ingenieur:2,developpeur:1,medecin:1,electricien:1},'g-sci'],
+  ['Bac général · SES, HGGSP, HLP, langues',{avocat:2,psychologue:1,prof:1,communitymanager:1},'g-lit'],
+  ['Bac général · SVT, biologie',{medecin:2,veterinaire:2,infirmier:1,kine:1},'g-bio'],
+  ['Bac STMG',{commercial:2,comptable:2,avocat:1,communitymanager:1},'stmg'],
+  ['Bac STI2D',{ingenieur:2,electricien:2,developpeur:1},'sti2d'],
+  ['Bac ST2S',{infirmier:2,psychologue:1},'st2s'],
+  ['Bac pro commerce, vente',{commercial:3},'pro-com'],
   ['Bac pro électricité, industrie',{electricien:3},'pro-elec'],
   ['Bac pro santé, social (ASSP)',{infirmier:2},'pro-assp'],
-  ['CAP',{electricien:1},'cap'],
+  ['CAP',{electricien:1,policier:1,sport:1},'cap'],
   ['Déjà dans le supérieur, je me réoriente',{},'sup']
 ];
 const CONSEIL = {
@@ -352,11 +540,11 @@ const CONSEIL = {
 };
 const QUIZ = [
   {q:'Quelle formation suis-tu en ce moment ?', profil:true, o:PROFILS.map(p=>[p[0],p[1]])},
-  {q:'Tu préfères passer ta journée à…', o:[['Aider ou soigner des gens',{infirmier:2}],['Argumenter et convaincre',{avocat:2}],['Réparer ou construire',{electricien:2}],['Analyser des documents',{avocat:1}]]},
-  {q:'Ta matière la plus forte ?', o:[['SES, philo, histoire',{avocat:2}],['SVT, biologie',{infirmier:2}],['Physique, techno',{electricien:2}],['Un peu de tout',{}]]},
-  {q:'Tu te vois travailler…', o:[['Dans un bureau ou au tribunal',{avocat:2}],['À l’hôpital ou chez les patients',{infirmier:2}],['Sur des chantiers',{electricien:2}],['Peu importe',{}]]},
-  {q:'Combien d’années d’études après le bac ?', o:[['2 ans maximum',{electricien:2}],['Environ 3 ans',{infirmier:2}],['5 ans ou plus, ça me va',{avocat:2}],['Je ne sais pas encore',{}]]},
-  {q:'En groupe, tu es plutôt…', o:[['Celui qui prend la parole',{avocat:1}],['Celui qui écoute et rassure',{infirmier:1}],['Celui qui passe à l’action',{electricien:1}],['Celui qui organise',{}]]}
+  {q:'Tu préfères passer ta journée à…', o:[['Aider ou soigner des gens',{infirmier:2,medecin:2,kine:2,psychologue:1}],['Argumenter et convaincre',{avocat:2,commercial:2,prof:1}],['Réparer, construire ou coder',{electricien:2,ingenieur:2,developpeur:2}],['Bouger, être sur le terrain',{sport:2,policier:2,kine:1}],['M’occuper d’animaux',{veterinaire:4}]]},
+  {q:'Ta matière la plus forte ?', o:[['SES, philo, histoire',{avocat:2,psychologue:1,prof:1,commercial:1}],['SVT, biologie',{medecin:2,veterinaire:2,infirmier:2,kine:1}],['Maths, physique, techno',{ingenieur:2,developpeur:2,electricien:2,comptable:1}],['Sport',{sport:3,kine:1,policier:1}],['Français, arts, communication',{communitymanager:3,prof:1}]]},
+  {q:'Tu te vois travailler…', o:[['Dans un bureau ou au tribunal',{avocat:2,comptable:2,commercial:1}],['À l’hôpital ou en cabinet',{infirmier:2,medecin:2,kine:2,psychologue:2,veterinaire:1}],['Sur le terrain ou dehors',{electricien:2,policier:2,sport:2}],['Avec des enfants',{prof:3,sport:1,psychologue:1}],['Derrière un écran',{developpeur:2,communitymanager:2,ingenieur:1}]]},
+  {q:'Combien d’années d’études après le bac ?', o:[['2 ans maximum',{electricien:2,commercial:2,policier:2,sport:1,communitymanager:1,developpeur:1}],['Environ 3 ans',{infirmier:2,developpeur:1,communitymanager:1,sport:1}],['5 ans, ça me va',{ingenieur:2,kine:2,psychologue:2,prof:2,avocat:1}],['Le plus long ne me fait pas peur',{medecin:3,veterinaire:2,comptable:2,avocat:1}],['Je ne sais pas encore',{}]]},
+  {q:'En groupe, tu es plutôt…', o:[['Celui qui prend la parole',{avocat:1,commercial:1,prof:1}],['Celui qui écoute et rassure',{infirmier:1,psychologue:2}],['Celui qui passe à l’action',{electricien:1,policier:1,sport:1}],['Celui qui organise',{comptable:1,ingenieur:1,communitymanager:1}]]}
 ];
 
 const st = {chemin:0, ecType:'all', ecVille:'', ecF:'droit', qi:0, ans:[], tab:'msg', tone:'formel'};
@@ -371,7 +559,7 @@ function home(){
       <h1>Choisis ton métier.<br>On te montre <em>tous les chemins</em>.</h1>
       <p class="lead">Études, écoles publiques et privées, chances d'admission, coûts et démarches : tout ce qu'il faut pour décider, au même endroit.</p>
       <form class="search" id="sf" role="search">
-        <div class="fld"><label for="q">Métier visé</label><input id="q" autocomplete="off" placeholder="avocat, infirmier, électricien…"></div>
+        <div class="fld"><label for="q">Métier visé</label><input id="q" autocomplete="off" placeholder="médecin, avocat, développeur…"></div>
         <div class="fld"><label for="v">Ta ville</label><input id="v" autocomplete="off" placeholder="Paris, Lyon…"></div>
         <button class="btn btn-p" type="submit">${IC.search} Voir les chemins</button>
       </form>
@@ -409,7 +597,7 @@ function home(){
   </div></section>
 
   <section style="padding:0 0 80px"><div class="wrap">
-    <div class="quizb"><div><h2>Pas encore d'idée de métier ?</h2><p>Réponds à 6 questions, on te propose des pistes adaptées à ta formation actuelle.</p></div>
+    <div class="quizb"><div><h2>Pas encore d'idée de métier ?</h2><p>Réponds à 6 questions, on te propose des pistes parmi 15 métiers adaptées à ta formation actuelle.</p></div>
     <a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div>
   </div></section>`;
 }
@@ -441,7 +629,7 @@ function metier(key){
 }
 
 function ecoles(){
-  const fNames = {droit:'Licence et bachelor de droit', ifsi:'Instituts de soins infirmiers', elec:'Formations en électricité'};
+  const fNames = {droit:'Licence et bachelor de droit', ifsi:'Instituts de soins infirmiers', elec:'Formations en électricité', medecine:'PASS et L.AS', inge:'Écoles d’ingénieurs et prépas', psycho:'Licences de psychologie', staps:'STAPS et BPJEPS', kine:'Instituts de kinésithérapie', commerce:'BTS, BUT et écoles de commerce', compta:'DCG, BTS CG et BUT GEA', info:'Formations en informatique', prof:'Licences professorat des écoles', veto:'Écoles vétérinaires', police:'Concours police et gendarmerie', com:'Formations en communication'};
   const v = norm(st.ecVille);
   const list = ECOLES.filter(e=>e.f===st.ecF && (st.ecType==='all'||e.type===st.ecType) && (!v || norm(e.ville).includes(v) || norm(e.nom).includes(v)));
   return `<div class="wrap page fade">
@@ -564,11 +752,11 @@ function paiement(){
 
 function quiz(){
   if(st.qi>=QUIZ.length){
-    const sc = {avocat:0,infirmier:0,electricien:0};
+    const sc = Object.fromEntries(Object.keys(METIERS).map(k=>[k,0]));
     const prof = PROFILS[st.ans[0]] || PROFILS[0];
     st.ans.forEach((a,i)=>{const w=QUIZ[i].o[a][1];for(const k in w)sc[k]+=w[k];});
     const max = Math.max(1,...Object.values(sc));
-    const r = Object.entries(sc).sort((a,b)=>b[1]-a[1]);
+    const r = Object.entries(sc).sort((a,b)=>b[1]-a[1]).slice(0,5);
     return `<div class="wrap page fade"><div class="qz">
       <div class="crumb">Quiz · Résultats</div>
       <h1>Les métiers qui te ressemblent</h1>
@@ -615,7 +803,7 @@ function bind(){
     const err = document.getElementById('err');
     if(!document.getElementById('q').value.trim()){ err.textContent='Tape un métier pour commencer.'; return; }
     if(k){ st.chemin=0; location.hash='metier-'+k; scrollTo(0,0); }
-    else err.textContent = 'Ce métier arrive bientôt. Pour la démo, essaie avocat, infirmier ou électricien.';
+    else err.textContent = 'Ce métier arrive bientôt. Essaie par exemple médecin, ingénieur, psychologue ou développeur.';
   });
   document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{st.chemin=0;location.hash=b.dataset.go;scrollTo(0,0);});
   document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{const i=+b.dataset.ch;if(!hasPlan()&&i>0){st.lockCh=i;}else{st.lockCh=0;st.chemin=i;}rerender(true);});
