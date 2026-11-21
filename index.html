@@ -1256,7 +1256,7 @@ function psCard(r){
     <div><span class="tag ${pub?'t-pub':'t-pri'}">${pub?'PUBLIC':'PRIVÉ'}</span><span class="meta">${esc(form)}${det?' · '+esc(det):''}</span>
       <h3>${esc(nom)}</h3><div class="meta">${esc(ville)}${r.contrat_etab&&!pub?' · '+esc(r.contrat_etab):''}</div>
       <div class="stats">
-        <div class="stat"><span>Taux d’accès 2025</span><b>${ta}</b></div>
+        <div class="stat"><span>Taux d’accès ${r.session||''}</span><b>${ta}</b></div>
         <div class="stat"><span>Places</span><b>${r.capa_fin??'—'}</b></div>
         <div class="stat"><span>Candidats</span><b>${r.voe_tot!=null?(+r.voe_tot).toLocaleString('fr-FR'):'—'}</b></div>
       </div></div>
@@ -1302,7 +1302,7 @@ function ecoles(){
       <input class="inp" id="ecv" placeholder="Ville ou département" value="${esc(st.ecVille)}" style="flex:1;max-width:220px">
     </div>
     <div id="eclist"></div>
-    <p class="note">Source : Parcoursup 2025, données ouvertes du ministère de l’Enseignement supérieur (mise à jour du 9 mars 2026), hors apprentissage. <b>Taux d’accès</b> : part des candidats qui étaient classés assez haut pour recevoir une proposition. Ce n’est pas une garantie pour 2027.</p>
+    <p class="note">Source : données ouvertes Parcoursup du ministère de l’Enseignement supérieur (dernière session publiée, actuellement 2025), hors apprentissage. <b>Taux d’accès</b> : part des candidats qui étaient classés assez haut pour recevoir une proposition. Ce n’est pas une garantie pour 2027.</p>
     <h2 class="ph" style="font-size:26px;margin-top:44px">Combien ça coûte, selon le diplôme ?</h2>
     <p style="color:var(--ink2);margin:6px 0 0">Les prix du privé varient beaucoup : demande toujours la grille tarifaire officielle de l'école.</p>
     <div class="tbx"><table class="ptab"><thead><tr><th>Diplôme</th><th>Établissement</th><th>Prix par an</th><th>À savoir</th></tr></thead>
