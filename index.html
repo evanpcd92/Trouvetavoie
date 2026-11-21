@@ -190,7 +190,25 @@ select.inp{appearance:auto}
 .og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .og .opt{margin-bottom:0;font-size:15px;padding:16px 18px}
 @media (max-width:600px){.og{grid-template-columns:1fr}}
-@media (max-width:700px){.qz{padding:0 20px}}
+@media (max-width:700px){.qz{padding:0}.wrap.page{padding-left:18px;padding-right:18px}}
+.fiche{margin-top:26px;border-top:1px solid var(--line);padding-top:22px}
+.fgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.ftile{background:#F6F7FB;border-radius:12px;padding:12px 14px}
+.ftile span{display:block;font-size:12px;color:var(--mute);margin-bottom:4px}
+.ftile b{font-size:14px;line-height:1.35;display:block}
+.fpour{margin:18px 0 0;font-size:15px}
+.fpm{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:16px}
+.fpm h4{font-size:14px;margin:0 0 6px}
+.fpm ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink2)}
+.fpm li{margin-bottom:4px}
+.fpm ul li::marker{color:#16A34A}
+.fpm ul.neg li::marker{color:#D97706}
+.fconseil{margin-top:16px;background:#FFF8E6;border-radius:12px;padding:12px 14px;font-size:14px}
+.fconseil b{display:block;margin-bottom:2px}
+.aside-p{font-size:14px;color:var(--ink2);margin:0;line-height:1.5}
+.qtags{display:flex;flex-wrap:wrap;gap:6px}
+.qtags span{background:#F1F3F8;border-radius:99px;padding:4px 10px;font-size:13px}
+@media (max-width:800px){.fgrid{grid-template-columns:1fr 1fr}.fpm{grid-template-columns:1fr}}
 /* paywall */
 .lk{display:inline-flex;align-items:center;gap:6px}
 .tab.lockd{color:var(--mute)}
@@ -499,6 +517,221 @@ const METIERS = {
         ['Master ou premier emploi','—','Ton compte et tes réalisations comptent autant que le diplôme.']]}
     ]}
 };
+// ===== DÉTAILS DES MÉTIERS ET DES CHEMINS =====
+// Salaires : ordres de grandeur en début de carrière, sources indiquées dans la fiche.
+const EXTRA = {
+  avocat:{m:{quotidien:'Recevoir des clients, analyser des dossiers, rédiger des actes et des conclusions, plaider au tribunal. Beaucoup de lecture et d’écriture, et des délais à tenir.',
+      qualites:['Aisance à l’écrit et à l’oral','Esprit d’analyse','Résistance au stress'],
+      salaire:'Rétrocession minimale à Paris : 3 600 € HT/mois la 1re année (2025), cotisations à déduire. Souvent 2 000 à 4 000 € HT en province.',
+      evol:'Associé d’un cabinet, ouvrir ton propre cabinet, spécialisation (pénal, affaires, famille, travail…).'},
+    c:[
+      {duree:'≈ 7 ans',cout:'Droits universitaires (≈ 178 €/an en licence), puis frais de l’école d’avocats',alt:'Rare',sel:'Licence accessible, CRFPA sélectif',
+       pour:'Tous les bacs, avec un bon niveau à l’écrit',plus:['Formation publique et peu chère','Le parcours le plus courant : tu ne seras pas seul'],moins:['La L1 de droit est exigeante : beaucoup d’échecs la 1re année','Le CRFPA se prépare sérieusement (prépa souvent payante)'],
+       conseil:'Sur Parcoursup, soigne ton projet de formation : montre ton intérêt pour le droit (audiences, lectures, engagement).'},
+      {duree:'≈ 7 ans',cout:'Droits universitaires, ou frais d’IEP selon les revenus des parents',alt:'Rare',sel:'Très sélectif',
+       pour:'Les très bons dossiers de bac général',plus:['Double compétence très appréciée des cabinets','Ouvre aussi d’autres métiers si tu changes d’avis'],moins:['Charge de travail très lourde','Places limitées'],
+       conseil:'Vise plusieurs doubles licences et les concours d’IEP en parallèle, avec une licence de droit classique en sécurité.'},
+      {duree:'5 ans d’études + 8 ans d’expérience',cout:'Droits universitaires',alt:'Possible pendant le master',sel:'Accessible',
+       pour:'Ceux qui veulent d’abord travailler en entreprise',plus:['Tu es payé pendant 8 ans de pratique','Pas besoin de l’école d’avocats'],moins:['Le chemin le plus long avant de porter la robe'],
+       conseil:'Choisis un master avec de l’alternance pour entrer plus vite en entreprise.'}]},
+  infirmier:{m:{quotidien:'Soins, prises de sang, perfusions, surveillance des patients, travail avec les médecins et les aides-soignants. Horaires en 12 h possibles, nuits et week-ends.',
+      qualites:['Empathie','Sang-froid','Rigueur dans les gestes'],
+      salaire:'À l’hôpital public : 1 944 € brut/mois hors primes en début de carrière, plus avec les nuits, dimanches et heures sup.',
+      evol:'Spécialisations (bloc, anesthésie, puériculture), infirmier en pratique avancée (bac+5), cadre de santé, libéral.'},
+    c:[
+      {duree:'3 ans',cout:'Droits universitaires (≈ 178 €/an) en institut public',alt:'Non',sel:'Sélectif (formation très demandée)',
+       pour:'Bacs ST2S, général, pro ASSP',plus:['Emploi quasi garanti à la sortie','Diplôme de grade licence'],moins:['Stages intenses dès la 1re année','Rythme physique et émotionnel'],
+       conseil:'Fais beaucoup de vœux en IFSI (ils sont regroupés par secteur) et mets en avant un stage ou du bénévolat dans le soin.'},
+      {duree:'≈ 1 an + expérience + 3 ans',cout:'Souvent financé (employeur, région, France Travail)',alt:'Possible',sel:'Accessible',
+       pour:'CAP, bac pro, ou ceux qui veulent tester le métier',plus:['Tu découvres le soin avant de t’engager','Tu es salarié rapidement'],moins:['Plus long au total'],
+       conseil:'Le diplôme d’aide-soignant est accessible sans le bac : idéal pour commencer.'},
+      {duree:'3 ans',cout:'Gratuit pour toi',alt:'Oui',sel:'Sélectif (peu de places)',
+       pour:'Ceux qui ont besoin d’un salaire pendant les études',plus:['Payé pendant 3 ans','Employeur souvent trouvé d’avance'],moins:['Proposé par peu d’instituts'],
+       conseil:'Renseigne-toi directement auprès des IFSI et des hôpitaux de ta région.'}]},
+  electricien:{m:{quotidien:'Installer des câbles, des tableaux électriques, des prises connectées, dépanner des pannes sur des chantiers ou chez des particuliers.',
+      qualites:['Habileté manuelle','Rigueur (sécurité)','Autonomie'],
+      salaire:'Autour du SMIC en début de carrière, davantage avec l’expérience, les déplacements ou à son compte.',
+      evol:'Chef d’équipe, chef de chantier, technicien de maintenance, artisan à ton compte.'},
+    c:[
+      {duree:'2 ans',cout:'Gratuit en lycée pro, payé en apprentissage',alt:'Oui',sel:'Accessible',
+       pour:'Après la 3e, ou en reconversion',plus:['Tu travailles en 2 ans','Très recherché par les entreprises'],moins:['Moins de responsabilités sans diplôme supérieur'],
+       conseil:'Choisis l’apprentissage : tu es payé et tu as déjà une expérience à la sortie.'},
+      {duree:'3 ans',cout:'Gratuit, ou payé en apprentissage',alt:'Oui',sel:'Accessible',
+       pour:'Après la 3e ou un CAP',plus:['Bac en poche','Possibilité de continuer en BTS'],moins:['3 ans avant le premier emploi'],
+       conseil:'Avec de bons résultats, enchaîne sur un BTS en alternance.'},
+      {duree:'2 ans après le bac',cout:'Gratuit en lycée public, payé en alternance',alt:'Oui, très courant',sel:'Accessible à sélectif',
+       pour:'Bacs STI2D, pro électricité, général scientifique',plus:['Postes de technicien et d’encadrement','Bon salaire de départ pour bac+2'],moins:['Physique et maths appliquées à travailler'],
+       conseil:'Sur Parcoursup, candidate en lycée public et en apprentissage pour multiplier tes chances.'}]},
+  medecin:{m:{quotidien:'Examiner les patients, poser un diagnostic, prescrire des traitements. En cabinet, à l’hôpital, aux urgences… Selon la spécialité, gardes de nuit et week-end.',
+      qualites:['Capacité de travail','Sang-froid','Sens de l’écoute'],
+      salaire:'Pendant l’internat, tu es déjà rémunéré (gardes en plus). Une fois installé, les revenus sont élevés mais varient beaucoup selon la spécialité.',
+      evol:'Des dizaines de spécialités : médecine générale, chirurgie, pédiatrie, psychiatrie, urgences…'},
+    c:[
+      {duree:'9 à 12 ans',cout:'Droits universitaires (≈ 178 €/an en 1er cycle)',alt:'Non',sel:'Très sélectif',
+       pour:'Bacs généraux scientifiques avec de très bons résultats',plus:['La voie la plus directe','Année très encadrée'],moins:['Énormément de travail dès la 1re année','En cas d’échec, il faut avoir validé ta mineure pour continuer'],
+       conseil:'Choisis ta mineure avec soin : c’est ta porte de sortie si médecine ne passe pas.'},
+      {duree:'9 à 12 ans',cout:'Droits universitaires',alt:'Non',sel:'Sélectif',
+       pour:'Ceux qui veulent une sécurité en cas d’échec',plus:['Tu gardes une vraie licence si ça ne marche pas','Deux chances possibles sur 3 ans'],moins:['Il faut réussir ta licence ET l’option santé'],
+       conseil:'Prends une L.AS dans une matière qui te plaît vraiment : tu y passeras peut-être 3 ans.'},
+      {duree:'6 ans et plus',cout:'De quelques milliers à plus de 10 000 €/an selon le pays',alt:'Non',sel:'Variable selon le pays',
+       pour:'Ceux qui ont échoué en France et qui sont prêts à partir',plus:['Diplôme reconnu dans l’Union européenne','Moins de concurrence à l’entrée dans certains pays'],moins:['Coût total élevé','Cours dans une autre langue'],
+       conseil:'Calcule le coût total (frais, logement, voyages) avant de te décider.'}]},
+  ingenieur:{m:{quotidien:'Concevoir, tester et améliorer des produits, des systèmes ou des process. Beaucoup de travail en équipe, de gestion de projet et de résolution de problèmes.',
+      qualites:['Logique','Curiosité','Travail en équipe'],
+      salaire:'Les jeunes ingénieurs font partie des débutants les mieux payés, avec de gros écarts selon le secteur et l’école.',
+      evol:'Chef de projet, manager, expert technique, création de start-up, carrière à l’international.'},
+    c:[
+      {duree:'5 ans',cout:'Prépa publique gratuite, puis école (publique peu chère ou privée plus chère)',alt:'Possible en école',sel:'Sélectif',
+       pour:'Bacs généraux maths + physique (ou SI, NSI), très bons résultats',plus:['Accès aux écoles les plus réputées','Méthode de travail très solide'],moins:['2 ans de rythme très intense','Concours stressants'],
+       conseil:'La prépa n’est pas réservée aux génies : un dossier régulier et motivé suffit souvent pour une prépa de proximité.'},
+      {duree:'5 ans',cout:'Écoles publiques : quelques centaines d’€/an ; privées : plusieurs milliers d’€/an',alt:'Souvent possible en cycle ingénieur',sel:'Sélectif',
+       pour:'Bacs généraux scientifiques, parfois STI2D',plus:['Pas de concours en fin de 2e année','Projets concrets dès le début'],moins:['Les écoles privées coûtent cher'],
+       conseil:'Les concours communs (Avenir, Puissance Alpha, Geipi Polytech) te permettent de postuler à plusieurs écoles d’un coup.'},
+      {duree:'6 ans',cout:'Droits universitaires, puis gratuit en apprentissage',alt:'Oui, très courant',sel:'Accessible à sélectif',
+       pour:'Bacs STI2D, général, ou ceux qui préfèrent le concret',plus:['Diplôme bac+3 déjà valorisé','Payé en école d’ingé en apprentissage'],moins:['Une année de plus que les autres voies'],
+       conseil:'Pendant ton BUT, garde de bonnes notes en maths : c’est ce que regardent les écoles.'}]},
+  psychologue:{m:{quotidien:'Entretiens individuels, tests, accompagnement de patients ou de salariés, travail en équipe avec des médecins ou des éducateurs.',
+      qualites:['Écoute','Patience','Recul sur soi'],
+      salaire:'Les débuts sont souvent modestes, surtout en libéral le temps de se constituer une patientèle.',
+      evol:'Libéral, hôpital, entreprise (RH), éducation nationale, recherche.'},
+    c:[
+      {duree:'5 ans',cout:'Droits universitaires',alt:'Rare',sel:'Licence en tension, master très sélectif',
+       pour:'Tous les bacs généraux, ST2S',plus:['La voie officielle et la moins chère','Beaucoup de spécialités en master'],moins:['Beaucoup de statistiques et de biologie','L’entrée en master est difficile'],
+       conseil:'Travaille tes notes dès la L1 : c’est sur ton dossier que se joue l’entrée en master.'},
+      {duree:'5 ans + 1 an de formation',cout:'Droits universitaires, formation rémunérée',alt:'Non',sel:'Concours sélectif',
+       pour:'Ceux qui veulent travailler avec des élèves',plus:['Statut de fonctionnaire stable','Formation payée'],moins:['Il faut réussir un concours en plus du master'],
+       conseil:'Fais des stages en milieu scolaire pendant ta licence.'},
+      {duree:'5 ans',cout:'Payant (plusieurs milliers d’€/an)',alt:'Non',sel:'Sur dossier et entretien',
+       pour:'Ceux qui préfèrent un cadre plus encadré',plus:['Petites promotions','Beaucoup de pratique'],moins:['Coût élevé','Toutes les écoles ne donnent pas le titre'],
+       conseil:'Avant de t’inscrire, vérifie noir sur blanc que le diplôme donne le titre de psychologue.'}]},
+  sport:{m:{quotidien:'Préparer des séances, encadrer des groupes ou des clients, adapter les exercices au niveau de chacun, faire progresser.',
+      qualites:['Énergie','Pédagogie','Sens du contact'],
+      salaire:'Souvent proche du SMIC en salle au début. Les coachs indépendants peuvent gagner plus, mais c’est variable.',
+      evol:'Coach indépendant, responsable de salle, préparateur physique d’athlètes, prof d’EPS.'},
+    c:[
+      {duree:'≈ 1 an',cout:'Gratuit en apprentissage, sinon plusieurs milliers d’euros',alt:'Oui, très courant',sel:'Tests physiques d’entrée',
+       pour:'Tous, même sans le bac (18 ans minimum)',plus:['Rapide','Diplôme d’État pour être payé pour encadrer'],moins:['Moins de débouchés que la licence pour évoluer'],
+       conseil:'Prépare les tests physiques à l’avance et trouve ta structure d’alternance tôt.'},
+      {duree:'3 ans',cout:'Droits universitaires',alt:'Possible en licence pro',sel:'Sélectif (filière très demandée)',
+       pour:'Bacs généraux et techno, sportifs',plus:['Formation complète (physiologie, entraînement)','Peut mener au master'],moins:['Beaucoup de théorie et de sciences'],
+       conseil:'Mets en avant ton engagement sportif (club, arbitrage, encadrement) dans ton projet Parcoursup.'},
+      {duree:'5 ans',cout:'Droits universitaires, puis master rémunéré',alt:'Master en alternance rémunérée',sel:'Concours sélectif',
+       pour:'Ceux qui veulent enseigner',plus:['Emploi stable de fonctionnaire','Formation payée après le concours'],moins:['Concours à préparer pendant la licence'],
+       conseil:'Choisis le parcours « éducation et motricité » en STAPS dès que possible.'}]},
+  kine:{m:{quotidien:'Rééduquer après une blessure ou une opération, masser, faire faire des exercices, suivre des sportifs, des personnes âgées ou des enfants.',
+      qualites:['Contact humain','Connaissance du corps','Patience'],
+      salaire:'En libéral, les revenus sont souvent bons après quelques années. Salarié (hôpital, clinique), le début est plus modeste.',
+      evol:'Libéral, kiné du sport, spécialisations (respiratoire, pédiatrie), ostéopathie.'},
+    c:[
+      {duree:'5 ans',cout:'Instituts publics : droits universitaires ; privés : plusieurs milliers d’€/an',alt:'Rare',sel:'Très sélectif',
+       pour:'Bacs généraux scientifiques',plus:['La voie la plus courante'],moins:['Très peu de places en kiné à l’issue de la 1re année'],
+       conseil:'Renseigne-toi sur les instituts liés à chaque université : ce sont eux qui recrutent après le PASS ou la L.AS.'},
+      {duree:'5 ans',cout:'Droits universitaires',alt:'Rare',sel:'Très sélectif',
+       pour:'Les sportifs avec un bon dossier scientifique',plus:['Si tu échoues, tu continues en STAPS'],moins:['Pas proposé partout'],
+       conseil:'Vérifie que l’université visée a un partenariat avec un institut de kiné.'},
+      {duree:'4 ans et plus',cout:'Variable selon le pays',alt:'Non',sel:'Tirage au sort ou sélection',
+       pour:'Ceux qui sont prêts à partir',plus:['Alternative si tu n’es pas pris en France'],moins:['Démarches pour exercer en France au retour'],
+       conseil:'Renseigne-toi sur les quotas pour les étudiants non-résidents avant de candidater.'}]},
+  commercial:{m:{quotidien:'Prospecter des clients, présenter des produits, négocier des prix, suivre les commandes, atteindre des objectifs.',
+      qualites:['Aisance relationnelle','Persévérance','Sens de la négociation'],
+      salaire:'Un fixe auquel s’ajoutent des primes selon tes ventes : les bons commerciaux gagnent bien leur vie.',
+      evol:'Responsable de secteur, directeur commercial, chef des ventes, créer ta boîte.'},
+    c:[
+      {duree:'2 ans',cout:'Gratuit en lycée public, payé en alternance',alt:'Oui, très courant',sel:'Accessible',
+       pour:'Bacs STMG, pro commerce, général',plus:['Rapide et concret','Tu peux continuer en bachelor ou licence pro'],moins:['Postes de départ moins payés qu’après une école'],
+       conseil:'Trouve ton entreprise d’alternance avant l’été : c’est souvent elle qui débloque ton inscription.'},
+      {duree:'3 ans',cout:'Droits universitaires',alt:'Possible',sel:'Sélectif (BUT très demandé)',
+       pour:'Bacs STMG, général',plus:['Diplôme complet et reconnu','Ouvre les écoles de commerce en admission parallèle'],moins:['Très demandé sur Parcoursup'],
+       conseil:'Montre des expériences concrètes (job, vente, projet) dans ta lettre.'},
+      {duree:'3 à 5 ans',cout:'Souvent 8 000 €/an et plus, sauf en alternance',alt:'Souvent possible',sel:'Variable selon l’école',
+       pour:'Ceux qui visent des postes à responsabilités',plus:['Réseau et stages à l’international','Salaires de sortie plus élevés'],moins:['Coût élevé'],
+       conseil:'Vérifie que le diplôme est visé ou reconnu par l’État avant de t’engager.'}]},
+  comptable:{m:{quotidien:'Tenir et vérifier les comptes, établir les bilans, conseiller les chefs d’entreprise sur la fiscalité et la gestion.',
+      qualites:['Rigueur','Goût des chiffres','Discrétion'],
+      salaire:'Correct dès les premières années en cabinet, et très bon une fois expert-comptable diplômé.',
+      evol:'Expert-comptable associé, commissaire aux comptes, directeur financier.'},
+    c:[
+      {duree:'≈ 8 ans',cout:'Gratuit en lycée public, ou payé en alternance',alt:'Oui',sel:'Accessible',
+       pour:'Bacs STMG (gestion et finance), général',plus:['Filière pensée pour le métier','Possible en alternance'],moins:['Parcours long et exigeant'],
+       conseil:'Le DCG en lycée public est gratuit et très encadré.'},
+      {duree:'≈ 8 à 9 ans',cout:'Gratuit ou payé en alternance',alt:'Oui',sel:'Accessible',
+       pour:'Bacs STMG, pro gestion',plus:['Tu peux travailler dès bac+2','Tu avances à ton rythme'],moins:['Un peu plus long'],
+       conseil:'Choisis le BTS CG ou le BUT GEA en alternance pour gagner de l’expérience.'},
+      {duree:'≈ 8 ans',cout:'Droits universitaires',alt:'Possible en master',sel:'Master sélectif',
+       pour:'Bacs généraux, ou étudiants déjà à la fac',plus:['Master reconnu, beaucoup de dispenses'],moins:['Moins encadré qu’en lycée'],
+       conseil:'Vise un master CCA en alternance.'}]},
+  developpeur:{m:{quotidien:'Écrire du code, corriger des bugs, créer de nouvelles fonctionnalités en équipe, tester. Télétravail souvent possible.',
+      qualites:['Logique','Autonomie','Envie d’apprendre en continu'],
+      salaire:'Bon dès le début, et progresse vite avec l’expérience et la spécialisation.',
+      evol:'Développeur senior, lead dev, architecte, freelance, chef de projet.'},
+    c:[
+      {duree:'2 ans',cout:'Gratuit en lycée public, payé en alternance',alt:'Oui',sel:'Accessible à sélectif',
+       pour:'Bacs STMG (SIG), STI2D (SIN), général, pro CIEL',plus:['Rapide','Très bonne insertion'],moins:['Poursuite souvent utile pour évoluer'],
+       conseil:'Choisis l’option SLAM, et commence des petits projets perso dès maintenant.'},
+      {duree:'3 ans',cout:'Droits universitaires',alt:'Possible',sel:'Sélectif',
+       pour:'Bacs généraux (maths, NSI), STI2D',plus:['Formation complète et reconnue','Ouvre les écoles d’ingé'],moins:['Maths présentes'],
+       conseil:'Mets en avant tes projets (site, appli, jeu) dans ton dossier.'},
+      {duree:'≈ 2 à 5 ans',cout:'Gratuit',alt:'Stages en entreprise',sel:'Sélection par la piscine',
+       pour:'Tous, même sans le bac, dès 18 ans',plus:['Gratuit','Pédagogie par projets très appréciée'],moins:['Beaucoup d’autonomie nécessaire','Pas de cours classiques'],
+       conseil:'Entraîne-toi aux bases (logique, terminal) avant la piscine.'}]},
+  prof:{m:{quotidien:'Préparer et faire la classe, corriger, suivre chaque élève, échanger avec les parents et les collègues.',
+      qualites:['Patience','Pédagogie','Organisation'],
+      salaire:'Fonctionnaire : salaire fixé par une grille nationale, qui progresse avec l’ancienneté.',
+      evol:'Directeur d’école, conseiller pédagogique, enseignant spécialisé, inspecteur.'},
+    c:[
+      {duree:'5 ans (dont 2 rémunérés)',cout:'Droits universitaires, puis master rémunéré',alt:'Master rémunéré',sel:'Accessible, concours sélectif',
+       pour:'Tous les bacs généraux et techno',plus:['Licence pensée pour le métier','Payé dès la réussite au concours'],moins:['Nouvelle licence : pas encore proposée partout'],
+       conseil:'Fais de l’animation (BAFA) ou de l’aide aux devoirs pour montrer ta motivation.'},
+      {duree:'5 ans (dont 2 rémunérés)',cout:'Droits universitaires',alt:'Master rémunéré',sel:'Concours sélectif',
+       pour:'Ceux qui ont une matière de prédilection',plus:['Tu gardes une licence utile si tu changes d’avis'],moins:['Préparation au concours à organiser toi-même'],
+       conseil:'Pendant ta licence, suis les modules de préparation au concours proposés par ta fac.'},
+      {duree:'2 ans après la licence',cout:'Formation rémunérée',alt:'Oui',sel:'Concours',
+       pour:'Personnes déjà diplômées d’une licence',plus:['Changer de métier sans tout recommencer'],moins:['Concours à préparer en plus d’un emploi éventuel'],
+       conseil:'Commence par quelques remplacements comme contractuel pour tester le métier.'}]},
+  veterinaire:{m:{quotidien:'Consultations, vaccins, chirurgies, urgences. En ville avec les animaux de compagnie ou à la campagne avec les élevages.',
+      qualites:['Amour des animaux','Sang-froid','Résistance physique'],
+      salaire:'Correct dès le début, et bon avec l’expérience ou en devenant associé d’une clinique.',
+      evol:'Associé d’une clinique, spécialisation (chirurgie, équins), santé publique, recherche.'},
+    c:[
+      {duree:'6 ans',cout:'Frais de scolarité d’école publique',alt:'Non',sel:'Extrêmement sélectif',
+       pour:'Bacs généraux SVT + physique-chimie, excellents dossiers',plus:['Pas de prépa','Le plus rapide'],moins:['Très peu de places'],
+       conseil:'Mets ce vœu, mais garde absolument une prépa BCPST et une licence de bio en parallèle.'},
+      {duree:'7 ans',cout:'Prépa publique gratuite, puis école',alt:'Non',sel:'Très sélectif',
+       pour:'Bacs généraux scientifiques',plus:['Le plus grand nombre de places','La prépa ouvre aussi les écoles d’agro'],moins:['Rythme de prépa intense'],
+       conseil:'La BCPST t’ouvre plusieurs concours : tu as plusieurs chances.'},
+      {duree:'6 ans',cout:'Très élevé (plusieurs dizaines de milliers d’€ au total)',alt:'Non',sel:'Sélectif',
+       pour:'Ceux qui peuvent financer leurs études',plus:['Une chance en plus'],moins:['Coût très lourd'],
+       conseil:'Renseigne-toi sur les prêts étudiants et les bourses avant de t’engager.'}]},
+  policier:{m:{quotidien:'Patrouilles, interventions, accueil des victimes, enquêtes, maintien de l’ordre. Horaires décalés, nuits et week-ends.',
+      qualites:['Sang-froid','Sens du service','Bonne condition physique'],
+      salaire:'Gardien de la paix débutant : environ 1 870 € net/mois, plus en Île-de-France.',
+      evol:'Brigadier, officier, commissaire, unités spécialisées (cyber, police judiciaire, maître-chien…).'},
+    c:[
+      {duree:'Quelques mois',cout:'Formation rémunérée',alt:'Oui',sel:'Accessible',
+       pour:'18-30 ans, même sans diplôme',plus:['Entrée rapide','Tremplin vers le concours de gardien'],moins:['Contrat à durée limitée'],
+       conseil:'Profite de ces années pour préparer le concours interne de gardien de la paix.'},
+      {duree:'≈ 1 an après le bac',cout:'Formation rémunérée',alt:'Oui',sel:'Concours',
+       pour:'Tous les bacs',plus:['Emploi stable de fonctionnaire','Nombreuses spécialités ensuite'],moins:['Affectation souvent en Île-de-France au début'],
+       conseil:'Entraîne-toi aux épreuves sportives longtemps à l’avance.'},
+      {duree:'≈ 1 an après le bac',cout:'Formation rémunérée',alt:'Oui',sel:'Concours',
+       pour:'Tous les bacs, goût pour la discipline',plus:['Logement fourni','Beaucoup de spécialités'],moins:['Statut militaire, mutations'],
+       conseil:'Tu peux d’abord tester avec un engagement de gendarme adjoint volontaire.'}]},
+  communitymanager:{m:{quotidien:'Planifier et publier des contenus, répondre aux abonnés, analyser les statistiques, suivre les tendances, travailler avec des créateurs.',
+      qualites:['Créativité','Aisance à l’écrit','Réactivité'],
+      salaire:'Modeste au début, puis meilleur en évoluant ou en freelance avec plusieurs clients.',
+      evol:'Social media manager, responsable communication, créateur de contenu, freelance.'},
+    c:[
+      {duree:'2 à 3 ans',cout:'Gratuit en lycée public, payé en alternance',alt:'Oui',sel:'Accessible',
+       pour:'Bacs STMG, STD2A, général',plus:['Rapide','Formation concrète'],moins:['Poursuite d’études souvent utile'],
+       conseil:'Lance un compte ou une page dès maintenant : c’est ton meilleur CV.'},
+      {duree:'3 ans',cout:'Droits universitaires',alt:'Possible',sel:'Sélectif',
+       pour:'Bacs généraux et techno, créatifs',plus:['Formation très complète (vidéo, web, graphisme)'],moins:['Très demandé'],
+       conseil:'Joins un portfolio (vidéos, montages, visuels) à ta candidature.'},
+      {duree:'3 à 5 ans',cout:'Fac peu chère ; bachelor privé 6 000 €/an et plus, sauf en alternance',alt:'Souvent possible',sel:'Variable',
+       pour:'Bacs généraux',plus:['Culture générale de la communication'],moins:['Les bachelors privés coûtent cher'],
+       conseil:'Vérifie la reconnaissance du diplôme (RNCP, visa) avant de payer une école.'}]}
+};
+
 const ALIAS = {'avocat':'avocat','avocate':'avocat','infirmier':'infirmier','infirmiere':'infirmier','electricien':'electricien','electricienne':'electricien','medecin':'medecin','docteur':'medecin','medecine':'medecin','generaliste':'medecin','ingenieur':'ingenieur','ingenieure':'ingenieur','inge':'ingenieur','psychologue':'psychologue','psy':'psychologue','psycho':'psychologue','coach sportif':'sport','coach':'sport','prof de sport':'sport','professeur de sport':'sport','prof d eps':'sport','prof d’eps':'sport','prof eps':'sport','educateur sportif':'sport','staps':'sport','entraineur':'sport','kine':'kine','kinesitherapeute':'kine','kinesi':'kine','commercial':'commercial','commerciale':'commercial','vendeur':'commercial','vendeuse':'commercial','business developer':'commercial','commerce':'commercial','expert-comptable':'comptable','expert comptable':'comptable','comptable':'comptable','experte-comptable':'comptable','developpeur':'developpeur','developpeuse':'developpeur','developpeur informatique':'developpeur','dev':'developpeur','informaticien':'developpeur','programmeur':'developpeur','informatique':'developpeur','professeur des ecoles':'prof','prof des ecoles':'prof','instituteur':'prof','institutrice':'prof','professeur':'prof','prof':'prof','enseignant':'prof','maitresse':'prof','veterinaire':'veterinaire','veto':'veterinaire','policier':'policier','policiere':'policier','police':'policier','gendarme':'policier','policier ou gendarme':'policier','gardien de la paix':'policier','community manager':'communitymanager','cm':'communitymanager','reseaux sociaux':'communitymanager','influenceur':'communitymanager','influenceuse':'communitymanager','createur de contenu':'communitymanager'};
 const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
 
@@ -508,17 +741,17 @@ const ECOLES = [
   {nom:'Université Paris Nanterre', ville:'Nanterre (92)', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
   {nom:'Université Paris-Saclay · Faculté Jean Monnet', ville:'Sceaux (92)', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
   {nom:'Université Sorbonne Paris Nord', ville:'Villetaneuse (93)', type:'pub', f:'droit', formation:'Licence Droit', frais:'Droits nationaux', voie:'Parcoursup'},
-  {nom:'École privée de droit (exemple)', ville:'Île-de-France', type:'pri', f:'droit', formation:'Bachelor Droit (bac+3)', frais:'3 000 – 8 000 €/an', alt:'Possible en 3e année', voie:'Dossier de l’école'},
+  {nom:'École privée de droit (exemple)', ville:'Île-de-France', type:'pri', f:'droit', formation:'Bachelor Droit (bac+3)', frais:'3 000 – 8 000 €/an', alt:'Possible en 3e année', voie:'Dossier de l’école'},
   {nom:'Lycées publics avec BTS Électrotechnique', ville:'Île-de-France', type:'pub', f:'elec', formation:'BTS Électrotechnique', frais:'Gratuit', voie:'Parcoursup'},
-  {nom:'École privée de BTS (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'BTS Électrotechnique', frais:'1 000 – 7 000 €/an', alt:'0 € en alternance', voie:'Dossier ou Parcoursup'},
-  {nom:'CFA du bâtiment (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'CAP Électricien en apprentissage', frais:'0 € + salaire', alt:'Formation payée par l’employeur', voie:'Inscription au CFA'}
+  {nom:'École privée de BTS (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'BTS Électrotechnique', frais:'1 000 – 7 000 €/an', alt:'0 € en alternance', voie:'Dossier ou Parcoursup'},
+  {nom:'CFA du bâtiment (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'CAP Électricien en apprentissage', frais:'0 € + salaire', alt:'Formation payée par l’employeur', voie:'Inscription au CFA'}
 ];
 const PRIX = [
-  ['Licence', 'Université publique', '178 €/an (2025-26)', 'Droits nationaux, exonérés pour les boursiers'],
+  ['Licence', 'Université publique', '178 €/an (2025-26)', 'Droits nationaux, exonérés pour les boursiers'],
   ['BTS', 'Lycée public', 'Gratuit', 'Pas de droits de scolarité'],
-  ['BTS', 'École privée', '1 000 – 7 000 €/an et plus', 'Variable selon l’école et la ville'],
-  ['Bachelor (bac+3)', 'École privée', '3 000 – 8 000 €/an', 'Parfois plus dans les grandes écoles'],
-  ['Toutes formations', 'En alternance', '0 € pour toi', 'Frais payés par l’employeur et son OPCO, et tu es salarié']
+  ['BTS', 'École privée', '1 000 – 7 000 €/an et plus', 'Variable selon l’école et la ville'],
+  ['Bachelor (bac+3)', 'École privée', '3 000 – 8 000 €/an', 'Parfois plus dans les grandes écoles'],
+  ['Toutes formations', 'En alternance', '0 € pour toi', 'Frais payés par l’employeur et son OPCO, et tu es salarié']
 ];
 
 const PROFILS = [
@@ -805,6 +1038,21 @@ function home(){
   </div></section>`;
 }
 
+function fiche(key,i){
+  const f=(EXTRA[key]||{c:[]}).c[i]; if(!f) return '';
+  return `<div class="fiche">
+    <div class="fgrid">
+      <div class="ftile"><span>Durée totale</span><b>${f.duree}</b></div>
+      <div class="ftile"><span>Coût</span><b>${f.cout}</b></div>
+      <div class="ftile"><span>Alternance</span><b>${f.alt}</b></div>
+      <div class="ftile"><span>Sélectivité</span><b>${f.sel}</b></div>
+    </div>
+    <p class="fpour"><b>Pour qui ?</b> ${f.pour}</p>
+    <div class="fpm"><div><h4>Les points forts</h4><ul>${f.plus.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      <div><h4>Points de vigilance</h4><ul class="neg">${f.moins.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+    <div class="fconseil"><b>Notre conseil</b> ${f.conseil}</div>
+  </div>`;
+}
 function metier(key){
   const m = METIERS[key];
   if(!m) return `<div class="wrap page"><div class="card empty"><h2 class="ph" style="font-size:26px;margin-bottom:8px">Ce métier arrive bientôt</h2><p>On ajoute de nouveaux métiers chaque semaine.</p><a class="btn btn-p" href="#accueil" style="margin-top:12px">Retour à l'accueil</a></div></div>`;
@@ -819,11 +1067,16 @@ function metier(key){
       <div>
       ${st.lockCh?paywall('Débloque les '+m.chemins.length+' chemins','En gratuit, tu vois le chemin principal. Les autres voies (alternance, passerelles, double cursus…) sont réservées à la version premium.','<div class="card" style="min-height:420px"><h2 class="ph" style="font-size:24px">'+m.chemins[st.lockCh].nom+'</h2><p>'+m.chemins[st.lockCh].sous+'</p>'+m.chemins[st.lockCh].steps.map(x=>'<p><b>'+x[0]+'</b><br>'+x[2]+'</p>').join('')+'</div>'):`<div class="card"><h2 class="ph" style="font-size:24px">${c.nom}${!hasPlan()?' <span class="badge b-free" style="vertical-align:middle;margin-left:6px">Gratuit</span>':''}</h2><p style="color:var(--mute);margin:4px 0 24px">${c.sous}</p>
         <div class="tl">${c.steps.map((s,i)=>`<div class="st"><span class="n">${i+1}</span><div><h3>${s[0]}</h3><div class="d">${s[1]}</div><p>${s[2]}</p></div></div>`).join('')}</div>
+        ${fiche(key, m.chemins.indexOf(c))}
         ${!hasPlan()?`<div class="callout" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>${m.chemins.length-1} autres chemins existent pour ce métier.</span><a class="btn btn-p" href="#paiement" style="height:40px">${IC.lock} Les débloquer</a></div>`:''}
       </div>`}
       </div>
       <aside class="card"><h3 style="font-size:17px;margin-bottom:6px">L'essentiel</h3>
         ${m.infos.map(k=>`<div class="kv"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}
+        ${EXTRA[key]?`<h3 style="font-size:15px;margin:18px 0 6px">Au quotidien</h3><p class="aside-p">${EXTRA[key].m.quotidien}</p>
+        <h3 style="font-size:15px;margin:14px 0 6px">Qualités clés</h3><div class="qtags">${EXTRA[key].m.qualites.map(q=>`<span>${q}</span>`).join('')}</div>
+        <h3 style="font-size:15px;margin:14px 0 6px">Salaire en début de carrière</h3><p class="aside-p">${EXTRA[key].m.salaire}</p>
+        <h3 style="font-size:15px;margin:14px 0 6px">Évolutions possibles</h3><p class="aside-p">${EXTRA[key].m.evol}</p>`:''}
         <div class="callout">Tu veux contacter une école ou préparer ta lettre ? L'assistant t'aide à rédiger.</div>
         <a class="btn btn-p" href="#assistant" style="width:100%;margin-top:14px">Ouvrir l'assistant</a>
         <div class="note">Sources : ${m.sources}</div>
@@ -894,7 +1147,7 @@ function assistant(){
           <div style="display:flex;gap:10px;align-items:center"><span class="ok" id="cpok" role="status"></span><button class="btn btn-o" id="cp" style="height:40px">Copier</button></div></div>
         <label class="sr" for="txt">Brouillon</label>
         <textarea id="txt">${esc(draft())}</textarea>
-        ${st.tab==='lettre'&&st.plan!=='complet'?`<div class="lock"><div><b>Lettre complète pour 5 vœux</b><p>Personnalisée selon ton profil et chaque formation.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
+        ${st.tab==='lettre'&&st.plan!=='complet'?`<div class="lock"><div><b>Lettre complète pour 5 vœux</b><p>Personnalisée selon ton profil et chaque formation.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
       </div>
     </div></div>`;
 }
@@ -909,7 +1162,7 @@ function paywall(title, desc, ghost){
     <div class="over"><div class="pwc"><span class="badge b-prem">${IC.lock} Premium</span>
       <h2>${title}</h2><p>${desc}</p>
       <ul><li>Les 3 chemins pour chaque métier</li><li>Écoles, prix selon le diplôme et chances d’admission</li><li>Quiz d’orientation et messages aux écoles</li></ul>
-      <a class="btn btn-p" href="#paiement" style="width:100%">Débloquer dès 4,99 €</a>
+      <a class="btn btn-p" href="#paiement" style="width:100%">Débloquer dès 4,99 €</a>
       <p style="font-size:13px;color:var(--mute);margin:12px 0 0">Paiement unique, sans abonnement</p></div></div></div>`;
 }
 function lockedPage(crumb, h1, sub, title, desc, ghost){
