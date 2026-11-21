@@ -196,6 +196,26 @@ select.inp{appearance:auto}
 .ftile{background:#F6F7FB;border-radius:12px;padding:12px 14px}
 .ftile span{display:block;font-size:12px;color:var(--mute);margin-bottom:4px}
 .ftile b{font-size:14px;line-height:1.35;display:block}
+.lstep{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;margin:26px 0 4px}
+.lstep:first-child{margin-top:0}
+.lstep span{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+.ltypes{display:grid;gap:8px;margin-top:10px}
+.ltype{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px 14px;cursor:pointer}
+.ltype b{display:block;font-size:15px}.ltype small{color:var(--mute);font-size:12.5px}
+.ltype.on{border-color:var(--navy);background:#F3F5FB}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chipb{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:6px 12px;font-size:13.5px;cursor:pointer}
+.chipb.on{border-color:var(--navy);background:var(--navy);color:#fff}
+.lta{width:100%;min-height:64px;resize:vertical;padding:10px 12px;line-height:1.45;font-family:inherit}
+.hint{font-size:12.5px;color:var(--mute);margin:6px 0 0}
+#txt.blurred{filter:blur(4px);user-select:none;pointer-events:none}
+.anbox{margin-top:14px}
+@media (min-width:901px){.as > div:last-child{position:sticky;top:90px}}
+.an-h{display:flex;justify-content:space-between;align-items:center;font-weight:600;margin-bottom:8px}.an-h b{font-size:22px}
+.an{list-style:none;padding:0;margin:0;font-size:14px}
+.an li{padding:7px 0 7px 26px;position:relative;border-top:1px solid var(--line)}
+.an li::before{position:absolute;left:0;top:7px;font-weight:700}
+.an li.ok::before{content:'✓';color:#16A34A}.an li.warn::before{content:'!';color:#D97706}.an li.bad::before{content:'✕';color:#DC2626}
 .fsal{margin-top:12px;background:#ECFDF3;border:1px solid #BBF7D0;border-radius:12px;padding:12px 14px}
 .fsal span{display:block;font-size:12px;color:#166534;margin-bottom:2px}
 .fsal b{font-size:18px;display:block}
@@ -1125,35 +1145,217 @@ function ecoles(){
   </div>`;
 }
 
+const MSGOBJ=[['jpo','Portes ouvertes'],['question','Question sur l’admission'],['immersion','Parler à un étudiant'],['alternance','Trouver une alternance']];
 function draft(){
   const e = st.ecole || '[nom de l’école]';
-  const f = st.form || 'la licence de droit';
-  const T = {
-    formel:`Madame, Monsieur,\n\nActuellement en terminale, je souhaite candidater en ${f} à ${e}. Afin de préparer au mieux mon dossier, pourriez-vous m'indiquer les dates de vos prochaines journées portes ouvertes, ainsi que la possibilité d'échanger avec un étudiant de la formation ?\n\nJe vous remercie par avance pour votre réponse.\n\nCordialement,\n[Prénom Nom]`,
-    simple:`Bonjour,\n\nJe suis en terminale et ${f} à ${e} m'intéresse beaucoup. Est-ce qu'une journée portes ouvertes est prévue cette année ? Et serait-il possible de discuter avec un étudiant de la formation ?\n\nMerci beaucoup pour votre aide !\n\n[Prénom]`,
-    direct:`Bonjour,\n\nEn terminale, je vise ${f} à ${e}. Pourriez-vous me donner les dates des portes ouvertes ?\n\nMerci,\n[Prénom]`
-  };
-  const L = `Projet de formation motivé — ${f}, ${e}\n\nDepuis [le moment ou l'expérience qui t'a donné envie], je souhaite devenir [métier]. ${f.charAt(0).toUpperCase()+f.slice(1)} à ${e} m'attire particulièrement pour [un point précis : option, stage, association, partenariat].\n\nMon parcours m'a permis de développer [qualité 1] et [qualité 2], notamment grâce à [exemple concret : stage, engagement, projet].\n\nJe suis prêt(e) à m'investir pleinement dans cette formation, qui correspond à mon projet de [objectif professionnel].`;
-  return st.tab==='msg' ? T[st.tone] : L;
+  const f = st.form || '[la formation]';
+  const o = st.mobj||'jpo', t=st.tone||'formel';
+  const ask = {
+    jpo:{formel:`pourriez-vous m’indiquer les dates de vos prochaines journées portes ouvertes, et s’il est possible d’y assister à un cours ?`,simple:`est-ce qu’une journée portes ouvertes est prévue cette année ? Et est-il possible d’assister à un cours ?`,direct:`quelles sont les dates de vos portes ouvertes ?`},
+    question:{formel:`pourriez-vous me préciser les critères examinés dans les dossiers (matières, notes, activités) et si un profil comme le mien, [ton bac et tes spécialités], a ses chances ?`,simple:`qu’est-ce que vous regardez le plus dans les dossiers ? Avec [ton bac et tes spécialités], est-ce que mon profil peut convenir ?`,direct:`quels critères comptent le plus dans les dossiers pour un profil [ton bac] ?`},
+    immersion:{formel:`serait-il possible d’échanger quelques minutes avec un étudiant ou une étudiante de la formation, pour mieux comprendre le rythme et le contenu des cours ?`,simple:`est-ce que je pourrais discuter avec un étudiant de la formation, pour savoir comment ça se passe vraiment ?`,direct:`puis-je échanger avec un étudiant de la formation ?`},
+    alternance:{formel:`pourriez-vous m’indiquer si vous accompagnez les candidats dans la recherche d’une entreprise d’alternance, et s’il existe une liste d’entreprises partenaires ?`,simple:`est-ce que vous aidez à trouver une entreprise pour l’alternance ? Vous avez des entreprises partenaires ?`,direct:`proposez-vous une aide pour trouver une entreprise d’alternance ?`}
+  }[o][t];
+  const objet = {jpo:'Portes ouvertes',question:'Question sur l’admission',immersion:'Échange avec un étudiant',alternance:'Recherche d’alternance'}[o]+` — ${f}`;
+  if(t==='formel') return `Objet : ${objet}\n\nMadame, Monsieur,\n\nActuellement en [ta classe et ton bac], je m’intéresse à ${f} à ${e}. Afin de préparer au mieux ma candidature, ${ask}\n\nJe vous remercie par avance pour votre réponse.\n\nCordialement,\n[Prénom Nom]\n[Téléphone]`;
+  if(t==='simple') return `Objet : ${objet}\n\nBonjour,\n\nJe suis en [ta classe et ton bac] et ${f} à ${e} m’intéresse beaucoup. ${cap1(ask)}\n\nMerci beaucoup pour votre aide !\n\n[Prénom Nom]`;
+  return `Objet : ${objet}\n\nBonjour,\n\nEn [ta classe], je vise ${f} à ${e} : ${ask}\n\nMerci,\n[Prénom Nom]`;
 }
-function assistant(){
+function assistantMsg(){
   return `<div class="wrap page fade">
     <div class="crumb"><a href="#accueil">Accueil</a> / Assistant</div>
-    <div class="ptitle"><div><h1>Assistant de rédaction</h1><p>Un brouillon prêt en quelques secondes. Tu relis, tu ajustes, tu envoies toi-même.</p></div></div>
+    <div class="ptitle"><div><h1>Message à une école</h1><p>Un e-mail clair, poli et précis : tu remplis, tu relis, tu envoies toi-même.</p></div></div>
+    <div class="seg" role="group" aria-label="Type de texte" style="max-width:420px;margin-bottom:18px">${[['msg','Message à l’école'],['lettre','Lettre de motivation']].map(x=>`<button type="button" style="flex:1" class="${st.tab===x[0]?'on':''}" data-tb="${x[0]}">${x[1]}</button>`).join('')}</div>
     <div class="as">
       <form class="card frm" id="af">
-        <div class="seg" role="group" aria-label="Type de texte" style="width:100%">${[['msg','Message à l’école'],['lettre','Lettre de motivation']].map(t=>`<button type="button" style="flex:1" class="${st.tab===t[0]?'on':''}" data-tb="${t[0]}">${t[1]}</button>`).join('')}</div>
+        <label>Ce que tu veux demander</label>
+        <div class="chips">${MSGOBJ.map(x=>`<button type="button" class="chipb ${(st.mobj||'jpo')===x[0]?'on':''}" data-mo="${x[0]}">${x[1]}</button>`).join('')}</div>
         <label for="ae">École</label><input class="inp" id="ae" value="${esc(st.ecole||'')}" placeholder="Ex. Université Paris Nanterre">
         <label for="afo">Formation</label><input class="inp" id="afo" value="${esc(st.form||'')}" placeholder="Ex. la licence de droit">
-        ${st.tab==='msg'?`<label for="at">Ton</label><select class="inp" id="at">${[['formel','Formel'],['simple','Simple'],['direct','Direct']].map(t=>`<option value="${t[0]}" ${st.tone===t[0]?'selected':''}>${t[1]}</option>`).join('')}</select>`:''}
-        <button class="btn btn-p" type="submit" style="width:100%;margin-top:18px">Générer le brouillon</button>
+        <label for="at">Ton</label><select class="inp" id="at">${[['formel','Formel'],['simple','Simple'],['direct','Direct']].map(x=>`<option value="${x[0]}" ${st.tone===x[0]?'selected':''}>${x[1]}</option>`).join('')}</select>
+        <button class="btn btn-p" type="submit" style="width:100%;margin-top:18px">Générer le message</button>
       </form>
       <div class="out">
-        <div class="bar"><b>${st.tab==='msg'?'E-mail à l’école':'Projet de formation motivé'}</b>
+        <div class="bar"><b>E-mail à l’école</b>
           <div style="display:flex;gap:10px;align-items:center"><span class="ok" id="cpok" role="status"></span><button class="btn btn-o" id="cp" style="height:40px">Copier</button></div></div>
         <label class="sr" for="txt">Brouillon</label>
         <textarea id="txt">${esc(draft())}</textarea>
-        ${st.tab==='lettre'&&st.plan!=='complet'?`<div class="lock"><div><b>Lettre complète pour 5 vœux</b><p>Personnalisée selon ton profil et chaque formation.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
+      </div>
+    </div></div>`;
+}
+// ===== ASSISTANT LETTRES (générateur guidé + analyse) =====
+const QUALS = [
+  ['Organisé(e)','m’organiser, même quand j’ai beaucoup de choses à gérer'],
+  ['Persévérant(e)','persévérer quand quelque chose me résiste'],
+  ['À l’écoute','écouter les autres avant de répondre'],
+  ['Curieux(se)','aller chercher l’information par moi-même'],
+  ['Rigoureux(se)','travailler avec rigueur et vérifier ce que je fais'],
+  ['Sens du contact','aller vers les gens et les mettre à l’aise'],
+  ['Esprit d’équipe','travailler en équipe et trouver ma place dans un groupe'],
+  ['Autonome','avancer sans attendre qu’on me dise quoi faire'],
+  ['Créatif(ve)','proposer des idées nouvelles'],
+  ['Sang-froid','garder mon calme dans les moments tendus']
+];
+const EXPS = [['stage','Un stage ou une immersion'],['job','Un job (été, week-end, babysitting…)'],['benevolat','Du bénévolat ou un engagement'],['sport','Un sport ou une activité en club'],['projet','Un projet perso (compte, site, création…)'],['lycee','Un projet ou une matière au lycée']];
+const ATOUTS = [
+  ['programme','Le programme','son programme'],
+  ['stages','Les stages','la place donnée aux stages, qui me permettront de me confronter au terrain'],
+  ['alternance','L’alternance','la possibilité de me former en alternance'],
+  ['petite','Petites promos','l’accompagnement dans des promotions à taille humaine'],
+  ['assos','Vie associative','une vie associative active'],
+  ['inter','L’international','les ouvertures vers l’international'],
+  ['debouches','Les débouchés','les débouchés concrets vers le métier que je vise']
+];
+const LTYPES = [['parcoursup','Parcoursup','Projet de formation motivé · 1 500 caractères max'],['ecole','École privée','Lettre classique d’une page'],['alternance','Alternance','Lettre à une entreprise']];
+const CLICHES = ['depuis toujours','depuis mon plus jeune âge','depuis tout petit','depuis toute petite','de tout temps','rêve d’enfant','rêve d\'enfant','passionné','passionnée','je suis motivé','je suis motivée','très motivé','très motivée','dynamique','sérieux et motivé','sérieuse et motivée','candidat idéal','candidate idéale','n’hésitez pas','n\'hésitez pas','je pense être','votre prestigieuse','prestigieux établissement'];
+const L0 = ()=>({type:'parcoursup',metier:'',form:'',ecole:'',entreprise:'',declic:'',q:[],p:['',''],expType:'',exp:'',appris:'',atouts:[],detail:'',bac:'',nom:'',v:0});
+function lPrefill(){
+  const L=st.L||(st.L=L0());
+  if(!L.metier && st.qa && st.qa.voie!==undefined){ try{ const R=resultats(st.qa); if(R.top[0]) L.metier=R.top[0]; }catch(e){} }
+  if(!L.form && L.metier && METIERS[L.metier]){ L.form=METIERS[L.metier].chemins[st.chemin||0].steps[0][0]; }
+  if(!L.ecole && st.ecole) L.ecole=st.ecole;
+  if(!L.bac && st.qa && st.qa.voie!==undefined){ try{ const c=contexte(st.qa); L.bac={gen:'bac général',techno:'bac technologique',pro:'bac professionnel',cap:'CAP',sup:''}[c.voie]||''; if(c.voie==='techno'&&st.qa.techno!==undefined) L.bac='bac '+Q.techno.o[st.qa.techno][0]; }catch(e){} }
+  return L;
+}
+const cap1 = t => t? t.charAt(0).toUpperCase()+t.slice(1) : t;
+const low1 = t => t? t.charAt(0).toLowerCase()+t.slice(1) : t;
+const dot = t => { t=(t||'').trim(); return !t? t : /[.!?…]$/.test(t)? t : t+'.'; };
+const pick = (arr,v,i=0) => arr[(v+i)%arr.length];
+const stripArt = t => (t||'').replace(/^(la |le |les |l’|l')/i,'');
+const aLieu = n => { if(!n||n.startsWith('[')) return 'à '+n; if(/^(lycée|iut|cfa|institut|campus|centre|cnam)/i.test(n)) return 'au '+low1(n); if(/^(université|école|ecole|académie|ifsi|ifmk|insa|esc|ensa)/i.test(n)) return 'à l’'+n; return 'à '+n; };
+function lettre(){
+  const L=lPrefill(), v=L.v||0;
+  const met = L.metier&&METIERS[L.metier]? METIERS[L.metier].nom.toLowerCase() : '';
+  const form = L.form || '[la formation]';
+  const ou = L.type==='alternance' ? (L.entreprise||'[nom de l’entreprise]') : (L.ecole||'[nom de l’école]');
+  const declic = L.declic.trim();
+  // 1. Le déclic et le projet
+  let p1;
+  if(declic){
+    p1 = pick([
+      `${dot(cap1(declic))} C’est à ce moment-là que j’ai compris que je voulais ${met?'devenir '+met:'travailler dans ce domaine'}.`,
+      `${dot(cap1(declic))} Depuis, mon projet s’est précisé : ${met?'je veux devenir '+met:'je veux me former dans ce domaine'}.`,
+      `${met?'Mon objectif est de devenir '+met+'. ':''}${dot(cap1(declic))} C’est ce qui m’a fait choisir cette voie.`],v);
+  } else p1 = `[Raconte ici le moment précis qui t’a donné envie${met?' de devenir '+met:''} : une rencontre, une expérience, une situation vécue.]`;
+  // 2. Les preuves
+  const qs = L.q.map((i,k)=>({t:QUALS[i][1], p:(L.p[k]||'').trim()}));
+  const e = L.exp.trim(), ap = L.appris.trim();
+  let p2 = '';
+  if(e){
+    p2 += pick([`${dot(cap1(e))}`,`Cette envie, je l’ai déjà mise à l’épreuve : ${dot(low1(e))}`,`J’ai pu me confronter concrètement à ce milieu : ${dot(low1(e))}`],v,1);
+    if(ap) p2 += ' '+pick([`J’en ai retenu que ${dot(low1(ap))}`,`Cette expérience m’a appris que ${dot(low1(ap))}`,`Ce que j’en retiens : ${dot(low1(ap))}`],v,2);
+  }
+  qs.forEach((q,k)=>{
+    if(!q.p){ p2 += (p2?' ':'')+`[Donne un exemple qui montre que tu sais ${q.t}.]`; return; }
+    p2 += (p2?' ':'') + pick(
+      k===0? [`Je sais ${q.t} : ${dot(low1(q.p))}`,`${cap1(q.p.replace(/[.!]$/,''))}, ce qui montre que je sais ${q.t}.`,`Par exemple, ${dot(low1(q.p))} Cela m’a appris à ${q.t}.`]
+           : [`Je sais aussi ${q.t} : ${dot(low1(q.p))}`,`Autre point fort, je sais ${q.t} : ${dot(low1(q.p))}`,`Enfin, ${q.p.replace(/[.!]$/,'')}, ce qui prouve que je sais ${q.t}.`], v, k+3);
+  });
+  if(!p2) p2 = '[Donne un ou deux exemples concrets : un stage, un job, un engagement, un projet. Dis ce que tu as fait et ce que tu en as retenu.]';
+  if(L.bac) p2 += ' ' + pick([`Mon ${L.bac} m’a aussi donné des bases utiles pour cette formation.`,`Mon ${L.bac} m’a permis d’acquérir des méthodes de travail que je compte mettre à profit.`,``],v,6);
+  p2 = p2.replace(/\s+$/,'');
+  // 3. Pourquoi cette formation / cette entreprise
+  const at = L.atouts.map(k=>ATOUTS.find(a=>a[0]===k)).filter(Boolean).map(a=>a[0]==='programme'&&L.detail.trim()? 'son programme' : a[2]);
+  let p3;
+  if(L.type==='alternance'){
+    p3 = `Rejoindre ${ou} en alternance pendant ${stripArt(form)} me permettrait d’apprendre au contact de professionnels`+(L.detail.trim()?`. ${dot(cap1(L.detail.trim()))}`:'. [Explique ce qui t’attire dans cette entreprise : son activité, ses valeurs, une rencontre.]')+` Je souhaite m’investir dans vos missions tout en construisant mon projet${met?' de devenir '+met:''}.`;
+  } else {
+    p3 = pick([`${cap1(form)} ${aLieu(ou)} correspond à ce projet.`,`Je souhaite rejoindre ${low1(form)} ${aLieu(ou)}, car cette formation correspond à mon projet.`,`C’est pour cette raison que je candidate en ${stripArt(form)} ${aLieu(ou)}.`],v,7);
+    p3 += at.length? ` J’y retrouve ${at.length>1? at.slice(0,-1).join(', ')+' et '+at[at.length-1] : at[0]}.` : '';
+    p3 += L.detail.trim()? ' '+dot(cap1(L.detail.trim())) : ' [Ajoute un détail précis sur cette formation : ce que tu as vu aux portes ouvertes, un cours, une option, un échange avec un étudiant.]';
+    p3 += ' ' + pick([`Je compte fournir tout le travail nécessaire pour réussir dans ce cursus.`,`Je compte m’y investir pleinement pour avancer vers mon objectif.`,`C’est le cadre dont j’ai besoin pour transformer cette envie en métier.`],v,8);
+  }
+  const body = [p1,p2,p3].join('\n\n');
+  if(L.type==='parcoursup') return body;
+  const nom = L.nom.trim()||'[Prénom Nom]';
+  const obj = L.type==='alternance'? `Objet : candidature en alternance — ${cap1(stripArt(form))}` : `Objet : candidature — ${cap1(stripArt(form))}`;
+  return `${nom}\n[Adresse]\n[Téléphone] · [E-mail]\n\n${ou}\n\n[Ville], le [date]\n\n${obj}\n\nMadame, Monsieur,\n\n${body}\n\nJe souhaiterais vous présenter mon projet plus en détail lors d’un entretien. Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.\n\n${nom}`;
+}
+function analyse(t){
+  const L=st.L||L0(), tl=t.toLowerCase(), n=[...t].length, out=[];
+  const lim = L.type==='parcoursup'? [700,1500] : [1200,3000];
+  if(n>lim[1]) out.push(['bad',`Trop long : ${n} caractères pour ${lim[1]} maximum${L.type==='parcoursup'?' sur Parcoursup (le texte serait coupé)':''}.`]);
+  else if(n<lim[0]) out.push(['warn',`Un peu court : ${n} caractères. Vise entre ${lim[0]} et ${lim[1]}.`]);
+  else out.push(['ok',`Bonne longueur : ${n} / ${lim[1]} caractères.`]);
+  const ph=(t.match(/\[[^\]]+\]/g)||[]).length;
+  out.push(ph?['bad',`${ph} passage${ph>1?'s':''} entre crochets à compléter.`]:['ok','Aucun passage à compléter.']);
+  const target = L.type==='alternance'? L.entreprise : L.ecole;
+  if(target) out.push(tl.includes(target.toLowerCase())?['ok','Le nom de l’établissement apparaît : la lettre est personnalisée.']:['warn','Le nom de l’établissement n’apparaît pas : cite-le.']);
+  const cl=CLICHES.filter(c=>tl.includes(c));
+  out.push(cl.length?['warn',`Formules toutes faites à remplacer : « ${[...new Set(cl)].join(' », « ')} ». Remplace-les par un exemple concret.`]:['ok','Pas de formule toute faite repérée.']);
+  const ph2=t.replace(/\[[^\]]*\]/g,'').split(/(?<=[.!?])\s+/).filter(s=>s.trim().length>3);
+  const je=ph2.filter(s=>/^(je|j’|j')/i.test(s.trim())).length;
+  if(ph2.length>=4) out.push(je/ph2.length>0.5?['warn',`${je} phrases sur ${ph2.length} commencent par « Je » : varie les débuts de phrase.`]:['ok','Les débuts de phrase sont variés.']);
+  const longues=ph2.filter(s=>s.split(/\s+/).length>35).length;
+  if(longues) out.push(['warn',`${longues} phrase${longues>1?'s':''} trop longue${longues>1?'s':''} (plus de 35 mots) : coupe-la en deux.`]);
+  const concret = /\d/.test(t) || /(stage|job|bénévol|club|association|projet|portes ouvertes|immersion|entraîn|été dernier|l’an dernier)/i.test(t);
+  out.push(concret?['ok','Il y a des éléments concrets : c’est ce que les jurys regardent.']:['bad','Aucun exemple concret : ajoute une expérience précise (stage, job, engagement, projet).']);
+  if(/votre formation/i.test(t) && !(L.form && tl.includes(L.form.toLowerCase()))) out.push(['warn','« Votre formation » sans la nommer fait lettre générique : nomme la formation.']);
+  const sc=Math.max(0,Math.min(100,100-out.filter(o=>o[0]==='bad').length*25-out.filter(o=>o[0]==='warn').length*10));
+  return {sc,out};
+}
+function analyseHTML(t){
+  const A=analyse(t), col=A.sc>=80?'#16A34A':A.sc>=55?'#D97706':'#DC2626';
+  return `<div class="an-h"><span>Analyse de ta lettre</span><b style="color:${col}">${A.sc}/100</b></div>
+    <ul class="an">${A.out.map(o=>`<li class="${o[0]}">${o[1]}</li>`).join('')}</ul>`;
+}
+function assistant(){
+  const L=lPrefill();
+  if(st.tab!=='lettre') return assistantMsg();
+  const t = st.ltxt!=null? st.ltxt : lettre();
+  const lock = st.plan!=='complet';
+  const chip=(name,val,on,lab)=>`<button type="button" class="chipb ${on?'on':''}" data-${name}="${val}">${lab}</button>`;
+  return `<div class="wrap page fade">
+    <div class="crumb"><a href="#accueil">Accueil</a> / Assistant</div>
+    <div class="ptitle"><div><h1>Lettre de motivation</h1><p>Réponds aux questions : on construit une lettre avec <b>tes</b> exemples, pas une lettre copiée-collée.</p></div></div>
+    <div class="seg" role="group" aria-label="Type de texte" style="max-width:420px;margin-bottom:18px">${[['msg','Message à l’école'],['lettre','Lettre de motivation']].map(x=>`<button type="button" style="flex:1" class="${st.tab===x[0]?'on':''}" data-tb="${x[0]}">${x[1]}</button>`).join('')}</div>
+    <div class="as">
+      <form class="card frm lf" id="lf" onsubmit="return false">
+        <div class="lstep"><span>1</span>Pour quoi ?</div>
+        <div class="ltypes">${LTYPES.map(x=>`<button type="button" class="ltype ${L.type===x[0]?'on':''}" data-lt="${x[0]}"><b>${x[1]}</b><small>${x[2]}</small></button>`).join('')}</div>
+        <label for="lm">Métier visé</label><select class="inp" id="lm" data-lk="metier"><option value="">Pas encore défini</option>${Object.keys(METIERS).map(k=>`<option value="${k}" ${L.metier===k?'selected':''}>${METIERS[k].nom}</option>`).join('')}</select>
+        <label for="lfo">Formation</label><input class="inp" id="lfo" data-lk="form" value="${esc(L.form)}" placeholder="Ex. la licence de droit">
+        ${L.type==='alternance'?`<label for="len">Entreprise</label><input class="inp" id="len" data-lk="entreprise" value="${esc(L.entreprise)}" placeholder="Ex. Décathlon Rivoli">`:`<label for="lec">École</label><input class="inp" id="lec" data-lk="ecole" value="${esc(L.ecole)}" placeholder="Ex. Université Paris Nanterre">`}
+        <label for="lbac">Ton bac (facultatif)</label><input class="inp" id="lbac" data-lk="bac" value="${esc(L.bac)}" placeholder="Ex. bac STMG">
+        ${L.type!=='parcoursup'?`<label for="lnom">Prénom et nom</label><input class="inp" id="lnom" data-lk="nom" value="${esc(L.nom)}" placeholder="Ex. Evan Martin">`:''}
+
+        <div class="lstep"><span>2</span>Ton déclic</div>
+        <label for="ld">Le moment qui t’a donné envie (une phrase)</label>
+        <textarea class="inp lta" id="ld" data-lk="declic" placeholder="Ex. En 3e, j’ai assisté à une audience au tribunal de Nanterre et j’ai vu une avocate défendre un jeune de mon âge">${esc(L.declic)}</textarea>
+        <p class="hint">Évite « depuis toujours » : un souvenir précis convainc beaucoup plus.</p>
+
+        <div class="lstep"><span>3</span>Une expérience concrète</div>
+        <div class="chips">${EXPS.map(x=>chip('ex',x[0],L.expType===x[0],x[1])).join('')}</div>
+        <label for="lx">Ce que tu as fait</label>
+        <textarea class="inp lta" id="lx" data-lk="exp" placeholder="Ex. L’été dernier, j’ai travaillé deux mois dans un fast-food, souvent en caisse aux heures de pointe">${esc(L.exp)}</textarea>
+        <label for="la">Ce que tu en as retenu</label>
+        <textarea class="inp lta" id="la" data-lk="appris" placeholder="Ex. je sais rester efficace et souriant sous la pression">${esc(L.appris)}</textarea>
+
+        <div class="lstep"><span>4</span>Deux qualités, avec une preuve</div>
+        <div class="chips">${QUALS.map((x,i)=>chip('qu',i,L.q.includes(i),x[0])).join('')}</div>
+        ${L.q.map((i,k)=>`<label for="lp${k}">Preuve : quand as-tu montré que tu sais ${QUALS[i][1]} ?</label><textarea class="inp lta" id="lp${k}" data-lp="${k}" placeholder="Ex. j’ai organisé le tournoi de foot du lycée avec deux amis">${esc(L.p[k]||'')}</textarea>`).join('')}
+        ${!L.q.length?'<p class="hint">Choisis-en 2. Une qualité sans exemple ne convainc personne.</p>':''}
+
+        <div class="lstep"><span>5</span>Pourquoi ${L.type==='alternance'?'cette entreprise':'cette formation'} ?</div>
+        ${L.type!=='alternance'?`<div class="chips">${ATOUTS.map(x=>chip('at',x[0],L.atouts.includes(x[0]),x[1])).join('')}</div>`:''}
+        <label for="ldt">${L.type==='alternance'?'Ce qui t’attire dans cette entreprise':'Un détail précis sur la formation'}</label>
+        <textarea class="inp lta" id="ldt" data-lk="detail" placeholder="${L.type==='alternance'?'Ex. J’ai rencontré une de vos vendeuses qui m’a parlé de l’accompagnement des alternants':'Ex. Aux portes ouvertes, un étudiant m’a parlé de la clinique juridique où les élèves conseillent de vrais clients'}">${esc(L.detail)}</textarea>
+        <p class="hint">C’est ce qui montre que tu ne l’envoies pas partout : portes ouvertes, cours, option, étudiant rencontré.</p>
+
+        <button class="btn btn-p" type="button" id="lgen" style="width:100%;margin-top:18px">Générer ma lettre</button>
+      </form>
+      <div>
+        <div class="out">
+          <div class="bar"><b>${LTYPES.find(x=>x[0]===L.type)[2]}</b>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="ok" id="cpok" role="status"></span>
+              <button class="btn btn-o" id="lvar" style="height:40px">Autre formulation</button>
+              <button class="btn btn-o" id="cp" style="height:40px">Copier</button></div></div>
+          <label class="sr" for="txt">Ta lettre</label>
+          <textarea id="txt" class="${lock?'blurred':''}">${esc(t)}</textarea>
+          ${lock?`<div class="lock"><div><b>Lettres complètes pour tous tes vœux</b><p>Génération guidée, analyse et variantes illimitées.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
+        </div>
+        <div class="card anbox" id="anbox">${analyseHTML(t)}</div>
+        <p class="hint" style="margin-top:10px">Tu peux aussi coller ta propre lettre dans le cadre : l’analyse se met à jour en direct. Relis toujours avant d’envoyer : c’est ta lettre, pas la nôtre.</p>
       </div>
     </div></div>`;
 }
@@ -1308,6 +1510,18 @@ function bind(){
   const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}st.paid=true;st.mail=m.value;st.plan=st.offer||'complet';rerender();scrollTo(0,0);});
   const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
+  document.querySelectorAll('[data-mo]').forEach(b=>b.onclick=()=>{readForm();st.mobj=b.dataset.mo;rerender(true);});
+  if(document.getElementById('lf')){ const L=st.L;
+    document.querySelectorAll('[data-lt]').forEach(b=>b.onclick=()=>{L.type=b.dataset.lt;st.ltxt=null;rerender(true);});
+    document.querySelectorAll('[data-lk]').forEach(i=>{const f=()=>{L[i.dataset.lk]=i.value;}; i.oninput=f; i.onchange=()=>{f(); if(i.dataset.lk==='metier'){ if(L.metier&&METIERS[L.metier]) L.form=METIERS[L.metier].chemins[0].steps[0][0]; st.ltxt=null; rerender(true);} };});
+    document.querySelectorAll('[data-lp]').forEach(i=>i.oninput=()=>{L.p[+i.dataset.lp]=i.value;});
+    document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{L.expType=L.expType===b.dataset.ex?'':b.dataset.ex;rerender(true);});
+    document.querySelectorAll('[data-qu]').forEach(b=>b.onclick=()=>{const i=+b.dataset.qu,k=L.q.indexOf(i); if(k>=0){L.q.splice(k,1);L.p.splice(k,1);L.p.push('');} else if(L.q.length<2){L.q.push(i);} rerender(true);});
+    document.querySelectorAll('[data-at]').forEach(b=>b.onclick=()=>{const k=b.dataset.at; L.atouts=L.atouts.includes(k)?L.atouts.filter(x=>x!==k):[...L.atouts,k]; rerender(true);});
+    const g=document.getElementById('lgen'); if(g) g.onclick=()=>{st.ltxt=null;rerender(true);document.getElementById('txt').scrollIntoView({behavior:'smooth',block:'center'});};
+    const lv=document.getElementById('lvar'); if(lv) lv.onclick=()=>{L.v=(L.v||0)+1;st.ltxt=null;rerender(true);};
+    const tx=document.getElementById('txt'); if(tx) tx.oninput=()=>{st.ltxt=tx.value;document.getElementById('anbox').innerHTML=analyseHTML(tx.value);};
+  }
   const gl=document.getElementById('golettre'); if(gl) gl.onclick=()=>{st.tab='lettre';};
   document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>{const a=st.qa||(st.qa={});const id=flow(a)[st.qi];const i=+b.dataset.o;
     if(Q[id].multi){st.qm=st.qm||[];if(st.qm.includes(i))st.qm=st.qm.filter(x=>x!==i);else if(st.qm.length<Q[id].multi[1])st.qm.push(i);rerender(true);}
