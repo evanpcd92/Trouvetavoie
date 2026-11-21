@@ -209,7 +209,15 @@ select.inp{appearance:auto}
 .lta{width:100%;min-height:64px;resize:vertical;padding:10px 12px;line-height:1.45;font-family:inherit}
 .hint{font-size:12.5px;color:var(--mute);margin:6px 0 0}
 #txt.blurred{filter:blur(4px);user-select:none;pointer-events:none}
-.anbox{margin-top:14px}
+.anbox{margin-top:14px;padding:14px 18px}
+.anx summary{display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-weight:600;list-style:none}
+.anx summary::-webkit-details-marker{display:none}
+.anx summary b{font-size:20px}
+.an li.tip::before{content:'★';color:#CA8A04}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+@media (max-width:500px){.row2{grid-template-columns:1fr}}
+.perso{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.perso summary{cursor:pointer;font-weight:600;font-size:14.5px}
 @media (min-width:901px){.as > div:last-child{position:sticky;top:90px}}
 .an-h{display:flex;justify-content:space-between;align-items:center;font-weight:600;margin-bottom:8px}.an-h b{font-size:22px}
 .an{list-style:none;padding:0;margin:0;font-size:14px}
@@ -1183,179 +1191,180 @@ function assistantMsg(){
       </div>
     </div></div>`;
 }
-// ===== ASSISTANT LETTRES (générateur guidé + analyse) =====
-const QUALS = [
-  ['Organisé(e)','m’organiser, même quand j’ai beaucoup de choses à gérer'],
-  ['Persévérant(e)','persévérer quand quelque chose me résiste'],
-  ['À l’écoute','écouter les autres avant de répondre'],
-  ['Curieux(se)','aller chercher l’information par moi-même'],
-  ['Rigoureux(se)','travailler avec rigueur et vérifier ce que je fais'],
-  ['Sens du contact','aller vers les gens et les mettre à l’aise'],
-  ['Esprit d’équipe','travailler en équipe et trouver ma place dans un groupe'],
-  ['Autonome','avancer sans attendre qu’on me dise quoi faire'],
-  ['Créatif(ve)','proposer des idées nouvelles'],
-  ['Sang-froid','garder mon calme dans les moments tendus']
+// ===== ASSISTANT LETTRES v2 : 3 taps, lettre professionnelle =====
+const LMET = {
+  avocat:['défendre et conseiller des particuliers comme des entreprises','Je sais que ce métier exige une excellente maîtrise de l’écrit et de l’oral, une réelle capacité d’analyse et un parcours exigeant, de la licence de droit jusqu’au CAPA.'],
+  infirmier:['accompagner et soigner les patients au quotidien','Je mesure les exigences de ce métier : rigueur dans les soins, disponibilité, travail en équipe pluridisciplinaire et horaires parfois décalés.'],
+  electricien:['installer, mettre en service et dépanner des installations électriques','Je sais que ce métier demande de la précision, un respect strict des règles de sécurité et une bonne capacité d’adaptation sur les chantiers.'],
+  medecin:['diagnostiquer et soigner les patients','Je mesure la longueur et l’exigence de ces études, ainsi que les qualités qu’impose ce métier : capacité de travail, sang-froid et sens de l’écoute.'],
+  ingenieur:['concevoir des solutions techniques innovantes','Je sais que ce métier repose sur de solides bases scientifiques, le goût de la résolution de problèmes et le travail en équipe sur des projets complexes.'],
+  psychologue:['accompagner des personnes en difficulté psychologique','Je sais que ce métier exige une formation universitaire longue, une grande qualité d’écoute et une solide capacité d’analyse, y compris en statistiques et en biologie.'],
+  sport:['faire progresser des sportifs et transmettre le goût de l’activité physique','Je sais que ce métier demande des connaissances solides en physiologie et en méthodologie de l’entraînement, ainsi qu’un vrai sens de la pédagogie.'],
+  kine:['accompagner la rééducation des patients','Je sais que ce métier exige de solides connaissances scientifiques sur le corps humain, une grande rigueur et une relation de confiance avec chaque patient.'],
+  commercial:['conseiller des clients et développer un portefeuille commercial','Je sais que ce métier demande une réelle aisance relationnelle, de la persévérance et la maîtrise des techniques de vente et de négociation.'],
+  comptable:['accompagner les entreprises dans leur gestion','Je sais que ce métier exige rigueur, discrétion et une solide maîtrise de la comptabilité, de la fiscalité et du droit des affaires.'],
+  developpeur:['concevoir des applications et des logiciels','Je sais que ce métier demande de la logique, de l’autonomie et une curiosité constante pour suivre l’évolution rapide des technologies.'],
+  prof:['transmettre des connaissances aux enfants et les accompagner dans leurs apprentissages','Je sais que ce métier exige la maîtrise des savoirs fondamentaux, de la patience et un réel sens de la pédagogie.'],
+  veterinaire:['soigner les animaux et contribuer à la santé publique','Je mesure la sélectivité et la longueur de ces études, ainsi que l’exigence scientifique et physique de ce métier.'],
+  policier:['protéger la population et faire respecter la loi','Je sais que ce métier demande du sang-froid, une bonne condition physique, un sens aigu du service public et une grande disponibilité.'],
+  communitymanager:['développer la présence en ligne des marques','Je sais que ce métier demande de la créativité, une excellente expression écrite et la capacité d’analyser les performances des contenus publiés.']
+};
+const LBACS = [
+  ['gen','🎓 Général','Mon baccalauréat général m’a permis de développer de solides méthodes de travail, ainsi qu’une bonne capacité d’analyse et de rédaction.'],
+  ['stmg','📊 STMG','Mon baccalauréat STMG m’a apporté des bases solides en management, en gestion et en droit, ainsi qu’une bonne compréhension du fonctionnement des organisations.'],
+  ['sti2d','⚙️ STI2D','Mon baccalauréat STI2D m’a apporté des bases solides en sciences et technologies, ainsi qu’une démarche de projet concrète.'],
+  ['st2s','🩺 ST2S','Mon baccalauréat ST2S m’a apporté des connaissances en biologie humaine et dans le domaine sanitaire et social.'],
+  ['techno','🧪 Autre techno','Mon baccalauréat technologique m’a habitué à relier les connaissances théoriques à des applications concrètes.'],
+  ['pro','🛠️ Bac pro','Ma formation professionnelle m’a apporté une expérience concrète du monde du travail grâce aux périodes de formation en entreprise.'],
+  ['cap','🔧 CAP','Mon CAP m’a apporté une première expérience concrète du métier et des exigences du monde professionnel.'],
+  ['sup','🏛️ Supérieur','Mon parcours dans l’enseignement supérieur m’a permis de gagner en autonomie et de confirmer mon projet de réorientation.']
 ];
-const EXPS = [['stage','Un stage ou une immersion'],['job','Un job (été, week-end, babysitting…)'],['benevolat','Du bénévolat ou un engagement'],['sport','Un sport ou une activité en club'],['projet','Un projet perso (compte, site, création…)'],['lycee','Un projet ou une matière au lycée']];
-const ATOUTS = [
-  ['programme','Le programme','son programme'],
-  ['stages','Les stages','la place donnée aux stages, qui me permettront de me confronter au terrain'],
-  ['alternance','L’alternance','la possibilité de me former en alternance'],
-  ['petite','Petites promos','l’accompagnement dans des promotions à taille humaine'],
-  ['assos','Vie associative','une vie associative active'],
-  ['inter','L’international','les ouvertures vers l’international'],
-  ['debouches','Les débouchés','les débouchés concrets vers le métier que je vise']
+const LEXPS = [
+  ['stage','👀 Stage d’observation','Mon stage d’observation m’a permis de découvrir la réalité du terrain et de confirmer mon choix d’orientation.'],
+  ['job','💼 Job étudiant','Mon expérience en job étudiant m’a appris la ponctualité, le respect des consignes et le sens du service.'],
+  ['benevolat','🤝 Bénévolat','Mon engagement bénévole m’a appris à m’investir dans la durée au service des autres.'],
+  ['sport','⚽ Sport en club','La pratique régulière d’un sport en club m’a appris la discipline, la persévérance et l’esprit d’équipe.'],
+  ['delegue','🗳️ Délégué de classe','Représenter ma classe auprès de l’équipe pédagogique m’a appris à prendre la parole, à écouter et à défendre l’intérêt collectif.'],
+  ['enfants','🧸 Babysitting, aide aux devoirs','La garde d’enfants et l’aide aux devoirs m’ont appris la patience, la pédagogie et le sens des responsabilités.'],
+  ['minient','🏪 Mini-entreprise','Ma participation à une mini-entreprise au lycée m’a fait découvrir le fonctionnement concret d’une entreprise et le travail en équipe.'],
+  ['bafa','🏕️ BAFA, animation','Mes expériences d’animation m’ont appris à encadrer un groupe et à prendre des responsabilités.'],
+  ['projet','💡 Projet perso','La réalisation d’un projet personnel m’a appris à mener un projet de bout en bout, en autonomie.']
+];
+const LQUALS = [
+  ['rigueur','📐 Rigueur','ma rigueur et mon sens de l’organisation'],
+  ['perseverance','💪 Persévérance','ma persévérance face aux difficultés'],
+  ['ecoute','👂 Écoute','mon sens de l’écoute et mon empathie'],
+  ['relation','😄 Aisance à l’oral','mon aisance relationnelle'],
+  ['equipe','🤜 Esprit d’équipe','mon goût pour le travail en équipe'],
+  ['curiosite','🔎 Curiosité','ma curiosité intellectuelle'],
+  ['autonomie','🚀 Autonomie','mon autonomie'],
+  ['creativite','🎨 Créativité','ma créativité'],
+  ['sangfroid','🧊 Sang-froid','mon sang-froid'],
+  ['analyse','🧠 Esprit d’analyse','mon esprit d’analyse']
 ];
 const LTYPES = [['parcoursup','Parcoursup','Projet de formation motivé · 1 500 caractères max'],['ecole','École privée','Lettre classique d’une page'],['alternance','Alternance','Lettre à une entreprise']];
 const CLICHES = ['depuis toujours','depuis mon plus jeune âge','depuis tout petit','depuis toute petite','de tout temps','rêve d’enfant','rêve d\'enfant','passionné','passionnée','je suis motivé','je suis motivée','très motivé','très motivée','dynamique','sérieux et motivé','sérieuse et motivée','candidat idéal','candidate idéale','n’hésitez pas','n\'hésitez pas','je pense être','votre prestigieuse','prestigieux établissement'];
-const L0 = ()=>({type:'parcoursup',metier:'',form:'',ecole:'',entreprise:'',declic:'',q:[],p:['',''],expType:'',exp:'',appris:'',atouts:[],detail:'',bac:'',nom:'',v:0});
-function lPrefill(){
-  const L=st.L||(st.L=L0());
-  if(!L.metier && st.qa && st.qa.voie!==undefined){ try{ const R=resultats(st.qa); if(R.top[0]) L.metier=R.top[0]; }catch(e){} }
-  if(!L.form && L.metier && METIERS[L.metier]){ L.form=METIERS[L.metier].chemins[st.chemin||0].steps[0][0]; }
-  if(!L.ecole && st.ecole) L.ecole=st.ecole;
-  if(!L.bac && st.qa && st.qa.voie!==undefined){ try{ const c=contexte(st.qa); L.bac={gen:'bac général',techno:'bac technologique',pro:'bac professionnel',cap:'CAP',sup:''}[c.voie]||''; if(c.voie==='techno'&&st.qa.techno!==undefined) L.bac='bac '+Q.techno.o[st.qa.techno][0]; }catch(e){} }
-  return L;
-}
+const L0 = ()=>({type:'parcoursup',metier:'',form:'',ecole:'',entreprise:'',bac:'',exps:[],quals:[],declic:'',detail:'',nom:'',v:0});
 const cap1 = t => t? t.charAt(0).toUpperCase()+t.slice(1) : t;
 const low1 = t => t? t.charAt(0).toLowerCase()+t.slice(1) : t;
 const dot = t => { t=(t||'').trim(); return !t? t : /[.!?…]$/.test(t)? t : t+'.'; };
 const pick = (arr,v,i=0) => arr[(v+i)%arr.length];
 const stripArt = t => (t||'').replace(/^(la |le |les |l’|l')/i,'');
-const aLieu = n => { if(!n||n.startsWith('[')) return 'à '+n; if(/^(lycée|iut|cfa|institut|campus|centre|cnam)/i.test(n)) return 'au '+low1(n); if(/^(université|école|ecole|académie|ifsi|ifmk|insa|esc|ensa)/i.test(n)) return 'à l’'+n; return 'à '+n; };
+const aLieu = n => { if(!n) return ''; if(/^(lycée|iut|cfa|institut|campus|centre|cnam)/i.test(n)) return 'au '+low1(n); if(/^(université|école|ecole|académie|ifsi|ifmk|insa|esc|ensa)/i.test(n)) return 'à l’'+n; return 'à '+n; };
+function lPrefill(){
+  const L=st.L||(st.L=L0());
+  if(L._pre) return L; L._pre=1;
+  try{ if(st.qa&&st.qa.voie!==undefined){ const R=resultats(st.qa); if(R.top[0]) L.metier=R.top[0];
+    const c=contexte(st.qa); L.bac = c.voie==='techno'? (['stmg','sti2d','st2s'].includes(c.prof)?c.prof:'techno') : c.voie; } }catch(e){}
+  if(L.metier&&METIERS[L.metier]) L.form=METIERS[L.metier].chemins[st.chemin||0].steps[0][0];
+  if(st.ecole) L.ecole=st.ecole;
+  return L;
+}
+function formPara(L,v){
+  const f=L.form||'cette formation', F=cap1(stripArt(f)), fl=f.toLowerCase(), li=aLieu(L.ecole)?' '+aLieu(L.ecole):'';
+  if(/\bbts\b/.test(fl)) return `Le ${F}${li} m’attire particulièrement par son caractère professionnalisant : les périodes en entreprise et les mises en situation concrètes me permettront d’acquérir rapidement des compétences opérationnelles.`;
+  if(/\bbut\b/.test(fl)) return `Le ${F}${li} correspond pleinement à mon projet : en alliant enseignements théoriques, projets tutorés et stages, cette formation me permettra de construire des compétences solides et directement utiles en entreprise.`;
+  if(/ifsi|soins infirmiers/.test(fl)) return `La formation en soins infirmiers${li} m’attire par son alternance entre enseignements théoriques et stages cliniques, qui me permettra de développer progressivement les compétences et la posture attendues d’un soignant.`;
+  if(/\bpass\b|l\.as|\blas\b/.test(fl)) return `Le ${F}${li} constitue la première étape de ce projet. J’ai conscience de l’exigence de cette année et je compte m’y investir avec méthode et régularité.`;
+  if(/prépa|cpge|préparatoire/.test(fl)) return `La classe préparatoire${li} m’attire par l’exigence de sa formation et la solidité des méthodes de travail qu’elle permet d’acquérir. Je souhaite m’y investir pleinement pour réussir les concours.`;
+  if(/licence/.test(fl)) return `La ${F}${li} me permettrait d’acquérir les bases théoriques et la méthodologie universitaire indispensables à mon projet. J’ai conscience de l’autonomie qu’exige la première année et je compte m’y préparer avec sérieux.`;
+  if(/bpjeps/.test(fl)) return `Le BPJEPS${li} m’attire par son approche concrète en alternance, qui me permettra d’encadrer rapidement des publics variés tout en me formant aux fondamentaux de l’entraînement.`;
+  if(/\bdcg\b/.test(fl)) return `Le DCG${li} constitue la voie la plus directe vers l’expertise comptable : ses enseignements en comptabilité, en droit et en gestion correspondent exactement aux compétences que je souhaite développer.`;
+  if(/école|ecole|bachelor|cycle|post-bac|programme/.test(fl)) return `${F}${li} correspond à mon projet par la qualité de son accompagnement et la place qu’elle accorde aux projets concrets et aux expériences professionnelles.`;
+  return `${F}${li} correspond à mon projet et me permettra d’acquérir les compétences nécessaires pour atteindre mon objectif.`;
+}
 function lettre(){
-  const L=lPrefill(), v=L.v||0;
-  const met = L.metier&&METIERS[L.metier]? METIERS[L.metier].nom.toLowerCase() : '';
-  const form = L.form || '[la formation]';
-  const ou = L.type==='alternance' ? (L.entreprise||'[nom de l’entreprise]') : (L.ecole||'[nom de l’école]');
-  const declic = L.declic.trim();
-  // 1. Le déclic et le projet
-  let p1;
-  if(declic){
-    p1 = pick([
-      `${dot(cap1(declic))} C’est à ce moment-là que j’ai compris que je voulais ${met?'devenir '+met:'travailler dans ce domaine'}.`,
-      `${dot(cap1(declic))} Depuis, mon projet s’est précisé : ${met?'je veux devenir '+met:'je veux me former dans ce domaine'}.`,
-      `${met?'Mon objectif est de devenir '+met+'. ':''}${dot(cap1(declic))} C’est ce qui m’a fait choisir cette voie.`],v);
-  } else p1 = `[Raconte ici le moment précis qui t’a donné envie${met?' de devenir '+met:''} : une rencontre, une expérience, une situation vécue.]`;
-  // 2. Les preuves
-  const qs = L.q.map((i,k)=>({t:QUALS[i][1], p:(L.p[k]||'').trim()}));
-  const e = L.exp.trim(), ap = L.appris.trim();
-  let p2 = '';
-  if(e){
-    p2 += pick([`${dot(cap1(e))}`,`Cette envie, je l’ai déjà mise à l’épreuve : ${dot(low1(e))}`,`J’ai pu me confronter concrètement à ce milieu : ${dot(low1(e))}`],v,1);
-    if(ap) p2 += ' '+pick([`J’en ai retenu que ${dot(low1(ap))}`,`Cette expérience m’a appris que ${dot(low1(ap))}`,`Ce que j’en retiens : ${dot(low1(ap))}`],v,2);
+  const L=lPrefill(), v=L.v||0, m=L.metier&&METIERS[L.metier]?METIERS[L.metier].nom.toLowerCase():'', lm=LMET[L.metier];
+  const s1 = (m&&L.declic.trim())? `${dot(cap1(L.declic.trim()))} ${pick(['Depuis, mon projet professionnel est clair : devenir '+m+', afin de '+lm[0]+'.','Cette expérience a confirmé mon projet : devenir '+m+' pour '+lm[0]+'.','C’est ce qui m’a donné envie de devenir '+m+', afin de '+lm[0]+'.'],v)}` : m? pick([`Mon projet professionnel est de devenir ${m}, afin de ${lm[0]}.`,`Je souhaite devenir ${m} pour ${lm[0]}.`,`Devenir ${m}, pour ${lm[0]} : c’est le projet professionnel que je construis aujourd’hui.`],v)
+               : `Je souhaite construire un projet professionnel solide dans ce domaine.`;
+  const dec = '';
+  const conn = lm? ' '+lm[1] : '';
+  const bac = (LBACS.find(b=>b[0]===L.bac)||[])[2]||'';
+  const ex = L.exps.map(k=>LEXPS.find(e=>e[0]===k)).filter(Boolean).map((e,i)=> i===0? e[2] : pick(['De plus, ','Par ailleurs, ','En parallèle, '],v,i)+low1(e[2]));
+  const q = L.quals.map(k=>LQUALS.find(x=>x[0]===k)).filter(Boolean).map(x=>x[2]);
+  const qs = q.length? pick([`Je souhaite mettre au service de cette formation ${q.join(' et ')}${m?', des qualités essentielles pour le métier de '+m:''}.`,`Je pourrai m’appuyer sur ${q.join(' et ')}${m?', des atouts indispensables pour devenir '+m:''}.`,`${cap1(q.join(' et '))} ${q.length>1?'sont':'est'} ${q.length>1?'des atouts':'un atout'} sur lesquels je compte m’appuyer tout au long de cette formation.`],v,1) : '';
+  const det = L.detail.trim()? ' '+dot(cap1(L.detail.trim())) : '';
+  const close = pick([`Intégrer cette formation représenterait une étape décisive vers mon objectif, et j’y consacrerai toute mon énergie.`,`C’est avec sérieux et détermination que je souhaite rejoindre cette formation${m?', première étape concrète vers le métier de '+m:''}.`,`Je souhaite m’y investir pleinement afin de construire, étape par étape, mon projet professionnel.`],v,2);
+  let p3 = L.type==='alternance'
+    ? `Effectuer ${L.form?low1(L.form):'ma formation'} en alternance au sein de ${L.entreprise||'votre entreprise'} me permettrait de mettre immédiatement en pratique mes apprentissages, aux côtés de professionnels expérimentés.${det} Je m’engage à m’investir pleinement dans les missions qui me seront confiées.`
+    : formPara(L,v)+det+' '+close;
+  const build = (opt)=>{
+    const p1 = s1+dec+(opt.conn?conn:'');
+    const p2 = [opt.bac?bac:'', ...(opt.ex2?ex:ex.slice(0,1)), qs].filter(Boolean).join(' ');
+    return [p1,p2,p3].filter(Boolean).join('\n\n');
+  };
+  let body = build({conn:1,bac:1,ex2:1});
+  if(L.type==='parcoursup'){ // respecter la limite de 1 500 caractères
+    for(const o of [{conn:1,bac:1,ex2:0},{conn:1,bac:0,ex2:0},{conn:0,bac:0,ex2:0}]){ if([...body].length<=1500) break; body=build(o); }
+    return body;
   }
-  qs.forEach((q,k)=>{
-    if(!q.p){ p2 += (p2?' ':'')+`[Donne un exemple qui montre que tu sais ${q.t}.]`; return; }
-    p2 += (p2?' ':'') + pick(
-      k===0? [`Je sais ${q.t} : ${dot(low1(q.p))}`,`${cap1(q.p.replace(/[.!]$/,''))}, ce qui montre que je sais ${q.t}.`,`Par exemple, ${dot(low1(q.p))} Cela m’a appris à ${q.t}.`]
-           : [`Je sais aussi ${q.t} : ${dot(low1(q.p))}`,`Autre point fort, je sais ${q.t} : ${dot(low1(q.p))}`,`Enfin, ${q.p.replace(/[.!]$/,'')}, ce qui prouve que je sais ${q.t}.`], v, k+3);
-  });
-  if(!p2) p2 = '[Donne un ou deux exemples concrets : un stage, un job, un engagement, un projet. Dis ce que tu as fait et ce que tu en as retenu.]';
-  if(L.bac) p2 += ' ' + pick([`Mon ${L.bac} m’a aussi donné des bases utiles pour cette formation.`,`Mon ${L.bac} m’a permis d’acquérir des méthodes de travail que je compte mettre à profit.`,``],v,6);
-  p2 = p2.replace(/\s+$/,'');
-  // 3. Pourquoi cette formation / cette entreprise
-  const at = L.atouts.map(k=>ATOUTS.find(a=>a[0]===k)).filter(Boolean).map(a=>a[0]==='programme'&&L.detail.trim()? 'son programme' : a[2]);
-  let p3;
-  if(L.type==='alternance'){
-    p3 = `Rejoindre ${ou} en alternance pendant ${stripArt(form)} me permettrait d’apprendre au contact de professionnels`+(L.detail.trim()?`. ${dot(cap1(L.detail.trim()))}`:'. [Explique ce qui t’attire dans cette entreprise : son activité, ses valeurs, une rencontre.]')+` Je souhaite m’investir dans vos missions tout en construisant mon projet${met?' de devenir '+met:''}.`;
-  } else {
-    p3 = pick([`${cap1(form)} ${aLieu(ou)} correspond à ce projet.`,`Je souhaite rejoindre ${low1(form)} ${aLieu(ou)}, car cette formation correspond à mon projet.`,`C’est pour cette raison que je candidate en ${stripArt(form)} ${aLieu(ou)}.`],v,7);
-    p3 += at.length? ` J’y retrouve ${at.length>1? at.slice(0,-1).join(', ')+' et '+at[at.length-1] : at[0]}.` : '';
-    p3 += L.detail.trim()? ' '+dot(cap1(L.detail.trim())) : ' [Ajoute un détail précis sur cette formation : ce que tu as vu aux portes ouvertes, un cours, une option, un échange avec un étudiant.]';
-    p3 += ' ' + pick([`Je compte fournir tout le travail nécessaire pour réussir dans ce cursus.`,`Je compte m’y investir pleinement pour avancer vers mon objectif.`,`C’est le cadre dont j’ai besoin pour transformer cette envie en métier.`],v,8);
-  }
-  const body = [p1,p2,p3].join('\n\n');
-  if(L.type==='parcoursup') return body;
-  const nom = L.nom.trim()||'[Prénom Nom]';
-  const obj = L.type==='alternance'? `Objet : candidature en alternance — ${cap1(stripArt(form))}` : `Objet : candidature — ${cap1(stripArt(form))}`;
-  return `${nom}\n[Adresse]\n[Téléphone] · [E-mail]\n\n${ou}\n\n[Ville], le [date]\n\n${obj}\n\nMadame, Monsieur,\n\n${body}\n\nJe souhaiterais vous présenter mon projet plus en détail lors d’un entretien. Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.\n\n${nom}`;
+  const nom = L.nom.trim()||'Prénom Nom', dest = L.type==='alternance'? (L.entreprise||'Nom de l’entreprise') : (L.ecole||'Nom de l’établissement');
+  const obj = L.type==='alternance'? `Objet : candidature en alternance — ${cap1(stripArt(L.form||'formation'))}` : `Objet : candidature — ${cap1(stripArt(L.form||'formation'))}`;
+  return `${nom}\nAdresse\nTéléphone · E-mail\n\n${dest}\n\nÀ [ville], le [date]\n\n${obj}\n\nMadame, Monsieur,\n\n${body}\n\nJe me tiens à votre disposition pour un entretien afin de vous présenter plus en détail mon projet. Je vous prie d’agréer, Madame, Monsieur, l’expression de mes salutations distinguées.\n\n${nom}`;
 }
 function analyse(t){
   const L=st.L||L0(), tl=t.toLowerCase(), n=[...t].length, out=[];
-  const lim = L.type==='parcoursup'? [700,1500] : [1200,3000];
-  if(n>lim[1]) out.push(['bad',`Trop long : ${n} caractères pour ${lim[1]} maximum${L.type==='parcoursup'?' sur Parcoursup (le texte serait coupé)':''}.`]);
+  const lim = L.type==='parcoursup'? [700,1500] : [1200,3200];
+  if(n>lim[1]) out.push(['bad',`Trop long : ${n} caractères pour ${lim[1]} maximum${L.type==='parcoursup'?' sur Parcoursup':''}.`]);
   else if(n<lim[0]) out.push(['warn',`Un peu court : ${n} caractères. Vise entre ${lim[0]} et ${lim[1]}.`]);
   else out.push(['ok',`Bonne longueur : ${n} / ${lim[1]} caractères.`]);
   const ph=(t.match(/\[[^\]]+\]/g)||[]).length;
-  out.push(ph?['bad',`${ph} passage${ph>1?'s':''} entre crochets à compléter.`]:['ok','Aucun passage à compléter.']);
-  const target = L.type==='alternance'? L.entreprise : L.ecole;
-  if(target) out.push(tl.includes(target.toLowerCase())?['ok','Le nom de l’établissement apparaît : la lettre est personnalisée.']:['warn','Le nom de l’établissement n’apparaît pas : cite-le.']);
+  if(ph) out.push(['warn',`${ph} élément${ph>1?'s':''} entre crochets à compléter.`]);
   const cl=CLICHES.filter(c=>tl.includes(c));
-  out.push(cl.length?['warn',`Formules toutes faites à remplacer : « ${[...new Set(cl)].join(' », « ')} ». Remplace-les par un exemple concret.`]:['ok','Pas de formule toute faite repérée.']);
-  const ph2=t.replace(/\[[^\]]*\]/g,'').split(/(?<=[.!?])\s+/).filter(s=>s.trim().length>3);
-  const je=ph2.filter(s=>/^(je|j’|j')/i.test(s.trim())).length;
-  if(ph2.length>=4) out.push(je/ph2.length>0.5?['warn',`${je} phrases sur ${ph2.length} commencent par « Je » : varie les débuts de phrase.`]:['ok','Les débuts de phrase sont variés.']);
-  const longues=ph2.filter(s=>s.split(/\s+/).length>35).length;
-  if(longues) out.push(['warn',`${longues} phrase${longues>1?'s':''} trop longue${longues>1?'s':''} (plus de 35 mots) : coupe-la en deux.`]);
-  const concret = /\d/.test(t) || /(stage|job|bénévol|club|association|projet|portes ouvertes|immersion|entraîn|été dernier|l’an dernier)/i.test(t);
-  out.push(concret?['ok','Il y a des éléments concrets : c’est ce que les jurys regardent.']:['bad','Aucun exemple concret : ajoute une expérience précise (stage, job, engagement, projet).']);
-  if(/votre formation/i.test(t) && !(L.form && tl.includes(L.form.toLowerCase()))) out.push(['warn','« Votre formation » sans la nommer fait lettre générique : nomme la formation.']);
-  const sc=Math.max(0,Math.min(100,100-out.filter(o=>o[0]==='bad').length*25-out.filter(o=>o[0]==='warn').length*10));
+  out.push(cl.length?['warn',`Formules toutes faites à éviter : « ${[...new Set(cl)].join(' », « ')} ».`]:['ok','Pas de formule toute faite.']);
+  if(!L.exps.length && !/(stage|job|bénévol|club|association|projet|délégué|représenter ma classe|animation|mini-entreprise)/i.test(t)) out.push(['warn','Ajoute une expérience (même petite) : les jurys adorent le concret.']);
+  else out.push(['ok','Expérience concrète présente.']);
+  if(L.type!=='parcoursup' && !L.nom.trim()) out.push(['warn','Ajoute ton prénom et ton nom.']);
+  if(!L.declic.trim()&&!L.detail.trim()) out.push(['tip','Bonus : une touche perso (ce qui t’a donné envie, ou ce qui t’a plu aux portes ouvertes) rend la lettre unique.']);
+  const sc=Math.max(0,Math.min(100,100-out.filter(o=>o[0]==='bad').length*25-out.filter(o=>o[0]==='warn').length*10-out.filter(o=>o[0]==='tip').length*5));
   return {sc,out};
 }
 function analyseHTML(t){
-  const A=analyse(t), col=A.sc>=80?'#16A34A':A.sc>=55?'#D97706':'#DC2626';
-  return `<div class="an-h"><span>Analyse de ta lettre</span><b style="color:${col}">${A.sc}/100</b></div>
-    <ul class="an">${A.out.map(o=>`<li class="${o[0]}">${o[1]}</li>`).join('')}</ul>`;
+  const A=analyse(t), col=A.sc>=85?'#16A34A':A.sc>=60?'#D97706':'#DC2626';
+  return `<details class="anx"><summary><span>Qualité de ta lettre</span><b style="color:${col}">${A.sc}/100</b></summary>
+    <ul class="an">${A.out.map(o=>`<li class="${o[0]}">${o[1]}</li>`).join('')}</ul></details>`;
 }
 function assistant(){
-  const L=lPrefill();
   if(st.tab!=='lettre') return assistantMsg();
-  const t = st.ltxt!=null? st.ltxt : lettre();
-  const lock = st.plan!=='complet';
-  const chip=(name,val,on,lab)=>`<button type="button" class="chipb ${on?'on':''}" data-${name}="${val}">${lab}</button>`;
+  const L=lPrefill(), t = st.ltxt!=null? st.ltxt : lettre(), lock = st.plan!=='complet';
+  const chip=(n,val,on,lab)=>`<button type="button" class="chipb ${on?'on':''}" data-${n}="${val}">${lab}</button>`;
   return `<div class="wrap page fade">
     <div class="crumb"><a href="#accueil">Accueil</a> / Assistant</div>
-    <div class="ptitle"><div><h1>Lettre de motivation</h1><p>Réponds aux questions : on construit une lettre avec <b>tes</b> exemples, pas une lettre copiée-collée.</p></div></div>
+    <div class="ptitle"><div><h1>Ta lettre en 30 secondes</h1><p>3 clics, et on rédige une lettre pro. Tu relis, tu ajustes, c’est prêt.</p></div></div>
     <div class="seg" role="group" aria-label="Type de texte" style="max-width:420px;margin-bottom:18px">${[['msg','Message à l’école'],['lettre','Lettre de motivation']].map(x=>`<button type="button" style="flex:1" class="${st.tab===x[0]?'on':''}" data-tb="${x[0]}">${x[1]}</button>`).join('')}</div>
     <div class="as">
       <form class="card frm lf" id="lf" onsubmit="return false">
-        <div class="lstep"><span>1</span>Pour quoi ?</div>
-        <div class="ltypes">${LTYPES.map(x=>`<button type="button" class="ltype ${L.type===x[0]?'on':''}" data-lt="${x[0]}"><b>${x[1]}</b><small>${x[2]}</small></button>`).join('')}</div>
-        <label for="lm">Métier visé</label><select class="inp" id="lm" data-lk="metier"><option value="">Pas encore défini</option>${Object.keys(METIERS).map(k=>`<option value="${k}" ${L.metier===k?'selected':''}>${METIERS[k].nom}</option>`).join('')}</select>
-        <label for="lfo">Formation</label><input class="inp" id="lfo" data-lk="form" value="${esc(L.form)}" placeholder="Ex. la licence de droit">
-        ${L.type==='alternance'?`<label for="len">Entreprise</label><input class="inp" id="len" data-lk="entreprise" value="${esc(L.entreprise)}" placeholder="Ex. Décathlon Rivoli">`:`<label for="lec">École</label><input class="inp" id="lec" data-lk="ecole" value="${esc(L.ecole)}" placeholder="Ex. Université Paris Nanterre">`}
-        <label for="lbac">Ton bac (facultatif)</label><input class="inp" id="lbac" data-lk="bac" value="${esc(L.bac)}" placeholder="Ex. bac STMG">
-        ${L.type!=='parcoursup'?`<label for="lnom">Prénom et nom</label><input class="inp" id="lnom" data-lk="nom" value="${esc(L.nom)}" placeholder="Ex. Evan Martin">`:''}
-
-        <div class="lstep"><span>2</span>Ton déclic</div>
-        <label for="ld">Le moment qui t’a donné envie (une phrase)</label>
-        <textarea class="inp lta" id="ld" data-lk="declic" placeholder="Ex. En 3e, j’ai assisté à une audience au tribunal de Nanterre et j’ai vu une avocate défendre un jeune de mon âge">${esc(L.declic)}</textarea>
-        <p class="hint">Évite « depuis toujours » : un souvenir précis convainc beaucoup plus.</p>
-
-        <div class="lstep"><span>3</span>Une expérience concrète</div>
-        <div class="chips">${EXPS.map(x=>chip('ex',x[0],L.expType===x[0],x[1])).join('')}</div>
-        <label for="lx">Ce que tu as fait</label>
-        <textarea class="inp lta" id="lx" data-lk="exp" placeholder="Ex. L’été dernier, j’ai travaillé deux mois dans un fast-food, souvent en caisse aux heures de pointe">${esc(L.exp)}</textarea>
-        <label for="la">Ce que tu en as retenu</label>
-        <textarea class="inp lta" id="la" data-lk="appris" placeholder="Ex. je sais rester efficace et souriant sous la pression">${esc(L.appris)}</textarea>
-
-        <div class="lstep"><span>4</span>Deux qualités, avec une preuve</div>
-        <div class="chips">${QUALS.map((x,i)=>chip('qu',i,L.q.includes(i),x[0])).join('')}</div>
-        ${L.q.map((i,k)=>`<label for="lp${k}">Preuve : quand as-tu montré que tu sais ${QUALS[i][1]} ?</label><textarea class="inp lta" id="lp${k}" data-lp="${k}" placeholder="Ex. j’ai organisé le tournoi de foot du lycée avec deux amis">${esc(L.p[k]||'')}</textarea>`).join('')}
-        ${!L.q.length?'<p class="hint">Choisis-en 2. Une qualité sans exemple ne convainc personne.</p>':''}
-
-        <div class="lstep"><span>5</span>Pourquoi ${L.type==='alternance'?'cette entreprise':'cette formation'} ?</div>
-        ${L.type!=='alternance'?`<div class="chips">${ATOUTS.map(x=>chip('at',x[0],L.atouts.includes(x[0]),x[1])).join('')}</div>`:''}
-        <label for="ldt">${L.type==='alternance'?'Ce qui t’attire dans cette entreprise':'Un détail précis sur la formation'}</label>
-        <textarea class="inp lta" id="ldt" data-lk="detail" placeholder="${L.type==='alternance'?'Ex. J’ai rencontré une de vos vendeuses qui m’a parlé de l’accompagnement des alternants':'Ex. Aux portes ouvertes, un étudiant m’a parlé de la clinique juridique où les élèves conseillent de vrais clients'}">${esc(L.detail)}</textarea>
-        <p class="hint">C’est ce qui montre que tu ne l’envoies pas partout : portes ouvertes, cours, option, étudiant rencontré.</p>
-
-        <button class="btn btn-p" type="button" id="lgen" style="width:100%;margin-top:18px">Générer ma lettre</button>
+        <div class="seg" role="group" aria-label="Format" style="width:100%">${LTYPES.map(x=>`<button type="button" style="flex:1" class="${L.type===x[0]?'on':''}" data-lt="${x[0]}">${x[1]}</button>`).join('')}</div>
+        <div class="lstep"><span>1</span>Ton projet</div>
+        <div class="row2">
+          <select class="inp" id="lm" data-lk="metier" aria-label="Métier visé"><option value="">Métier visé…</option>${Object.keys(METIERS).map(k=>`<option value="${k}" ${L.metier===k?'selected':''}>${METIERS[k].nom}</option>`).join('')}</select>
+          <input class="inp" id="lfo" data-lk="form" value="${esc(L.form)}" placeholder="Formation (ex. BTS NDRC)" aria-label="Formation">
+        </div>
+        <input class="inp" style="width:100%;margin-top:8px" id="${L.type==='alternance'?'len':'lec'}" data-lk="${L.type==='alternance'?'entreprise':'ecole'}" value="${esc(L.type==='alternance'?L.entreprise:L.ecole)}" placeholder="${L.type==='alternance'?'Entreprise (ex. Decathlon)':'École (facultatif, ex. Lycée Jean Lurçat)'}" aria-label="${L.type==='alternance'?'Entreprise':'École'}">
+        ${L.type!=='parcoursup'?`<input class="inp" style="width:100%;margin-top:8px" id="lnom" data-lk="nom" value="${esc(L.nom)}" placeholder="Ton prénom et ton nom" aria-label="Prénom et nom">`:''}
+        <div class="lstep"><span>2</span>Ton bac et ce que tu as déjà fait</div>
+        <div class="chips">${LBACS.map(b=>chip('bac',b[0],L.bac===b[0],b[1])).join('')}</div>
+        <p class="hint">Ce que tu as déjà fait (1 ou 2) :</p>
+        <div class="chips">${LEXPS.map(e=>chip('ex',e[0],L.exps.includes(e[0]),e[1])).join('')}</div>
+        <div class="lstep"><span>3</span>Tes 2 points forts</div>
+        <div class="chips">${LQUALS.map(q=>chip('qu',q[0],L.quals.includes(q[0]),q[1])).join('')}</div>
+        <details class="perso" ${L.declic||L.detail?'open':''}><summary>✨ Rendre ta lettre unique (facultatif)</summary>
+          <input class="inp" style="width:100%;margin-top:8px" data-lk="declic" value="${esc(L.declic)}" placeholder="Ce qui t’a donné envie (ex. un stage, une rencontre)">
+          <input class="inp" style="width:100%;margin-top:8px" data-lk="detail" value="${esc(L.detail)}" placeholder="Ce qui t’a plu dans cette formation (ex. aux portes ouvertes)">
+          <p class="hint">Écris-le simplement, comme tu le dirais : on l’intègre tel quel.</p>
+        </details>
       </form>
       <div>
         <div class="out">
           <div class="bar"><b>${LTYPES.find(x=>x[0]===L.type)[2]}</b>
             <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="ok" id="cpok" role="status"></span>
-              <button class="btn btn-o" id="lvar" style="height:40px">Autre formulation</button>
-              <button class="btn btn-o" id="cp" style="height:40px">Copier</button></div></div>
+              <button class="btn btn-o" id="lvar" style="height:40px">🔄 Autre version</button>
+              <button class="btn btn-p" id="cp" style="height:40px">Copier</button></div></div>
           <label class="sr" for="txt">Ta lettre</label>
           <textarea id="txt" class="${lock?'blurred':''}">${esc(t)}</textarea>
-          ${lock?`<div class="lock"><div><b>Lettres complètes pour tous tes vœux</b><p>Génération guidée, analyse et variantes illimitées.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
+          ${lock?`<div class="lock"><div><b>Lettres complètes pour tous tes vœux</b><p>Versions illimitées et analyse de qualité.</p></div><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Passer au Complet · 9,99 €</a></div>`:''}
         </div>
         <div class="card anbox" id="anbox">${analyseHTML(t)}</div>
-        <p class="hint" style="margin-top:10px">Tu peux aussi coller ta propre lettre dans le cadre : l’analyse se met à jour en direct. Relis toujours avant d’envoyer : c’est ta lettre, pas la nôtre.</p>
       </div>
     </div></div>`;
 }
@@ -1512,13 +1521,14 @@ function bind(){
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
   document.querySelectorAll('[data-mo]').forEach(b=>b.onclick=()=>{readForm();st.mobj=b.dataset.mo;rerender(true);});
   if(document.getElementById('lf')){ const L=st.L;
+    const live=()=>{ if(st.ltxt!=null) return; const t=lettre(); const tx=document.getElementById('txt'); tx.value=t; document.getElementById('anbox').innerHTML=analyseHTML(t); };
+    const tog=(arr,k,max)=>{ const i=arr.indexOf(k); if(i>=0) arr.splice(i,1); else { arr.push(k); if(arr.length>max) arr.shift(); } };
     document.querySelectorAll('[data-lt]').forEach(b=>b.onclick=()=>{L.type=b.dataset.lt;st.ltxt=null;rerender(true);});
-    document.querySelectorAll('[data-lk]').forEach(i=>{const f=()=>{L[i.dataset.lk]=i.value;}; i.oninput=f; i.onchange=()=>{f(); if(i.dataset.lk==='metier'){ if(L.metier&&METIERS[L.metier]) L.form=METIERS[L.metier].chemins[0].steps[0][0]; st.ltxt=null; rerender(true);} };});
-    document.querySelectorAll('[data-lp]').forEach(i=>i.oninput=()=>{L.p[+i.dataset.lp]=i.value;});
-    document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{L.expType=L.expType===b.dataset.ex?'':b.dataset.ex;rerender(true);});
-    document.querySelectorAll('[data-qu]').forEach(b=>b.onclick=()=>{const i=+b.dataset.qu,k=L.q.indexOf(i); if(k>=0){L.q.splice(k,1);L.p.splice(k,1);L.p.push('');} else if(L.q.length<2){L.q.push(i);} rerender(true);});
-    document.querySelectorAll('[data-at]').forEach(b=>b.onclick=()=>{const k=b.dataset.at; L.atouts=L.atouts.includes(k)?L.atouts.filter(x=>x!==k):[...L.atouts,k]; rerender(true);});
-    const g=document.getElementById('lgen'); if(g) g.onclick=()=>{st.ltxt=null;rerender(true);document.getElementById('txt').scrollIntoView({behavior:'smooth',block:'center'});};
+    document.querySelectorAll('[data-lk]').forEach(i=>{ i.oninput=()=>{L[i.dataset.lk]=i.value; st.ltxt=null; live();};
+      if(i.tagName==='SELECT') i.onchange=()=>{L.metier=i.value; if(L.metier&&METIERS[L.metier]) L.form=METIERS[L.metier].chemins[0].steps[0][0]; st.ltxt=null; rerender(true);}; });
+    document.querySelectorAll('[data-bac]').forEach(b=>b.onclick=()=>{L.bac=L.bac===b.dataset.bac?'':b.dataset.bac;st.ltxt=null;rerender(true);});
+    document.querySelectorAll('[data-ex]').forEach(b=>b.onclick=()=>{tog(L.exps,b.dataset.ex,2);st.ltxt=null;rerender(true);});
+    document.querySelectorAll('[data-qu]').forEach(b=>b.onclick=()=>{tog(L.quals,b.dataset.qu,2);st.ltxt=null;rerender(true);});
     const lv=document.getElementById('lvar'); if(lv) lv.onclick=()=>{L.v=(L.v||0)+1;st.ltxt=null;rerender(true);};
     const tx=document.getElementById('txt'); if(tx) tx.oninput=()=>{st.ltxt=tx.value;document.getElementById('anbox').innerHTML=analyseHTML(tx.value);};
   }
