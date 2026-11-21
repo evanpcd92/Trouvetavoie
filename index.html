@@ -667,20 +667,37 @@ function contexte(a){
   const fol=g('follow');
   return {voie:v, prof, spe, duree:g('duree')[2], pay:g('argent')[2], lvl:g('niveau')[2], tag:fol&&fol[2]};
 }
+// Points bloquants : exclusions définitives (métier jamais proposé) et pénalités légères
+const NOPE_HARD = [['medecin','infirmier','veterinaire'],['comptable','developpeur'],['prof','avocat'],[],['commercial'],['policier'],[],['comptable','ingenieur']];
+const INTERET = ['samedi','contenus','qualites','motiv','follow'];
 function scorer(a){
-  const sc=Object.fromEntries(Object.keys(METIERS).map(k=>[k,0])), why={};
-  const add=(w,label,m=1)=>{for(const k in w){sc[k]+=w[k]*m; if(w[k]*m>=1.5&&label)(why[k]=why[k]||[]).push([label,w[k]*m]);}};
-  const LBL={qualites:'ta qualité ',samedi:'ton samedi idéal ',contenus:'ce que tu regardes ',motiv:'ce qui te motive ',spefav:'ta spécialité préférée, ',techno:'ton bac ',stmg:'ta spécialité ',stmgfav:'ton goût pour la matière ',sti2d:'ta spécialité ',st2s:'ton intérêt pour ',pro:'ton bac pro ',cap:'ton CAP ',supdom:'tes études en '};
+  const K=Object.keys(METIERS), I=Object.fromEntries(K.map(k=>[k,0])), P=Object.fromEntries(K.map(k=>[k,0])), why={}, strong={};
+  const LBL={qualites:'ta qualité ',samedi:'ton samedi idéal ',contenus:'ce que tu regardes ',motiv:'ce qui te motive ',spefav:'ta spécialité préférée, ',techno:'ton bac ',stmg:'ta spécialité ',stmgfav:'ton goût pour la matière ',sti2d:'ta spécialité ',st2s:'ton intérêt pour ',pro:'ton bac pro ',cap:'ton CAP ',supdom:'tes études en ',follow:'ta réponse '};
+  const clean=t=>t.replace(/^[^A-Za-zÀ-ÿ0-9’«(]+/,'');
+  const add=(T,w,label,m=1)=>{for(const k in w){const v=w[k]*m; if(v<=0) continue; T[k]+=v; if(v>=1.5&&label){(why[k]=why[k]||[]).push([label,v*(T===I?1.2:1)]); if(T===I) strong[k]=1;}}};
   flow(a).forEach(id=>{
-    if(a[id]===undefined||['univers','univers2','duree','argent','niveau','voie'].includes(id)) return;
-    if(id==='spe'){ a.spe.forEach(i=>add(SPE[i][1],'ta spécialité '+SPE[i][0])); return; }
-    if(Array.isArray(a[id])){ a[id].forEach(i=>{const o=Q[id].o[i]; add(o[1],(LBL[id]||'ta réponse ')+'« '+o[0].replace(/^\S+\s/,'')+' »');}); return; }
-    const o=qOpts(id,a)[a[id]]; add(o[1],(LBL[id]||'ta réponse ')+'« '+o[0].replace(/^[^\wÀ-ÿ’«]+/,'')+' »', id==='spefav'?1.5:1);
+    if(a[id]===undefined||['univers','duree','argent','niveau','voie','nope'].includes(id)) return;
+    const T=INTERET.includes(id)?I:P, m=id==='follow'?1.6:T===P?0.6:1;
+    if(id==='spe'){ a.spe.forEach(i=>add(P,SPE[i][1],'ta spécialité « '+SPE[i][0]+' »',0.6)); return; }
+    const sel=Array.isArray(a[id])?a[id]:[a[id]], opts=qOpts(id,a);
+    sel.forEach(i=>{const o=opts[i]; add(T,o[1],(LBL[id]||'ta réponse ')+'« '+clean(o[0])+' »', id==='spefav'?0.9:m);});
   });
-  const u1=UNIVERS[a.univers]; add(DOM_BASE[u1[1]],'ton attirance pour « '+u1[0].toLowerCase()+' »',1.5);
-  const c=contexte(a);
-  for(const k in sc){ if(MIN_ANS[k]>c.duree+1) sc[k]-= (MIN_ANS[k]-c.duree>=4?4:2); }
-  return {sc,why,c};
+  const u1=UNIVERS[a.univers]; add(I,DOM_BASE[u1[1]],'ton attirance pour « '+u1[0].toLowerCase()+' »',1.5);
+  const c=contexte(a), excl={}, sc={};
+  (a.nope||[]).forEach(i=>{ NOPE_HARD[i].forEach(k=>excl[k]='nope'); for(const k in Q.nope.o[i][1]) I[k]+=Q.nope.o[i][1][k]*0.6; });
+  K.forEach(k=>{ if(!excl[k] && MIN_ANS[k]>c.duree+2) excl[k]='duree'; sc[k]=I[k]+P[k]; });
+  return {sc,I,P,why,c,excl,strong};
+}
+function resultats(a){
+  const R=scorer(a);
+  let ok=Object.keys(R.sc).filter(k=>!R.excl[k] && R.I[k]>=2 && R.strong[k]).sort((x,y)=>R.sc[y]-R.sc[x]);
+  // Le choix explicite (« au final… ») passe toujours en premier s'il est compatible
+  const fo=qOpts('follow',a)[a.follow][1], fm=Object.entries(fo).sort((x,y)=>y[1]-x[1])[0][0];
+  if(!R.excl[fm]) ok=[fm,...ok.filter(k=>k!==fm)];
+  const max=ok.length?R.sc[ok[0]]:1;
+  const max2=Math.max(...ok.slice(0,3).map(k=>R.sc[k]),1); const n=ok.slice(0,3).filter((k,i)=>i<1||R.sc[k]>=max2*0.5).length;
+  const longer=Object.keys(R.sc).filter(k=>R.excl[k]==='duree'&&R.I[k]>=4).sort((x,y)=>R.sc[y]-R.sc[x]).slice(0,2);
+  return {...R, top:ok.slice(0,n), more:ok.slice(n,n+3), longer};
 }
 function recoChemin(k,c,a){
   const r=(i,t)=>[i,t];
@@ -939,9 +956,8 @@ function paiement(){
 function quiz(){
   const a=st.qa||(st.qa={}); const f=flow(a);
   if(st.qi>=f.length){
-    const {sc,why,c}=scorer(a);
-    const r=Object.entries(sc).sort((x,y)=>y[1]-x[1]);
-    const max=Math.max(1,r[0][1]); let n=r.slice(0,3).filter(([k,v],i)=>i<2||v>=max*0.45).length; const top=r.slice(0,n), more=r.slice(n,n+4);
+    const R=resultats(a), {sc,why,c}=R, max=R.top.length?sc[R.top[0]]:1;
+    const top=R.top.map(k=>[k,sc[k]]), more=R.more.map(k=>[k,sc[k]]);
     const pl={gen:'Bac général',techno:'Bac technologique',pro:'Bac professionnel',cap:'CAP',sup:'Réorientation'}[c.voie];
     const det=c.voie==='gen'?' · '+c.spe.map(s=>SPE.find(x=>x[2]===s)[0]).join(', '):c.voie==='techno'&&a.techno!==undefined?' · '+Q.techno.o[a.techno][0]:'';
     return `<div class="wrap page fade"><div class="qz">
@@ -955,10 +971,13 @@ function quiz(){
         ${w.length?`<p style="margin:10px 0 0;font-size:14px"><b>Pourquoi :</b> ${w.join(' et ')}.</p>`:''}
         <p style="margin:8px 0 0;font-size:14px;color:var(--gold-d);font-weight:500">Chemin conseillé : ${METIERS[k].chemins[ch].nom}. ${rs}</p>
         ${al.map(x=>`<p style="margin:8px 0 0;font-size:13px;color:#9A3412">⚠ ${x}</p>`).join('')}
-        <div class="bar2"><i style="width:${Math.max(8,Math.round(v/max*100))}%"></i></div></div>
+        <div class="bar2"><i style="width:${i===0?100:Math.min(92,Math.max(10,Math.round(v/Math.max(...top.map(x=>x[1]))*100)))}%"></i></div></div>
         <a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Voir le chemin ${ch+1}</a></div></div>`}).join('')}
-      <p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
-      <div class="sugg" style="margin:0">${more.map(([k])=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom}</a>`).join('')}</div>
+      ${!top.length?`<div class="card"><h3 style="font-size:19px">Aucun de nos 15 métiers ne colle parfaitement</h3><p style="color:var(--ink2);font-size:15px;margin:6px 0 0">Avec ce que tu ne supportes pas et la durée d’études choisie, on préfère ne rien te proposer plutôt qu’un métier qui ne te correspond pas. On ajoute de nouveaux métiers chaque semaine. Tu peux aussi refaire le quiz en étant un peu plus souple.</p></div>`:''}
+      ${more.length?`<p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
+      <div class="sugg" style="margin:0">${more.map(([k])=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom}</a>`).join('')}</div>`:''}
+      ${R.longer.length?`<p style="margin:22px 0 10px;font-weight:600">Si tu es prêt(e) à faire des études plus longues</p>
+      <div class="sugg" style="margin:0">${R.longer.map(k=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom} · ${MIN_ANS[k]} ans min.</a>`).join('')}</div>`:''}
       <button class="btn btn-o" id="rq" style="margin-top:22px">Refaire le quiz</button>
     </div></div>`;
   }
