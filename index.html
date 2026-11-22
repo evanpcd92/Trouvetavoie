@@ -1575,7 +1575,7 @@ function lockedPage(crumb, h1, sub, title, desc, ghost){
 }
 const eur = n => n.toFixed(2).replace('.',',')+' €';
 const ED = { // ⚠ À compléter dès réception du SIRET
-  nom:'Evan Picard', statut:'Entrepreneur individuel (micro-entreprise)',
+  nom:'[Nom de l’entrepreneur]', statut:'Entrepreneur individuel (micro-entreprise)',
   siret:'[SIRET en cours d’attribution]', adresse:'[Adresse de domiciliation]',
   mail:'[adresse e-mail de contact]',
   mediateur:'[Nom et site du médiateur de la consommation]'
@@ -1599,7 +1599,7 @@ function legal(k){
 
   cgv:['Conditions générales de vente',`
 <h2>1. Objet</h2>
-<p>Les présentes conditions encadrent la vente des offres payantes du site trouvetavoie, édité par ${ED.nom} (voir les mentions légales). Tout achat implique leur acceptation.</p>
+<p>Les présentes conditions encadrent la vente des offres payantes du site trouvetavoie (l’éditeur est indiqué dans les mentions légales). Tout achat implique leur acceptation.</p>
 <h2>2. Offres et prix</h2>
 <p><b>Essentiel — 4,99 €</b> : les 3 chemins détaillés pour chaque métier, les écoles publiques et privées avec prix et chances d’admission, le quiz d’orientation et les messages aux écoles.<br><b>Complet — 9,99 €</b> : tout l’Essentiel, plus les lettres de motivation personnalisées.</p>
 <p>Prix en euros, toutes taxes comprises. TVA non applicable, article 293 B du CGI. Il s’agit d’un paiement unique, sans abonnement ni renouvellement automatique.</p>
@@ -1623,7 +1623,7 @@ function legal(k){
 <h2>En bref</h2>
 <p>Pas de compte, pas de publicité, pas de revente de données. Tes réponses au quiz et tes lettres restent dans ton navigateur : elles ne sont jamais envoyées sur nos serveurs.</p>
 <h2>Responsable du traitement</h2>
-<p>${ED.nom}, ${ED.adresse}. Contact : ${ED.mail}.</p>
+<p>L’éditeur du site trouvetavoie (voir les mentions légales). Contact : ${ED.mail}.</p>
 <h2>Ce que nous traitons</h2>
 <p><b>Achat</b> : ton adresse e-mail et l’offre choisie, transmises à Stripe pour le paiement et l’envoi du reçu. Base légale : l’exécution du contrat. Conservation : 10 ans pour les pièces comptables, comme l’exige la loi.</p>
 <p><b>Mesure d’audience</b> : Vercel Web Analytics compte les pages vues de façon anonyme, sans cookie et sans suivi d’un site à l’autre. Base légale : notre intérêt légitime à améliorer le site.</p>
