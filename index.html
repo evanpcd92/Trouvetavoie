@@ -130,6 +130,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mute);font-si
 .kv span{color:var(--mute)}
 .kv b{font-weight:600;text-align:right}
 .note{font-size:13px;color:var(--mute);margin-top:14px}
+.legal{max-width:780px;padding:36px}.legal h1{font-size:34px}.legal h2{font-size:19px;margin:28px 0 8px}.legal p{color:var(--ink2);line-height:1.65;margin:0 0 12px}
+.lgnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.lgnav a{padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink2);text-decoration:none;background:#fff}.lgnav a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ftl{display:flex;gap:16px;flex-wrap:wrap;width:100%;font-size:13px}.ftl a{color:var(--mute)}
+.rtr{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink2);margin-top:16px;line-height:1.5;cursor:pointer}.rtr input{margin-top:3px;width:18px;height:18px;flex:none}
+@media (max-width:700px){.legal{padding:22px}.legal h1{font-size:27px}}
 .callout{background:#FFF4D1;border-radius:14px;padding:14px 16px;font-size:14px;color:#5C4300;margin-top:18px}
 
 /* schools */
@@ -302,6 +307,7 @@ select.inp{appearance:auto}
   <div class="wrap ft">
     <div><b style="color:var(--ink)">trouvetavoie</b> · un outil d'aide à la décision. Il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
     <div>Sources : Parcoursup, Onisep, CNB, établissements <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
+    <div class="ftl"><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a><span>© 2026 trouvetavoie</span></div>
   </div>
 </footer>
 
@@ -1551,7 +1557,7 @@ function assistant(){
 const PAYLINKS = { essentiel: '', complet: '' };
 const STRIPE_ON = true; // paiement réel via /api/checkout (identifiants de prix dans les variables Vercel)
 const OFFERS = {
-  essentiel:{nom:'Essentiel', prix:4.99, items:['Les 3 chemins pour chaque métier','Écoles publiques et privées, prix et chances d’admission','Quiz d’orientation','Messages aux écoles illimités']},
+  essentiel:{nom:'Essentiel', prix:4.99, items:['Les 3 chemins pour chaque métier','Écoles publiques et privées, prix et chances d’admission','Quiz d’orientation','Messages aux écoles illimités','Accès jusqu’à la fin de Parcoursup 2027']},
   complet:{nom:'Complet', prix:9.99, items:['Tout l’Essentiel','5 lettres de motivation personnalisées','Accès jusqu’à la fin de Parcoursup 2027']}
 };
 const hasPlan = () => !!st.plan;
@@ -1568,13 +1574,83 @@ function lockedPage(crumb, h1, sub, title, desc, ghost){
     <div class="ptitle"><div><h1>${h1}</h1><p>${sub}</p></div></div>${paywall(title, desc, ghost)}</div>`;
 }
 const eur = n => n.toFixed(2).replace('.',',')+' €';
+const ED = { // ⚠ À compléter dès réception du SIRET
+  nom:'Evan Picard', statut:'Entrepreneur individuel (micro-entreprise)',
+  siret:'[SIRET en cours d’attribution]', adresse:'[Adresse de domiciliation]',
+  mail:'[adresse e-mail de contact]',
+  mediateur:'[Nom et site du médiateur de la consommation]'
+};
+const MAJ_LEGAL = '22 novembre 2026';
+function legal(k){
+  const T = {
+  mentions:['Mentions légales',`
+<h2>Éditeur du site</h2>
+<p>Le site trouvetavoie est édité par ${ED.nom}, ${ED.statut}.<br>SIRET : ${ED.siret}<br>Adresse : ${ED.adresse}<br>Contact : ${ED.mail}<br>Directeur de la publication : ${ED.nom}.</p>
+<p>TVA non applicable, article 293 B du Code général des impôts.</p>
+<h2>Hébergement</h2>
+<p>Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis · vercel.com</p>
+<h2>Propriété intellectuelle</h2>
+<p>La structure du site, ses textes, son quiz, ses modèles de lettres et ses éléments graphiques sont protégés. Toute reproduction ou réutilisation, totale ou partielle, sans autorisation écrite est interdite.</p>
+<p>Les données sur les formations et les taux d’accès proviennent de la plateforme ouverte des données publiques de l’enseignement supérieur (jeu « Parcoursup », Licence Ouverte / Etalab). Les informations sur les métiers, les études et les salaires s’appuient sur Onisep, France Travail, l’Apec, l’Insee et les sites officiels des organismes concernés.</p>
+<h2>Limites de responsabilité</h2>
+<p>trouvetavoie est un outil d’aide à la décision. Les informations sont données à titre indicatif, peuvent évoluer et ne remplacent ni les informations officielles des établissements et de Parcoursup, ni l’avis d’un conseiller d’orientation. Un taux d’accès passé ne garantit pas une admission. Les lettres et messages générés sont des modèles à relire et à adapter avant envoi.</p>
+<h2>Signaler une erreur</h2>
+<p>Une information te paraît fausse ou dépassée ? Écris-nous à ${ED.mail}, nous corrigeons au plus vite.</p>`],
+
+  cgv:['Conditions générales de vente',`
+<h2>1. Objet</h2>
+<p>Les présentes conditions encadrent la vente des offres payantes du site trouvetavoie, édité par ${ED.nom} (voir les mentions légales). Tout achat implique leur acceptation.</p>
+<h2>2. Offres et prix</h2>
+<p><b>Essentiel — 4,99 €</b> : les 3 chemins détaillés pour chaque métier, les écoles publiques et privées avec prix et chances d’admission, le quiz d’orientation et les messages aux écoles.<br><b>Complet — 9,99 €</b> : tout l’Essentiel, plus les lettres de motivation personnalisées.</p>
+<p>Prix en euros, toutes taxes comprises. TVA non applicable, article 293 B du CGI. Il s’agit d’un paiement unique, sans abonnement ni renouvellement automatique.</p>
+<h2>3. Commande et paiement</h2>
+<p>Le paiement se fait par carte bancaire, Apple Pay ou Google Pay sur la page sécurisée de Stripe. trouvetavoie ne reçoit ni ne conserve aucune donnée bancaire. La commande est ferme une fois le paiement accepté. Un reçu est envoyé à l’adresse e-mail indiquée.</p>
+<h2>4. Accès</h2>
+<p>L’accès est ouvert dès la confirmation du paiement, sur le navigateur utilisé pour l’achat, et dure jusqu’au 31 août 2027 (fin de la procédure Parcoursup 2027). Si tu changes d’appareil ou effaces les données de ton navigateur, écris-nous avec l’e-mail utilisé lors de l’achat pour retrouver ton accès.</p>
+<h2>5. Droit de rétractation</h2>
+<p>Les offres sont des contenus numériques fournis immédiatement. Conformément à l’article L221-28 13° du Code de la consommation, en demandant l’accès immédiat au moment de l’achat, tu reconnais perdre ton droit de rétractation de 14 jours.</p>
+<p>Si le service ne fonctionne pas comme décrit et que nous ne parvenons pas à corriger le problème, nous te remboursons. Écris-nous à ${ED.mail}.</p>
+<h2>6. Acheteurs mineurs</h2>
+<p>Si tu as moins de 18 ans, tu dois avoir l’accord d’un parent ou de ton représentant légal avant d’acheter.</p>
+<h2>7. Responsabilité</h2>
+<p>trouvetavoie fournit des informations et des outils d’aide à l’orientation. Nous ne garantissons pas l’admission dans une formation. Les décisions d’orientation et l’envoi des lettres restent sous ta responsabilité.</p>
+<h2>8. Réclamations et médiation</h2>
+<p>Pour toute réclamation, écris d’abord à ${ED.mail}. Si aucune solution n’est trouvée, tu peux saisir gratuitement le médiateur de la consommation : ${ED.mediateur}. Tu peux aussi utiliser la plateforme européenne de règlement en ligne des litiges.</p>
+<h2>9. Droit applicable</h2>
+<p>Les présentes conditions sont soumises au droit français.</p>`],
+
+  confidentialite:['Politique de confidentialité',`
+<h2>En bref</h2>
+<p>Pas de compte, pas de publicité, pas de revente de données. Tes réponses au quiz et tes lettres restent dans ton navigateur : elles ne sont jamais envoyées sur nos serveurs.</p>
+<h2>Responsable du traitement</h2>
+<p>${ED.nom}, ${ED.adresse}. Contact : ${ED.mail}.</p>
+<h2>Ce que nous traitons</h2>
+<p><b>Achat</b> : ton adresse e-mail et l’offre choisie, transmises à Stripe pour le paiement et l’envoi du reçu. Base légale : l’exécution du contrat. Conservation : 10 ans pour les pièces comptables, comme l’exige la loi.</p>
+<p><b>Mesure d’audience</b> : Vercel Web Analytics compte les pages vues de façon anonyme, sans cookie et sans suivi d’un site à l’autre. Base légale : notre intérêt légitime à améliorer le site.</p>
+<p><b>Stockage local</b> : ton navigateur garde ton accès payant et tes réponses (localStorage). Ces données ne quittent pas ton appareil et tu peux les effacer à tout moment depuis les réglages de ton navigateur.</p>
+<p><b>Recherche d’écoles</b> : la page Écoles interroge directement le site public data.enseignementsup-recherche.gouv.fr. Ton adresse IP est donc visible par ce site, comme pour toute visite web.</p>
+<h2>Destinataires</h2>
+<p>Stripe Payments Europe Ltd (paiement, Irlande) et Vercel Inc. (hébergement et mesure d’audience, États-Unis). Les transferts hors de l’Union européenne sont encadrés par des clauses contractuelles types et le cadre de protection des données UE–États-Unis.</p>
+<h2>Utilisateurs mineurs</h2>
+<p>Le site s’adresse notamment aux lycéens. Nous ne demandons aucune information sur ton identité, ton âge ou ton lycée. Si tu as moins de 18 ans, un parent doit donner son accord avant un achat.</p>
+<h2>Tes droits</h2>
+<p>Tu peux demander l’accès, la rectification ou l’effacement de tes données, ou t’opposer à leur traitement, en écrivant à ${ED.mail}. Tu peux aussi saisir la CNIL (cnil.fr).</p>
+<h2>Cookies</h2>
+<p>trouvetavoie n’utilise aucun cookie publicitaire ni de mesure d’audience. Stripe dépose ses propres cookies sur sa page de paiement, nécessaires à la sécurité de la transaction.</p>`]
+  };
+  const t = T[k];
+  const nav = [['mentions','Mentions légales'],['cgv','CGV'],['confidentialite','Confidentialité']].map(([id,l])=>`<a href="#${id}" class="${id===k?'on':''}">${l}</a>`).join('');
+  return `<div class="wrap page fade"><div class="crumb"><a href="#accueil">Accueil</a> / ${t[0]}</div>
+  <div class="lgnav">${nav}</div>
+  <article class="card legal"><h1>${t[0]}</h1><p class="note" style="margin-top:4px">Dernière mise à jour : ${MAJ_LEGAL}</p>${t[1]}</article></div>`;
+}
 function paiement(){
   const o = OFFERS[st.offer||'complet'];
   if(st.paid) return `<div class="wrap page fade"><div class="qz"><div class="card" style="text-align:center;padding:44px 28px">
     <div class="ic" style="background:#E4F5EC;color:var(--green);margin:0 auto 18px;width:60px;height:60px;border-radius:50%"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5,12 10,17 19,7"/></svg></div>
     <h1 style="font-size:30px;margin-bottom:8px">Merci, c'est débloqué</h1>
     <p style="color:var(--ink2);margin:0 0 6px">${o.nom} · ${eur(o.prix)}</p>
-    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">Paiement de démonstration : aucun montant n'a été débité. Le reçu serait envoyé à ${esc(st.mail)}.</p>
+    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">${st.mail&&st.mail!=='test'?'Ton reçu est envoyé à '+esc(st.mail)+'.':''} Accès valable jusqu’au 31 août 2027 sur ce navigateur.</p>
     <a class="btn btn-p" href="#assistant" id="golettre">Rédiger ma lettre</a>
     <a class="btn btn-o" href="#paiement" id="pback" style="margin-left:6px">Revenir aux offres</a>
   </div></div></div>`;
@@ -1590,16 +1666,17 @@ function paiement(){
           <div style="font-size:13px;font-weight:600;color:var(--ink2);margin-top:16px">Moyen de paiement</div>
           <div class="pm" role="group" aria-label="Moyen de paiement">${[['cb','Carte bancaire'],['apple','Apple Pay'],['google','Google Pay']].map(p=>`<button type="button" class="${(st.pm||'cb')===p[0]?'on':''}" data-pm="${p[0]}">${p[1]}</button>`).join('')}</div>
           <p class="note">Tu seras redirigé vers la page sécurisée de notre prestataire de paiement. Aucune donnée bancaire n'est saisie sur trouvetavoie.</p>
+          <label class="rtr"><input type="checkbox" id="prtr"><span>Je demande l’accès immédiat et je reconnais perdre mon droit de rétractation. J’accepte les <a href="#cgv" target="_blank">CGV</a>. Si j’ai moins de 18 ans, un parent est d’accord.</span></label>
           <div class="err" id="perr" role="status"></div>
         </div>
       </div>
       <aside class="card sum">
         <h3 style="font-size:17px;margin-bottom:6px">Récapitulatif</h3>
         <div class="kv"><span>${o.nom}</span><b>${eur(o.prix)}</b></div>
-        <div class="kv"><span>Dont TVA (20 %)</span><b>${eur(o.prix - o.prix/1.2)}</b></div>
+        <div class="kv"><span style="font-size:13px">TVA non applicable, art. 293 B du CGI</span><b></b></div>
         <div class="kv" style="font-size:17px"><span style="color:var(--ink);font-weight:600">Total</span><b>${eur(o.prix)}</b></div>
         <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:52px">Payer ${eur(o.prix)}</button>
-        <div class="secure"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé · Démo, aucun débit</div>
+        <div class="secure"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé par Stripe</div>
       </aside>
     </form></div>`;
 }
@@ -1664,6 +1741,7 @@ function route(){
   else if(h==='assistant'){ html = hasPlan()? assistant() : lockedPage('Assistant','Assistant de rédaction','Messages aux écoles et lettres de motivation.','Écris aux écoles en un clic','Génère des messages prêts à envoyer et fais-toi aider pour tes lettres de motivation.',G); r='assistant'; }
   else if(h==='quiz'){ html = hasPlan()? quiz() : lockedPage('Quiz','Quiz d’orientation','Des questions adaptées à ton bac et à tes envies.','Pas d’idée de métier ?','Le quiz te propose des métiers et le chemin conseillé selon ta formation actuelle.',G); r='quiz'; }
   else if(h==='paiement'){ html = paiement(); r='paiement'; }
+  else if(['mentions','cgv','confidentialite'].includes(h)){ html = legal(h); }
   else html = home();
   app.innerHTML = html;
   document.querySelectorAll('nav.main a').forEach(a=>a.classList.toggle('on',a.dataset.r===r));
@@ -1700,7 +1778,7 @@ function bind(){
   const cp=document.getElementById('cp'); if(cp) cp.onclick=async()=>{const ok=document.getElementById('cpok');try{await navigator.clipboard.writeText(document.getElementById('txt').value);ok.textContent='Copié';}catch(e){document.getElementById('txt').select();ok.textContent='Sélectionné, fais Ctrl+C';}};
   document.querySelectorAll('[data-of]').forEach(b=>b.onclick=()=>{st.offer=b.dataset.of;rerender(true);});
   document.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{st.pm=b.dataset.pm;rerender(true);});
-  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}const of=st.offer||'complet'; if(STRIPE_ON){ location.href='/api/checkout?plan='+of+'&email='+encodeURIComponent(m.value); return; } if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
+  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}if(!document.getElementById('prtr').checked){document.getElementById('perr').textContent='Coche la case pour confirmer ta commande.';return;}const of=st.offer||'complet'; if(STRIPE_ON){ location.href='/api/checkout?plan='+of+'&email='+encodeURIComponent(m.value); return; } if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
   const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
   document.querySelectorAll('[data-mo]').forEach(b=>b.onclick=()=>{readForm();st.mobj=b.dataset.mo;rerender(true);});
