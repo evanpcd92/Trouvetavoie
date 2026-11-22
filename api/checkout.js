@@ -1,7 +1,7 @@
 // Crée une session de paiement Stripe Checkout et redirige le visiteur vers la page Stripe
 const PRICES = {
-  essentiel: process.env.STRIPE_PRICE_ESSENTIEL || '',
-  complet: process.env.STRIPE_PRICE_COMPLET || ''
+  essentiel: process.env.STRIPE_PRICE_ESSENTIEL || 'price_1UeW7eQYGqrixugcGLNH4Mea',
+  complet: process.env.STRIPE_PRICE_COMPLET || 'price_1UeWBMQYGqrixugcwOd2RT59'
 };
 export default async function handler(req, res) {
   const plan = String((req.query && req.query.plan) || '');
