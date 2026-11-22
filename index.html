@@ -1547,6 +1547,8 @@ function assistant(){
     </div></div>`;
 }
 
+// Liens de paiement Stripe : colle ici les liens créés dans le tableau de bord Stripe
+const PAYLINKS = { essentiel: '', complet: '' };
 const OFFERS = {
   essentiel:{nom:'Essentiel', prix:4.99, items:['Les 3 chemins pour chaque métier','Écoles publiques et privées, prix et chances d’admission','Quiz d’orientation','Messages aux écoles illimités']},
   complet:{nom:'Complet', prix:9.99, items:['Tout l’Essentiel','5 lettres de motivation personnalisées','Accès jusqu’à la fin de Parcoursup 2027']}
@@ -1697,7 +1699,7 @@ function bind(){
   const cp=document.getElementById('cp'); if(cp) cp.onclick=async()=>{const ok=document.getElementById('cpok');try{await navigator.clipboard.writeText(document.getElementById('txt').value);ok.textContent='Copié';}catch(e){document.getElementById('txt').select();ok.textContent='Sélectionné, fais Ctrl+C';}};
   document.querySelectorAll('[data-of]').forEach(b=>b.onclick=()=>{st.offer=b.dataset.of;rerender(true);});
   document.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{st.pm=b.dataset.pm;rerender(true);});
-  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}st.paid=true;st.mail=m.value;st.plan=st.offer||'complet';rerender();scrollTo(0,0);});
+  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}const of=st.offer||'complet'; if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
   const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
   document.querySelectorAll('[data-mo]').forEach(b=>b.onclick=()=>{readForm();st.mobj=b.dataset.mo;rerender(true);});
@@ -1734,6 +1736,11 @@ document.querySelector('nav.main a[data-r="metier"]').addEventListener('click',(
   if(a==='evan2027') localStorage.setItem('ttv_test','1');
   if(a==='off') localStorage.removeItem('ttv_test');
   if(localStorage.getItem('ttv_test')==='1'){st.paid=true;st.plan='complet';st.mail='test';}
+  try{ const sv=JSON.parse(localStorage.getItem('ttv_plan')||'null'); if(sv&&sv.plan){st.paid=true;st.plan=sv.plan;st.mail=sv.email||'';} }catch(e){}
+  const sid=new URLSearchParams(location.search).get('session_id');
+  if(sid){ fetch('/api/verify?session_id='+encodeURIComponent(sid)).then(r=>r.json()).then(d=>{
+      if(d.ok){ localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,sid})); st.paid=true; st.plan=d.plan; st.mail=d.email; }
+      history.replaceState(null,'',location.pathname+(location.hash||'#paiement')); route(); }).catch(()=>{}); }
 }catch(e){}})();
 addEventListener('hashchange',()=>{route();scrollTo(0,0);try{const r='/'+(location.hash.replace('#','')||'accueil');window.va('pageview',{route:r,path:r});}catch(e){}});
 route();
