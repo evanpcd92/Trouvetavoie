@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (!r.ok) return res.status(404).json({ ok: false, error: 'session introuvable' });
   const s = await r.json();
   if (s.payment_status !== 'paid') return res.status(402).json({ ok: false, error: 'paiement non finalisé' });
-  const plan = s.amount_total >= 999 ? 'complet' : 'essentiel';
+  const plan = (s.metadata && ['essentiel','complet'].includes(s.metadata.plan)) ? s.metadata.plan : (s.amount_total >= 999 ? 'complet' : 'essentiel');
   res.setHeader('Cache-Control', 'no-store');
   return res.status(200).json({ ok: true, plan, email: (s.customer_details && s.customer_details.email) || '' });
 }
