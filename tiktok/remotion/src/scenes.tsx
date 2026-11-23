@@ -1,8 +1,11 @@
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { MetierProps } from "./data";
-import { Mascot } from "./Mascot";
+import { Mascot, Pose } from "./Mascot";
+import { mouthAt, SceneVoice } from "./timing";
 import { Background, BODY, Bubble, C, Emoji, Floaters, Logo, SceneTag, TITLE, useIn, Words } from "./ui";
+
+type P = { m: MetierProps; v: SceneVoice };
 
 const fmt = (n: number) => Math.round(n).toLocaleString("fr-FR").replace(/[  ]/g, " ");
 
@@ -12,35 +15,42 @@ const Page: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AbsoluteFill style={{ padding: "230px 70px 0 70px", fontFamily: BODY, color: C.white }}>{children}</AbsoluteFill>
 );
 
-const MascotSlot: React.FC<{ pose: React.ComponentProps<typeof Mascot>["pose"]; talking?: boolean; bubble: string; size?: number; delay?: number; seed?: number }> = ({
+/** la mascotte en bas à gauche, qui parle avec la voix */
+const MascotSlot: React.FC<{ v: SceneVoice; pose: Pose; bubble?: string; bubbleAt?: number; size?: number; delay?: number; seed?: number }> = ({
+  v,
   pose,
-  talking,
   bubble,
+  bubbleAt = 0,
   size = 560,
-  delay = 8,
+  delay = 4,
   seed,
 }) => {
+  const frame = useCurrentFrame();
   const p = useIn(delay, 13);
   const w = (size * 400) / 560;
   return (
     <>
       <div style={{ position: "absolute", left: 40, top: 1640 - size, transform: `translateY(${(1 - p) * 500}px)` }}>
-        <Mascot pose={pose} talking={talking} size={size} seed={seed} lookX={0.6} />
+        <Mascot pose={pose} mouth={mouthAt(v, frame)} size={size} seed={seed} lookX={0.6} />
       </div>
-      <Bubble text={bubble} delay={delay + 14} style={{ left: 40 + w + 20, top: 1640 - size + 40, maxWidth: 480 }} />
+      {bubble ? <Bubble text={bubble} delay={bubbleAt} style={{ left: 40 + w + 20, top: 1640 - size + 40, maxWidth: 480 }} /> : null}
     </>
   );
 };
 
+const endOf = (v: SceneVoice, i = v.cues.length - 1) => v.cues[i] + v.lens[i];
+
 /* ---------- 1. Accroche ---------- */
-export const Hook: React.FC<{ m: MetierProps }> = ({ m }) => {
+export const Hook: React.FC<P> = ({ m, v }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const reveal = v.cues[1];
   const badge = useIn(2, 12);
   const icon = spring({ frame: frame - 10, fps, config: { damping: 9, mass: 0.7 } });
-  const name = spring({ frame: frame - 22, fps, config: { damping: 12 } });
-  const mascot = useIn(40, 13);
-  const zoom = interpolate(frame, [0, 150], [1.08, 1]);
+  const name = spring({ frame: frame - reveal, fps, config: { damping: 11 } });
+  const mascot = useIn(0, 13);
+  const zoom = interpolate(frame, [0, reveal, reveal + 8, 200], [1.1, 1.04, 1.0, 0.98], { extrapolateRight: "clamp" });
+  const flash = interpolate(frame, [reveal, reveal + 3, reveal + 10], [0, 0.35, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   return (
     <AbsoluteFill>
       <Background accent={C.gold} accent2={C.pink} />
@@ -73,7 +83,7 @@ export const Hook: React.FC<{ m: MetierProps }> = ({ m }) => {
               border: "3px solid rgba(255,255,255,0.18)",
               display: "grid",
               placeItems: "center",
-              transform: `scale(${icon})`,
+              transform: `scale(${icon * (1 + 0.15 * name * Math.exp(-Math.max(0, frame - reveal) / 6))})`,
             }}
           >
             <Emoji name={m.key} size={170} style={{ transform: `rotate(${Math.sin(frame / 9) * 6}deg)` }} />
@@ -88,7 +98,7 @@ export const Hook: React.FC<{ m: MetierProps }> = ({ m }) => {
             textAlign: "center",
             padding: "0 50px",
             transform: `scale(${0.4 + 0.6 * name}) translateY(${(1 - name) * 80}px)`,
-            opacity: name,
+            opacity: Math.min(1, name * 1.5),
             textShadow: "0 12px 40px rgba(0,0,0,0.35)",
           }}
         >
@@ -96,23 +106,26 @@ export const Hook: React.FC<{ m: MetierProps }> = ({ m }) => {
         </div>
         <div style={{ marginTop: 26, height: 14, width: 260 * name, background: C.gold, borderRadius: 9 }} />
       </AbsoluteFill>
+      <AbsoluteFill style={{ background: "#fff", opacity: flash }} />
       <div style={{ position: "absolute", right: 90, top: 1640 - 520, transform: `translateX(${(1 - mascot) * 600}px)` }}>
-        <Mascot pose="wave" size={520} lookX={-0.6} talking={frame > 55 && frame < 100} />
+        <Mascot pose={frame < reveal ? "talk" : "wave"} size={520} lookX={-0.6} mouth={mouthAt(v, frame)} />
       </div>
-      <Bubble text="Tu connais ce métier ?" delay={52} tail="bottom" style={{ left: 120, top: 1300 }} />
+      <Bubble text="Tu connais ce métier ?" delay={endOf(v) + 4} tail="bottom" style={{ left: 120, top: 1300 }} />
     </AbsoluteFill>
   );
 };
 
 /* ---------- 2. Le but ---------- */
-export const But: React.FC<{ m: MetierProps }> = ({ m }) => {
-  const card = useIn(6, 15);
+export const But: React.FC<P> = ({ m, v }) => {
+  const card = useIn(v.cues[0], 15);
+  const words = m.but.split(" ").length;
+  const per = Math.max(1.5, (v.lens[1] * 0.85) / words);
   return (
     <AbsoluteFill>
       <Background accent={C.pink} accent2={C.blue} />
       <Floaters color={C.pink} />
       <Page>
-        <SceneTag icon="_but" label="Son but" color={C.pink} />
+        <SceneTag icon="_but" label="Son but" color={C.pink} delay={v.cues[0] - 6} />
         <div
           style={{
             marginTop: 50,
@@ -124,37 +137,33 @@ export const But: React.FC<{ m: MetierProps }> = ({ m }) => {
             opacity: card,
           }}
         >
-          <Words
-            text={m.but}
-            delay={14}
-            per={3}
-            style={{ fontFamily: TITLE, fontWeight: 700, fontSize: m.but.length > 110 ? 58 : 66, lineHeight: 1.22 }}
-          />
+          <Words text={m.but} delay={v.cues[1]} per={per} style={{ fontFamily: TITLE, fontWeight: 700, fontSize: m.but.length > 110 ? 58 : 66, lineHeight: 1.22 }} />
         </div>
       </Page>
-      <MascotSlot pose="point" talking bubble="Un métier qui a du sens !" delay={30} seed={1} />
+      <MascotSlot v={v} pose="point" seed={1} />
     </AbsoluteFill>
   );
 };
 
 /* ---------- 3. Le quotidien ---------- */
-export const Quotidien: React.FC<{ m: MetierProps; per: number }> = ({ m, per }) => {
+export const Quotidien: React.FC<P> = ({ m, v }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
-  const n = m.quotidien.length;
   const long = m.quotidien.some((x) => x.length > 48);
   const fs = long ? 40 : 46;
-  const noteAt = 14 + n * per + 10;
+  const noteAt = endOf(v) + 6;
   const note = spring({ frame: frame - noteAt, fps, config: { damping: 14 } });
   return (
     <AbsoluteFill>
       <Background accent={C.blue} accent2={C.mint} />
       <Floaters color={C.mint} />
       <Page>
-        <SceneTag icon="_jour" label="Au quotidien" color={C.blue} />
+        <SceneTag icon="_jour" label="Au quotidien" color={C.blue} delay={v.cues[0] - 6} />
         <div style={{ marginTop: 44, display: "flex", flexDirection: "column", gap: 22 }}>
           {m.quotidien.map((it, i) => {
-            const p = spring({ frame: frame - 14 - i * per, fps, config: { damping: 14, mass: 0.7 } });
+            const at = v.cues[i + 1] - 3;
+            const p = spring({ frame: frame - at, fps, config: { damping: 14, mass: 0.7 } });
+            const speaking = frame >= v.cues[i + 1] && frame < v.cues[i + 1] + v.lens[i + 1];
             return (
               <div
                 key={i}
@@ -166,8 +175,8 @@ export const Quotidien: React.FC<{ m: MetierProps; per: number }> = ({ m, per })
                   color: C.navy,
                   borderRadius: 30,
                   padding: "26px 32px",
-                  transform: `translateX(${(1 - p) * 900}px) rotate(${(1 - p) * 4}deg)`,
-                  boxShadow: "0 16px 40px rgba(0,0,0,0.25)",
+                  transform: `translateX(${(1 - p) * 900}px) rotate(${(1 - p) * 4}deg) scale(${speaking ? 1.03 : 1})`,
+                  boxShadow: speaking ? `0 0 0 5px ${C.gold}, 0 16px 40px rgba(0,0,0,0.3)` : "0 16px 40px rgba(0,0,0,0.25)",
                   marginRight: 60,
                 }}
               >
@@ -203,6 +212,7 @@ export const Quotidien: React.FC<{ m: MetierProps; per: number }> = ({ m, per })
               border: `3px dashed ${C.gold}`,
               borderRadius: 28,
               padding: "22px 26px",
+              background: "rgba(14,22,48,0.6)",
               opacity: note,
               transform: `scale(${0.85 + 0.15 * note})`,
             }}
@@ -215,13 +225,13 @@ export const Quotidien: React.FC<{ m: MetierProps; per: number }> = ({ m, per })
           </div>
         ) : null}
       </Page>
-      {m.aSavoir && m.aSavoir.length > 90 && n >= 4 ? null : <MascotSlot pose="think" bubble="Ça te tente ?" delay={noteAt + 6} size={500} seed={2} />}
+      {m.aSavoir && m.aSavoir.length > 90 && m.quotidien.length >= 4 ? null : <MascotSlot v={v} pose="talk" size={500} seed={2} />}
     </AbsoluteFill>
   );
 };
 
 /* ---------- 4. Les qualités ---------- */
-export const Qualites: React.FC<{ m: MetierProps }> = ({ m }) => {
+export const Qualites: React.FC<P> = ({ m, v }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const colors = [C.gold, C.mint, C.pink];
@@ -230,10 +240,10 @@ export const Qualites: React.FC<{ m: MetierProps }> = ({ m }) => {
       <Background accent={C.mint} accent2={C.pink} />
       <Floaters color={C.gold} />
       <Page>
-        <SceneTag icon="_qual" label="Les qualités clés" color={C.green} />
+        <SceneTag icon="_qual" label="Les qualités clés" color={C.green} delay={v.cues[0] - 6} />
         <div style={{ marginTop: 70, display: "flex", flexDirection: "column", gap: 34, alignItems: "flex-start" }}>
           {m.qualites.map((q, i) => {
-            const p = spring({ frame: frame - 14 - i * 16, fps, config: { damping: 8, mass: 0.6 } });
+            const p = spring({ frame: frame - (v.cues[i + 1] - 2), fps, config: { damping: 8, mass: 0.6 } });
             const rot = [-3, 2.5, -1.5][i];
             return (
               <div
@@ -261,19 +271,21 @@ export const Qualites: React.FC<{ m: MetierProps }> = ({ m }) => {
           })}
         </div>
       </Page>
-      <MascotSlot pose="cheer" bubble="Ça te ressemble ?" delay={60} seed={3} />
+      <MascotSlot v={v} pose={frame < endOf(v) ? "talk" : "cheer"} bubble="Ça te ressemble ?" bubbleAt={endOf(v) + 4} seed={3} />
     </AbsoluteFill>
   );
 };
 
 /* ---------- 5. Le salaire ---------- */
-export const SalaireScene: React.FC<{ m: MetierProps; countStart: number; countLen: number }> = ({ m, countStart, countLen }) => {
+export const SalaireScene: React.FC<P> = ({ m, v }) => {
   const frame = useCurrentFrame();
   const s = m.salaire;
+  const countStart = v.cues[1];
+  const countLen = Math.min(60, Math.max(30, v.lens[1] - 10));
   const k = interpolate(frame, [countStart, countStart + countLen], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (x) => 1 - Math.pow(1 - x, 3) });
   const done = frame - (countStart + countLen);
   const punch = done >= 0 ? 1 + 0.12 * Math.exp(-done / 5) * Math.cos(done / 2) : 1;
-  const card = useIn(8, 14);
+  const card = useIn(v.cues[0], 14);
   const detail = useIn(countStart + countLen + 8, 14);
   const big = s.high ? `${fmt(s.low * k)} – ${fmt(s.high * k)} €` : `${fmt(s.low * k)} €`;
   const bigSize = s.high ? 112 : 150;
@@ -282,7 +294,7 @@ export const SalaireScene: React.FC<{ m: MetierProps; countStart: number; countL
       <Background accent={C.gold} accent2={C.green} />
       <Coins start={countStart + countLen} />
       <Page>
-        <SceneTag icon="_sal" label="Le salaire" color={C.goldD} />
+        <SceneTag icon="_sal" label="Le salaire" color={C.goldD} delay={v.cues[0] - 6} />
         <div
           style={{
             marginTop: 56,
@@ -297,21 +309,33 @@ export const SalaireScene: React.FC<{ m: MetierProps; countStart: number; countL
           }}
         >
           <div style={{ fontFamily: TITLE, fontWeight: 600, fontSize: 40, color: C.ink2 }}>{s.label} </div>
-          <div style={{ fontFamily: TITLE, fontWeight: 800, fontSize: bigSize, lineHeight: 1.1, marginTop: 6, transform: `scale(${punch})`, whiteSpace: "nowrap" }}>
-            {big}
-          </div>
+          <div style={{ fontFamily: TITLE, fontWeight: 800, fontSize: bigSize, lineHeight: 1.1, marginTop: 6, transform: `scale(${punch})`, whiteSpace: "nowrap" }}>{big}</div>
           <div style={{ display: "inline-block", marginTop: 18, background: C.gold, borderRadius: 999, padding: "10px 28px", fontFamily: TITLE, fontWeight: 700, fontSize: 40 }}>
             {s.unit || "par mois"}
           </div>
         </div>
         {s.detail ? (
-          <div style={{ position: "relative", marginTop: 30, fontSize: 36, lineHeight: 1.35, fontWeight: 500, opacity: detail, transform: `translateY(${(1 - detail) * 30}px)`, background: "rgba(14,22,48,0.82)", border: "2px solid rgba(255,255,255,0.12)", borderRadius: 30, padding: "26px 32px" }}>
+          <div
+            style={{
+              position: "relative",
+              marginTop: 30,
+              fontSize: 36,
+              lineHeight: 1.35,
+              fontWeight: 500,
+              opacity: detail,
+              transform: `translateY(${(1 - detail) * 30}px)`,
+              background: "rgba(14,22,48,0.82)",
+              border: "2px solid rgba(255,255,255,0.12)",
+              borderRadius: 30,
+              padding: "26px 32px",
+            }}
+          >
             {s.detail}
             {s.source ? <div style={{ marginTop: 12, fontSize: 28, color: C.mute }}>Source : {s.source}</div> : null}
           </div>
         ) : null}
       </Page>
-      <MascotSlot pose="cheer" bubble="En début de carrière !" delay={countStart + countLen} size={440} seed={4} />
+      <MascotSlot v={v} pose={done >= 0 ? "cheer" : "talk"} bubble="Pas mal, non ?" bubbleAt={Math.max(endOf(v), countStart + countLen) + 6} size={440} seed={4} />
     </AbsoluteFill>
   );
 };
@@ -323,22 +347,29 @@ const Coins: React.FC<{ start: number }> = ({ start }) => {
   return (
     <AbsoluteFill style={{ pointerEvents: "none" }}>
       {Array.from({ length: 18 }).map((_, i) => {
-        const x = (i * 131) % 1000 + 40;
+        const x = ((i * 131) % 1000) + 40;
         const delay = (i * 7) % 20;
         const y = -120 + (f - delay) * (14 + (i % 5) * 3);
         if (f < delay) return null;
-        return <Emoji key={i} name={i % 3 === 0 ? "_star" : "_sal"} size={60 + (i % 4) * 14} style={{ position: "absolute", left: x, top: y, transform: `rotate(${(f - delay) * (i % 2 ? 6 : -6)}deg)`, opacity: 0.55 }} />;
+        return (
+          <Emoji
+            key={i}
+            name={i % 3 === 0 ? "_star" : "_sal"}
+            size={60 + (i % 4) * 14}
+            style={{ position: "absolute", left: x, top: y, transform: `rotate(${(f - delay) * (i % 2 ? 6 : -6)}deg)`, opacity: 0.55 }}
+          />
+        );
       })}
     </AbsoluteFill>
   );
 };
 
 /* ---------- 6. Fin ---------- */
-export const Outro: React.FC<{ m: MetierProps }> = ({ m }) => {
+export const Outro: React.FC<P> = ({ m, v }) => {
   const frame = useCurrentFrame();
-  const logo = useIn(4, 11);
-  const url = useIn(26, 12);
-  const sub = useIn(44, 12);
+  const logo = useIn(v.cues[0] - 8, 11);
+  const url = useIn(v.cues[1], 12);
+  const sub = useIn(v.cues[2], 12);
   const pulse = 1 + Math.sin(frame / 5) * 0.025;
   return (
     <AbsoluteFill>
@@ -350,12 +381,12 @@ export const Outro: React.FC<{ m: MetierProps }> = ({ m }) => {
         </div>
         <Words
           text={`Comment devenir ${m.nom.toLowerCase()} ?`}
-          delay={12}
+          delay={v.cues[0]}
           per={2}
           style={{ justifyContent: "center", fontWeight: 800, fontSize: m.nom.length > 16 ? 60 : 70, lineHeight: 1.15, marginTop: 60, padding: "0 70px" }}
           highlight={m.nom.toLowerCase().split(" ")}
         />
-        <Words text="Toutes les étapes pour y arriver sur" delay={22} per={2} style={{ justifyContent: "center", fontWeight: 600, fontSize: 44, marginTop: 24, color: "#D7DCEB" }} />
+        <Words text="Toutes les étapes pour y arriver sur" delay={v.cues[1] - 4} per={2} style={{ justifyContent: "center", fontWeight: 600, fontSize: 44, marginTop: 24, color: "#D7DCEB" }} />
         <div
           style={{
             marginTop: 50,
@@ -376,9 +407,9 @@ export const Outro: React.FC<{ m: MetierProps }> = ({ m }) => {
         </div>
       </AbsoluteFill>
       <div style={{ position: "absolute", left: "50%", marginLeft: -(500 * 400) / 560 / 2, top: 1660 - 500 }}>
-        <Mascot pose="wave" talking={frame > 50 && frame < 80} size={500} />
+        <Mascot pose={frame < v.cues[2] ? "talk" : "wave"} mouth={mouthAt(v, frame)} size={500} />
       </div>
-      <Bubble text="À demain !" delay={50} tail="left" style={{ left: 540 + 190, top: 1210 }} />
+      <Bubble text="À demain !" delay={v.cues[2] + 8} tail="left" style={{ left: 540 + 190, top: 1210 }} />
     </AbsoluteFill>
   );
 };

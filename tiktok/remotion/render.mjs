@@ -2,7 +2,7 @@
 // Usage : node render.mjs            -> métier du jour (rotation à partir du 23/11/2026, heure de Paris)
 //         node render.mjs <cle>      -> un métier précis (ex. infirmier)
 //         node render.mjs --date 2026-12-01
-// Sortie : out/<date>_<cle>.mp4 et out/<date>_<cle>_description.txt
+// Sortie : out/<date>_<cle>.mp4, out/<date>_<cle>_description.txt (+ le texte de la voix en JSON)
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -28,6 +28,19 @@ const base = `${today}_${key}`;
 const mp4 = path.join(outDir, `${base}.mp4`);
 
 console.log(`Métier du ${today} : ${nom} (${key})`);
+
+// 1. Voix off : texte -> morceaux audio (public/voice)
+const run = (cmd, a, opts = {}) => execFileSync(cmd, a, { cwd: HERE, stdio: "inherit", ...opts });
+try {
+  execFileSync("python3", ["-c", "import sherpa_onnx, soundfile, numpy; assert sherpa_onnx.__version__.startswith('1.')"], { stdio: "ignore" });
+} catch {
+  run("python3", ["-m", "pip", "install", "-q", "sherpa-onnx<2", "soundfile", "numpy"]);
+}
+const scriptJson = path.join(outDir, `${base}_texte.json`);
+run("npx", ["tsx", "scripts/dump-script.ts", key, scriptJson]);
+run("python3", ["scripts/make_voice.py", scriptJson, path.join(HERE, "public/voice")]);
+
+// 2. Vidéo
 execFileSync(
   "npx",
   ["remotion", "render", "src/index.ts", "MetierDuJour", mp4, `--props=${JSON.stringify({ metier: key })}`, "--codec=h264", "--crf=18", "--log=error"],

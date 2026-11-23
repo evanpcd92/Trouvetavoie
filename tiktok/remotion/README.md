@@ -12,7 +12,9 @@ npm run dev                     # Remotion Studio
 
 Sortie : `out/<date>_<metier>.mp4` et `out/<date>_<metier>_description.txt`.
 
+Voix off : `render.mjs` écrit le texte (`src/script.ts`), puis `scripts/make_voice.py` le fait lire par Kokoro (voix « Puck » mélangée à 35 % avec la voix française « Siwis » pour gommer l'accent). Le modèle (≈ 330 Mo) est téléchargé une fois dans `~/.cache/trouvetavoie`. Dépendances Python : `pip install "sherpa-onnx<2" soundfile numpy`. Les images, les bruitages et la bouche de la mascotte sont calés sur chaque morceau de voix (`src/timing.ts`).
+
 - Données : `../metiers.json` · ordre de rotation : `src/order.json`
-- Mascotte : `src/Mascot.tsx` · scènes : `src/scenes.tsx` · montage : `src/Video.tsx`
+- Mascotte : `src/Mascot.tsx` · voix : `src/script.ts`, `scripts/make_voice.py` · scènes : `src/scenes.tsx` · montage : `src/Video.tsx`
 - Musique et bruitages synthétisés (libres de droits) : `python3 scripts/make_audio.py`
 - Emojis Twemoji (CC-BY 4.0) · polices Poppins et Inter (OFL)

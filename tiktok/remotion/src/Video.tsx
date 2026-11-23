@@ -4,49 +4,63 @@ import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { slide } from "@remotion/transitions/slide";
 import { wipe } from "@remotion/transitions/wipe";
 import { fade } from "@remotion/transitions/fade";
-import { buildMetier } from "./data";
 import { But, Hook, Outro, Quotidien, Qualites, SalaireScene } from "./scenes";
+import { T, timeline, VoiceData } from "./timing";
 import { Progress } from "./ui";
 
-export const FPS = 30;
-export const T = 14; // durée des transitions (images)
-const QUOT_PER = 34; // délai entre deux lignes « au quotidien »
-const COUNT_START = 26;
-const COUNT_LEN = 45;
+export type VideoProps = { metier: string; voice?: VoiceData | null };
 
-export const timeline = (metier: string) => {
-  const m = buildMetier(metier);
-  const quot = Math.max(240, 14 + m.quotidien.length * QUOT_PER + (m.aSavoir ? 150 : 90));
-  const durs = [140, 200, quot, 170, 200, 150];
-  const starts: number[] = [];
+const MUSIC = 0.3; // volume de la musique quand personne ne parle
+const MUSIC_UNDER_VOICE = 0.09; // volume pendant la voix
+
+export const MetierVideo: React.FC<VideoProps> = ({ metier, voice }) => {
+  const { m, scenes, durs, starts, total, hasVoice } = timeline(metier, voice);
+
+  // morceaux de voix placés sur la timeline globale
+  const clips = scenes.flatMap((sv, i) => sv.segs.map((s, j) => ({ id: s.id, at: starts[i] + sv.cues[j], len: sv.lens[j] })));
+
+  // musique : on baisse pendant la voix, avec des rampes douces
+  const speech = new Float32Array(total + 1);
+  for (const c of clips) for (let f = c.at - 6; f < c.at + c.len + 8; f++) if (f >= 0 && f <= total) speech[f] = 1;
+  const smooth = new Float32Array(total + 1);
   let acc = 0;
-  durs.forEach((d, i) => {
-    starts.push(acc);
-    acc += d - (i < durs.length - 1 ? T : 0);
-  });
-  return { m, durs, starts, total: acc };
-};
+  for (let f = 0; f <= total; f++) {
+    acc += (speech[f] - acc) * 0.25;
+    smooth[f] = acc;
+  }
+  const musicVol = (f: number) => {
+    const base = hasVoice ? MUSIC - (MUSIC - MUSIC_UNDER_VOICE) * smooth[Math.min(total, Math.max(0, Math.round(f)))] : MUSIC;
+    return f > total - 45 ? base * Math.max(0, (total - f) / 45) : base;
+  };
 
-export type VideoProps = { metier: string };
-
-export const MetierVideo: React.FC<VideoProps> = ({ metier }) => {
-  const { m, durs, starts, total } = timeline(metier);
+  const s = scenes;
   const sfx: [string, number, number][] = [
-    ["boom", 22, 0.7],
-    ["pop", 52, 0.6],
-    ["whoosh", starts[1] - 4, 0.5],
-    ["whoosh", starts[2] - 4, 0.5],
-    ...m.quotidien.map((_, i) => ["pop", starts[2] + 16 + i * QUOT_PER, 0.45] as [string, number, number]),
-    ["whoosh", starts[3] - 4, 0.5],
-    ...[0, 1, 2].map((i) => ["pop", starts[3] + 16 + i * 16, 0.55] as [string, number, number]),
-    ["whoosh", starts[4] - 4, 0.5],
-    ["cash", starts[4] + COUNT_START + COUNT_LEN - 2, 0.6],
-    ["whoosh", starts[5] - 4, 0.5],
-    ["ding", starts[5] + 26, 0.5],
+    ["whoosh", 0, 0.35],
+    ["boom", starts[0] + s[0].cues[1] - 1, 0.75],
+    ["pop", starts[0] + s[0].cues[1] + s[0].lens[1] + 4, 0.45],
+    ["whoosh", starts[1] - 2, 0.5],
+    ["whoosh", starts[2] - 2, 0.5],
+    ...m.quotidien.map((_, i) => ["pop", starts[2] + s[2].cues[i + 1] - 3, 0.5] as [string, number, number]),
+    ["whoosh", starts[3] - 2, 0.5],
+    ...m.qualites.map((_, i) => ["ding", starts[3] + s[3].cues[i + 1] - 2, 0.22] as [string, number, number]),
+    ...m.qualites.map((_, i) => ["pop", starts[3] + s[3].cues[i + 1] - 2, 0.4] as [string, number, number]),
+    ["whoosh", starts[4] - 2, 0.5],
+    ["cash", starts[4] + s[4].cues[1] + Math.min(60, Math.max(30, s[4].lens[1] - 10)) - 2, 0.55],
+    ["whoosh", starts[5] - 2, 0.5],
+    ["ding", starts[5] + s[5].cues[1], 0.4],
+    ["pop", starts[5] + s[5].cues[2] + 8, 0.4],
   ];
+
   return (
     <AbsoluteFill style={{ background: "#0E1630" }}>
-      <Audio src={staticFile("audio/music.wav")} volume={(f) => (f > total - 45 ? 0.32 * Math.max(0, (total - f) / 45) : 0.32)} />
+      <Audio src={staticFile("audio/music.wav")} volume={musicVol} />
+      {hasVoice
+        ? clips.map((c) => (
+            <Sequence key={c.id} from={c.at} durationInFrames={c.len + 10} layout="none">
+              <Audio src={staticFile(`voice/${c.id}.wav`)} volume={1} />
+            </Sequence>
+          ))
+        : null}
       {sfx.map(([name, at, vol], i) => (
         <Sequence key={i} from={Math.max(0, at)} durationInFrames={40} layout="none">
           <Audio src={staticFile(`audio/${name}.wav`)} volume={vol} />
@@ -54,31 +68,31 @@ export const MetierVideo: React.FC<VideoProps> = ({ metier }) => {
       ))}
       <TransitionSeries>
         <TransitionSeries.Sequence durationInFrames={durs[0]}>
-          <Hook m={m} />
+          <Hook m={m} v={s[0]} />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={slide({ direction: "from-bottom" })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[1]}>
-          <But m={m} />
+          <But m={m} v={s[1]} />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={wipe({ direction: "from-right" })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[2]}>
-          <Quotidien m={m} per={QUOT_PER} />
+          <Quotidien m={m} v={s[2]} />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={slide({ direction: "from-right" })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[3]}>
-          <Qualites m={m} />
+          <Qualites m={m} v={s[3]} />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={wipe({ direction: "from-bottom" })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[4]}>
-          <SalaireScene m={m} countStart={COUNT_START} countLen={COUNT_LEN} />
+          <SalaireScene m={m} v={s[4]} />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={fade()} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[5]}>
-          <Outro m={m} />
+          <Outro m={m} v={s[5]} />
         </TransitionSeries.Sequence>
       </TransitionSeries>
       <Sequence from={starts[1]} durationInFrames={starts[5] - starts[1]}>
-        <Progress starts={starts.slice(1, 5).map((s) => s - starts[1])} total={starts[5] - starts[1]} />
+        <Progress starts={starts.slice(1, 5).map((x) => x - starts[1])} total={starts[5] - starts[1]} />
       </Sequence>
     </AbsoluteFill>
   );

@@ -18,10 +18,12 @@ type Props = {
   lookX?: number; // -1..1
   style?: React.CSSProperties;
   seed?: number;
+  /** ouverture de bouche imposée (0..1), calée sur la voix */
+  mouth?: number;
 };
 
 /** Mascotte trouvetavoie : un lycéen en sweat jaune, logo boussole sur la poitrine. */
-export const Mascot: React.FC<Props> = ({ pose = "idle", talking = false, size = 600, lookX = 0, style, seed = 0 }) => {
+export const Mascot: React.FC<Props> = ({ pose = "idle", talking = false, size = 600, lookX = 0, style, seed = 0, mouth }) => {
   const frame = useCurrentFrame() + seed * 17;
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -35,7 +37,7 @@ export const Mascot: React.FC<Props> = ({ pose = "idle", talking = false, size =
   const blink = cyc > 90 ? interpolate(cyc, [90, 93, 96], [1, 0.08, 1]) : 1;
 
   // bouche qui parle
-  const mouthOpen = talking ? 0.35 + 0.65 * Math.abs(Math.sin(t * 13) * Math.sin(t * 5.3 + 1)) : 0;
+  const mouthOpen = mouth !== undefined ? Math.max(0, Math.min(1, (mouth - 0.12) / 0.7)) : talking ? 0.35 + 0.65 * Math.abs(Math.sin(t * 13) * Math.sin(t * 5.3 + 1)) : 0;
 
   // bras (angle en degrés, 0 = vers le bas)
   let armR = 12 + Math.sin(t * 2.4) * 2;
