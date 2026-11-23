@@ -119,6 +119,86 @@
   "marketing": {
    "nom": "Chargé de marketing",
    "resume": "Analyser les clients et la concurrence, lancer des produits et imaginer des campagnes pour les vendre."
+  },
+  "osteo": {
+   "nom": "Ostéopathe",
+   "resume": "Soulager les douleurs du dos, des articulations ou des muscles grâce à des techniques manuelles, sans médicaments."
+  },
+  "dieteticien": {
+   "nom": "Diététicien",
+   "resume": "Conseiller sur l’alimentation et construire des menus adaptés, pour rester en forme ou accompagner le traitement d’une maladie."
+  },
+  "opticien": {
+   "nom": "Opticien-lunetier",
+   "resume": "Conseiller et adapter des lunettes et des lentilles, contrôler la vue et accompagner les clients dans leur choix."
+  },
+  "manip": {
+   "nom": "Manipulateur radio",
+   "resume": "Réaliser les radios, scanners, IRM et échographies, et participer aux traitements des cancers par rayons."
+  },
+  "puericulture": {
+   "nom": "Auxiliaire de puériculture",
+   "resume": "Prendre soin des bébés et des jeunes enfants (soins, repas, sommeil, jeux d’éveil) en crèche, en maternité ou à l’hôpital."
+  },
+  "assistantsocial": {
+   "nom": "Assistant de service social",
+   "resume": "Aider les personnes et les familles en difficulté (argent, logement, santé, emploi) à trouver des solutions et à faire valoir leurs droits."
+  },
+  "datascientist": {
+   "nom": "Data scientist",
+   "resume": "Analyser de grandes quantités de données avec les statistiques et l’intelligence artificielle pour aider une entreprise à prendre les bonnes décisions."
+  },
+  "cyber": {
+   "nom": "Expert en cybersécurité",
+   "resume": "Protéger les ordinateurs, les réseaux et les données d’une entreprise contre les pirates informatiques."
+  },
+  "jeuxvideo": {
+   "nom": "Développeur de jeux vidéo",
+   "resume": "Programmer les jeux vidéo : le gameplay, la physique, l’intelligence des personnages et le multijoueur."
+  },
+  "notaire": {
+   "nom": "Notaire",
+   "resume": "Rédiger et authentifier les actes importants de la vie : achat d’un logement, mariage, succession, création d’entreprise."
+  },
+  "banque": {
+   "nom": "Conseiller bancaire",
+   "resume": "Suivre un portefeuille de clients et les conseiller sur leurs comptes, leurs crédits, leur épargne et leurs assurances."
+  },
+  "immobilier": {
+   "nom": "Agent immobilier",
+   "resume": "Trouver des biens à vendre ou à louer, les faire visiter et négocier entre les propriétaires et les acheteurs."
+  },
+  "rh": {
+   "nom": "Chargé de ressources humaines",
+   "resume": "Recruter, former et accompagner les salariés d’une entreprise, et gérer leurs contrats."
+  },
+  "patissier": {
+   "nom": "Pâtissier",
+   "resume": "Fabriquer des gâteaux, des viennoiseries, des entremets et des desserts, en boutique, en restaurant ou en hôtel."
+  },
+  "coiffeur": {
+   "nom": "Coiffeur",
+   "resume": "Couper, coiffer, colorer et conseiller les clients sur le style qui leur va, en salon ou à domicile."
+  },
+  "estheticien": {
+   "nom": "Esthéticienne",
+   "resume": "Réaliser des soins du visage et du corps, des épilations, du maquillage et des soins des mains, et conseiller les produits de beauté."
+  },
+  "plombier": {
+   "nom": "Plombier-chauffagiste",
+   "resume": "Installer et réparer les canalisations, les sanitaires, le chauffage et les pompes à chaleur, chez les particuliers et dans les bâtiments."
+  },
+  "monteur": {
+   "nom": "Monteur vidéo",
+   "resume": "Assembler les images et le son pour raconter une histoire : films, séries, émissions, pubs, clips et vidéos web."
+  },
+  "pnc": {
+   "nom": "Hôtesse de l’air / Steward",
+   "resume": "Assurer la sécurité et le confort des passagers à bord des avions, sur un vol d’une heure comme à l’autre bout du monde."
+  },
+  "asv": {
+   "nom": "Auxiliaire vétérinaire",
+   "resume": "Assister le vétérinaire pendant les soins et les opérations, accueillir les propriétaires et prendre soin des animaux hospitalisés."
   }
  },
  "EXTRA": {
@@ -421,6 +501,206 @@
      "Aisance à l’oral"
     ]
    }
+  },
+  "osteo": {
+   "m": {
+    "quotidien": "Écouter le patient, chercher l’origine de la douleur, la soulager par des techniques manuelles et suivre son évolution d’une séance à l’autre. Des patients de tous âges : sportifs, femmes enceintes, bébés, personnes âgées.",
+    "qualites": [
+     "Sens du toucher",
+     "Écoute",
+     "Connaissance du corps"
+    ]
+   }
+  },
+  "dieteticien": {
+   "m": {
+    "quotidien": "Faire le bilan des habitudes alimentaires, établir des régimes adaptés (diabète, allergies, sport…), suivre les patients et élaborer des menus pour une cantine ou un hôpital.",
+    "qualites": [
+     "Pédagogie",
+     "Écoute",
+     "Goût des sciences"
+    ]
+   }
+  },
+  "opticien": {
+   "m": {
+    "quotidien": "Lire les ordonnances, contrôler la vue, conseiller les montures, monter les verres et adapter les lentilles.",
+    "qualites": [
+     "Précision",
+     "Sens du contact",
+     "Sens commercial"
+    ]
+   }
+  },
+  "manip": {
+   "m": {
+    "quotidien": "Installer les patients, régler les appareils, réaliser les examens d’imagerie, veiller à la radioprotection et travailler avec les médecins radiologues.",
+    "qualites": [
+     "Rigueur",
+     "Sens du contact",
+     "Goût de la technique"
+    ]
+   }
+  },
+  "puericulture": {
+   "m": {
+    "quotidien": "Donner les repas, changer les couches, préparer les siestes, proposer des jeux d’éveil et échanger avec les parents. Horaires parfois de nuit à l’hôpital.",
+    "qualites": [
+     "Douceur",
+     "Patience",
+     "Vigilance"
+    ]
+   }
+  },
+  "assistantsocial": {
+   "m": {
+    "quotidien": "Recevoir les personnes, évaluer leur situation, monter les dossiers d’aide (logement, RSA, protection de l’enfance), orienter vers les bons services et travailler en réseau.",
+    "qualites": [
+     "Écoute",
+     "Discrétion",
+     "Solidité émotionnelle"
+    ]
+   }
+  },
+  "datascientist": {
+   "m": {
+    "quotidien": "Récupérer les données, les nettoyer, construire des modèles statistiques ou d’IA et présenter les résultats aux équipes avec des graphiques clairs.",
+    "qualites": [
+     "Logique",
+     "Curiosité",
+     "Goût des maths"
+    ]
+   }
+  },
+  "cyber": {
+   "m": {
+    "quotidien": "Surveiller les réseaux, repérer les attaques, tester les failles (hacking éthique), réagir aux incidents et former les salariés aux bons réflexes.",
+    "qualites": [
+     "Rigueur",
+     "Curiosité",
+     "Sang-froid"
+    ]
+   }
+  },
+  "jeuxvideo": {
+   "m": {
+    "quotidien": "Coder les mécaniques de jeu, corriger les bugs, rendre le jeu fluide et travailler avec les game designers ou les graphistes.",
+    "qualites": [
+     "Logique",
+     "Persévérance",
+     "Esprit d’équipe"
+    ]
+   }
+  },
+  "notaire": {
+   "m": {
+    "quotidien": "Recevoir les clients, vérifier les documents, rédiger les actes (ventes, contrats de mariage, testaments), les faire signer et conseiller les familles ou les entreprises.",
+    "qualites": [
+     "Rigueur",
+     "Discrétion",
+     "Sens du contact"
+    ]
+   }
+  },
+  "banque": {
+   "m": {
+    "quotidien": "Recevoir les clients en rendez-vous, analyser leur situation, proposer des crédits ou de l’épargne, gérer les incidents de paiement et atteindre des objectifs commerciaux.",
+    "qualites": [
+     "Sens du contact",
+     "Rigueur",
+     "Sens commercial"
+    ]
+   }
+  },
+  "immobilier": {
+   "m": {
+    "quotidien": "Trouver des biens à vendre ou à louer, estimer leur prix, organiser les visites, négocier les offres et accompagner les clients jusqu’à la signature chez le notaire.",
+    "qualites": [
+     "Sens commercial",
+     "Aisance relationnelle",
+     "Autonomie"
+    ]
+   }
+  },
+  "rh": {
+   "m": {
+    "quotidien": "Rédiger les offres d’emploi, faire passer les entretiens, accueillir les nouveaux salariés, organiser les formations et répondre aux questions sur les contrats.",
+    "qualites": [
+     "Écoute",
+     "Discrétion",
+     "Sens de l’organisation"
+    ]
+   }
+  },
+  "patissier": {
+   "m": {
+    "quotidien": "Préparer les pâtes ou les crèmes, cuire, monter les entremets, réaliser les décors et suivre les recettes au gramme près. Journées qui commencent très tôt, travail le week-end et les jours de fête.",
+    "qualites": [
+     "Précision",
+     "Créativité",
+     "Patience"
+    ]
+   }
+  },
+  "coiffeur": {
+   "m": {
+    "quotidien": "Accueillir les clients, comprendre ce qu’ils veulent, couper ou colorer les cheveux, réaliser les coiffages et conseiller les produits adaptés. Debout toute la journée, souvent le samedi.",
+    "qualites": [
+     "Créativité",
+     "Habileté manuelle",
+     "Sens du contact"
+    ]
+   }
+  },
+  "estheticien": {
+   "m": {
+    "quotidien": "Accueillir la clientèle, réaliser les soins (visage, corps, épilation, manucure, maquillage), conseiller les produits de beauté et gérer les rendez-vous.",
+    "qualites": [
+     "Douceur",
+     "Minutie",
+     "Sens du contact"
+    ]
+   }
+  },
+  "plombier": {
+   "m": {
+    "quotidien": "Installer les canalisations ou les sanitaires, poser les chaudières ou les pompes à chaleur, dépanner les fuites et conseiller les clients sur les économies d’énergie.",
+    "qualites": [
+     "Habileté manuelle",
+     "Logique",
+     "Autonomie"
+    ]
+   }
+  },
+  "monteur": {
+   "m": {
+    "quotidien": "Trier les images tournées, choisir les meilleures prises, les assembler, caler le son ou la musique et ajuster le montage selon les retours du réalisateur.",
+    "qualites": [
+     "Créativité",
+     "Patience",
+     "Sens du rythme"
+    ]
+   }
+  },
+  "pnc": {
+   "m": {
+    "quotidien": "Vérifier le matériel de sécurité, accueillir les passagers, faire les démonstrations de sécurité, servir les repas et gérer les situations d’urgence. Horaires décalés et nuits à l’étranger.",
+    "qualites": [
+     "Sang-froid",
+     "Sens du service",
+     "Anglais"
+    ]
+   }
+  },
+  "asv": {
+   "m": {
+    "quotidien": "Accueillir les propriétaires, tenir les animaux pendant les examens, assister le vétérinaire aux opérations, stériliser le matériel et s’occuper des animaux hospitalisés.",
+    "qualites": [
+     "Amour des animaux",
+     "Sang-froid",
+     "Sens du contact"
+    ]
+   }
   }
  },
  "SALAIRES": {
@@ -517,7 +797,7 @@
   ],
   "policier": [
    [
-    "≈ 1 530 – 1 625 € net/mois",
+    "≈ 1 530 – 1 625 € net/mois",
     "Primes comprises, plus en Île-de-France.",
     "CIDJ"
    ]
@@ -622,16 +902,156 @@
   ],
   "militaire": [
    [
-    "≈ 1 980 € brut/mois",
+    "≈ 1 980 € brut/mois",
     "Engagé volontaire, logé et nourri, ce qui change beaucoup le budget.",
     "Armée de Terre (sengager.fr)"
    ]
   ],
   "marketing": [
    [
-    "≈ 2 150 – 2 650 € brut/mois",
+    "≈ 2 150 – 2 650 € brut/mois",
     "Chargé de marketing ou d’études débutant, plus les primes éventuelles.",
     "Onisep, grilles de salaires 2026"
+   ]
+  ],
+  "osteo": [
+   [
+    "À partir de 2 175 € brut/mois",
+    "En début de carrière. En libéral, tes revenus dépendent du nombre de patients.",
+    "Onisep"
+   ]
+  ],
+  "dieteticien": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "À l’hôpital ou en restauration collective. En libéral, ça dépend du nombre de patients.",
+    "Onisep"
+   ]
+  ],
+  "opticien": [
+   [
+    "À partir de 2 000 € brut/mois",
+    "En magasin, souvent avec des primes sur les ventes.",
+    "Onisep"
+   ]
+  ],
+  "manip": [
+   [
+    "À partir de 1 890 € brut/mois",
+    "À l’hôpital public, plus les primes de nuit et de week-end.",
+    "Onisep"
+   ]
+  ],
+  "puericulture": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Dans le secteur privé, plus les primes selon l’établissement.",
+    "Onisep"
+   ]
+  ],
+  "assistantsocial": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Dans la fonction publique, plus les primes ; variable dans les associations.",
+    "Onisep"
+   ]
+  ],
+  "datascientist": [
+   [
+    "À partir de 3 100 € brut/mois",
+    "Data scientist à bac+5. Data analyst à bac+3 : à partir de 2 900 €.",
+    "Onisep"
+   ]
+  ],
+  "cyber": [
+   [
+    "À partir de 2 500 € brut/mois",
+    "Analyste en cybersécurité à bac+3, puis à partir de 3 080 € à bac+5.",
+    "Onisep"
+   ]
+  ],
+  "jeuxvideo": [
+   [
+    "≈ 2 000 – 2 500 € brut/mois",
+    "Programmeur débutant en studio, plus avec l’expérience.",
+    "CIDJ"
+   ]
+  ],
+  "notaire": [
+   [
+    "À partir de 3 000 € brut/mois",
+    "Notaire salarié débutant, beaucoup plus en tant qu’associé.",
+    "Onisep"
+   ]
+  ],
+  "banque": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus les primes selon tes résultats.",
+    "Onisep"
+   ]
+  ],
+  "immobilier": [
+   [
+    "À partir de 1 914 € brut/mois",
+    "Pour un salarié, plus les commissions sur les ventes.",
+    "Onisep"
+   ]
+  ],
+  "rh": [
+   [
+    "À partir de 1 916 € brut/mois",
+    "Assistant RH débutant, plus en évoluant vers chargé RH.",
+    "Onisep"
+   ]
+  ],
+  "patissier": [
+   [
+    "À partir de 1 868 € brut/mois",
+    "Pâtissier débutant, plus en restaurant gastronomique ou en hôtel.",
+    "Onisep"
+   ]
+  ],
+  "coiffeur": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus les pourboires et les primes sur les ventes.",
+    "Onisep"
+   ]
+  ],
+  "estheticien": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus les primes sur les ventes de produits.",
+    "Onisep"
+   ]
+  ],
+  "plombier": [
+   [
+    "À partir de 1 868 € brut/mois",
+    "Plus avec les déplacements et les astreintes, et à ton compte.",
+    "Onisep"
+   ]
+  ],
+  "monteur": [
+   [
+    "≈ 1 800 – 2 300 € brut/mois",
+    "Monteur débutant salarié, selon les productions ; certains postes à la télévision démarrent au Smic.",
+    "L’Express Éducation, CIDJ"
+   ]
+  ],
+  "pnc": [
+   [
+    "À partir de 1 801 € brut/mois",
+    "Dans les compagnies low cost, plus les primes de vol. Les grandes compagnies paient plus.",
+    "Onisep"
+   ]
+  ],
+  "asv": [
+   [
+    "À partir de 1 914 € brut/mois",
+    "En clinique vétérinaire.",
+    "Onisep"
    ]
   ]
  }

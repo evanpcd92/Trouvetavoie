@@ -20,13 +20,20 @@ DATA = json.load(open(os.path.join(HERE, "metiers.json"), encoding="utf-8"))
 ORDER = ["infirmier", "developpeur", "psychologue", "pilote", "kine", "commercial", "medecin", "policier",
          "architecte", "veterinaire", "sport", "journaliste", "electricien", "prof", "communitymanager",
          "pharmacien", "sagefemme", "graphiste", "cuisinier", "ingenieur", "pompier", "comptable", "dentiste",
-         "orthophoniste", "mecanicien", "educateur", "militaire", "marketing", "aidesoignant", "avocat"]
+         "orthophoniste", "mecanicien", "educateur", "militaire", "marketing", "aidesoignant", "avocat",
+         "osteo", "datascientist", "coiffeur", "pnc", "notaire", "patissier", "cyber", "asv", "immobilier",
+         "jeuxvideo", "manip", "estheticien", "banque", "monteur", "puericulture", "plombier", "dieteticien",
+         "rh", "opticien", "assistantsocial"]
 EMO = {"avocat": "⚖️", "infirmier": "🩺", "electricien": "⚡", "medecin": "👨‍⚕️", "ingenieur": "🛠️",
        "psychologue": "🧠", "sport": "🏋️", "kine": "💪", "commercial": "🤝", "comptable": "📊",
        "developpeur": "💻", "prof": "🍎", "veterinaire": "🐶", "policier": "🚓", "communitymanager": "📱",
        "pharmacien": "💊", "sagefemme": "👶", "dentiste": "🦷", "orthophoniste": "🗣️", "aidesoignant": "🤲",
        "educateur": "🧩", "architecte": "📐", "pilote": "✈️", "journaliste": "🎙️", "graphiste": "🎨",
-       "cuisinier": "👨‍🍳", "mecanicien": "🔧", "pompier": "🚒", "militaire": "🎖️", "marketing": "📈"}
+       "cuisinier": "👨‍🍳", "mecanicien": "🔧", "pompier": "🚒", "militaire": "🎖️", "marketing": "📈",
+       "osteo": "🦴", "dieteticien": "🥗", "opticien": "👓", "manip": "🩻", "puericulture": "🍼",
+       "assistantsocial": "🤝", "datascientist": "📊", "cyber": "🔐", "jeuxvideo": "🎮", "notaire": "📜",
+       "banque": "🏦", "immobilier": "🏠", "rh": "🧑‍💼", "patissier": "🧁", "coiffeur": "💇", "estheticien": "💅",
+       "plombier": "🔧", "monteur": "🎬", "pnc": "🛫", "asv": "🐾"}
 PSL = {"P": ("Sur Parcoursup", (30, 150, 95)), "H": ("Hors Parcoursup", (130, 135, 150)),
        "A": ("Après la 3e / apprentissage", (90, 120, 210)), "X": ("Selon l'école", (200, 140, 40))}
 VIO = (130, 118, 255)
@@ -134,10 +141,11 @@ def s_hook(img, t, M):
     particles(img, t, 3)
     words(img, "Tu veux devenir", 520, 70, WHITE, t, 0.1, per=0.1)
     nm = M.nom + " ?"
-    if font(BOLD, 120).getlength(nm) > 960 and " " in M.nom:
-        ws = nm.split(" "); best = None
-        for k in range(1, len(ws)):
-            l1, l2 = " ".join(ws[:k]), " ".join(ws[k:])
+    if font(BOLD, 120).getlength(nm) > 960 and (" " in M.nom or "-" in M.nom):
+        cuts = [(nm[:i], nm[i + 1:]) for i, c in enumerate(nm) if c == " " and nm[i + 1:] != "?"]
+        cuts += [(nm[:i + 1], nm[i + 1:]) for i, c in enumerate(nm) if c == "-"]
+        best = None
+        for l1, l2 in cuts:
             sc = max(font(BOLD, 100).getlength(l1), font(BOLD, 100).getlength(l2))
             if best is None or sc < best[0]: best = (sc, l1, l2)
         sz = min(fit(best[1], BOLD, 130, 960, 60), fit(best[2], BOLD, 130, 960, 60))
