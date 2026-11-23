@@ -414,7 +414,7 @@ def render(key, outdir="out"):
 
 def key_of_day(d=None):
     d = d or datetime.date.today()
-    return ORDER[(d - datetime.date(2026, 11, 24)).days % len(ORDER)]
+    return ORDER[(d - datetime.date(2026, 11, 23)).days % len(ORDER)]
 
 
 if __name__ == "__main__":
