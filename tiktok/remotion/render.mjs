@@ -2,7 +2,7 @@
 // Usage : node render.mjs            -> métier du jour (rotation à partir du 23/11/2026, heure de Paris)
 //         node render.mjs <cle>      -> un métier précis (ex. infirmier)
 //         node render.mjs --date 2026-12-01
-// Sortie : out/<date>_<cle>.mp4, out/<date>_<cle>_description.txt (+ le texte de la voix en JSON)
+// Sortie : out/<date>_<cle>.mp4, _description.txt, et pour la page des vidéos : _web.mp4 (< 10 Mo), .jpg, _galerie.json
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
@@ -58,4 +58,12 @@ Toutes les étapes pour y arriver sur trouvetavoie.pages.dev 🧭
 #orientation #parcoursup #metier #${tag} #lycee #bac #etudes #trouvetavoie
 `;
 fs.writeFileSync(path.join(outDir, `${base}_description.txt`), desc);
+
+// 3. Version légère (< 10 Mo) et image d'aperçu pour la page des vidéos
+run("npx", ["remotion", "ffmpeg", "-y", "-loglevel", "error", "-i", mp4, "-c:v", "libx264", "-preset", "slow", "-crf", "24", "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", path.join(outDir, `${base}_web.mp4`)]);
+run("npx", ["remotion", "ffmpeg", "-y", "-loglevel", "error", "-ss", "2.6", "-i", mp4, "-frames:v", "1", "-vf", "scale=360:-1", "-q:v", "4", path.join(outDir, `${base}.jpg`)]);
+fs.writeFileSync(
+  path.join(outDir, `${base}_galerie.json`),
+  JSON.stringify({ date: today, key, nom, numero: order.indexOf(key) + 1, video: `videos/${base}.mp4`, poster: `videos/${base}.jpg`, description: desc.trim() }, null, 1),
+);
 console.log(mp4);
