@@ -1,0 +1,4762 @@
+{
+ "METIERS": {
+  "avocat": {
+   "nom": "Avocat",
+   "formation": "droit",
+   "resume": "Défendre, conseiller et représenter des personnes ou des entreprises.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "≈ 7 ans"
+    ],
+    [
+     "Diplôme pour exercer",
+     "CAPA"
+    ],
+    [
+     "Niveau requis",
+     "Master 2 de droit"
+    ],
+    [
+     "Voie Parcoursup",
+     "Licence de droit"
+    ]
+   ],
+   "sources": "CNB, Onisep, meilleurs-masters.com",
+   "chemins": [
+    {
+     "nom": "La voie classique",
+     "sous": "Université puis école d’avocats",
+     "steps": [
+      [
+       "Licence de droit",
+       "3 ans",
+       "À l’université, accessible sur Parcoursup."
+      ],
+      [
+       "Master 1 de droit",
+       "1 an",
+       "Les 60 premiers crédits d’un master suffisent pour passer l’examen d’entrée."
+      ],
+      [
+       "Examen d’entrée au CRFPA",
+       "1 session par an",
+       "Souvent préparé à l’IEJ de ta fac ou en prépa privée."
+      ],
+      [
+       "École d’avocats",
+       "18 mois",
+       "6 mois de cours, 6 mois de projet personnel, 6 mois de stage en cabinet."
+      ],
+      [
+       "CAPA",
+       "Examen final",
+       "Le Master 2 doit être obtenu avant de le passer."
+      ]
+     ]
+    },
+    {
+     "nom": "Le profil double",
+     "sous": "Double licence ou Sciences Po",
+     "steps": [
+      [
+       "Double licence ou IEP",
+       "3 à 5 ans",
+       "Droit + économie, langues, histoire… ou un Institut d’études politiques."
+      ],
+      [
+       "Master de droit",
+       "1 à 2 ans",
+       "Indispensable : le Master 2 en droit (ou équivalent) est exigé pour exercer."
+      ],
+      [
+       "Examen CRFPA puis école d’avocats",
+       "≈ 2 ans",
+       "Même examen et même formation que la voie classique."
+      ]
+     ]
+    },
+    {
+     "nom": "La passerelle",
+     "sous": "Juriste d’entreprise d’abord",
+     "steps": [
+      [
+       "Master de droit",
+       "5 ans",
+       "Licence + master, comme pour la voie classique."
+      ],
+      [
+       "Juriste en entreprise",
+       "8 ans d’expérience",
+       "Tu travailles dans le service juridique d’une entreprise."
+      ],
+      [
+       "Accès à la profession",
+       "Sur dossier",
+       "Après 8 ans de pratique, une dispense permet de devenir avocat sans l’école d’avocats."
+      ]
+     ]
+    }
+   ]
+  },
+  "infirmier": {
+   "nom": "Infirmier",
+   "formation": "ifsi",
+   "resume": "Soigner, surveiller et accompagner les patients, à l’hôpital ou en libéral.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "3 ans"
+    ],
+    [
+     "Diplôme pour exercer",
+     "Diplôme d’État d’infirmier"
+    ],
+    [
+     "Grade",
+     "Licence"
+    ],
+    [
+     "Voie Parcoursup",
+     "IFSI"
+    ]
+   ],
+   "sources": "Onisep, Parcoursup",
+   "chemins": [
+    {
+     "nom": "Direct en IFSI",
+     "sous": "Après le bac, via Parcoursup",
+     "steps": [
+      [
+       "Institut de formation en soins infirmiers",
+       "3 ans",
+       "Cours et nombreux stages à l’hôpital et en structures de soins."
+      ],
+      [
+       "Diplôme d’État",
+       "Fin de 3e année",
+       "Il te permet d’exercer partout en France."
+      ]
+     ]
+    },
+    {
+     "nom": "Par l’aide-soignance",
+     "sous": "Une entrée progressive",
+     "steps": [
+      [
+       "Diplôme d’aide-soignant",
+       "≈ 1 an",
+       "Formation en institut, accessible sans le bac."
+      ],
+      [
+       "Expérience professionnelle",
+       "Quelques années",
+       "Tu travailles comme aide-soignant."
+      ],
+      [
+       "IFSI en formation continue",
+       "3 ans",
+       "Accès réservé aux personnes ayant de l’expérience."
+      ]
+     ]
+    },
+    {
+     "nom": "En apprentissage",
+     "sous": "Payé pendant tes études",
+     "steps": [
+      [
+       "IFSI en apprentissage",
+       "3 ans",
+       "Proposé par certains instituts : alternance entre cours et employeur."
+      ],
+      [
+       "Diplôme d’État",
+       "Fin de 3e année",
+       "Même diplôme que la voie classique."
+      ]
+     ]
+    }
+   ]
+  },
+  "electricien": {
+   "nom": "Électricien",
+   "formation": "elec",
+   "resume": "Installer, raccorder et dépanner les installations électriques.",
+   "infos": [
+    [
+     "Durée de formation",
+     "2 à 5 ans"
+    ],
+    [
+     "Diplôme de base",
+     "CAP Électricien"
+    ],
+    [
+     "Pour évoluer",
+     "BTS Électrotechnique"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le CAP",
+     "sous": "Le plus rapide pour travailler",
+     "steps": [
+      [
+       "CAP Électricien",
+       "2 ans",
+       "En lycée professionnel ou en apprentissage."
+      ],
+      [
+       "Premier emploi",
+       "—",
+       "Électricien d’équipement ou d’installation."
+      ]
+     ]
+    },
+    {
+     "nom": "Le bac pro",
+     "sous": "Plus de responsabilités",
+     "steps": [
+      [
+       "Bac pro Métiers de l’électricité",
+       "3 ans",
+       "Installations, réseaux et équipements connectés."
+      ],
+      [
+       "Emploi ou poursuite d’études",
+       "—",
+       "Possibilité d’enchaîner sur un BTS."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BTS",
+     "sous": "Après un bac général, techno ou pro",
+     "steps": [
+      [
+       "BTS Électrotechnique",
+       "2 ans",
+       "Accessible sur Parcoursup, souvent en alternance."
+      ],
+      [
+       "Technicien ou chef d’équipe",
+       "—",
+       "Encadrement de chantiers et études techniques."
+      ]
+     ]
+    }
+   ]
+  },
+  "medecin": {
+   "nom": "Médecin",
+   "formation": "medecine",
+   "resume": "Diagnostiquer, soigner et suivre les patients, en cabinet ou à l’hôpital.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "9 à 12 ans"
+    ],
+    [
+     "Diplôme pour exercer",
+     "DE de docteur en médecine"
+    ],
+    [
+     "Accès",
+     "PASS ou L.AS"
+    ],
+    [
+     "Voie Parcoursup",
+     "PASS, L.AS"
+    ]
+   ],
+   "sources": "Onisep, ministère de l’Enseignement supérieur",
+   "chemins": [
+    {
+     "nom": "Le PASS",
+     "sous": "Parcours d’accès spécifique santé",
+     "steps": [
+      [
+       "PASS",
+       "1 an",
+       "Une majeure santé et une mineure d’une autre discipline. Si tu valides ta mineure sans être admis, tu peux continuer en L2 et retenter ta chance."
+      ],
+      [
+       "Fin du 1er cycle",
+       "2 ans",
+       "Cours de sciences médicales et premiers stages."
+      ],
+      [
+       "2e cycle (externat)",
+       "3 ans",
+       "Stages à l’hôpital. Les examens de fin de cycle déterminent ta spécialité et ta ville d’internat."
+      ],
+      [
+       "Internat et thèse",
+       "3 à 5 ans",
+       "Tu es rémunéré. Médecine générale : 4 ans. Le diplôme d’État est délivré après la thèse."
+      ]
+     ]
+    },
+    {
+     "nom": "La L.AS",
+     "sous": "Une licence avec une option santé",
+     "steps": [
+      [
+       "Licence avec option santé",
+       "1 à 3 ans",
+       "Droit, biologie, psycho, STAPS… Tu peux candidater en médecine en fin de L1, L2 ou L3 (deux chances au maximum)."
+      ],
+      [
+       "Entrée en médecine",
+       "Sur classement",
+       "Mêmes études ensuite que par le PASS."
+      ],
+      [
+       "Externat, internat et thèse",
+       "≈ 9 ans",
+       "Le parcours est identique à partir de l’entrée en médecine."
+      ]
+     ]
+    },
+    {
+     "nom": "L’étranger",
+     "sous": "Belgique, Espagne, Roumanie, Portugal…",
+     "steps": [
+      [
+       "Études de médecine dans l’Union européenne",
+       "6 ans et plus",
+       "Sélection propre à chaque pays. Souvent payant et dans une autre langue."
+      ],
+      [
+       "Diplôme reconnu en France",
+       "—",
+       "Un diplôme de médecin obtenu dans l’Union européenne permet d’exercer en France."
+      ],
+      [
+       "Spécialisation",
+       "Selon le pays",
+       "Vérifie bien les règles avant de partir : coût total, langue et retour en France."
+      ]
+     ]
+    }
+   ]
+  },
+  "ingenieur": {
+   "nom": "Ingénieur",
+   "formation": "inge",
+   "resume": "Concevoir, améliorer et piloter des projets techniques : énergie, informatique, transports, industrie…",
+   "infos": [
+    [
+     "Durée après le bac",
+     "5 ans"
+    ],
+    [
+     "Diplôme",
+     "Titre d’ingénieur (habilité CTI)"
+    ],
+    [
+     "Bacs conseillés",
+     "Général maths/physique, STI2D"
+    ],
+    [
+     "Voie Parcoursup",
+     "Prépas, écoles post-bac, BUT"
+    ]
+   ],
+   "sources": "Onisep, CTI",
+   "chemins": [
+    {
+     "nom": "La prépa",
+     "sous": "La voie des grandes écoles",
+     "steps": [
+      [
+       "Classe prépa scientifique",
+       "2 ans",
+       "MPSI, PCSI, PTSI… ou TSI si tu as un bac STI2D."
+      ],
+      [
+       "Concours",
+       "Fin de 2e année",
+       "Ton classement décide de ton école."
+      ],
+      [
+       "École d’ingénieurs",
+       "3 ans",
+       "Spécialisation, stages et souvent un semestre à l’étranger."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école post-bac",
+     "sous": "Directement après le bac",
+     "steps": [
+      [
+       "Cycle préparatoire intégré",
+       "2 ans",
+       "Dans l’école : INSA, UT, Polytech ou écoles privées. Recrutement sur dossier ou concours (Avenir, Puissance Alpha, Geipi Polytech…)."
+      ],
+      [
+       "Cycle ingénieur",
+       "3 ans",
+       "Sans concours à passer entre les deux. Écoles publiques à frais réduits, écoles privées plus chères."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BUT puis l’école",
+     "sous": "Plus concret, souvent en alternance",
+     "steps": [
+      [
+       "BUT",
+       "3 ans",
+       "GEII, GMP, informatique, génie civil… Diplôme bac+3 déjà reconnu par les entreprises."
+      ],
+      [
+       "Admission parallèle",
+       "Sur dossier",
+       "Les écoles d’ingénieurs recrutent des diplômés de BUT."
+      ],
+      [
+       "Cycle ingénieur",
+       "3 ans",
+       "Souvent possible en apprentissage : tu es payé et l’école est financée."
+      ]
+     ]
+    }
+   ]
+  },
+  "psychologue": {
+   "nom": "Psychologue",
+   "formation": "psycho",
+   "resume": "Écouter, évaluer et accompagner les personnes en difficulté psychologique.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "5 ans"
+    ],
+    [
+     "Titre",
+     "Psychologue (titre protégé)"
+    ],
+    [
+     "Niveau requis",
+     "Master de psychologie + stage"
+    ],
+    [
+     "Voie Parcoursup",
+     "Licence de psychologie"
+    ]
+   ],
+   "sources": "Onisep, Mon Master",
+   "chemins": [
+    {
+     "nom": "La fac",
+     "sous": "Licence puis master de psychologie",
+     "steps": [
+      [
+       "Licence de psychologie",
+       "3 ans",
+       "Beaucoup de théorie, de biologie et de statistiques."
+      ],
+      [
+       "Master de psychologie",
+       "2 ans",
+       "Sélection à l’entrée du M1 (plateforme Mon Master). Clinique, travail, neuropsychologie, éducation…"
+      ],
+      [
+       "Stage professionnel et titre",
+       "Pendant le master",
+       "Le master et le stage te donnent le droit d’utiliser le titre de psychologue."
+      ]
+     ]
+    },
+    {
+     "nom": "Psychologue de l’Éducation nationale",
+     "sous": "Travailler avec les élèves",
+     "steps": [
+      [
+       "Licence et master de psychologie",
+       "5 ans",
+       "Même parcours que la voie classique."
+      ],
+      [
+       "Concours PsyEN",
+       "1 session par an",
+       "Concours de la fonction publique."
+      ],
+      [
+       "Année de formation rémunérée",
+       "1 an",
+       "Puis poste en école, collège ou lycée."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école privée habilitée",
+     "sous": "Une autre façon de se former",
+     "steps": [
+      [
+       "École de psychologie",
+       "5 ans",
+       "Quelques écoles privées délivrent un diplôme qui donne le titre de psychologue. Formation payante."
+      ],
+      [
+       "Point de vigilance",
+       "—",
+       "Avant de t’inscrire, vérifie que le diplôme donne bien le titre : beaucoup de formations privées ne le donnent pas."
+      ]
+     ]
+    }
+   ]
+  },
+  "sport": {
+   "nom": "Coach sportif",
+   "formation": "staps",
+   "resume": "Entraîner, faire progresser et enseigner le sport, en salle, en club ou à l’école.",
+   "infos": [
+    [
+     "Durée de formation",
+     "1 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "BPJEPS, licence STAPS, CAPEPS"
+    ],
+    [
+     "Alternance",
+     "Très courante (BPJEPS)"
+    ],
+    [
+     "Voie Parcoursup",
+     "Licence STAPS"
+    ]
+   ],
+   "sources": "Onisep, devenirenseignant.gouv.fr",
+   "chemins": [
+    {
+     "nom": "Le BPJEPS",
+     "sous": "Le plus rapide pour coacher",
+     "steps": [
+      [
+       "BPJEPS",
+       "≈ 1 an",
+       "Diplôme d’État d’éducateur sportif, souvent en alternance. Pas besoin du bac, mais des tests d’entrée physiques."
+      ],
+      [
+       "Coach en salle ou indépendant",
+       "—",
+       "Spécialités possibles : forme, sports collectifs, activités aquatiques…"
+      ]
+     ]
+    },
+    {
+     "nom": "La licence STAPS",
+     "sous": "Entraînement et préparation physique",
+     "steps": [
+      [
+       "Licence STAPS",
+       "3 ans",
+       "Parcours entraînement sportif ou activité physique adaptée et santé."
+      ],
+      [
+       "Éducateur, entraîneur ou préparateur physique",
+       "—",
+       "Possibilité de poursuivre en master."
+      ]
+     ]
+    },
+    {
+     "nom": "Prof d’EPS",
+     "sous": "Enseigner le sport au collège et au lycée",
+     "steps": [
+      [
+       "Licence STAPS",
+       "3 ans",
+       "Parcours éducation et motricité."
+      ],
+      [
+       "CAPEPS",
+       "Fin de licence",
+       "Depuis la réforme de 2026, le concours se passe à bac+3."
+      ],
+      [
+       "Master enseignement rémunéré",
+       "2 ans",
+       "Formation en alternance dans un établissement, avec un salaire."
+      ]
+     ]
+    }
+   ]
+  },
+  "kine": {
+   "nom": "Kinésithérapeute",
+   "formation": "kine",
+   "resume": "Rééduquer le corps après une blessure, une opération ou une maladie.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "5 ans"
+    ],
+    [
+     "Diplôme pour exercer",
+     "DE de masseur-kinésithérapeute"
+    ],
+    [
+     "Grade",
+     "Master"
+    ],
+    [
+     "Voie Parcoursup",
+     "PASS, L.AS, STAPS"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Par le PASS ou une L.AS",
+     "sous": "La voie la plus courante",
+     "steps": [
+      [
+       "PASS ou L.AS",
+       "1 an",
+       "Tu choisis la filière kiné selon ton classement."
+      ],
+      [
+       "Institut de formation en kinésithérapie (IFMK)",
+       "4 ans",
+       "Cours et stages. Instituts publics peu chers, certains privés à plusieurs milliers d’euros par an."
+      ],
+      [
+       "Diplôme d’État",
+       "Fin de 4e année",
+       "Tu peux exercer en libéral, en hôpital ou en club."
+      ]
+     ]
+    },
+    {
+     "nom": "Par la STAPS",
+     "sous": "Si tu aimes le sport",
+     "steps": [
+      [
+       "L1 STAPS",
+       "1 an",
+       "Certains IFMK recrutent après la 1re année de STAPS. Vérifie quelle université est liée à quel institut."
+      ],
+      [
+       "IFMK",
+       "4 ans",
+       "Même formation que par le PASS."
+      ]
+     ]
+    },
+    {
+     "nom": "L’étranger",
+     "sous": "Belgique, Espagne…",
+     "steps": [
+      [
+       "Études de kiné dans l’Union européenne",
+       "4 ans et plus",
+       "Places limitées pour les non-résidents (tirage au sort en Belgique)."
+      ],
+      [
+       "Retour en France",
+       "Démarches",
+       "Diplôme reconnu en France, avec une demande d’autorisation d’exercice."
+      ]
+     ]
+    }
+   ]
+  },
+  "commercial": {
+   "nom": "Commercial",
+   "formation": "commerce",
+   "resume": "Trouver des clients, négocier et vendre des produits ou des services.",
+   "infos": [
+    [
+     "Durée de formation",
+     "2 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "BTS NDRC/MCO, BUT TC, école de commerce"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ],
+    [
+     "Voie Parcoursup",
+     "BTS, BUT, bachelors"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le BTS",
+     "sous": "Rapide et souvent en alternance",
+     "steps": [
+      [
+       "BTS NDRC ou MCO",
+       "2 ans",
+       "Négociation, relation client, vente. Gratuit en lycée public, payé en alternance."
+      ],
+      [
+       "Commercial ou conseiller de vente",
+       "—",
+       "Possibilité d’ajouter 1 an de bachelor ou de licence pro."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BUT TC",
+     "sous": "Techniques de commercialisation",
+     "steps": [
+      [
+       "BUT Techniques de commercialisation",
+       "3 ans",
+       "À l’IUT. Marketing, vente, commerce international."
+      ],
+      [
+       "Emploi ou poursuite",
+       "—",
+       "Chargé de clientèle, commercial, ou entrée en école de commerce."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école de commerce",
+     "sous": "Pour viser des postes à responsabilité",
+     "steps": [
+      [
+       "Bachelor post-bac ou prépa ECG",
+       "2 à 4 ans",
+       "Bachelor directement après le bac, ou prépa puis concours."
+      ],
+      [
+       "Programme grande école",
+       "2 à 3 ans",
+       "Frais souvent élevés, sauf en alternance."
+      ],
+      [
+       "Business developer, responsable grands comptes",
+       "—",
+       "Postes bien rémunérés, souvent avec variable."
+      ]
+     ]
+    }
+   ]
+  },
+  "comptable": {
+   "nom": "Expert-comptable",
+   "formation": "compta",
+   "resume": "Tenir et contrôler les comptes des entreprises, et les conseiller sur leur gestion.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "≈ 8 ans"
+    ],
+    [
+     "Diplômes",
+     "DCG, DSCG, DEC"
+    ],
+    [
+     "Stage",
+     "3 ans, rémunéré"
+    ],
+    [
+     "Voie Parcoursup",
+     "DCG, BUT GEA, BTS CG"
+    ]
+   ],
+   "sources": "Onisep, Ordre des experts-comptables",
+   "chemins": [
+    {
+     "nom": "La voie DCG",
+     "sous": "La filière expertise comptable",
+     "steps": [
+      [
+       "DCG",
+       "3 ans",
+       "Diplôme de comptabilité et de gestion (grade licence). En lycée public ou en alternance."
+      ],
+      [
+       "DSCG",
+       "2 ans",
+       "Diplôme supérieur (grade master)."
+      ],
+      [
+       "Stage et diplôme d’expert-comptable (DEC)",
+       "3 ans",
+       "Stage rémunéré en cabinet, puis examen final."
+      ]
+     ]
+    },
+    {
+     "nom": "BTS ou BUT d’abord",
+     "sous": "Commencer par un diplôme court",
+     "steps": [
+      [
+       "BTS CG ou BUT GEA",
+       "2 à 3 ans",
+       "Tu peux déjà travailler comme comptable."
+      ],
+      [
+       "DCG avec dispenses",
+       "1 à 2 ans",
+       "Certaines épreuves du DCG sont dispensées."
+      ],
+      [
+       "DSCG puis stage et DEC",
+       "5 ans",
+       "Même fin de parcours que la voie DCG."
+      ]
+     ]
+    },
+    {
+     "nom": "La fac",
+     "sous": "Master CCA",
+     "steps": [
+      [
+       "Licence de gestion",
+       "3 ans",
+       "À l’université."
+      ],
+      [
+       "Master comptabilité-contrôle-audit (CCA)",
+       "2 ans",
+       "Donne des dispenses pour le DSCG."
+      ],
+      [
+       "Stage et DEC",
+       "3 ans",
+       "Stage rémunéré en cabinet."
+      ]
+     ]
+    }
+   ]
+  },
+  "developpeur": {
+   "nom": "Développeur informatique",
+   "formation": "info",
+   "resume": "Créer des sites, des applications et des logiciels.",
+   "infos": [
+    [
+     "Durée de formation",
+     "2 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "BTS SIO, BUT info, école d’ingé"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ],
+    [
+     "Voie Parcoursup",
+     "BTS SIO, BUT informatique"
+    ]
+   ],
+   "sources": "Onisep, école 42",
+   "chemins": [
+    {
+     "nom": "Le BTS SIO",
+     "sous": "Option SLAM (développement)",
+     "steps": [
+      [
+       "BTS Services informatiques aux organisations",
+       "2 ans",
+       "Gratuit en lycée public, souvent en alternance."
+      ],
+      [
+       "Développeur junior",
+       "—",
+       "Ou 1 an de plus en licence pro ou bachelor."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BUT informatique",
+     "sous": "Plus complet",
+     "steps": [
+      [
+       "BUT informatique",
+       "3 ans",
+       "À l’IUT : développement, bases de données, projets en équipe."
+      ],
+      [
+       "Développeur ou école d’ingénieurs",
+       "—",
+       "Admission parallèle possible en école d’ingénieurs."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école 42",
+     "sous": "Gratuite et sans condition de diplôme",
+     "steps": [
+      [
+       "La piscine",
+       "4 semaines",
+       "Sélection intensive par projets, accessible dès 18 ans."
+      ],
+      [
+       "Formation par projets",
+       "≈ 2 à 5 ans",
+       "Pas de profs ni de cours magistraux : tu apprends en réalisant des projets."
+      ]
+     ]
+    }
+   ]
+  },
+  "prof": {
+   "nom": "Professeur des écoles",
+   "formation": "prof",
+   "resume": "Enseigner toutes les matières aux enfants de maternelle et d’élémentaire.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "5 ans"
+    ],
+    [
+     "Concours",
+     "CRPE, à bac+3"
+    ],
+    [
+     "Ensuite",
+     "Master rémunéré de 2 ans"
+    ],
+    [
+     "Voie Parcoursup",
+     "Licence professorat des écoles (LPE)"
+    ]
+   ],
+   "sources": "devenirenseignant.gouv.fr, Onisep",
+   "chemins": [
+    {
+     "nom": "La licence professorat des écoles",
+     "sous": "Nouvelle depuis la rentrée 2026",
+     "steps": [
+      [
+       "Licence professorat des écoles (LPE)",
+       "3 ans",
+       "Formation pensée pour le métier, accessible sur Parcoursup."
+      ],
+      [
+       "CRPE",
+       "Fin de licence",
+       "Les diplômés de la LPE pourront passer directement les épreuves orales du concours."
+      ],
+      [
+       "Master enseignement et éducation",
+       "2 ans",
+       "Formation rémunérée avec des stages en classe."
+      ]
+     ]
+    },
+    {
+     "nom": "Une autre licence",
+     "sous": "Lettres, maths, sciences de l’éducation…",
+     "steps": [
+      [
+       "Licence au choix",
+       "3 ans",
+       "Toutes les licences permettent de passer le concours."
+      ],
+      [
+       "CRPE",
+       "Fin de licence",
+       "Le concours se passe à bac+3 depuis 2026."
+      ],
+      [
+       "Master enseignement et éducation",
+       "2 ans",
+       "Rémunéré, puis tu deviens titulaire."
+      ]
+     ]
+    },
+    {
+     "nom": "La reconversion",
+     "sous": "Après d’autres études ou un emploi",
+     "steps": [
+      [
+       "Une licence minimum",
+       "—",
+       "Le concours est ouvert aux personnes en reconversion qui ont au moins une licence."
+      ],
+      [
+       "CRPE puis formation rémunérée",
+       "2 ans",
+       "Même formation que les étudiants."
+      ]
+     ]
+    }
+   ]
+  },
+  "veterinaire": {
+   "nom": "Vétérinaire",
+   "formation": "veto",
+   "resume": "Soigner les animaux de compagnie, d’élevage ou sauvages.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "6 à 7 ans"
+    ],
+    [
+     "Diplôme",
+     "DE de docteur vétérinaire"
+    ],
+    [
+     "Écoles publiques",
+     "4 en France"
+    ],
+    [
+     "Voie Parcoursup",
+     "Concours post-bac"
+    ]
+   ],
+   "sources": "Onisep, écoles nationales vétérinaires",
+   "chemins": [
+    {
+     "nom": "Post-bac",
+     "sous": "Directement après le bac",
+     "steps": [
+      [
+       "Concours commun post-bac",
+       "Sur Parcoursup",
+       "Dossier puis entretien, pour les 4 écoles publiques (Alfort, Lyon, Nantes, Toulouse). Très sélectif."
+      ],
+      [
+       "École nationale vétérinaire",
+       "6 ans",
+       "Formation complète jusqu’au diplôme d’État."
+      ]
+     ]
+    },
+    {
+     "nom": "La prépa BCPST",
+     "sous": "La voie historique",
+     "steps": [
+      [
+       "Prépa BCPST",
+       "2 ans",
+       "Biologie, chimie, physique, sciences de la Terre."
+      ],
+      [
+       "Concours vétérinaire",
+       "Fin de prépa",
+       "Ton classement décide de ton école."
+      ],
+      [
+       "École nationale vétérinaire",
+       "5 ans",
+       "Jusqu’au diplôme d’État."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école privée",
+     "sous": "UniLaSalle Rouen",
+     "steps": [
+      [
+       "École vétérinaire privée",
+       "6 ans",
+       "Accessible après le bac, sur dossier."
+      ],
+      [
+       "Point de vigilance",
+       "—",
+       "Frais de scolarité très élevés : plusieurs dizaines de milliers d’euros au total."
+      ]
+     ]
+    }
+   ]
+  },
+  "policier": {
+   "nom": "Policier ou gendarme",
+   "formation": "police",
+   "resume": "Protéger les personnes et les biens, enquêter et faire respecter la loi.",
+   "infos": [
+    [
+     "Recrutement",
+     "Sur concours"
+    ],
+    [
+     "Formation",
+     "Rémunérée, en école"
+    ],
+    [
+     "Sans le bac",
+     "Policier adjoint"
+    ],
+    [
+     "Avec le bac",
+     "Gardien de la paix, gendarme"
+    ]
+   ],
+   "sources": "devenirpolicier.fr, gendarmerie nationale, Onisep",
+   "chemins": [
+    {
+     "nom": "Policier adjoint",
+     "sous": "Accessible sans diplôme",
+     "steps": [
+      [
+       "Sélection",
+       "Tests et entretien",
+       "De 18 à moins de 30 ans, sans condition de diplôme."
+      ],
+      [
+       "Formation rémunérée",
+       "≈ 4 mois",
+       "Puis contrat de 3 ans, renouvelable une fois."
+      ],
+      [
+       "Concours interne",
+       "Après 1 an",
+       "Tu peux passer le concours interne de gardien de la paix."
+      ]
+     ]
+    },
+    {
+     "nom": "Gardien de la paix",
+     "sous": "Avec le bac",
+     "steps": [
+      [
+       "Concours de gardien de la paix",
+       "1 session par an",
+       "Épreuves écrites, sportives et oral."
+      ],
+      [
+       "École de police",
+       "≈ 1 an",
+       "Formation rémunérée."
+      ],
+      [
+       "Policier titulaire",
+       "—",
+       "Évolution possible vers officier par concours."
+      ]
+     ]
+    },
+    {
+     "nom": "Gendarme",
+     "sous": "Avec le bac, statut militaire",
+     "steps": [
+      [
+       "Concours de sous-officier de gendarmerie",
+       "1 à 2 sessions par an",
+       "Épreuves écrites, sportives et entretien."
+      ],
+      [
+       "École de gendarmerie",
+       "Plusieurs mois",
+       "Formation rémunérée."
+      ],
+      [
+       "Gendarme",
+       "—",
+       "Logé en caserne, nombreuses spécialités possibles."
+      ]
+     ]
+    }
+   ]
+  },
+  "communitymanager": {
+   "nom": "Community manager",
+   "formation": "com",
+   "resume": "Gérer les réseaux sociaux d’une marque, créer du contenu et animer une communauté.",
+   "infos": [
+    [
+     "Durée de formation",
+     "2 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "BTS Com, BUT MMI, bachelor"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ],
+    [
+     "Ce qui compte",
+     "Ton portfolio"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le BTS Communication",
+     "sous": "Rapide",
+     "steps": [
+      [
+       "BTS Communication",
+       "2 ans",
+       "Gratuit en lycée public, possible en alternance."
+      ],
+      [
+       "Bachelor ou licence pro",
+       "1 an",
+       "Spécialisation réseaux sociaux et marketing digital."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BUT MMI",
+     "sous": "Métiers du multimédia et de l’internet",
+     "steps": [
+      [
+       "BUT MMI",
+       "3 ans",
+       "À l’IUT : vidéo, graphisme, web, stratégie de communication."
+      ],
+      [
+       "Community manager ou créateur de contenu",
+       "—",
+       "Poursuite possible en master."
+      ]
+     ]
+    },
+    {
+     "nom": "La fac ou le bachelor",
+     "sous": "Information-communication",
+     "steps": [
+      [
+       "Licence information-communication ou bachelor privé",
+       "3 ans",
+       "Licence à la fac (droits nationaux) ou bachelor en école (payant, sauf en alternance)."
+      ],
+      [
+       "Master ou premier emploi",
+       "—",
+       "Ton compte et tes réalisations comptent autant que le diplôme."
+      ]
+     ]
+    }
+   ]
+  },
+  "pharmacien": {
+   "nom": "Pharmacien",
+   "formation": "pharma",
+   "resume": "Délivrer les médicaments, conseiller les patients et veiller au bon usage des traitements.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "6 à 9 ans"
+    ],
+    [
+     "Diplôme",
+     "DE de docteur en pharmacie"
+    ],
+    [
+     "Accès",
+     "PASS ou L.AS"
+    ],
+    [
+     "Voie Parcoursup",
+     "PASS, L.AS"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le PASS",
+     "sous": "Vers l’officine ou l’industrie",
+     "steps": [
+      [
+       "PASS",
+       "1 an",
+       "Tu choisis la filière pharmacie selon ton classement."
+      ],
+      [
+       "2e à 5e année",
+       "4 ans",
+       "Sciences du médicament, stages en officine et à l’hôpital, choix de ta filière."
+      ],
+      [
+       "6e année et thèse",
+       "1 an",
+       "Diplôme d’État de docteur en pharmacie."
+      ]
+     ]
+    },
+    {
+     "nom": "La L.AS",
+     "sous": "Une licence avec option santé",
+     "steps": [
+      [
+       "Licence avec option santé",
+       "1 à 3 ans",
+       "Tu peux candidater en pharmacie en fin de L1, L2 ou L3 (deux chances au maximum)."
+      ],
+      [
+       "Études de pharmacie",
+       "5 ans",
+       "Même cursus que par le PASS."
+      ]
+     ]
+    },
+    {
+     "nom": "L’internat",
+     "sous": "Hôpital ou biologie médicale",
+     "steps": [
+      [
+       "PASS ou L.AS, puis 5 ans",
+       "6 ans",
+       "Tronc commun des études de pharmacie."
+      ],
+      [
+       "Concours de l’internat",
+       "Fin de 5e année",
+       "Ouvre la pharmacie hospitalière et la biologie médicale."
+      ],
+      [
+       "Internat rémunéré",
+       "4 ans",
+       "Puis thèse et diplôme."
+      ]
+     ]
+    }
+   ]
+  },
+  "sagefemme": {
+   "nom": "Sage-femme",
+   "formation": "maieutique",
+   "resume": "Suivre les grossesses, réaliser les accouchements et accompagner les femmes et les nouveau-nés.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "6 ans"
+    ],
+    [
+     "Diplôme",
+     "DE de docteur en maïeutique"
+    ],
+    [
+     "Accès",
+     "PASS ou L.AS"
+    ],
+    [
+     "Voie Parcoursup",
+     "PASS, L.AS"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le PASS",
+     "sous": "La voie la plus courante",
+     "steps": [
+      [
+       "PASS",
+       "1 an",
+       "Tu choisis la filière maïeutique selon ton classement."
+      ],
+      [
+       "École de sages-femmes",
+       "5 ans",
+       "Cours et nombreux stages en maternité."
+      ],
+      [
+       "Diplôme d’État",
+       "Fin de 6e année",
+       "Tu peux exercer à l’hôpital, en clinique ou en libéral."
+      ]
+     ]
+    },
+    {
+     "nom": "La L.AS",
+     "sous": "Une licence avec option santé",
+     "steps": [
+      [
+       "Licence avec option santé",
+       "1 à 3 ans",
+       "Candidature en maïeutique en fin de L1, L2 ou L3."
+      ],
+      [
+       "École de sages-femmes",
+       "5 ans",
+       "Même formation que par le PASS."
+      ]
+     ]
+    },
+    {
+     "nom": "L’étranger",
+     "sous": "Belgique, Espagne…",
+     "steps": [
+      [
+       "Études de sage-femme dans l’Union européenne",
+       "4 ans et plus",
+       "Sélection propre à chaque pays."
+      ],
+      [
+       "Exercer en France",
+       "Démarches",
+       "Diplôme reconnu, avec une demande d’autorisation."
+      ]
+     ]
+    }
+   ]
+  },
+  "dentiste": {
+   "nom": "Chirurgien-dentiste",
+   "formation": "dentaire",
+   "resume": "Soigner les dents, les gencives et la mâchoire, des caries jusqu’aux implants.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "6 à 9 ans"
+    ],
+    [
+     "Diplôme",
+     "DE de docteur en chirurgie dentaire"
+    ],
+    [
+     "Accès",
+     "PASS ou L.AS"
+    ],
+    [
+     "Voie Parcoursup",
+     "PASS, L.AS"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le PASS",
+     "sous": "La voie la plus courante",
+     "steps": [
+      [
+       "PASS",
+       "1 an",
+       "Tu choisis la filière odontologie selon ton classement."
+      ],
+      [
+       "Études d’odontologie",
+       "5 ans",
+       "Beaucoup de travaux pratiques, puis soins sur de vrais patients."
+      ],
+      [
+       "Thèse",
+       "Fin de 6e année",
+       "Diplôme d’État : tu peux t’installer. L’internat (3 ans de plus) ouvre l’orthodontie et la chirurgie orale."
+      ]
+     ]
+    },
+    {
+     "nom": "La L.AS",
+     "sous": "Une licence avec option santé",
+     "steps": [
+      [
+       "Licence avec option santé",
+       "1 à 3 ans",
+       "Candidature en odontologie en fin de L1, L2 ou L3."
+      ],
+      [
+       "Études d’odontologie",
+       "5 ans",
+       "Même cursus que par le PASS."
+      ]
+     ]
+    },
+    {
+     "nom": "L’étranger",
+     "sous": "Espagne, Portugal, Belgique…",
+     "steps": [
+      [
+       "Études dentaires dans l’Union européenne",
+       "5 ans et plus",
+       "Souvent dans des universités privées, donc payant."
+      ],
+      [
+       "Exercer en France",
+       "Démarches",
+       "Diplôme reconnu dans l’Union européenne."
+      ]
+     ]
+    }
+   ]
+  },
+  "orthophoniste": {
+   "nom": "Orthophoniste",
+   "formation": "ortho",
+   "resume": "Rééduquer les troubles de la parole, du langage, de la lecture et de la voix, chez l’enfant comme chez l’adulte.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "5 ans"
+    ],
+    [
+     "Diplôme",
+     "Certificat de capacité d’orthophoniste"
+    ],
+    [
+     "Grade",
+     "Master"
+    ],
+    [
+     "Voie Parcoursup",
+     "Dossier et entretien"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Direct après le bac",
+     "sous": "Sur Parcoursup",
+     "steps": [
+      [
+       "Sélection",
+       "Dossier puis entretien",
+       "Parfois des épreuves écrites."
+      ],
+      [
+       "Centre de formation universitaire",
+       "5 ans",
+       "Linguistique, psychologie, médecine et de nombreux stages."
+      ],
+      [
+       "Certificat de capacité",
+       "Fin de 5e année",
+       "Tu peux exercer en libéral ou à l’hôpital."
+      ]
+     ]
+    },
+    {
+     "nom": "Après une licence",
+     "sous": "Sciences du langage, psycho, lettres",
+     "steps": [
+      [
+       "Licence",
+       "1 à 3 ans",
+       "Elle renforce ton dossier."
+      ],
+      [
+       "Candidature sur Parcoursup",
+       "Dossier et entretien",
+       "Même sélection que les lycéens."
+      ],
+      [
+       "Formation d’orthophoniste",
+       "5 ans",
+       "Même diplôme."
+      ]
+     ]
+    },
+    {
+     "nom": "L’étranger",
+     "sous": "Belgique (logopédie)",
+     "steps": [
+      [
+       "Études de logopédie",
+       "4 à 5 ans",
+       "Places limitées pour les non-résidents."
+      ],
+      [
+       "Exercer en France",
+       "Démarches",
+       "Autorisation d’exercice à demander."
+      ]
+     ]
+    }
+   ]
+  },
+  "aidesoignant": {
+   "nom": "Aide-soignant",
+   "formation": "ifas",
+   "resume": "Accompagner les patients dans leur quotidien : hygiène, confort, repas, surveillance, avec l’équipe soignante.",
+   "infos": [
+    [
+     "Durée de formation",
+     "≈ 10 mois"
+    ],
+    [
+     "Diplôme",
+     "DE d’aide-soignant (niveau bac)"
+    ],
+    [
+     "Accès",
+     "Dossier et entretien"
+    ],
+    [
+     "Sans le bac",
+     "Oui"
+    ]
+   ],
+   "sources": "Onisep, ministère de la Santé",
+   "chemins": [
+    {
+     "nom": "L’institut de formation",
+     "sous": "Le plus rapide",
+     "steps": [
+      [
+       "Sélection",
+       "Dossier et entretien",
+       "Accessible dès 17 ans, sans condition de diplôme."
+      ],
+      [
+       "Formation en IFAS",
+       "≈ 10 mois",
+       "Cours et stages à l’hôpital et en maison de retraite."
+      ],
+      [
+       "Diplôme d’État",
+       "—",
+       "Tu peux travailler tout de suite."
+      ]
+     ]
+    },
+    {
+     "nom": "En apprentissage",
+     "sous": "Payé pendant la formation",
+     "steps": [
+      [
+       "Contrat d’apprentissage",
+       "Durée un peu plus longue",
+       "Avec un hôpital, une clinique ou un Ehpad."
+      ],
+      [
+       "Diplôme d’État",
+       "—",
+       "Souvent avec un poste à la clé."
+      ]
+     ]
+    },
+    {
+     "nom": "Après un bac pro",
+     "sous": "ASSP ou SAPAT",
+     "steps": [
+      [
+       "Bac pro ASSP ou SAPAT",
+       "3 ans",
+       "Accompagnement, soins et services à la personne."
+      ],
+      [
+       "IFAS avec allègements",
+       "Formation raccourcie",
+       "Une partie des modules est dispensée."
+      ],
+      [
+       "Évolution",
+       "—",
+       "Infirmier par la suite, grâce aux passerelles."
+      ]
+     ]
+    }
+   ]
+  },
+  "educateur": {
+   "nom": "Éducateur spécialisé",
+   "formation": "dees",
+   "resume": "Accompagner des enfants, des jeunes ou des adultes en difficulté ou en situation de handicap vers plus d’autonomie.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "3 ans"
+    ],
+    [
+     "Diplôme",
+     "DE d’éducateur spécialisé (grade licence)"
+    ],
+    [
+     "Accès",
+     "Parcoursup, dossier et entretien"
+    ],
+    [
+     "Alternance",
+     "Possible"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le DEES",
+     "sous": "La voie directe",
+     "steps": [
+      [
+       "Sélection sur Parcoursup",
+       "Dossier et entretien",
+       "En école de travail social."
+      ],
+      [
+       "Formation",
+       "3 ans",
+       "Moitié cours, moitié stages sur le terrain."
+      ],
+      [
+       "Diplôme d’État",
+       "—",
+       "Foyers, protection de l’enfance, établissements pour personnes handicapées…"
+      ]
+     ]
+    },
+    {
+     "nom": "Moniteur-éducateur d’abord",
+     "sous": "Une entrée progressive",
+     "steps": [
+      [
+       "Diplôme de moniteur-éducateur",
+       "2 ans",
+       "Niveau bac."
+      ],
+      [
+       "Expérience sur le terrain",
+       "Quelques années",
+       "Tu travailles déjà dans le secteur."
+      ],
+      [
+       "DEES avec allègements",
+       "Formation raccourcie",
+       "Pour évoluer vers plus de responsabilités."
+      ]
+     ]
+    },
+    {
+     "nom": "En apprentissage",
+     "sous": "Payé pendant 3 ans",
+     "steps": [
+      [
+       "DEES en apprentissage",
+       "3 ans",
+       "Avec une association ou un établissement employeur."
+      ],
+      [
+       "Diplôme d’État",
+       "—",
+       "Même diplôme que la voie classique."
+      ]
+     ]
+    }
+   ]
+  },
+  "architecte": {
+   "nom": "Architecte",
+   "formation": "archi",
+   "resume": "Concevoir des bâtiments, dessiner les plans et suivre les chantiers jusqu’à la livraison.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "5 à 6 ans"
+    ],
+    [
+     "Diplôme",
+     "Architecte diplômé d’État"
+    ],
+    [
+     "Pour signer en ton nom",
+     "HMONP (1 an)"
+    ],
+    [
+     "Voie Parcoursup",
+     "Écoles nationales d’architecture"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "L’école nationale d’architecture",
+     "sous": "Publique, sur Parcoursup",
+     "steps": [
+      [
+       "Licence (DEEA)",
+       "3 ans",
+       "Projets, dessin, histoire de l’architecture, construction."
+      ],
+      [
+       "Master (DEA)",
+       "2 ans",
+       "Diplôme d’État d’architecte."
+      ],
+      [
+       "HMONP",
+       "1 an",
+       "Pour pouvoir signer des projets en ton nom."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école privée",
+     "sous": "Reconnue par l’État",
+     "steps": [
+      [
+       "École privée d’architecture",
+       "5 ans",
+       "Même diplôme d’État, frais de scolarité élevés."
+      ],
+      [
+       "HMONP",
+       "1 an",
+       "Pour exercer en ton nom."
+      ]
+     ]
+    },
+    {
+     "nom": "Par le bâtiment",
+     "sous": "BTS ou BUT d’abord",
+     "steps": [
+      [
+       "BTS ou BUT bâtiment, génie civil",
+       "2 à 3 ans",
+       "Tu peux déjà travailler comme technicien."
+      ],
+      [
+       "Admission en école d’architecture",
+       "Sur dossier",
+       "Entrée possible en cours de cursus."
+      ],
+      [
+       "Master et HMONP",
+       "3 ans",
+       "Puis architecte."
+      ]
+     ]
+    }
+   ]
+  },
+  "pilote": {
+   "nom": "Pilote de ligne",
+   "formation": "pilote",
+   "resume": "Piloter des avions de passagers ou de fret, en toute sécurité, en France et à l’étranger.",
+   "infos": [
+    [
+     "Formation",
+     "≈ 2 ans (licence ATPL)"
+    ],
+    [
+     "Aptitude médicale",
+     "Classe 1 obligatoire"
+    ],
+    [
+     "Anglais",
+     "Indispensable"
+    ],
+    [
+     "Coût",
+     "De gratuit à plus de 100 000 €"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "L’ENAC",
+     "sous": "École publique de l’aviation civile",
+     "steps": [
+      [
+       "Prépa scientifique",
+       "2 ans",
+       "Le concours EPL vise surtout les élèves de prépa."
+      ],
+      [
+       "Concours EPL",
+       "Très sélectif",
+       "Tests scientifiques, anglais et psychotechniques."
+      ],
+      [
+       "Formation à l’ENAC",
+       "≈ 2 ans",
+       "Coût très réduit comparé aux écoles privées."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école privée",
+     "sous": "ATPL intégré",
+     "steps": [
+      [
+       "Sélection de l’école",
+       "Tests et entretien",
+       "Souvent accessible juste après le bac."
+      ],
+      [
+       "Formation ATPL",
+       "≈ 2 ans",
+       "Souvent entre 80 000 et 130 000 €."
+      ],
+      [
+       "Recrutement en compagnie",
+       "Copilote",
+       "Le prêt étudiant est à rembourser pendant les premières années."
+      ]
+     ]
+    },
+    {
+     "nom": "Pilote militaire",
+     "sous": "Armée de l’air et de l’espace",
+     "steps": [
+      [
+       "Recrutement",
+       "Tests et visite médicale",
+       "Formation entièrement prise en charge."
+      ],
+      [
+       "Pilote militaire",
+       "Plusieurs années d’engagement",
+       "Tu es payé dès le début."
+      ],
+      [
+       "Reconversion possible",
+       "—",
+       "Vers l’aviation civile ensuite."
+      ]
+     ]
+    }
+   ]
+  },
+  "journaliste": {
+   "nom": "Journaliste",
+   "formation": "journalisme",
+   "resume": "Enquêter, vérifier et raconter l’actualité, à l’écrit, à la radio, à la télé ou sur le web.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "3 à 5 ans"
+    ],
+    [
+     "Formation conseillée",
+     "École reconnue par la profession"
+    ],
+    [
+     "Accès",
+     "Très sélectif"
+    ],
+    [
+     "Statut",
+     "Salarié ou pigiste"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le BUT journalisme",
+     "sous": "Information-communication",
+     "steps": [
+      [
+       "BUT parcours journalisme",
+       "3 ans",
+       "À l’IUT, très sélectif, beaucoup de pratique."
+      ],
+      [
+       "Premier poste",
+       "—",
+       "Presse locale, web, radio."
+      ]
+     ]
+    },
+    {
+     "nom": "Licence puis école",
+     "sous": "La voie la plus courante",
+     "steps": [
+      [
+       "Licence ou Sciences Po",
+       "3 ans",
+       "Histoire, science politique, lettres, droit…"
+      ],
+      [
+       "Concours d’une école reconnue",
+       "Très sélectif",
+       "Les écoles reconnues sont les plus valorisées."
+      ],
+      [
+       "École de journalisme",
+       "2 ans",
+       "Stages dans les rédactions."
+      ]
+     ]
+    },
+    {
+     "nom": "Le bachelor privé",
+     "sous": "Journalisme",
+     "steps": [
+      [
+       "Bachelor journalisme",
+       "3 ans",
+       "Payant : vérifie la reconnaissance du diplôme."
+      ],
+      [
+       "Premier poste",
+       "—",
+       "Les stages et ton réseau comptent beaucoup."
+      ]
+     ]
+    }
+   ]
+  },
+  "graphiste": {
+   "nom": "Graphiste",
+   "formation": "design",
+   "resume": "Créer des visuels : logos, affiches, identités de marque, interfaces et animations.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "3 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "DN MADE, DNA, DNSEP, BUT MMI"
+    ],
+    [
+     "Ce qui compte",
+     "Ton book (portfolio)"
+    ],
+    [
+     "Statut",
+     "Salarié ou freelance"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le DN MADE",
+     "sous": "Diplôme national des métiers d’art et du design",
+     "steps": [
+      [
+       "DN MADE graphisme",
+       "3 ans",
+       "Public, sur Parcoursup, grade licence."
+      ],
+      [
+       "Graphiste ou poursuite",
+       "—",
+       "Possibilité de master ou de DSAA."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école supérieure d’art",
+     "sous": "Publique",
+     "steps": [
+      [
+       "DNA",
+       "3 ans",
+       "Diplôme national d’art, option design ou communication."
+      ],
+      [
+       "DNSEP",
+       "2 ans",
+       "Grade master."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BUT MMI",
+     "sous": "Métiers du multimédia et de l’internet",
+     "steps": [
+      [
+       "BUT MMI",
+       "3 ans",
+       "Graphisme, web, vidéo, motion design."
+      ],
+      [
+       "Graphiste web ou UI designer",
+       "—",
+       "Les profils numériques sont très recherchés."
+      ]
+     ]
+    }
+   ]
+  },
+  "cuisinier": {
+   "nom": "Chef cuisinier",
+   "formation": "cuisine",
+   "resume": "Préparer et inventer des plats, gérer une brigade et faire tourner une cuisine.",
+   "infos": [
+    [
+     "Durée de formation",
+     "2 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "CAP cuisine, bac pro, BTS MHR"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ],
+    [
+     "Évolution",
+     "Commis → chef de partie → chef"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le CAP cuisine",
+     "sous": "Le plus rapide",
+     "steps": [
+      [
+       "CAP cuisine",
+       "2 ans",
+       "En lycée pro ou en apprentissage."
+      ],
+      [
+       "Commis de cuisine",
+       "—",
+       "Puis chef de partie avec l’expérience."
+      ]
+     ]
+    },
+    {
+     "nom": "Le bac pro cuisine",
+     "sous": "Plus de responsabilités",
+     "steps": [
+      [
+       "Bac pro cuisine",
+       "3 ans",
+       "Techniques, gestion des stocks, hygiène."
+      ],
+      [
+       "Emploi ou BTS",
+       "—",
+       "Possibilité de poursuivre en BTS."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BTS MHR",
+     "sous": "Management en hôtellerie-restauration",
+     "steps": [
+      [
+       "BTS MHR",
+       "2 ans",
+       "Option production culinaire."
+      ],
+      [
+       "Chef de partie, second, chef",
+       "—",
+       "Avec des responsabilités de gestion."
+      ]
+     ]
+    }
+   ]
+  },
+  "mecanicien": {
+   "nom": "Mécanicien automobile",
+   "formation": "auto",
+   "resume": "Diagnostiquer les pannes, entretenir et réparer les véhicules, y compris électriques et hybrides.",
+   "infos": [
+    [
+     "Durée de formation",
+     "2 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "CAP, bac pro, BTS maintenance des véhicules"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ],
+    [
+     "Débouchés",
+     "Garages, concessions, réseaux"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Le CAP",
+     "sous": "Le plus rapide",
+     "steps": [
+      [
+       "CAP maintenance des véhicules",
+       "2 ans",
+       "Souvent en apprentissage."
+      ],
+      [
+       "Mécanicien",
+       "—",
+       "En garage ou en concession."
+      ]
+     ]
+    },
+    {
+     "nom": "Le bac pro",
+     "sous": "Diagnostic et électronique",
+     "steps": [
+      [
+       "Bac pro maintenance des véhicules",
+       "3 ans",
+       "Mécanique, électronique, diagnostic."
+      ],
+      [
+       "Technicien ou BTS",
+       "—",
+       "Possibilité de continuer."
+      ]
+     ]
+    },
+    {
+     "nom": "Le BTS",
+     "sous": "Technicien expert",
+     "steps": [
+      [
+       "BTS maintenance des véhicules",
+       "2 ans",
+       "Diagnostic avancé, véhicules électriques."
+      ],
+      [
+       "Technicien, chef d’atelier",
+       "—",
+       "Ou réceptionnaire après-vente."
+      ]
+     ]
+    }
+   ]
+  },
+  "pompier": {
+   "nom": "Sapeur-pompier",
+   "formation": "pompier",
+   "resume": "Porter secours, lutter contre les incendies et protéger les personnes lors des accidents et catastrophes.",
+   "infos": [
+    [
+     "Recrutement",
+     "Sur concours ou engagement"
+    ],
+    [
+     "Âge",
+     "18 ans minimum (16 ans en volontaire)"
+    ],
+    [
+     "Diplôme",
+     "CAP ou BEP minimum (ou 3 ans de volontariat)"
+    ],
+    [
+     "Condition physique",
+     "Indispensable"
+    ]
+   ],
+   "sources": "Onisep, CIDJ",
+   "chemins": [
+    {
+     "nom": "Volontaire puis concours",
+     "sous": "Pompier professionnel",
+     "steps": [
+      [
+       "Sapeur-pompier volontaire",
+       "Dès 16 ans",
+       "Tu te formes et tu interviens à côté de tes études."
+      ],
+      [
+       "Concours externe de caporal",
+       "QCM, épreuves sportives, entretien",
+       "Dès 18 ans, avec un CAP ou un BEP. Un concours est aussi réservé aux volontaires."
+      ],
+      [
+       "Formation initiale",
+       "Plusieurs semaines",
+       "Puis affectation en caserne."
+      ]
+     ]
+    },
+    {
+     "nom": "Pompier de Paris",
+     "sous": "Brigade de sapeurs-pompiers de Paris",
+     "steps": [
+      [
+       "Engagement",
+       "Statut militaire",
+       "De 18 à moins de 26 ans, avec tests sportifs et médicaux."
+      ],
+      [
+       "Formation",
+       "≈ 8 mois",
+       "Puis interventions à Paris et en petite couronne."
+      ]
+     ]
+    },
+    {
+     "nom": "Officier",
+     "sous": "Lieutenant ou capitaine",
+     "steps": [
+      [
+       "Études supérieures",
+       "Bac+2 ou bac+3",
+       "Selon le concours visé."
+      ],
+      [
+       "Concours d’officier",
+       "Très sélectif",
+       "Encadrement des équipes et commandement."
+      ]
+     ]
+    }
+   ]
+  },
+  "militaire": {
+   "nom": "Militaire",
+   "formation": "armee",
+   "resume": "Défendre le pays, participer à des missions en France et à l’étranger, dans plus de 100 métiers.",
+   "infos": [
+    [
+     "Recrutement",
+     "À tous les niveaux d’études"
+    ],
+    [
+     "Formation",
+     "Payée par l’armée"
+    ],
+    [
+     "Avantages",
+     "Logement, nourriture selon le grade"
+    ],
+    [
+     "Contrat",
+     "Durée limitée, renouvelable"
+    ]
+   ],
+   "sources": "Onisep",
+   "chemins": [
+    {
+     "nom": "Militaire du rang",
+     "sous": "Accessible sans diplôme",
+     "steps": [
+      [
+       "Recrutement en centre (CIRFA)",
+       "Tests et visite médicale",
+       "De 17 ans et demi à moins de 30 ans, sans diplôme. Contrat renouvelable."
+      ],
+      [
+       "Formation militaire",
+       "≈ 10 semaines",
+       "Puis formation à un métier (combat, mécanique, transmissions…)."
+      ],
+      [
+       "Évolution",
+       "Concours internes",
+       "Vers sous-officier."
+      ]
+     ]
+    },
+    {
+     "nom": "Sous-officier",
+     "sous": "Avec le bac",
+     "steps": [
+      [
+       "Recrutement",
+       "Tests et entretien",
+       "Avec le bac, de 17 ans et demi à moins de 32 ans. Formation à l’école des sous-officiers."
+      ],
+      [
+       "Chef d’équipe",
+       "—",
+       "Tu encadres des militaires du rang."
+      ]
+     ]
+    },
+    {
+     "nom": "Officier",
+     "sous": "Saint-Cyr ou après un bac+3",
+     "steps": [
+      [
+       "Prépa ou études supérieures",
+       "2 à 5 ans",
+       "Selon la voie choisie."
+      ],
+      [
+       "École d’officiers",
+       "Plusieurs années",
+       "Formation au commandement."
+      ]
+     ]
+    }
+   ]
+  },
+  "marketing": {
+   "nom": "Chargé de marketing",
+   "formation": "marketing",
+   "resume": "Analyser les clients et la concurrence, lancer des produits et imaginer des campagnes pour les vendre.",
+   "infos": [
+    [
+     "Durée après le bac",
+     "3 à 5 ans"
+    ],
+    [
+     "Diplômes",
+     "BUT TC, école de commerce, master"
+    ],
+    [
+     "Alternance",
+     "Très courante"
+    ],
+    [
+     "Évolution",
+     "Chef de produit, directeur marketing"
+    ]
+   ],
+   "sources": "Onisep, CGE",
+   "chemins": [
+    {
+     "nom": "Le BUT TC",
+     "sous": "Parcours marketing",
+     "steps": [
+      [
+       "BUT Techniques de commercialisation",
+       "3 ans",
+       "À l’IUT, souvent en alternance en 3e année."
+      ],
+      [
+       "Assistant ou chargé de marketing",
+       "—",
+       "Ou poursuite en école ou en master."
+      ]
+     ]
+    },
+    {
+     "nom": "L’école de commerce",
+     "sous": "Bachelor ou programme grande école",
+     "steps": [
+      [
+       "Bachelor ou prépa puis école",
+       "3 à 5 ans",
+       "Frais élevés, sauf en alternance."
+      ],
+      [
+       "Chef de produit junior",
+       "—",
+       "Réseau et stages à l’international."
+      ]
+     ]
+    },
+    {
+     "nom": "La fac",
+     "sous": "Licence puis master marketing",
+     "steps": [
+      [
+       "Licence d’économie-gestion",
+       "3 ans",
+       "Droits universitaires."
+      ],
+      [
+       "Master marketing",
+       "2 ans",
+       "Sélection à l’entrée du M1."
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "EXTRA": {
+  "avocat": {
+   "m": {
+    "quotidien": "Recevoir des clients, analyser des dossiers, rédiger des actes et des conclusions, plaider au tribunal. Beaucoup de lecture et d’écriture, et des délais à tenir.",
+    "qualites": [
+     "Aisance à l’écrit et à l’oral",
+     "Esprit d’analyse",
+     "Résistance au stress"
+    ],
+    "salaire": "Rétrocession minimale à Paris : 3 600 € HT/mois la 1re année (2025), cotisations à déduire. Souvent 2 000 à 4 000 € HT en province.",
+    "evol": "Associé d’un cabinet, ouvrir ton propre cabinet, spécialisation (pénal, affaires, famille, travail…)."
+   },
+   "c": [
+    {
+     "duree": "≈ 7 ans",
+     "cout": "Droits universitaires (≈ 178 €/an en licence), puis frais de l’école d’avocats",
+     "alt": "Rare",
+     "sel": "Licence accessible, CRFPA sélectif",
+     "pour": "Tous les bacs, avec un bon niveau à l’écrit",
+     "plus": [
+      "Formation publique et peu chère",
+      "Le parcours le plus courant : tu ne seras pas seul"
+     ],
+     "moins": [
+      "La L1 de droit est exigeante : beaucoup d’échecs la 1re année",
+      "Le CRFPA se prépare sérieusement (prépa souvent payante)"
+     ],
+     "conseil": "Sur Parcoursup, soigne ton projet de formation : montre ton intérêt pour le droit (audiences, lectures, engagement)."
+    },
+    {
+     "duree": "≈ 7 ans",
+     "cout": "Droits universitaires, ou frais d’IEP selon les revenus des parents",
+     "alt": "Rare",
+     "sel": "Très sélectif",
+     "pour": "Les très bons dossiers de bac général",
+     "plus": [
+      "Double compétence très appréciée des cabinets",
+      "Ouvre aussi d’autres métiers si tu changes d’avis"
+     ],
+     "moins": [
+      "Charge de travail très lourde",
+      "Places limitées"
+     ],
+     "conseil": "Vise plusieurs doubles licences et les concours d’IEP en parallèle, avec une licence de droit classique en sécurité."
+    },
+    {
+     "duree": "5 ans d’études + 8 ans d’expérience",
+     "cout": "Droits universitaires",
+     "alt": "Possible pendant le master",
+     "sel": "Accessible",
+     "pour": "Ceux qui veulent d’abord travailler en entreprise",
+     "plus": [
+      "Tu es payé pendant 8 ans de pratique",
+      "Pas besoin de l’école d’avocats"
+     ],
+     "moins": [
+      "Le chemin le plus long avant de porter la robe"
+     ],
+     "conseil": "Choisis un master avec de l’alternance pour entrer plus vite en entreprise."
+    }
+   ]
+  },
+  "infirmier": {
+   "m": {
+    "quotidien": "Soins, prises de sang, perfusions, surveillance des patients, travail avec les médecins et les aides-soignants. Horaires en 12 h possibles, nuits et week-ends.",
+    "qualites": [
+     "Empathie",
+     "Sang-froid",
+     "Rigueur dans les gestes"
+    ],
+    "salaire": "À l’hôpital public : 1 944 € brut/mois hors primes en début de carrière, plus avec les nuits, dimanches et heures sup.",
+    "evol": "Spécialisations (bloc, anesthésie, puériculture), infirmier en pratique avancée (bac+5), cadre de santé, libéral."
+   },
+   "c": [
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires (≈ 178 €/an) en institut public",
+     "alt": "Non",
+     "sel": "Sélectif (formation très demandée)",
+     "pour": "Bacs ST2S, général, pro ASSP",
+     "plus": [
+      "Emploi quasi garanti à la sortie",
+      "Diplôme de grade licence"
+     ],
+     "moins": [
+      "Stages intenses dès la 1re année",
+      "Rythme physique et émotionnel"
+     ],
+     "conseil": "Fais beaucoup de vœux en IFSI (ils sont regroupés par secteur) et mets en avant un stage ou du bénévolat dans le soin."
+    },
+    {
+     "duree": "≈ 1 an + expérience + 3 ans",
+     "cout": "Souvent financé (employeur, région, France Travail)",
+     "alt": "Possible",
+     "sel": "Accessible",
+     "pour": "CAP, bac pro, ou ceux qui veulent tester le métier",
+     "plus": [
+      "Tu découvres le soin avant de t’engager",
+      "Tu es salarié rapidement"
+     ],
+     "moins": [
+      "Plus long au total"
+     ],
+     "conseil": "Le diplôme d’aide-soignant est accessible sans le bac : idéal pour commencer."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Gratuit pour toi",
+     "alt": "Oui",
+     "sel": "Sélectif (peu de places)",
+     "pour": "Ceux qui ont besoin d’un salaire pendant les études",
+     "plus": [
+      "Payé pendant 3 ans",
+      "Employeur souvent trouvé d’avance"
+     ],
+     "moins": [
+      "Proposé par peu d’instituts"
+     ],
+     "conseil": "Renseigne-toi directement auprès des IFSI et des hôpitaux de ta région."
+    }
+   ]
+  },
+  "electricien": {
+   "m": {
+    "quotidien": "Installer des câbles, des tableaux électriques, des prises connectées, dépanner des pannes sur des chantiers ou chez des particuliers.",
+    "qualites": [
+     "Habileté manuelle",
+     "Rigueur (sécurité)",
+     "Autonomie"
+    ],
+    "salaire": "Autour du SMIC en début de carrière, davantage avec l’expérience, les déplacements ou à son compte.",
+    "evol": "Chef d’équipe, chef de chantier, technicien de maintenance, artisan à ton compte."
+   },
+   "c": [
+    {
+     "duree": "2 ans",
+     "cout": "Gratuit en lycée pro, payé en apprentissage",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Après la 3e, ou en reconversion",
+     "plus": [
+      "Tu travailles en 2 ans",
+      "Très recherché par les entreprises"
+     ],
+     "moins": [
+      "Moins de responsabilités sans diplôme supérieur"
+     ],
+     "conseil": "Choisis l’apprentissage : tu es payé et tu as déjà une expérience à la sortie."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Gratuit, ou payé en apprentissage",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Après la 3e ou un CAP",
+     "plus": [
+      "Bac en poche",
+      "Possibilité de continuer en BTS"
+     ],
+     "moins": [
+      "3 ans avant le premier emploi"
+     ],
+     "conseil": "Avec de bons résultats, enchaîne sur un BTS en alternance."
+    },
+    {
+     "duree": "2 ans après le bac",
+     "cout": "Gratuit en lycée public, payé en alternance",
+     "alt": "Oui, très courant",
+     "sel": "Accessible à sélectif",
+     "pour": "Bacs STI2D, pro électricité, général scientifique",
+     "plus": [
+      "Postes de technicien et d’encadrement",
+      "Bon salaire de départ pour bac+2"
+     ],
+     "moins": [
+      "Physique et maths appliquées à travailler"
+     ],
+     "conseil": "Sur Parcoursup, candidate en lycée public et en apprentissage pour multiplier tes chances."
+    }
+   ]
+  },
+  "medecin": {
+   "m": {
+    "quotidien": "Examiner les patients, poser un diagnostic, prescrire des traitements. En cabinet, à l’hôpital, aux urgences… Selon la spécialité, gardes de nuit et week-end.",
+    "qualites": [
+     "Capacité de travail",
+     "Sang-froid",
+     "Sens de l’écoute"
+    ],
+    "salaire": "Pendant l’internat, tu es déjà rémunéré (gardes en plus). Une fois installé, les revenus sont élevés mais varient beaucoup selon la spécialité.",
+    "evol": "Des dizaines de spécialités : médecine générale, chirurgie, pédiatrie, psychiatrie, urgences…"
+   },
+   "c": [
+    {
+     "duree": "9 à 12 ans",
+     "cout": "Droits universitaires (≈ 178 €/an en 1er cycle)",
+     "alt": "Non",
+     "sel": "Très sélectif",
+     "pour": "Bacs généraux scientifiques avec de très bons résultats",
+     "plus": [
+      "La voie la plus directe",
+      "Année très encadrée"
+     ],
+     "moins": [
+      "Énormément de travail dès la 1re année",
+      "En cas d’échec, il faut avoir validé ta mineure pour continuer"
+     ],
+     "conseil": "Choisis ta mineure avec soin : c’est ta porte de sortie si médecine ne passe pas."
+    },
+    {
+     "duree": "9 à 12 ans",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Sélectif",
+     "pour": "Ceux qui veulent une sécurité en cas d’échec",
+     "plus": [
+      "Tu gardes une vraie licence si ça ne marche pas",
+      "Deux chances possibles sur 3 ans"
+     ],
+     "moins": [
+      "Il faut réussir ta licence ET l’option santé"
+     ],
+     "conseil": "Prends une L.AS dans une matière qui te plaît vraiment : tu y passeras peut-être 3 ans."
+    },
+    {
+     "duree": "6 ans et plus",
+     "cout": "De quelques milliers à plus de 10 000 €/an selon le pays",
+     "alt": "Non",
+     "sel": "Variable selon le pays",
+     "pour": "Ceux qui ont échoué en France et qui sont prêts à partir",
+     "plus": [
+      "Diplôme reconnu dans l’Union européenne",
+      "Moins de concurrence à l’entrée dans certains pays"
+     ],
+     "moins": [
+      "Coût total élevé",
+      "Cours dans une autre langue"
+     ],
+     "conseil": "Calcule le coût total (frais, logement, voyages) avant de te décider."
+    }
+   ]
+  },
+  "ingenieur": {
+   "m": {
+    "quotidien": "Concevoir, tester et améliorer des produits, des systèmes ou des process. Beaucoup de travail en équipe, de gestion de projet et de résolution de problèmes.",
+    "qualites": [
+     "Logique",
+     "Curiosité",
+     "Travail en équipe"
+    ],
+    "salaire": "Les jeunes ingénieurs font partie des débutants les mieux payés, avec de gros écarts selon le secteur et l’école.",
+    "evol": "Chef de projet, manager, expert technique, création de start-up, carrière à l’international."
+   },
+   "c": [
+    {
+     "duree": "5 ans",
+     "cout": "Prépa publique gratuite, puis école (publique peu chère ou privée plus chère)",
+     "alt": "Possible en école",
+     "sel": "Sélectif",
+     "pour": "Bacs généraux maths + physique (ou SI, NSI), très bons résultats",
+     "plus": [
+      "Accès aux écoles les plus réputées",
+      "Méthode de travail très solide"
+     ],
+     "moins": [
+      "2 ans de rythme très intense",
+      "Concours stressants"
+     ],
+     "conseil": "La prépa n’est pas réservée aux génies : un dossier régulier et motivé suffit souvent pour une prépa de proximité."
+    },
+    {
+     "duree": "5 ans",
+     "cout": "Écoles publiques : quelques centaines d’€/an ; privées : plusieurs milliers d’€/an",
+     "alt": "Souvent possible en cycle ingénieur",
+     "sel": "Sélectif",
+     "pour": "Bacs généraux scientifiques, parfois STI2D",
+     "plus": [
+      "Pas de concours en fin de 2e année",
+      "Projets concrets dès le début"
+     ],
+     "moins": [
+      "Les écoles privées coûtent cher"
+     ],
+     "conseil": "Les concours communs (Avenir, Puissance Alpha, Geipi Polytech) te permettent de postuler à plusieurs écoles d’un coup."
+    },
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires, puis gratuit en apprentissage",
+     "alt": "Oui, très courant",
+     "sel": "Accessible à sélectif",
+     "pour": "Bacs STI2D, général, ou ceux qui préfèrent le concret",
+     "plus": [
+      "Diplôme bac+3 déjà valorisé",
+      "Payé en école d’ingé en apprentissage"
+     ],
+     "moins": [
+      "Une année de plus que les autres voies"
+     ],
+     "conseil": "Pendant ton BUT, garde de bonnes notes en maths : c’est ce que regardent les écoles."
+    }
+   ]
+  },
+  "psychologue": {
+   "m": {
+    "quotidien": "Entretiens individuels, tests, accompagnement de patients ou de salariés, travail en équipe avec des médecins ou des éducateurs.",
+    "qualites": [
+     "Écoute",
+     "Patience",
+     "Recul sur soi"
+    ],
+    "salaire": "Les débuts sont souvent modestes, surtout en libéral le temps de se constituer une patientèle.",
+    "evol": "Libéral, hôpital, entreprise (RH), éducation nationale, recherche."
+   },
+   "c": [
+    {
+     "duree": "5 ans",
+     "cout": "Droits universitaires",
+     "alt": "Rare",
+     "sel": "Licence en tension, master très sélectif",
+     "pour": "Tous les bacs généraux, ST2S",
+     "plus": [
+      "La voie officielle et la moins chère",
+      "Beaucoup de spécialités en master"
+     ],
+     "moins": [
+      "Beaucoup de statistiques et de biologie",
+      "L’entrée en master est difficile"
+     ],
+     "conseil": "Travaille tes notes dès la L1 : c’est sur ton dossier que se joue l’entrée en master."
+    },
+    {
+     "duree": "5 ans + 1 an de formation",
+     "cout": "Droits universitaires, formation rémunérée",
+     "alt": "Non",
+     "sel": "Concours sélectif",
+     "pour": "Ceux qui veulent travailler avec des élèves",
+     "plus": [
+      "Statut de fonctionnaire stable",
+      "Formation payée"
+     ],
+     "moins": [
+      "Il faut réussir un concours en plus du master"
+     ],
+     "conseil": "Fais des stages en milieu scolaire pendant ta licence."
+    },
+    {
+     "duree": "5 ans",
+     "cout": "Payant (plusieurs milliers d’€/an)",
+     "alt": "Non",
+     "sel": "Sur dossier et entretien",
+     "pour": "Ceux qui préfèrent un cadre plus encadré",
+     "plus": [
+      "Petites promotions",
+      "Beaucoup de pratique"
+     ],
+     "moins": [
+      "Coût élevé",
+      "Toutes les écoles ne donnent pas le titre"
+     ],
+     "conseil": "Avant de t’inscrire, vérifie noir sur blanc que le diplôme donne le titre de psychologue."
+    }
+   ]
+  },
+  "sport": {
+   "m": {
+    "quotidien": "Préparer des séances, encadrer des groupes ou des clients, adapter les exercices au niveau de chacun, faire progresser.",
+    "qualites": [
+     "Énergie",
+     "Pédagogie",
+     "Sens du contact"
+    ],
+    "salaire": "Souvent proche du SMIC en salle au début. Les coachs indépendants peuvent gagner plus, mais c’est variable.",
+    "evol": "Coach indépendant, responsable de salle, préparateur physique d’athlètes, prof d’EPS."
+   },
+   "c": [
+    {
+     "duree": "≈ 1 an",
+     "cout": "Gratuit en apprentissage, sinon plusieurs milliers d’euros",
+     "alt": "Oui, très courant",
+     "sel": "Tests physiques d’entrée",
+     "pour": "Tous, même sans le bac (18 ans minimum)",
+     "plus": [
+      "Rapide",
+      "Diplôme d’État pour être payé pour encadrer"
+     ],
+     "moins": [
+      "Moins de débouchés que la licence pour évoluer"
+     ],
+     "conseil": "Prépare les tests physiques à l’avance et trouve ta structure d’alternance tôt."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible en licence pro",
+     "sel": "Sélectif (filière très demandée)",
+     "pour": "Bacs généraux et techno, sportifs",
+     "plus": [
+      "Formation complète (physiologie, entraînement)",
+      "Peut mener au master"
+     ],
+     "moins": [
+      "Beaucoup de théorie et de sciences"
+     ],
+     "conseil": "Mets en avant ton engagement sportif (club, arbitrage, encadrement) dans ton projet Parcoursup."
+    },
+    {
+     "duree": "5 ans",
+     "cout": "Droits universitaires, puis master rémunéré",
+     "alt": "Master en alternance rémunérée",
+     "sel": "Concours sélectif",
+     "pour": "Ceux qui veulent enseigner",
+     "plus": [
+      "Emploi stable de fonctionnaire",
+      "Formation payée après le concours"
+     ],
+     "moins": [
+      "Concours à préparer pendant la licence"
+     ],
+     "conseil": "Choisis le parcours « éducation et motricité » en STAPS dès que possible."
+    }
+   ]
+  },
+  "kine": {
+   "m": {
+    "quotidien": "Rééduquer après une blessure ou une opération, masser, faire faire des exercices, suivre des sportifs, des personnes âgées ou des enfants.",
+    "qualites": [
+     "Contact humain",
+     "Connaissance du corps",
+     "Patience"
+    ],
+    "salaire": "En libéral, les revenus sont souvent bons après quelques années. Salarié (hôpital, clinique), le début est plus modeste.",
+    "evol": "Libéral, kiné du sport, spécialisations (respiratoire, pédiatrie), ostéopathie."
+   },
+   "c": [
+    {
+     "duree": "5 ans",
+     "cout": "Instituts publics : droits universitaires ; privés : plusieurs milliers d’€/an",
+     "alt": "Rare",
+     "sel": "Très sélectif",
+     "pour": "Bacs généraux scientifiques",
+     "plus": [
+      "La voie la plus courante"
+     ],
+     "moins": [
+      "Très peu de places en kiné à l’issue de la 1re année"
+     ],
+     "conseil": "Renseigne-toi sur les instituts liés à chaque université : ce sont eux qui recrutent après le PASS ou la L.AS."
+    },
+    {
+     "duree": "5 ans",
+     "cout": "Droits universitaires",
+     "alt": "Rare",
+     "sel": "Très sélectif",
+     "pour": "Les sportifs avec un bon dossier scientifique",
+     "plus": [
+      "Si tu échoues, tu continues en STAPS"
+     ],
+     "moins": [
+      "Pas proposé partout"
+     ],
+     "conseil": "Vérifie que l’université visée a un partenariat avec un institut de kiné."
+    },
+    {
+     "duree": "4 ans et plus",
+     "cout": "Variable selon le pays",
+     "alt": "Non",
+     "sel": "Tirage au sort ou sélection",
+     "pour": "Ceux qui sont prêts à partir",
+     "plus": [
+      "Alternative si tu n’es pas pris en France"
+     ],
+     "moins": [
+      "Démarches pour exercer en France au retour"
+     ],
+     "conseil": "Renseigne-toi sur les quotas pour les étudiants non-résidents avant de candidater."
+    }
+   ]
+  },
+  "commercial": {
+   "m": {
+    "quotidien": "Prospecter des clients, présenter des produits, négocier des prix, suivre les commandes, atteindre des objectifs.",
+    "qualites": [
+     "Aisance relationnelle",
+     "Persévérance",
+     "Sens de la négociation"
+    ],
+    "salaire": "Un fixe auquel s’ajoutent des primes selon tes ventes : les bons commerciaux gagnent bien leur vie.",
+    "evol": "Responsable de secteur, directeur commercial, chef des ventes, créer ta boîte."
+   },
+   "c": [
+    {
+     "duree": "2 ans",
+     "cout": "Gratuit en lycée public, payé en alternance",
+     "alt": "Oui, très courant",
+     "sel": "Accessible",
+     "pour": "Bacs STMG, pro commerce, général",
+     "plus": [
+      "Rapide et concret",
+      "Tu peux continuer en bachelor ou licence pro"
+     ],
+     "moins": [
+      "Postes de départ moins payés qu’après une école"
+     ],
+     "conseil": "Trouve ton entreprise d’alternance avant l’été : c’est souvent elle qui débloque ton inscription."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible",
+     "sel": "Sélectif (BUT très demandé)",
+     "pour": "Bacs STMG, général",
+     "plus": [
+      "Diplôme complet et reconnu",
+      "Ouvre les écoles de commerce en admission parallèle"
+     ],
+     "moins": [
+      "Très demandé sur Parcoursup"
+     ],
+     "conseil": "Montre des expériences concrètes (job, vente, projet) dans ta lettre."
+    },
+    {
+     "duree": "3 à 5 ans",
+     "cout": "Souvent 8 000 €/an et plus, sauf en alternance",
+     "alt": "Souvent possible",
+     "sel": "Variable selon l’école",
+     "pour": "Ceux qui visent des postes à responsabilités",
+     "plus": [
+      "Réseau et stages à l’international",
+      "Salaires de sortie plus élevés"
+     ],
+     "moins": [
+      "Coût élevé"
+     ],
+     "conseil": "Vérifie que le diplôme est visé ou reconnu par l’État avant de t’engager."
+    }
+   ]
+  },
+  "comptable": {
+   "m": {
+    "quotidien": "Tenir et vérifier les comptes, établir les bilans, conseiller les chefs d’entreprise sur la fiscalité et la gestion.",
+    "qualites": [
+     "Rigueur",
+     "Goût des chiffres",
+     "Discrétion"
+    ],
+    "salaire": "Correct dès les premières années en cabinet, et très bon une fois expert-comptable diplômé.",
+    "evol": "Expert-comptable associé, commissaire aux comptes, directeur financier."
+   },
+   "c": [
+    {
+     "duree": "≈ 8 ans",
+     "cout": "Gratuit en lycée public, ou payé en alternance",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Bacs STMG (gestion et finance), général",
+     "plus": [
+      "Filière pensée pour le métier",
+      "Possible en alternance"
+     ],
+     "moins": [
+      "Parcours long et exigeant"
+     ],
+     "conseil": "Le DCG en lycée public est gratuit et très encadré."
+    },
+    {
+     "duree": "≈ 8 à 9 ans",
+     "cout": "Gratuit ou payé en alternance",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Bacs STMG, pro gestion",
+     "plus": [
+      "Tu peux travailler dès bac+2",
+      "Tu avances à ton rythme"
+     ],
+     "moins": [
+      "Un peu plus long"
+     ],
+     "conseil": "Choisis le BTS CG ou le BUT GEA en alternance pour gagner de l’expérience."
+    },
+    {
+     "duree": "≈ 8 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible en master",
+     "sel": "Master sélectif",
+     "pour": "Bacs généraux, ou étudiants déjà à la fac",
+     "plus": [
+      "Master reconnu, beaucoup de dispenses"
+     ],
+     "moins": [
+      "Moins encadré qu’en lycée"
+     ],
+     "conseil": "Vise un master CCA en alternance."
+    }
+   ]
+  },
+  "developpeur": {
+   "m": {
+    "quotidien": "Écrire du code, corriger des bugs, créer de nouvelles fonctionnalités en équipe, tester. Télétravail souvent possible.",
+    "qualites": [
+     "Logique",
+     "Autonomie",
+     "Envie d’apprendre en continu"
+    ],
+    "salaire": "Bon dès le début, et progresse vite avec l’expérience et la spécialisation.",
+    "evol": "Développeur senior, lead dev, architecte, freelance, chef de projet."
+   },
+   "c": [
+    {
+     "duree": "2 ans",
+     "cout": "Gratuit en lycée public, payé en alternance",
+     "alt": "Oui",
+     "sel": "Accessible à sélectif",
+     "pour": "Bacs STMG (SIG), STI2D (SIN), général, pro CIEL",
+     "plus": [
+      "Rapide",
+      "Très bonne insertion"
+     ],
+     "moins": [
+      "Poursuite souvent utile pour évoluer"
+     ],
+     "conseil": "Choisis l’option SLAM, et commence des petits projets perso dès maintenant."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible",
+     "sel": "Sélectif",
+     "pour": "Bacs généraux (maths, NSI), STI2D",
+     "plus": [
+      "Formation complète et reconnue",
+      "Ouvre les écoles d’ingé"
+     ],
+     "moins": [
+      "Maths présentes"
+     ],
+     "conseil": "Mets en avant tes projets (site, appli, jeu) dans ton dossier."
+    },
+    {
+     "duree": "≈ 2 à 5 ans",
+     "cout": "Gratuit",
+     "alt": "Stages en entreprise",
+     "sel": "Sélection par la piscine",
+     "pour": "Tous, même sans le bac, dès 18 ans",
+     "plus": [
+      "Gratuit",
+      "Pédagogie par projets très appréciée"
+     ],
+     "moins": [
+      "Beaucoup d’autonomie nécessaire",
+      "Pas de cours classiques"
+     ],
+     "conseil": "Entraîne-toi aux bases (logique, terminal) avant la piscine."
+    }
+   ]
+  },
+  "prof": {
+   "m": {
+    "quotidien": "Préparer et faire la classe, corriger, suivre chaque élève, échanger avec les parents et les collègues.",
+    "qualites": [
+     "Patience",
+     "Pédagogie",
+     "Organisation"
+    ],
+    "salaire": "Fonctionnaire : salaire fixé par une grille nationale, qui progresse avec l’ancienneté.",
+    "evol": "Directeur d’école, conseiller pédagogique, enseignant spécialisé, inspecteur."
+   },
+   "c": [
+    {
+     "duree": "5 ans (dont 2 rémunérés)",
+     "cout": "Droits universitaires, puis master rémunéré",
+     "alt": "Master rémunéré",
+     "sel": "Accessible, concours sélectif",
+     "pour": "Tous les bacs généraux et techno",
+     "plus": [
+      "Licence pensée pour le métier",
+      "Payé dès la réussite au concours"
+     ],
+     "moins": [
+      "Nouvelle licence : pas encore proposée partout"
+     ],
+     "conseil": "Fais de l’animation (BAFA) ou de l’aide aux devoirs pour montrer ta motivation."
+    },
+    {
+     "duree": "5 ans (dont 2 rémunérés)",
+     "cout": "Droits universitaires",
+     "alt": "Master rémunéré",
+     "sel": "Concours sélectif",
+     "pour": "Ceux qui ont une matière de prédilection",
+     "plus": [
+      "Tu gardes une licence utile si tu changes d’avis"
+     ],
+     "moins": [
+      "Préparation au concours à organiser toi-même"
+     ],
+     "conseil": "Pendant ta licence, suis les modules de préparation au concours proposés par ta fac."
+    },
+    {
+     "duree": "2 ans après la licence",
+     "cout": "Formation rémunérée",
+     "alt": "Oui",
+     "sel": "Concours",
+     "pour": "Personnes déjà diplômées d’une licence",
+     "plus": [
+      "Changer de métier sans tout recommencer"
+     ],
+     "moins": [
+      "Concours à préparer en plus d’un emploi éventuel"
+     ],
+     "conseil": "Commence par quelques remplacements comme contractuel pour tester le métier."
+    }
+   ]
+  },
+  "veterinaire": {
+   "m": {
+    "quotidien": "Consultations, vaccins, chirurgies, urgences. En ville avec les animaux de compagnie ou à la campagne avec les élevages.",
+    "qualites": [
+     "Amour des animaux",
+     "Sang-froid",
+     "Résistance physique"
+    ],
+    "salaire": "Correct dès le début, et bon avec l’expérience ou en devenant associé d’une clinique.",
+    "evol": "Associé d’une clinique, spécialisation (chirurgie, équins), santé publique, recherche."
+   },
+   "c": [
+    {
+     "duree": "6 ans",
+     "cout": "Frais de scolarité d’école publique",
+     "alt": "Non",
+     "sel": "Extrêmement sélectif",
+     "pour": "Bacs généraux SVT + physique-chimie, excellents dossiers",
+     "plus": [
+      "Pas de prépa",
+      "Le plus rapide"
+     ],
+     "moins": [
+      "Très peu de places"
+     ],
+     "conseil": "Mets ce vœu, mais garde absolument une prépa BCPST et une licence de bio en parallèle."
+    },
+    {
+     "duree": "7 ans",
+     "cout": "Prépa publique gratuite, puis école",
+     "alt": "Non",
+     "sel": "Très sélectif",
+     "pour": "Bacs généraux scientifiques",
+     "plus": [
+      "Le plus grand nombre de places",
+      "La prépa ouvre aussi les écoles d’agro"
+     ],
+     "moins": [
+      "Rythme de prépa intense"
+     ],
+     "conseil": "La BCPST t’ouvre plusieurs concours : tu as plusieurs chances."
+    },
+    {
+     "duree": "6 ans",
+     "cout": "Très élevé (plusieurs dizaines de milliers d’€ au total)",
+     "alt": "Non",
+     "sel": "Sélectif",
+     "pour": "Ceux qui peuvent financer leurs études",
+     "plus": [
+      "Une chance en plus"
+     ],
+     "moins": [
+      "Coût très lourd"
+     ],
+     "conseil": "Renseigne-toi sur les prêts étudiants et les bourses avant de t’engager."
+    }
+   ]
+  },
+  "policier": {
+   "m": {
+    "quotidien": "Patrouilles, interventions, accueil des victimes, enquêtes, maintien de l’ordre. Horaires décalés, nuits et week-ends.",
+    "qualites": [
+     "Sang-froid",
+     "Sens du service",
+     "Bonne condition physique"
+    ],
+    "salaire": "Gardien de la paix débutant : environ 1 870 € net/mois, plus en Île-de-France.",
+    "evol": "Brigadier, officier, commissaire, unités spécialisées (cyber, police judiciaire, maître-chien…)."
+   },
+   "c": [
+    {
+     "duree": "Quelques mois",
+     "cout": "Formation rémunérée",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "18-30 ans, même sans diplôme",
+     "plus": [
+      "Entrée rapide",
+      "Tremplin vers le concours de gardien"
+     ],
+     "moins": [
+      "Contrat à durée limitée"
+     ],
+     "conseil": "Profite de ces années pour préparer le concours interne de gardien de la paix."
+    },
+    {
+     "duree": "≈ 1 an après le bac",
+     "cout": "Formation rémunérée",
+     "alt": "Oui",
+     "sel": "Concours",
+     "pour": "Tous les bacs",
+     "plus": [
+      "Emploi stable de fonctionnaire",
+      "Nombreuses spécialités ensuite"
+     ],
+     "moins": [
+      "Affectation souvent en Île-de-France au début"
+     ],
+     "conseil": "Entraîne-toi aux épreuves sportives longtemps à l’avance."
+    },
+    {
+     "duree": "≈ 1 an après le bac",
+     "cout": "Formation rémunérée",
+     "alt": "Oui",
+     "sel": "Concours",
+     "pour": "Tous les bacs, goût pour la discipline",
+     "plus": [
+      "Logement fourni",
+      "Beaucoup de spécialités"
+     ],
+     "moins": [
+      "Statut militaire, mutations"
+     ],
+     "conseil": "Tu peux d’abord tester avec un engagement de gendarme adjoint volontaire."
+    }
+   ]
+  },
+  "communitymanager": {
+   "m": {
+    "quotidien": "Planifier et publier des contenus, répondre aux abonnés, analyser les statistiques, suivre les tendances, travailler avec des créateurs.",
+    "qualites": [
+     "Créativité",
+     "Aisance à l’écrit",
+     "Réactivité"
+    ],
+    "salaire": "Modeste au début, puis meilleur en évoluant ou en freelance avec plusieurs clients.",
+    "evol": "Social media manager, responsable communication, créateur de contenu, freelance."
+   },
+   "c": [
+    {
+     "duree": "2 à 3 ans",
+     "cout": "Gratuit en lycée public, payé en alternance",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Bacs STMG, STD2A, général",
+     "plus": [
+      "Rapide",
+      "Formation concrète"
+     ],
+     "moins": [
+      "Poursuite d’études souvent utile"
+     ],
+     "conseil": "Lance un compte ou une page dès maintenant : c’est ton meilleur CV."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible",
+     "sel": "Sélectif",
+     "pour": "Bacs généraux et techno, créatifs",
+     "plus": [
+      "Formation très complète (vidéo, web, graphisme)"
+     ],
+     "moins": [
+      "Très demandé"
+     ],
+     "conseil": "Joins un portfolio (vidéos, montages, visuels) à ta candidature."
+    },
+    {
+     "duree": "3 à 5 ans",
+     "cout": "Fac peu chère ; bachelor privé 6 000 €/an et plus, sauf en alternance",
+     "alt": "Souvent possible",
+     "sel": "Variable",
+     "pour": "Bacs généraux",
+     "plus": [
+      "Culture générale de la communication"
+     ],
+     "moins": [
+      "Les bachelors privés coûtent cher"
+     ],
+     "conseil": "Vérifie la reconnaissance du diplôme (RNCP, visa) avant de payer une école."
+    }
+   ]
+  },
+  "pharmacien": {
+   "m": {
+    "quotidien": "Vérifier les ordonnances, délivrer et expliquer les traitements, vacciner, conseiller les patients. Ou travailler à l’hôpital, en laboratoire ou dans l’industrie.",
+    "qualites": [
+     "Rigueur",
+     "Sens du contact",
+     "Goût des sciences"
+    ],
+    "evol": "Titulaire de ta propre pharmacie, pharmacien hospitalier, biologiste, industrie du médicament."
+   },
+   "c": [
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires",
+     "alt": "Rare",
+     "sel": "Très sélectif en 1re année",
+     "pour": "Bacs généraux scientifiques",
+     "plus": [
+      "Emploi quasi assuré",
+      "Métier de santé de proximité"
+     ],
+     "moins": [
+      "1re année très sélective"
+     ],
+     "conseil": "Choisis ta mineure de PASS avec soin : c’est ta porte de sortie si pharmacie ne passe pas."
+    },
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires",
+     "alt": "Rare",
+     "sel": "Sélectif",
+     "pour": "Ceux qui veulent une sécurité en cas d’échec",
+     "plus": [
+      "Tu gardes une vraie licence"
+     ],
+     "moins": [
+      "Il faut réussir la licence et l’option santé"
+     ],
+     "conseil": "Prends une L.AS dans une matière qui te plaît vraiment."
+    },
+    {
+     "duree": "9 ans",
+     "cout": "Droits universitaires, internat rémunéré",
+     "alt": "Internat rémunéré",
+     "sel": "Concours de l’internat",
+     "pour": "Ceux qui visent l’hôpital ou la biologie",
+     "plus": [
+      "Payé pendant l’internat",
+      "Accès à la biologie médicale"
+     ],
+     "moins": [
+      "3 ans de plus"
+     ],
+     "conseil": "Prépare le concours de l’internat dès la 4e année."
+    }
+   ]
+  },
+  "sagefemme": {
+   "m": {
+    "quotidien": "Suivre les grossesses, réaliser les accouchements, s’occuper des nouveau-nés et assurer le suivi gynécologique de prévention.",
+    "qualites": [
+     "Sang-froid",
+     "Écoute",
+     "Résistance physique"
+    ],
+    "evol": "Libéral, coordination en maternité, enseignement, recherche."
+   },
+   "c": [
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Très sélectif en 1re année",
+     "pour": "Bacs généraux scientifiques",
+     "plus": [
+      "Profession médicale à part entière",
+      "Forte demande"
+     ],
+     "moins": [
+      "Gardes de nuit et de week-end"
+     ],
+     "conseil": "Fais un stage ou du bénévolat auprès de jeunes enfants ou en milieu de soin."
+    },
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Sélectif",
+     "pour": "Ceux qui veulent une sécurité en cas d’échec",
+     "plus": [
+      "Deux chances possibles"
+     ],
+     "moins": [
+      "Licence et option santé à réussir"
+     ],
+     "conseil": "Choisis une L.AS liée à la biologie ou à la psychologie."
+    },
+    {
+     "duree": "4 ans et plus",
+     "cout": "Variable selon le pays",
+     "alt": "Non",
+     "sel": "Variable",
+     "pour": "Ceux qui sont prêts à partir",
+     "plus": [
+      "Alternative au concours français"
+     ],
+     "moins": [
+      "Démarches au retour"
+     ],
+     "conseil": "Renseigne-toi sur les quotas pour les non-résidents."
+    }
+   ]
+  },
+  "dentiste": {
+   "m": {
+    "quotidien": "Consultations, soins des caries, détartrages, extractions, prothèses et implants, avec une assistante au fauteuil.",
+    "qualites": [
+     "Dextérité",
+     "Précision",
+     "Sens du contact"
+    ],
+    "evol": "Cabinet en libéral, orthodontie ou chirurgie orale (après l’internat), hôpital."
+   },
+   "c": [
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Très sélectif en 1re année",
+     "pour": "Bacs généraux scientifiques",
+     "plus": [
+      "Revenus élevés",
+      "Travail manuel et précis"
+     ],
+     "moins": [
+      "1re année très sélective"
+     ],
+     "conseil": "Montre ton habileté manuelle (bricolage, dessin, musique) dans ton dossier."
+    },
+    {
+     "duree": "6 ans",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Sélectif",
+     "pour": "Ceux qui veulent une sécurité en cas d’échec",
+     "plus": [
+      "Tu gardes une licence"
+     ],
+     "moins": [
+      "Double exigence"
+     ],
+     "conseil": "Garde de bonnes notes dans ta licence."
+    },
+    {
+     "duree": "5 ans et plus",
+     "cout": "Souvent plus de 10 000 €/an",
+     "alt": "Non",
+     "sel": "Variable",
+     "pour": "Ceux qui peuvent financer leurs études",
+     "plus": [
+      "Moins de concurrence à l’entrée"
+     ],
+     "moins": [
+      "Coût total très élevé"
+     ],
+     "conseil": "Calcule le coût total avant de te décider."
+    }
+   ]
+  },
+  "orthophoniste": {
+   "m": {
+    "quotidien": "Bilans et séances de rééducation : langage, lecture, bégaiement, voix, déglutition, avec des enfants comme avec des adultes.",
+    "qualites": [
+     "Écoute",
+     "Patience",
+     "Aisance avec le langage"
+    ],
+    "evol": "Libéral (la majorité), hôpital, centres spécialisés, spécialisation (neurologie, autisme…)."
+   },
+   "c": [
+    {
+     "duree": "5 ans",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Très sélectif",
+     "pour": "Bacs généraux et ST2S",
+     "plus": [
+      "Diplôme de grade master",
+      "Exercice libéral facile"
+     ],
+     "moins": [
+      "Très peu de places"
+     ],
+     "conseil": "Soigne ton français écrit et prépare l’entretien : on évalue ta motivation et ton expression."
+    },
+    {
+     "duree": "5 ans après la licence",
+     "cout": "Droits universitaires",
+     "alt": "Non",
+     "sel": "Très sélectif",
+     "pour": "Les étudiants en réorientation",
+     "plus": [
+      "Dossier plus solide"
+     ],
+     "moins": [
+      "Parcours plus long"
+     ],
+     "conseil": "Choisis une licence en sciences du langage ou en psychologie."
+    },
+    {
+     "duree": "4 à 5 ans",
+     "cout": "Variable",
+     "alt": "Non",
+     "sel": "Places limitées",
+     "pour": "Ceux qui sont prêts à partir",
+     "plus": [
+      "Alternative si tu n’es pas pris"
+     ],
+     "moins": [
+      "Démarches pour exercer en France"
+     ],
+     "conseil": "Vérifie les quotas pour les étudiants français."
+    }
+   ]
+  },
+  "aidesoignant": {
+   "m": {
+    "quotidien": "Toilette, aide aux repas et aux déplacements, surveillance des patients, en lien avec les infirmiers. Horaires possibles de nuit et de week-end.",
+    "qualites": [
+     "Bienveillance",
+     "Résistance physique",
+     "Esprit d’équipe"
+    ],
+    "evol": "Infirmier grâce aux passerelles, auxiliaire de puériculture, ambulancier."
+   },
+   "c": [
+    {
+     "duree": "≈ 10 mois",
+     "cout": "Payante, souvent financée (région, employeur)",
+     "alt": "Possible",
+     "sel": "Accessible",
+     "pour": "Tous, même sans le bac",
+     "plus": [
+      "Emploi immédiat",
+      "Formation courte"
+     ],
+     "moins": [
+      "Métier physique"
+     ],
+     "conseil": "Renseigne-toi sur les financements de la région avant de t’inscrire."
+    },
+    {
+     "duree": "Plus long qu’en institut",
+     "cout": "Gratuit pour toi",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Ceux qui veulent être payés",
+     "plus": [
+      "Salaire pendant la formation"
+     ],
+     "moins": [
+      "Il faut trouver un employeur"
+     ],
+     "conseil": "Contacte directement les hôpitaux et Ehpad de ton secteur."
+    },
+    {
+     "duree": "3 ans + formation raccourcie",
+     "cout": "Gratuit en lycée pro",
+     "alt": "Possible",
+     "sel": "Accessible",
+     "pour": "Élèves de 3e ou de bac pro",
+     "plus": [
+      "Bac en poche",
+      "Allègements de formation"
+     ],
+     "moins": [
+      "Plus long au total"
+     ],
+     "conseil": "Le bac pro ASSP est idéal si tu veux aussi garder la porte de l’IFSI ouverte."
+    }
+   ]
+  },
+  "educateur": {
+   "m": {
+    "quotidien": "Accompagner des jeunes ou des adultes au quotidien, organiser des activités, travailler avec les familles, les psychologues et les juges.",
+    "qualites": [
+     "Écoute",
+     "Patience",
+     "Solidité émotionnelle"
+    ],
+    "evol": "Chef de service, protection de l’enfance, éducateur de la PJJ (sur concours)."
+   },
+   "c": [
+    {
+     "duree": "3 ans",
+     "cout": "Variable selon l’école (souvent faible, bourses possibles)",
+     "alt": "Possible",
+     "sel": "Sélectif (dossier et entretien)",
+     "pour": "Tous les bacs, ST2S en particulier",
+     "plus": [
+      "Métier qui a du sens",
+      "Beaucoup de terrain"
+     ],
+     "moins": [
+      "Salaire modeste au début"
+     ],
+     "conseil": "Une expérience d’animation (BAFA) ou de bénévolat compte beaucoup à l’entretien."
+    },
+    {
+     "duree": "2 ans + expérience + DEES",
+     "cout": "Variable",
+     "alt": "Possible",
+     "sel": "Accessible",
+     "pour": "Ceux qui veulent commencer plus vite",
+     "plus": [
+      "Tu travailles rapidement"
+     ],
+     "moins": [
+      "Parcours plus long"
+     ],
+     "conseil": "Le diplôme de moniteur-éducateur est un bon tremplin."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Gratuit pour toi",
+     "alt": "Oui",
+     "sel": "Sélectif",
+     "pour": "Ceux qui veulent être payés",
+     "plus": [
+      "Salaire pendant 3 ans"
+     ],
+     "moins": [
+      "Il faut trouver un employeur"
+     ],
+     "conseil": "Cherche ton employeur dès la confirmation de tes vœux."
+    }
+   ]
+  },
+  "architecte": {
+   "m": {
+    "quotidien": "Rencontrer les clients, dessiner et modéliser les projets en 3D, déposer les permis de construire, suivre les chantiers.",
+    "qualites": [
+     "Créativité",
+     "Rigueur",
+     "Sens de l’espace"
+    ],
+    "evol": "Associé d’agence, architecte libéral, urbaniste, architecte du patrimoine."
+   },
+   "c": [
+    {
+     "duree": "5 ans (+1 an HMONP)",
+     "cout": "Frais d’école publique, modérés",
+     "alt": "Rare",
+     "sel": "Sélectif",
+     "pour": "Bacs généraux et STD2A",
+     "plus": [
+      "Diplôme d’État",
+      "Écoles publiques peu chères"
+     ],
+     "moins": [
+      "Charge de travail très lourde (projets, nuits blanches)"
+     ],
+     "conseil": "Joins des dessins, croquis ou maquettes à ton dossier : ils comptent beaucoup."
+    },
+    {
+     "duree": "5 ans (+1 an HMONP)",
+     "cout": "Élevé (plusieurs milliers d’€/an)",
+     "alt": "Rare",
+     "sel": "Sur dossier et entretien",
+     "pour": "Ceux qui peuvent financer leurs études",
+     "plus": [
+      "Petites promotions"
+     ],
+     "moins": [
+      "Coût élevé"
+     ],
+     "conseil": "Vérifie que l’école délivre bien le diplôme d’État."
+    },
+    {
+     "duree": "6 ans et plus",
+     "cout": "Faible",
+     "alt": "Possible en BTS/BUT",
+     "sel": "Admission sur dossier",
+     "pour": "Bacs STI2D, pro",
+     "plus": [
+      "Tu connais déjà le chantier"
+     ],
+     "moins": [
+      "Plus long"
+     ],
+     "conseil": "Garde tes travaux de BTS ou de BUT pour ton dossier."
+    }
+   ]
+  },
+  "pilote": {
+   "m": {
+    "quotidien": "Préparer le vol (météo, carburant, trajectoire), piloter avec le commandant de bord, gérer les imprévus. Horaires décalés et nuits à l’étranger.",
+    "qualites": [
+     "Sang-froid",
+     "Anglais",
+     "Rigueur"
+    ],
+    "evol": "Copilote, puis commandant de bord, instructeur."
+   },
+   "c": [
+    {
+     "duree": "Prépa + ≈ 2 ans",
+     "cout": "Très réduit",
+     "alt": "Non",
+     "sel": "Extrêmement sélectif",
+     "pour": "Bacs généraux maths + physique",
+     "plus": [
+      "Formation publique de référence"
+     ],
+     "moins": [
+      "Très peu de places"
+     ],
+     "conseil": "Vise une prépa scientifique et travaille ton anglais dès maintenant."
+    },
+    {
+     "duree": "≈ 2 ans",
+     "cout": "Souvent 80 000 à 130 000 €",
+     "alt": "Non",
+     "sel": "Tests d’entrée",
+     "pour": "Ceux qui peuvent financer la formation",
+     "plus": [
+      "Accessible juste après le bac"
+     ],
+     "moins": [
+      "Prêt très lourd à rembourser"
+     ],
+     "conseil": "Passe la visite médicale de classe 1 avant de payer quoi que ce soit."
+    },
+    {
+     "duree": "Plusieurs années d’engagement",
+     "cout": "Gratuit, et tu es payé",
+     "alt": "Oui",
+     "sel": "Très sélectif",
+     "pour": "Ceux qui sont attirés par l’armée",
+     "plus": [
+      "Formation financée"
+     ],
+     "moins": [
+      "Engagement long dans l’armée"
+     ],
+     "conseil": "Renseigne-toi en centre de recrutement (CIRFA)."
+    }
+   ]
+  },
+  "journaliste": {
+   "m": {
+    "quotidien": "Chercher des sujets, interviewer, vérifier les informations, écrire ou tourner, souvent dans l’urgence.",
+    "qualites": [
+     "Curiosité",
+     "Aisance à l’écrit",
+     "Esprit critique"
+    ],
+    "evol": "Reporter, présentateur, rédacteur en chef, journaliste spécialisé."
+   },
+   "c": [
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible",
+     "sel": "Très sélectif",
+     "pour": "Bacs généraux, bons à l’écrit",
+     "plus": [
+      "Beaucoup de pratique dès la 1re année"
+     ],
+     "moins": [
+      "Très peu de places"
+     ],
+     "conseil": "Montre ce que tu as déjà écrit ou tourné (journal du lycée, blog, podcast)."
+    },
+    {
+     "duree": "5 ans",
+     "cout": "Droits universitaires, puis frais d’école",
+     "alt": "Possible",
+     "sel": "Concours très sélectifs",
+     "pour": "Bacs généraux",
+     "plus": [
+      "Écoles les plus reconnues"
+     ],
+     "moins": [
+      "Concours exigeants"
+     ],
+     "conseil": "Lis la presse tous les jours : les concours testent ta culture de l’actu."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Payant",
+     "alt": "Possible",
+     "sel": "Variable",
+     "pour": "Ceux qui n’ont pas eu les écoles publiques",
+     "plus": [
+      "Accessible après le bac"
+     ],
+     "moins": [
+      "Reconnaissance variable selon l’école"
+     ],
+     "conseil": "Vérifie que l’école est reconnue par la profession."
+    }
+   ]
+  },
+  "graphiste": {
+   "m": {
+    "quotidien": "Comprendre la demande d’un client, chercher des idées, créer des visuels sur ordinateur, présenter et ajuster.",
+    "qualites": [
+     "Créativité",
+     "Sens esthétique",
+     "Écoute du client"
+    ],
+    "evol": "Directeur artistique, UI designer, motion designer, freelance."
+   },
+   "c": [
+    {
+     "duree": "3 ans",
+     "cout": "Gratuit en public",
+     "alt": "Possible",
+     "sel": "Sélectif",
+     "pour": "Bacs STD2A, général (arts)",
+     "plus": [
+      "Diplôme national reconnu"
+     ],
+     "moins": [
+      "Très demandé"
+     ],
+     "conseil": "Ton portfolio est décisif : montre tes meilleurs travaux, pas tous."
+    },
+    {
+     "duree": "3 à 5 ans",
+     "cout": "Frais modérés en école publique",
+     "alt": "Rare",
+     "sel": "Concours d’entrée",
+     "pour": "Profils artistiques",
+     "plus": [
+      "Culture artistique forte"
+     ],
+     "moins": [
+      "Moins orienté entreprise"
+     ],
+     "conseil": "Prépare le concours avec un dossier de travaux personnels."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible",
+     "sel": "Sélectif",
+     "pour": "Profils créatifs et numériques",
+     "plus": [
+      "Compétences web et vidéo recherchées"
+     ],
+     "moins": [
+      "Moins de dessin pur"
+     ],
+     "conseil": "Montre des créations numériques : sites, animations, vidéos."
+    }
+   ]
+  },
+  "cuisinier": {
+   "m": {
+    "quotidien": "Préparer les produits, cuisiner pendant le service, dresser les assiettes, gérer les stocks et l’hygiène. Horaires en coupure, soirs et week-ends.",
+    "qualites": [
+     "Créativité",
+     "Résistance au stress",
+     "Rigueur"
+    ],
+    "evol": "Chef de partie, second, chef de cuisine, ouvrir ton restaurant."
+   },
+   "c": [
+    {
+     "duree": "2 ans",
+     "cout": "Gratuit, ou payé en apprentissage",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Après la 3e ou en reconversion",
+     "plus": [
+      "Rapide",
+      "Énormément d’offres d’emploi"
+     ],
+     "moins": [
+      "Métier physique et horaires décalés"
+     ],
+     "conseil": "En apprentissage, choisis un bon restaurant : c’est là que tu apprends le plus."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Gratuit",
+     "alt": "Possible",
+     "sel": "Accessible",
+     "pour": "Après la 3e",
+     "plus": [
+      "Bac en poche"
+     ],
+     "moins": [
+      "3 ans avant de travailler"
+     ],
+     "conseil": "Fais des stages dans des établissements différents."
+    },
+    {
+     "duree": "2 ans après le bac",
+     "cout": "Gratuit en lycée public",
+     "alt": "Possible",
+     "sel": "Sélectif",
+     "pour": "Bacs STHR, pro cuisine",
+     "plus": [
+      "Ouvre les postes d’encadrement"
+     ],
+     "moins": [
+      "Plus de gestion"
+     ],
+     "conseil": "Montre ton expérience en cuisine dans ton dossier."
+    }
+   ]
+  },
+  "mecanicien": {
+   "m": {
+    "quotidien": "Diagnostiquer les pannes avec des outils électroniques, réparer, entretenir, conseiller les clients.",
+    "qualites": [
+     "Habileté manuelle",
+     "Logique",
+     "Patience"
+    ],
+    "evol": "Technicien expert, chef d’atelier, ouvrir ton garage."
+   },
+   "c": [
+    {
+     "duree": "2 ans",
+     "cout": "Gratuit, ou payé en apprentissage",
+     "alt": "Oui",
+     "sel": "Accessible",
+     "pour": "Après la 3e",
+     "plus": [
+      "Rapide",
+      "Métier qui recrute"
+     ],
+     "moins": [
+      "Travail physique"
+     ],
+     "conseil": "Choisis l’apprentissage pour être payé et embauché plus facilement."
+    },
+    {
+     "duree": "3 ans",
+     "cout": "Gratuit",
+     "alt": "Possible",
+     "sel": "Accessible",
+     "pour": "Après la 3e ou un CAP",
+     "plus": [
+      "Diagnostic électronique"
+     ],
+     "moins": [
+      "3 ans de formation"
+     ],
+     "conseil": "Intéresse-toi aux véhicules électriques : c’est l’avenir du métier."
+    },
+    {
+     "duree": "2 ans après le bac",
+     "cout": "Gratuit, ou payé en alternance",
+     "alt": "Oui",
+     "sel": "Accessible à sélectif",
+     "pour": "Bacs pro, STI2D",
+     "plus": [
+      "Postes de technicien"
+     ],
+     "moins": [
+      "Plus théorique"
+     ],
+     "conseil": "Garde de bonnes notes en bac pro pour être pris en BTS."
+    }
+   ]
+  },
+  "pompier": {
+   "m": {
+    "quotidien": "Secours aux personnes (la grande majorité des interventions), incendies, accidents. Gardes de 24 h, entraînement physique quotidien.",
+    "qualites": [
+     "Sang-froid",
+     "Condition physique",
+     "Esprit d’équipe"
+    ],
+    "evol": "Sergent, adjudant, officier, spécialités (plongée, risques chimiques…)."
+   },
+   "c": [
+    {
+     "duree": "Concours + formation",
+     "cout": "Gratuit",
+     "alt": "Rémunéré",
+     "sel": "Concours sélectif",
+     "pour": "Dès 16 ans en volontaire, puis concours dès 18 ans",
+     "plus": [
+      "Expérience très valorisée au concours"
+     ],
+     "moins": [
+      "Concours exigeant"
+     ],
+     "conseil": "Engage-toi comme volontaire dès 16 ans : c’est le meilleur atout."
+    },
+    {
+     "duree": "Quelques mois",
+     "cout": "Gratuit",
+     "alt": "Rémunéré",
+     "sel": "Tests",
+     "pour": "Jeunes en bonne condition physique",
+     "plus": [
+      "Beaucoup d’interventions"
+     ],
+     "moins": [
+      "Statut militaire"
+     ],
+     "conseil": "Prépare les tests sportifs à l’avance."
+    },
+    {
+     "duree": "Bac+2 ou bac+3 + concours",
+     "cout": "Gratuit",
+     "alt": "Rémunéré",
+     "sel": "Très sélectif",
+     "pour": "Étudiants du supérieur",
+     "plus": [
+      "Responsabilités de commandement"
+     ],
+     "moins": [
+      "Très peu de postes"
+     ],
+     "conseil": "Une expérience de volontaire reste très appréciée."
+    }
+   ]
+  },
+  "militaire": {
+   "m": {
+    "quotidien": "Entraînement, missions en France (Sentinelle) et à l’étranger, apprentissage d’un métier technique ou de combat.",
+    "qualites": [
+     "Discipline",
+     "Condition physique",
+     "Esprit d’équipe"
+    ],
+    "evol": "Sous-officier, officier, reconversion accompagnée dans le civil."
+   },
+   "c": [
+    {
+     "duree": "Quelques mois de formation",
+     "cout": "Gratuit, logé et nourri",
+     "alt": "Rémunéré",
+     "sel": "Accessible",
+     "pour": "Tous, même sans diplôme",
+     "plus": [
+      "Formation à un métier gratuite"
+     ],
+     "moins": [
+      "Missions loin de chez toi"
+     ],
+     "conseil": "Rends-toi dans un centre de recrutement (CIRFA) pour découvrir les métiers."
+    },
+    {
+     "duree": "Quelques mois",
+     "cout": "Gratuit",
+     "alt": "Rémunéré",
+     "sel": "Sélectif",
+     "pour": "Bacheliers",
+     "plus": [
+      "Encadrement rapide"
+     ],
+     "moins": [
+      "Mutations"
+     ],
+     "conseil": "Prépare-toi physiquement avant les tests."
+    },
+    {
+     "duree": "3 à 5 ans",
+     "cout": "Gratuit, rémunéré en école",
+     "alt": "Rémunéré",
+     "sel": "Très sélectif",
+     "pour": "Bons dossiers, prépas",
+     "plus": [
+      "Carrière de commandement"
+     ],
+     "moins": [
+      "Concours exigeants"
+     ],
+     "conseil": "Renseigne-toi sur les prépas militaires (lycées de la Défense)."
+    }
+   ]
+  },
+  "marketing": {
+   "m": {
+    "quotidien": "Étudier les clients et la concurrence, lancer des produits, préparer des campagnes, analyser les résultats.",
+    "qualites": [
+     "Créativité",
+     "Esprit d’analyse",
+     "Aisance à l’oral"
+    ],
+    "evol": "Chef de produit, responsable marketing, directeur marketing."
+   },
+   "c": [
+    {
+     "duree": "3 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible",
+     "sel": "Sélectif",
+     "pour": "Bacs STMG, général",
+     "plus": [
+      "Formation reconnue",
+      "Alternance possible"
+     ],
+     "moins": [
+      "Très demandé"
+     ],
+     "conseil": "Montre une expérience concrète : projet, job, compte que tu gères."
+    },
+    {
+     "duree": "3 à 5 ans",
+     "cout": "Souvent 8 000 €/an et plus, sauf en alternance",
+     "alt": "Souvent possible",
+     "sel": "Variable",
+     "pour": "Ceux qui visent des postes à responsabilités",
+     "plus": [
+      "Réseau, international"
+     ],
+     "moins": [
+      "Coût élevé"
+     ],
+     "conseil": "Vérifie que le diplôme est visé ou reconnu par l’État."
+    },
+    {
+     "duree": "5 ans",
+     "cout": "Droits universitaires",
+     "alt": "Possible en master",
+     "sel": "Master sélectif",
+     "pour": "Bacs généraux",
+     "plus": [
+      "Peu cher"
+     ],
+     "moins": [
+      "Moins encadré"
+     ],
+     "conseil": "Vise un master en alternance."
+    }
+   ]
+  }
+ },
+ "SALAIRES": {
+  "avocat": [
+   [
+    "2 000 – 4 000 € HT/mois",
+    "Rétrocession de collaborateur, cotisations à déduire. Minimum à Paris : 3 600 € HT la 1re année.",
+    "Ordre des avocats de Paris"
+   ],
+   [
+    "2 000 – 4 000 € HT/mois",
+    "Même rémunération que la voie classique, parfois plus dans les grands cabinets.",
+    "Ordre des avocats de Paris"
+   ],
+   [
+    "Salaire de juriste, puis d’avocat",
+    "Tu es payé comme juriste pendant 8 ans, puis tu deviens avocat avec déjà de l’expérience.",
+    ""
+   ]
+  ],
+  "infirmier": [
+   [
+    "≈ 1 950 – 2 500 € brut/mois",
+    "1 944 € brut à l’hôpital public hors primes (nuits, week-ends en plus), 2 100 à 2 500 € en clinique privée.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 950 – 2 500 € brut/mois",
+    "Une fois infirmier. Pendant tes années d’aide-soignant, le salaire est plus bas.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 950 – 2 500 € brut/mois",
+    "Même salaire une fois diplômé, et tu es déjà payé pendant les 3 ans d’études.",
+    "Grille FPH 2026"
+   ]
+  ],
+  "electricien": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus avec l’expérience, les déplacements ou à ton compte.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Évolution rapide vers chef d’équipe (chef de chantier : à partir de 2 080 €).",
+    "Onisep"
+   ],
+   [
+    "≈ 1 900 – 2 500 € brut/mois",
+    "Technicien électrotechnicien, avec plus de responsabilités.",
+    "Onisep"
+   ]
+  ],
+  "medecin": [
+   [
+    "Interne : ≈ 1 650 – 2 900 € net/mois",
+    "Gardes comprises pendant l’internat. Une fois diplômé : ≈ 4 500 – 5 000 € brut à l’hôpital, souvent plus en libéral.",
+    "Grille nationale des internes"
+   ],
+   [
+    "Interne : ≈ 1 650 – 2 900 € net/mois",
+    "Mêmes revenus que par le PASS : seule la porte d’entrée change.",
+    "Grille nationale des internes"
+   ],
+   [
+    "Mêmes revenus en France",
+    "Si tu exerces en France ensuite, tu es rémunéré comme les autres médecins.",
+    ""
+   ]
+  ],
+  "ingenieur": [
+   [
+    "≈ 2 900 – 3 500 € brut/mois",
+    "Salaire médian au premier emploi : 39 000 € brut par an.",
+    "Enquête CGE 2026"
+   ],
+   [
+    "≈ 2 900 – 3 500 € brut/mois",
+    "Même diplôme d’ingénieur, mêmes salaires de sortie.",
+    "Enquête CGE 2026"
+   ],
+   [
+    "≈ 2 900 – 3 500 € brut/mois",
+    "Et tu es déjà payé pendant tes 3 ans d’école en apprentissage.",
+    "Enquête CGE 2026"
+   ]
+  ],
+  "psychologue": [
+   [
+    "≈ 1 870 – 2 600 € brut/mois",
+    "Environ 2 580 € brut à l’hôpital public ; en libéral, ça dépend du nombre de patients.",
+    "Onisep, grille FPH"
+   ],
+   [
+    "≈ 1 920 – 1 950 € brut/mois",
+    "Grille de la fonction publique, qui progresse avec l’ancienneté.",
+    "Grille PsyEN"
+   ],
+   [
+    "≈ 1 870 – 2 600 € brut/mois",
+    "Mêmes salaires que les psychologues formés à la fac.",
+    "Onisep"
+   ]
+  ],
+  "sport": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Salarié en salle ou en club. En indépendant, ça dépend du nombre de clients.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Éducateur sportif ou entraîneur, plus selon le niveau des sportifs encadrés.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 170 € brut/mois",
+    "Prof d’EPS certifié à la titularisation, puis progression à l’ancienneté.",
+    "Onisep"
+   ]
+  ],
+  "kine": [
+   [
+    "≈ 2 000 – 2 500 € brut/mois",
+    "Salarié à l’hôpital ou en clinique. En libéral, les revenus augmentent avec la patientèle.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 2 000 – 2 500 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 2 000 – 2 500 € brut/mois",
+    "Une fois autorisé à exercer en France.",
+    "Onisep, CIDJ"
+   ]
+  ],
+  "commercial": [
+   [
+    "À partir de ≈ 2 080 € brut/mois",
+    "Plus des primes selon tes ventes : le variable peut beaucoup changer ton salaire.",
+    "Onisep"
+   ],
+   [
+    "À partir de ≈ 2 080 € brut/mois",
+    "Plus des primes, avec des postes un peu plus qualifiés.",
+    "Onisep"
+   ],
+   [
+    "≈ 3 300 – 3 500 € brut/mois",
+    "Salaire moyen des diplômés d’écoles de commerce au premier emploi : 40 825 €/an.",
+    "Enquête CGE 2026"
+   ]
+  ],
+  "comptable": [
+   [
+    "≈ 2 080 – 2 400 € brut, puis 4 100 €+",
+    "Collaborateur en cabinet pendant le parcours, puis à partir de 4 100 € brut une fois expert-comptable.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 080 – 2 400 € brut, puis 4 100 €+",
+    "Tu peux être comptable salarié dès bac+2.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 080 – 2 400 € brut, puis 4 100 €+",
+    "Mêmes salaires que par la voie DCG.",
+    "Onisep"
+   ]
+  ],
+  "developpeur": [
+   [
+    "À partir de ≈ 2 830 € brut/mois",
+    "Débutant bac+2, avec une progression rapide.",
+    "Onisep"
+   ],
+   [
+    "À partir de ≈ 2 830 € brut/mois",
+    "Et environ 2 920 € si tu poursuis jusqu’au diplôme d’ingénieur.",
+    "Onisep"
+   ],
+   [
+    "À partir de ≈ 2 830 € brut/mois",
+    "Ce sont tes compétences et tes projets qui comptent.",
+    "Onisep"
+   ]
+  ],
+  "prof": [
+   [
+    "≈ 2 170 € brut/mois",
+    "À la titularisation (≈ 2 050 € net avec les primes), puis progression à l’ancienneté.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 170 € brut/mois",
+    "Même grille pour tous les professeurs des écoles.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 170 € brut/mois",
+    "Même grille, ton ancienneté éventuelle dans la fonction publique peut compter.",
+    "Onisep"
+   ]
+  ],
+  "veterinaire": [
+   [
+    "≈ 2 300 – 3 000 € brut/mois",
+    "Selon la taille de la clinique et la région, plus en devenant associé.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 2 300 – 3 000 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 2 300 – 3 000 € brut/mois",
+    "Même diplôme d’État, mais pense au remboursement d’un éventuel prêt.",
+    "Onisep, CIDJ"
+   ]
+  ],
+  "policier": [
+   [
+    "≈ 1 530 – 1 625 € net/mois",
+    "Primes comprises, plus en Île-de-France.",
+    "CIDJ"
+   ],
+   [
+    "≈ 1 870 – 2 300 € net/mois",
+    "Primes comprises, plus en Île-de-France.",
+    "Grille police nationale 2026"
+   ],
+   [
+    "Comparable à la police",
+    "Avec le logement fourni en caserne, ce qui change beaucoup le budget.",
+    ""
+   ]
+  ],
+  "communitymanager": [
+   [
+    "≈ 1 700 – 2 230 € brut/mois",
+    "Plus en évoluant vers social media manager ou en freelance.",
+    "Onisep, Cned"
+   ],
+   [
+    "≈ 1 700 – 2 230 € brut/mois",
+    "Les profils qui savent faire de la vidéo sont plus recherchés.",
+    "Onisep, Cned"
+   ],
+   [
+    "≈ 1 700 – 2 230 € brut/mois",
+    "Le diplôme compte moins que ton portfolio.",
+    "Onisep, Cned"
+   ]
+  ],
+  "pharmacien": [
+   [
+    "≈ 3 620 – 5 800 € brut/mois",
+    "Pharmacien adjoint en officine (salarié).",
+    "Onisep"
+   ],
+   [
+    "≈ 3 620 – 5 800 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep"
+   ],
+   [
+    "À partir de 4 500 € brut/mois",
+    "Praticien hospitalier, hors primes. Tu es déjà payé pendant l’internat.",
+    "Onisep"
+   ]
+  ],
+  "sagefemme": [
+   [
+    "À partir de 2 264 € brut/mois",
+    "À l’hôpital public, plus les primes (nuits, week-ends).",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 264 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 264 € brut/mois",
+    "Une fois autorisé à exercer en France.",
+    "Onisep"
+   ]
+  ],
+  "dentiste": [
+   [
+    "≈ 4 000 – 6 000 € brut/mois",
+    "Selon le cabinet et la région. À partir de 4 634 € brut à l’hôpital public.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 4 000 – 6 000 € brut/mois",
+    "Même diplôme, mêmes revenus.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 4 000 – 6 000 € brut/mois",
+    "Pense au remboursement d’un éventuel prêt.",
+    "Onisep, CIDJ"
+   ]
+  ],
+  "orthophoniste": [
+   [
+    "≈ 2 045 – 2 300 € brut/mois",
+    "2 045 € à l’hôpital public, environ 2 300 € en libéral au début.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 2 045 – 2 300 € brut/mois",
+    "Même diplôme, mêmes revenus.",
+    "Onisep, CIDJ"
+   ],
+   [
+    "≈ 2 045 – 2 300 € brut/mois",
+    "Une fois autorisé à exercer en France.",
+    "Onisep, CIDJ"
+   ]
+  ],
+  "aidesoignant": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "À l’hôpital public, plus les primes de nuit et de week-end.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Et tu es payé pendant la formation.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Même diplôme d’État.",
+    "Onisep"
+   ]
+  ],
+  "educateur": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus les primes selon l’établissement.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Une fois le DEES obtenu.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Et tu es payé pendant les 3 ans.",
+    "Onisep"
+   ]
+  ],
+  "architecte": [
+   [
+    "À partir de 2 200 € brut/mois",
+    "Salarié en agence au début, plus en libéral avec l’expérience.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 200 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 200 € brut/mois",
+    "Une fois architecte diplômé.",
+    "Onisep"
+   ]
+  ],
+  "pilote": [
+   [
+    "≈ 3 000 – 4 500 € brut/mois",
+    "Copilote débutant, selon la compagnie.",
+    "Onisep, presse spécialisée"
+   ],
+   [
+    "≈ 3 000 – 4 500 € brut/mois",
+    "Moins les mensualités du prêt de formation.",
+    "Onisep, presse spécialisée"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Solde d’officier hors primes, qui augmente vite avec les primes de vol.",
+    "Onisep"
+   ]
+  ],
+  "journaliste": [
+   [
+    "À partir de 1 878 € brut/mois",
+    "Variable selon le média ; les pigistes sont payés à l’article.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 878 € brut/mois",
+    "Plus élevé dans les grands médias nationaux.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 878 € brut/mois",
+    "Ton réseau et tes stages comptent beaucoup.",
+    "Onisep"
+   ]
+  ],
+  "graphiste": [
+   [
+    "À partir de 1 878 € brut/mois",
+    "Salarié en agence ou en entreprise, variable en freelance.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 878 € brut/mois",
+    "Même métier, mêmes salaires.",
+    "Onisep"
+   ],
+   [
+    "≈ 1 878 – 2 200 € brut/mois",
+    "Les profils web et UI démarrent plus haut.",
+    "Onisep"
+   ]
+  ],
+  "cuisinier": [
+   [
+    "À partir de 1 868 € brut/mois",
+    "Commis de cuisine au début, puis chef de partie.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Évolution rapide si tu es bon.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 500 – 3 250 € brut/mois",
+    "Une fois chef de cuisine en restaurant traditionnel, après quelques années.",
+    "Onisep"
+   ]
+  ],
+  "mecanicien": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "En garage ou en concession.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus avec le diagnostic électronique.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Évolution plus rapide vers chef d’atelier.",
+    "Onisep"
+   ]
+  ],
+  "pompier": [
+   [
+    "À partir de 1 888 € brut/mois",
+    "Hors primes, qui augmentent nettement le salaire.",
+    "Onisep"
+   ],
+   [
+    "≈ 1 750 – 1 800 € net/mois",
+    "Pompier de Paris, une fois la formation terminée, pour un célibataire. Logé en caserne les jours de garde.",
+    "CIDJ, L’Étudiant, Matmut"
+   ],
+   [
+    "Grille d’officier",
+    "Nettement plus élevé que sapeur.",
+    ""
+   ]
+  ],
+  "militaire": [
+   [
+    "≈ 1 980 € brut/mois",
+    "Engagé volontaire, logé et nourri, ce qui change beaucoup le budget.",
+    "Armée de Terre (sengager.fr)"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Plus les primes selon les missions.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Sous-lieutenant hors primes, progression rapide.",
+    "Onisep"
+   ]
+  ],
+  "marketing": [
+   [
+    "≈ 2 150 – 2 650 € brut/mois",
+    "Chargé de marketing ou d’études débutant, plus les primes éventuelles.",
+    "Onisep, grilles de salaires 2026"
+   ],
+   [
+    "≈ 3 300 – 3 500 € brut/mois",
+    "Salaire moyen des diplômés d’écoles de commerce au premier emploi.",
+    "Enquête CGE 2026"
+   ],
+   [
+    "≈ 2 150 – 2 650 € brut/mois",
+    "Chargé d’études marketing ou média débutant.",
+    "Onisep, grilles de salaires 2026"
+   ]
+  ]
+ },
+ "PSLAB": {
+  "P": [
+   "Sur Parcoursup",
+   "ps-p"
+  ],
+  "H": [
+   "Hors Parcoursup (candidature directe)",
+   "ps-h"
+  ],
+  "A": [
+   "Après la 3e (Affelnet) ou en apprentissage",
+   "ps-h"
+  ],
+  "X": [
+   "En partie sur Parcoursup, selon l’établissement",
+   "ps-x"
+  ]
+ },
+ "PSUP": {
+  "avocat": "PPP",
+  "infirmier": "PHP",
+  "electricien": "AAP",
+  "medecin": "PPH",
+  "ingenieur": "PPP",
+  "psychologue": "PHX",
+  "sport": "HPP",
+  "kine": "PPH",
+  "commercial": "PPX",
+  "comptable": "PPP",
+  "developpeur": "PPH",
+  "prof": "PPH",
+  "veterinaire": "PPX",
+  "policier": "HHH",
+  "communitymanager": "PPX",
+  "pharmacien": "PPP",
+  "sagefemme": "PPH",
+  "dentiste": "PPH",
+  "orthophoniste": "PPH",
+  "aidesoignant": "HHA",
+  "educateur": "PXP",
+  "architecte": "PXP",
+  "pilote": "HHH",
+  "journaliste": "PHX",
+  "graphiste": "PXP",
+  "cuisinier": "AAP",
+  "mecanicien": "AAP",
+  "pompier": "HHH",
+  "militaire": "HHX",
+  "marketing": "PXP"
+ },
+ "MIN_ANS": {
+  "medecin": 9,
+  "veterinaire": 6,
+  "comptable": 8,
+  "avocat": 7,
+  "ingenieur": 5,
+  "psychologue": 5,
+  "kine": 5,
+  "prof": 5,
+  "infirmier": 3,
+  "developpeur": 2,
+  "commercial": 2,
+  "communitymanager": 2,
+  "sport": 1,
+  "electricien": 2,
+  "policier": 1,
+  "pharmacien": 6,
+  "sagefemme": 6,
+  "dentiste": 6,
+  "orthophoniste": 5,
+  "aidesoignant": 1,
+  "educateur": 3,
+  "architecte": 5,
+  "pilote": 2,
+  "journaliste": 3,
+  "graphiste": 3,
+  "cuisinier": 2,
+  "mecanicien": 2,
+  "pompier": 1,
+  "militaire": 1,
+  "marketing": 3
+ }
+}
