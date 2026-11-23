@@ -130,6 +130,28 @@ footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mute);font-si
 .kv span{color:var(--mute)}
 .kv b{font-weight:600;text-align:right}
 .note{font-size:13px;color:var(--mute);margin-top:14px}
+.founder-blk{padding-top:0}
+.founder{display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:28px;padding:36px 40px}
+.founder-q{flex:1 1 420px;min-width:0}
+.founder-q .k{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d);margin-bottom:10px}
+.founder-q p{font-family:Poppins,sans-serif;font-weight:600;font-size:22px;line-height:1.4;color:var(--ink);margin:0 0 12px;text-wrap:balance}
+.founder-q span{font-size:14px;color:var(--mute)}
+.founder .btn{flex:none}
+@media (max-width:600px){.founder{padding:26px 22px}.founder-q p{font-size:19px}}
+.story{max-width:720px;margin:0 auto}
+.story-k{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d)}
+.story h1{font-size:44px;line-height:1.1;margin:10px 0 14px;text-wrap:balance}
+.story-lead{font-size:20px;color:var(--ink2);margin:0 0 30px}
+.story-body p{font-size:17px;line-height:1.75;color:var(--ink2);margin:0 0 18px}
+.story-q{margin:34px 0;padding:6px 0 6px 24px;border-left:5px solid var(--gold);font-family:Poppins,sans-serif;font-weight:700;font-size:26px;line-height:1.35;color:var(--ink);text-wrap:balance}
+.story h2{font-size:24px;margin:40px 0 14px}
+.story-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.story-list li{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;color:var(--ink2);line-height:1.55}
+.story-list b{color:var(--ink);display:block;margin-bottom:2px}
+.story-sign{margin:32px 0 0;font-style:italic;color:var(--mute)}
+.story-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.story-cta .btn{display:inline-flex;align-items:center;gap:8px}
+@media (max-width:600px){.story h1{font-size:32px}.story-q{font-size:21px}}
 .legal{max-width:780px;padding:36px}.legal h1{font-size:34px}.legal h2{font-size:19px;margin:28px 0 8px}.legal p{color:var(--ink2);line-height:1.65;margin:0 0 12px}
 .lgnav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.lgnav a{padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:14px;color:var(--ink2);text-decoration:none;background:#fff}.lgnav a.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .ftl{display:flex;gap:16px;flex-wrap:wrap;width:100%;font-size:13px}.ftl a{color:var(--mute)}
@@ -337,7 +359,7 @@ select.inp{appearance:auto}
   <div class="wrap ft">
     <div><b style="color:var(--ink)">trouvetavoie</b> · un outil d'aide à la décision. Il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
     <div>Sources : Parcoursup, Onisep, CNB, établissements · certaines données chiffrées sont en cours d'intégration <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
-    <div class="ftl"><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a><span>© 2026 trouvetavoie</span></div>
+    <div class="ftl"><a href="#a-propos">Notre histoire</a><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a><span>© 2026 trouvetavoie</span></div>
   </div>
 </footer>
 
@@ -1227,6 +1249,17 @@ function home(){
     </div>
   </div></section>
 
+  <section class="blk founder-blk"><div class="wrap">
+    <div class="founder">
+      <div class="founder-q">
+        <div class="k">Pourquoi trouvetavoie ?</div>
+        <p>« Parcoursup ne m’a pas aidé. J’ai mis des vœux au hasard et je me suis retrouvé dans une école qui ne me plaisait pas. J’ai créé le guide que j’aurais aimé avoir. »</p>
+        <span>Le fondateur, ancien élève de STMG</span>
+      </div>
+      <a class="btn btn-o" href="#a-propos">Lire notre histoire ${IC.arrow}</a>
+    </div>
+  </div></section>
+
   <section style="padding:0 0 80px"><div class="wrap">
     <div class="quizb"><div><h2>Pas encore d'idée de métier ?</h2><p>Réponds à une dizaine de questions adaptées à ton bac, on te propose des pistes parmi ${Object.keys(METIERS).length} métiers adaptées à ta formation actuelle.</p></div>
     <a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div>
@@ -1747,6 +1780,37 @@ const ED = { // ⚠ À compléter dès réception du SIRET
   mediateur:'[Nom et site du médiateur de la consommation]'
 };
 const MAJ_LEGAL = '23 novembre 2026';
+function histoire(){
+  return `<div class="wrap page fade">
+    <article class="story">
+      <div class="crumb"><a href="#accueil">Accueil</a> / Notre histoire</div>
+      <div class="story-k">Notre histoire</div>
+      <h1>Le guide que j’aurais aimé avoir</h1>
+      <p class="story-lead">trouvetavoie est né d’une orientation ratée : la mienne.</p>
+      <div class="story-body">
+        <p>J’étais en terminale STMG et je ne savais pas quoi faire après le bac. Parcoursup ne m’a pas aidé. J’ai cherché partout, sans jamais trouver de réponse claire à une question pourtant simple : qu’est-ce qui est fait pour moi ?</p>
+        <p>Alors j’ai fait comme beaucoup d’élèves. J’ai mis des vœux un peu au hasard, dans des formations qui ne me plaisaient pas vraiment. Elles ne m’ont pas retenu non plus.</p>
+        <p>Je me suis retrouvé dans une école privée payante, parce que c’était le seul choix qu’il me restait. Je ne m’y suis pas plu, et j’ai arrêté.</p>
+        <p>Je me suis ensuite lancé à mon compte, avec un objectif : reprendre mes études, mais cette fois dans une voie que j’aurai vraiment choisie. Et c’est en construisant trouvetavoie que j’ai trouvé ce qui me plaît.</p>
+      </div>
+      <blockquote class="story-q">Personne ne devrait choisir son avenir au hasard, faute d’informations claires.</blockquote>
+      <div class="story-body">
+        <p>trouvetavoie, c’est le guide complet que je n’ai pas eu : pour chaque métier, tous les chemins pour y arriver, les écoles, ce qu’elles coûtent et tes chances d’y entrer, expliqués simplement. Je suis convaincu que chacun peut y trouver sa voie, et la choisir au lieu de la subir.</p>
+      </div>
+      <h2>Mes engagements</h2>
+      <ul class="story-list">
+        <li><b>Des informations sourcées.</b> Les données viennent de Parcoursup, de l’Onisep et des établissements, avec leur source.</li>
+        <li><b>L’essentiel reste gratuit.</b> Le quiz d’orientation et le chemin principal de chaque métier sont accessibles sans payer.</li>
+        <li><b>Pas de publicité, pas de revente de données.</b> Tes réponses au quiz restent dans ton navigateur.</li>
+      </ul>
+      <p class="story-sign">Le fondateur de trouvetavoie, ancien élève de STMG</p>
+      <div class="story-cta">
+        <a class="btn btn-p" href="#quiz">Faire le quiz gratuit ${IC.arrow}</a>
+        <a class="btn btn-o" href="#metiers">Voir les ${Object.keys(METIERS).length} métiers</a>
+      </div>
+    </article>
+  </div>`;
+}
 function legal(k){
   const T = {
   mentions:['Mentions légales',`
@@ -1908,6 +1972,7 @@ function route(){
   else if(h==='quiz'){ html = quiz(); r='quiz'; }
   else if(h==='metiers'){ html = metiersPage(); r='metier'; }
   else if(h==='paiement'){ html = paiement(); r='paiement'; }
+  else if(h==='a-propos'){ html = histoire(); }
   else if(['mentions','cgv','confidentialite'].includes(h)){ html = legal(h); }
   else html = home();
   app.innerHTML = html;
