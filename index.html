@@ -276,13 +276,36 @@ select.inp{appearance:auto}
 .bar2 i{display:block;height:100%;background:var(--navy)}
 .fade{animation:fd .35s ease}
 @keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.search{grid-template-columns:1fr auto}
+.chip-all{text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px;background:var(--bg)}
+.chip-all svg{width:14px;height:14px}
+.door{margin-top:22px;display:flex;align-items:center;gap:14px;padding:14px 18px;border-radius:16px;background:#FFF4D1;color:var(--ink);text-decoration:none;max-width:560px;border:1px solid #F5E2A6;transition:transform .15s}
+.door:hover{transform:translateY(-1px)}
+.door b{display:block;font-size:15px}.door small{display:block;color:var(--ink2);font-size:14px}
+.door-ic{flex:none;width:36px;height:36px;border-radius:50%;background:var(--navy);color:var(--gold);display:grid;place-items:center;font-weight:800}
+.door svg{margin-left:auto;flex:none}
+.trust{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--mute)}
+.trust li{display:flex;align-items:center;gap:7px}
+.trust li:before{content:"";width:16px;height:16px;border-radius:50%;background:#E4F5EC url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%231B7F4B' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.tag-prem{display:inline-block;font-size:12px;font-weight:600;color:var(--gold-d);background:#FFF4D1;border-radius:6px;padding:2px 8px;margin-bottom:10px}
+.float.b{bottom:-18px}
+@media (max-width:960px){.mock{display:none}}
+@media (max-width:600px){.search{grid-template-columns:1fr}.hd-cta{display:none}}
+
+.mfilter{width:100%;max-width:420px;margin:8px 0 8px}
+.mgroup{margin-top:36px}.mgroup h2{font-size:22px;margin-bottom:14px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.mcard{display:block;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.mcard:hover{border-color:var(--ink);transform:translateY(-1px)}
+.mcard b{display:block;font-size:16px;margin-bottom:4px}
+.mcard small{display:block;color:var(--mute);font-size:13.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mempty{margin-top:24px;color:var(--mute)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
 <script>if(/vercel\.app$/.test(location.hostname)){const v=document.createElement('script');v.defer=true;v.src='/_vercel/insights/script.js';document.head.appendChild(v);}</script>
 </head>
 <body>
-<div class="demo"><b>Version démo</b> · les données chiffrées sont en cours d'intégration depuis les sources officielles</div>
 <header>
   <div class="wrap hd">
     <a class="logo" href="#accueil" aria-label="trouvetavoie, accueil">
@@ -290,14 +313,14 @@ select.inp{appearance:auto}
       <b style="font-weight:700">trouve<span>tavoie</span></b>
     </a>
     <nav class="main" id="nav" aria-label="Navigation principale">
-      <a href="#metier-avocat" data-r="metier">Métiers</a>
-      <a href="#ecoles" data-r="ecoles" class="lk">Écoles <span class="nl"></span></a>
-      <a href="#quiz" data-r="quiz" class="lk">Quiz orientation <span class="nl"></span></a>
-      <a href="#assistant" data-r="assistant" class="lk">Assistant lettres <span class="nl"></span></a>
+      <a href="#metiers" data-r="metier">Tous les métiers</a>
+      <a href="#quiz" data-r="quiz">Quiz d’orientation</a>
+      <a href="#ecoles" data-r="ecoles">Écoles</a>
+      <a href="#assistant" data-r="assistant">Lettres de motivation</a>
       <a href="#paiement" data-r="paiement">Tarifs</a>
     </nav>
     <div style="display:flex;gap:10px;align-items:center">
-      <a class="btn btn-p" href="#accueil" onclick="setTimeout(()=>document.getElementById('q')&&document.getElementById('q').focus(),50)">Commencer</a>
+      <a class="btn btn-p hd-cta" href="#accueil" onclick="setTimeout(()=>document.getElementById('q')&&document.getElementById('q').focus(),50)">Commencer</a>
       <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
     </div>
   </div>
@@ -306,7 +329,7 @@ select.inp{appearance:auto}
 <footer>
   <div class="wrap ft">
     <div><b style="color:var(--ink)">trouvetavoie</b> · un outil d'aide à la décision. Il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
-    <div>Sources : Parcoursup, Onisep, CNB, établissements <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
+    <div>Sources : Parcoursup, Onisep, CNB, établissements · certaines données chiffrées sont en cours d'intégration <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
     <div class="ftl"><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a><span>© 2026 trouvetavoie</span></div>
   </div>
 </footer>
@@ -1155,16 +1178,17 @@ function home(){
   return `
   <section class="hero"><div class="wrap hero-g">
     <div class="fade">
-      <span class="pill">Spécial Parcoursup 2027</span>
+      <span class="pill">Pour les lycéens · Parcoursup 2027</span>
       <h1>Choisis ton métier.<br>On te montre <em>tous les chemins</em>.</h1>
-      <p class="lead">Études, écoles publiques et privées, chances d'admission, coûts et démarches : tout ce qu'il faut pour décider, au même endroit.</p>
+      <p class="lead">Les études, les écoles, les coûts et tes chances d'admission pour ${Object.keys(METIERS).length} métiers, expliqués simplement.</p>
       <form class="search" id="sf" role="search">
-        <div class="fld"><label for="q">Métier visé</label><input id="q" autocomplete="off" placeholder="médecin, avocat, développeur…"></div>
-        <div class="fld"><label for="v">Ta ville</label><input id="v" autocomplete="off" placeholder="Paris, Lyon…"></div>
+        <div class="fld"><label for="q">Quel métier t'intéresse ?</label><input id="q" autocomplete="off" placeholder="médecin, avocat, développeur…"></div>
         <button class="btn btn-p" type="submit">${IC.search} Voir les chemins</button>
       </form>
       <div class="err" id="err" role="status"></div>
-      <div class="sugg">Populaires : ${Object.keys(METIERS).slice(0,st.allm?99:12).map(k=>`<button class="chip" data-go="metier-${k}">${METIERS[k].nom}</button>`).join('')}${st.allm?'':`<button class="chip" id="allm" style="font-weight:600">+ ${Object.keys(METIERS).length-12} métiers</button>`}</div>
+      <div class="sugg">Populaires : ${['medecin','infirmier','developpeur','psychologue','avocat','kine'].filter(k=>METIERS[k]).map(k=>`<button class="chip" data-go="metier-${k}">${METIERS[k].nom}</button>`).join('')}<a class="chip chip-all" href="#metiers">Voir les ${Object.keys(METIERS).length} métiers ${IC.arrow}</a></div>
+      <a class="door" href="#quiz"><span class="door-ic">?</span><span><b>Tu ne sais pas encore ?</b><small>Fais le quiz d'orientation : des pistes adaptées à ton bac.</small></span>${IC.arrow}</a>
+      <ul class="trust"><li>Données Parcoursup et Onisep</li><li>Chemin principal gratuit</li><li>Sans inscription</li></ul>
     </div>
     <div class="mock fade" aria-hidden="true">
       <div class="float a"><span class="dot" style="background:var(--green)"></span>3 parcours trouvés</div>
@@ -1187,12 +1211,12 @@ function home(){
   </div></section>
 
   <section class="blk"><div class="wrap">
-    <div class="sh"><div class="k">Fonctionnalités</div><h2>Tout ce que Parcoursup ne te dit pas</h2><p>Des infos sourcées, mises à jour, et des outils pour passer à l'action.</p></div>
+    <div class="sh"><div class="k">Pour aller plus loin</div><h2>Tout ce que Parcoursup ne te dit pas</h2><p>Des infos sourcées et des outils pour passer à l'action. Paiement unique, sans abonnement : <a href="#paiement">voir les tarifs</a>.</p></div>
     <div class="g4">
-      <div class="card"><div class="ic" style="background:#E6EDFF;color:#1F44B8">${IC.school}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Écoles publiques et privées</h3><p>Y compris les formations hors Parcoursup, avec statut, ville et frais.</p></div>
-      <div class="card"><div class="ic" style="background:#FFF4D1;color:var(--gold-d)">${IC.chart}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Chances d'admission</h3><p>Taux d'accès et taux de réussite par formation, avec leur source et leur année.</p></div>
-      <div class="card"><div class="ic" style="background:#E4F5EC;color:var(--green)">${IC.mail}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Messages aux écoles</h3><p>Un e-mail prêt à envoyer en un clic, dans le ton que tu choisis.</p></div>
-      <div class="card"><div class="ic" style="background:#FDE7EC;color:#A3203F">${IC.pen}</div><span class="badge b-prem" style="margin-bottom:10px">${IC.lock} Premium</span><h3>Lettres de motivation</h3><p>Une aide pour rédiger ton projet de formation motivé pour chaque vœu.</p></div>
+      <div class="card"><div class="ic" style="background:#E6EDFF;color:#1F44B8">${IC.school}</div><span class="tag-prem">Premium</span><h3>Écoles publiques et privées</h3><p>Y compris les formations hors Parcoursup, avec statut, ville et frais.</p></div>
+      <div class="card"><div class="ic" style="background:#FFF4D1;color:var(--gold-d)">${IC.chart}</div><span class="tag-prem">Premium</span><h3>Chances d'admission</h3><p>Taux d'accès et taux de réussite par formation, avec leur source et leur année.</p></div>
+      <div class="card"><div class="ic" style="background:#E4F5EC;color:var(--green)">${IC.mail}</div><span class="tag-prem">Premium</span><h3>Messages aux écoles</h3><p>Un e-mail prêt à envoyer en un clic, dans le ton que tu choisis.</p></div>
+      <div class="card"><div class="ic" style="background:#FDE7EC;color:#A3203F">${IC.pen}</div><span class="tag-prem">Premium</span><h3>Lettres de motivation</h3><p>Une aide pour rédiger ton projet de formation motivé pour chaque vœu.</p></div>
     </div>
   </div></section>
 
@@ -1202,6 +1226,19 @@ function home(){
   </div></section>`;
 }
 
+function metiersPage(){
+  const D=DOM_BASE, keys=Object.keys(METIERS), dom={};
+  keys.forEach(k=>{let best=null,b=0;for(const d in D){const v=D[d][k]||0;if(v>b){b=v;best=d;}}(dom[best||'autres']=dom[best||'autres']||[]).push(k);});
+  const groups=UNIVERS.map(u=>[u[0],u[1]]).concat(dom.autres?[['Autres métiers','autres']]:[]);
+  return `<div class="wrap page fade">
+    <div class="crumb"><a href="#accueil">Accueil</a> / Tous les métiers</div>
+    <div class="ptitle"><div><h1>Tous les métiers</h1><p>${keys.length} métiers classés par univers. Clique sur un métier pour voir tous les chemins pour y arriver.</p></div></div>
+    <input class="inp mfilter" id="mf" placeholder="Filtrer : infirmier, droit, sport…" autocomplete="off" aria-label="Filtrer les métiers">
+    ${groups.filter(g=>dom[g[1]]).map(g=>`<section class="mgroup"><h2>${g[0]}</h2><div class="mgrid">${dom[g[1]].sort((a,b)=>METIERS[a].nom.localeCompare(METIERS[b].nom,'fr')).map(k=>`<a class="mcard" href="#metier-${k}" data-s="${esc(norm(METIERS[k].nom+' '+METIERS[k].resume+' '+g[0]+' '+g[1]))}"><b>${METIERS[k].nom}</b><small>${METIERS[k].resume}</small></a>`).join('')}</div></section>`).join('')}
+    <p class="mempty" id="mempty" hidden>Aucun métier ne correspond. Essaie le <a href="#quiz">quiz d’orientation</a>.</p>
+    <div class="quizb" style="margin-top:48px"><div><h2>Tu hésites encore ?</h2><p>Le quiz te propose des pistes selon ton bac et tes envies.</p></div><a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div>
+  </div>`;
+}
 function fiche(key,i){
   const f=(EXTRA[key]||{c:[]}).c[i]; if(!f) return '';
   return `<div class="fiche">
@@ -1225,7 +1262,7 @@ function metier(key){
   if(!hasPlan() && st.chemin>0) st.chemin=0;
   const c = m.chemins[st.chemin] || m.chemins[0];
   return `<div class="wrap page fade">
-    <div class="crumb"><a href="#accueil">Accueil</a> / Métiers / ${m.nom}</div>
+    <div class="crumb"><a href="#accueil">Accueil</a> / <a href="#metiers">Métiers</a> / ${m.nom}</div>
     <div class="ptitle"><div><h1>Devenir ${m.nom.toLowerCase()}</h1><p>${m.resume}</p></div>
       <a class="btn btn-o" href="#ecoles" data-f="${m.formation}">Voir les écoles ${IC.arrow}</a></div>
     <div class="tabs" role="tablist">${m.chemins.map((x,i)=>{const lk=!hasPlan()&&i>0;return `<button class="tab ${i===st.chemin?'on':''} ${lk?'lockd':''}" role="tab" aria-selected="${i===st.chemin}" data-ch="${i}">${lk?IC.lock+' ':''}Chemin ${i+1}${lk?'':' · '+x.nom}</button>`}).join('')}</div>
@@ -1845,6 +1882,7 @@ function route(){
   else if(h==='ecoles'){ html = hasPlan()? ecoles() : lockedPage('Écoles','Écoles et formations','Publiques et privées, prix selon le diplôme, chances d’admission.','Trouve les écoles qui te correspondent','Compare les établissements publics et privés près de chez toi, leurs prix et leurs chances d’admission.',G); r='ecoles'; }
   else if(h==='assistant'){ html = hasPlan()? assistant() : lockedPage('Assistant','Assistant de rédaction','Messages aux écoles et lettres de motivation.','Écris aux écoles en un clic','Génère des messages prêts à envoyer et fais-toi aider pour tes lettres de motivation.',G); r='assistant'; }
   else if(h==='quiz'){ html = hasPlan()? quiz() : lockedPage('Quiz','Quiz d’orientation','Des questions adaptées à ton bac et à tes envies.','Pas d’idée de métier ?','Le quiz te propose des métiers et le chemin conseillé selon ta formation actuelle.',G); r='quiz'; }
+  else if(h==='metiers'){ html = metiersPage(); r='metier'; }
   else if(h==='paiement'){ html = paiement(); r='paiement'; }
   else if(['mentions','cgv','confidentialite'].includes(h)){ html = legal(h); }
   else html = home();
@@ -1867,6 +1905,7 @@ function bind(){
     if(k){ st.chemin=0; location.hash='metier-'+k; scrollTo(0,0); }
     else err.textContent = 'Ce métier arrive bientôt. Essaie par exemple médecin, ingénieur, psychologue ou développeur.';
   });
+  const mf=document.getElementById('mf'); if(mf) mf.oninput=()=>{const q=norm(mf.value);let n=0;document.querySelectorAll('.mgroup').forEach(g=>{let c=0;g.querySelectorAll('.mcard').forEach(a=>{const ok=!q||a.dataset.s.includes(q);a.hidden=!ok;if(ok)c++;});g.hidden=!c;n+=c;});document.getElementById('mempty').hidden=n>0;};
   const am=document.getElementById('allm'); if(am) am.onclick=()=>{st.allm=1;rerender(true);};
   document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{st.chemin=0;location.hash=b.dataset.go;scrollTo(0,0);});
   document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{const i=+b.dataset.ch;if(!hasPlan()&&i>0){st.lockCh=i;}else{st.lockCh=0;st.chemin=i;}rerender(true);});
