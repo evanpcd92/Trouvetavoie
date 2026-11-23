@@ -893,7 +893,7 @@ const ECOLES = [
   {nom:'CFA du bâtiment (exemple)', ville:'Île-de-France', type:'pri', f:'elec', formation:'CAP Électricien en apprentissage', frais:'0 € + salaire', alt:'Formation payée par l’employeur', voie:'Inscription au CFA'}
 ];
 const PRIX = [
-  ['Licence', 'Université publique', '178 €/an (2025-26)', 'Droits nationaux, exonérés pour les boursiers'],
+  ['Licence', 'Université publique', '178 €/an (2026-27)', 'Droits nationaux, exonérés pour les boursiers'],
   ['BTS', 'Lycée public', 'Gratuit', 'Pas de droits de scolarité'],
   ['BTS', 'École privée', '1 000 – 7 000 €/an et plus', 'Variable selon l’école et la ville'],
   ['Bachelor (bac+3)', 'École privée', '3 000 – 8 000 €/an', 'Parfois plus dans les grandes écoles'],
@@ -1385,11 +1385,11 @@ function fraisEcole(r){
     if(/Licence|PASS|BUT|IFSI|DEUST/i.test(f)) return {v:'178 €',s:'Droits d’inscription · gratuit si boursier',ok:1};
     if(/CPGE/i.test(f)) return {v:'Gratuit',s:'+ 178 € d’inscription à la fac (0 € si boursier)',ok:1};
     if(/BTS|DN MADE|DCG|DMA/i.test(f)) return {v:'Gratuit',s:'Pas de frais dans un lycée public',ok:1};
-    if(/ing[ée]nieur/i.test(f)) return {v:'≈ 600 €',s:'Droits nationaux · gratuit si boursier',ok:1};
+    if(/ing[ée]nieur/i.test(f)) return {v:'630 €',s:'Tarif national 2026-27 · certaines écoles demandent plus · gratuit si boursier',ok:1};
     return {v:'Fixé par l’école',s:'Établissement public',ok:0};
   }
   if(/BTS/i.test(f)) return {v:'1 000 – 7 000 €',s:'Estimation pour un BTS privé',ok:0};
-  if(/ing[ée]nieur/i.test(f)) return {v:'5 000 – 10 000 €',s:'Estimation pour une école d’ingénieurs privée',ok:0};
+  if(/ing[ée]nieur/i.test(f)) return {v:'7 000 – 11 500 €',s:'Estimation pour une école d’ingénieurs privée',ok:0};
   if(/Licence|Bachelor|Commerce|Autre/i.test(f)) return {v:'3 000 – 8 000 €',s:'Estimation pour une formation privée',ok:0};
   return {v:'Variable',s:'Demande la grille tarifaire à l’école',ok:0};
 }
