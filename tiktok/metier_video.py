@@ -1,4 +1,4 @@
-# Générateur de vidéos TikTok « présentation d'un métier » pour trouvetavoie.
+# Générateur de vidéos TikTok « présentation d'un métier » pour trouvetavoie (but, quotidien, qualités, salaire ; jamais les parcours).
 # Usage :
 #   python3 metier_video.py auto            -> métier du jour (rotation sur 30 jours)
 #   python3 metier_video.py <cle_metier>    -> un métier précis (ex. infirmier)
@@ -125,9 +125,8 @@ class Metier:
         self.k = key
         m = DATA["METIERS"][key]; e = DATA["EXTRA"][key]
         self.nom = clean(m["nom"]); self.resume = clean(m["resume"])
-        self.chemins = m["chemins"]; self.fiche = e["c"]; self.info = e["m"]
+        self.info = e["m"]
         self.sal = [[clean(x) for x in s] for s in DATA["SALAIRES"][key]]
-        self.ps = DATA["PSUP"][key]
         self.emo = EMO.get(key, "🎯")
 
 
@@ -147,75 +146,8 @@ def s_hook(img, t, M):
     else:
         pop_text(img, nm, 680, fit(nm, BOLD, 150, 940, 70), GOLD, prog(t, 0.55, 0.4))
     emoji(img, M.emo, W // 2, 1075, 180, prog(t, 0.9, 0.45), rot=6 * math.sin(t * 3), bob=10, t=t)
-    words(img, "3 chemins pour y arriver.", 1300, 54, WHITE, t, 1.6, per=0.08, path=MED)
-    words(img, "Durée, coût, salaire : on te dit tout.", 1400, 40, PINK, t, 2.3, per=0.05, path=MED)
-
-
-def s_metier(img, t, M):
-    chip(img, "LE MÉTIER EN VRAI", 300, prog(t, 0.0, 0.3))
-    panel(img, (90, 400, W - 90, 760), prog(t, 0.2, 0.4))
-    para(img, M.resume, 520, 46, WHITE, 820, t, 0.4, path=BOLD)
-    q = first_sentence(M.info.get("quotidien", ""), 140)
-    text(img, "Au quotidien", 840, 38, GOLD, path=BOLD, p=prog(t, 1.2, 0.3))
-    para(img, q, 920, 38, GREY, 860, t, 1.4)
-    text(img, "Les qualités qu'il faut", 1260, 38, GOLD, path=BOLD, p=prog(t, 2.4, 0.3))
-    quals = [clean(x) for x in M.info.get("qualites", [])][:3]
-    cols = [GOLD, VIO, (90, 190, 255)]
-    for i, qq in enumerate(quals):
-        p = prog(t, 2.7 + i * 0.25, 0.35)
-        sticker(img, qq, W // 2, 1360 + i * 115, p, rot=[-3, 2, -2][i], bg=cols[i], fg=BG, size=40)
-
-
-def s_chemin(img, t, M, i):
-    c = M.chemins[i]; f = M.fiche[i] if i < len(M.fiche) else {}
-    accent = [GOLD, VIO, PINK][i]
-    chip(img, f"CHEMIN {i + 1}", 250, prog(t, 0.0, 0.3), bg=accent, fg=BG if i != 2 else WHITE)
-    nm = clean(c["nom"])
-    pop_text(img, nm, 370, fit(nm, BOLD, 76, 960, 44), WHITE, prog(t, 0.15, 0.4))
-    text(img, clean(c.get("sous", "")), 450, 38, GREY, path=MED, p=prog(t, 0.35, 0.3))
-    lab, col = PSL.get(M.ps[i] if i < len(M.ps) else "X", PSL["X"])
-    tiles = [("⏱️", "Durée", clean(f.get("duree", "—"))), ("💶", "Coût", clean(f.get("cout", "—"))),
-             ("🎯", "Sélection", clean(f.get("sel", "—"))), ("🧑‍🎓", "Pour qui", clean(f.get("pour", "—")))]
-    for j, (e, a, b) in enumerate(tiles):
-        x0 = 90 if j % 2 == 0 else W // 2 + 10
-        y0 = 540 + (j // 2) * 300
-        p = prog(t, 0.6 + j * 0.22, 0.4)
-        if p <= 0:
-            continue
-        panel(img, (x0, y0, x0 + 440, y0 + 270), p)
-        lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay); al = int(255 * lin(p))
-        ee = _emo_img(e).resize((54, 54), Image.LANCZOS); lay.alpha_composite(ee, (x0 + 30, y0 + 28))
-        d.text((x0 + 100, y0 + 55), a, font=font(BOLD, 34), fill=accent + (al,), anchor="lm")
-        fsz = 34 if len(b) < 40 else 30
-        for k, ln in enumerate(wrap(b, font(MED, fsz), 380)[:4]):
-            d.text((x0 + 30, y0 + 120 + k * fsz * 1.25), ln, font=font(MED, fsz), fill=WHITE + (al,), anchor="lm")
-        img.alpha_composite(lay)
-    # badge Parcoursup
-    pb = prog(t, 1.6, 0.35)
-    if pb > 0:
-        lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
-        fl = font(BOLD, 34); w = fl.getlength(lab) + 70
-        d.rounded_rectangle((W / 2 - w / 2, 1150, W / 2 + w / 2, 1220), 35, fill=col + (int(255 * pb),))
-        d.text((W / 2, 1186), lab, font=fl, fill=WHITE + (int(255 * pb),), anchor="mm")
-        img.alpha_composite(lay)
-    plus = [clean(x) for x in f.get("plus", [])][:1]; moins = [clean(x) for x in f.get("moins", [])][:1]
-    for k, (sym, s, cc) in enumerate([("+", plus[0] if plus else "", GREEN), ("–", moins[0] if moins else "", PINK)]):
-        if not s:
-            continue
-        p = prog(t, 2.1 + k * 0.35, 0.35)
-        if p <= 0:
-            continue
-        y = 1290 + k * 110
-        lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay); al = int(255 * lin(p))
-        dx = int((1 - ease(p)) * 80)
-        d.ellipse((110 + dx, y - 34, 178 + dx, y + 34), fill=cc + (al,))
-        d.text((144 + dx, y - 2), sym, font=font(BOLD, 50), fill=WHITE + (al,), anchor="mm")
-        fs_ = fit(s, MED, 38, 760, 28)
-        d.text((205 + dx, y), s, font=font(MED, fs_), fill=WHITE + (al,), anchor="lm")
-        img.alpha_composite(lay)
-    sal = M.sal[i][0] if i < len(M.sal) else ""
-    if sal:
-        sticker(img, "Salaire : " + sal, W // 2, 1560, prog(t, 3.0, 0.35), rot=-2, bg=GOLD, size=fit("Salaire : " + sal, BOLD, 40, 840, 28), emo="💰")
+    words(img, "Le métier en 30 secondes.", 1300, 54, WHITE, t, 1.6, per=0.08, path=MED)
+    
 
 
 def _range(s):
@@ -224,9 +156,57 @@ def _range(s):
     return (nums[0], nums[1]) if len(nums) >= 2 else ((nums[0], nums[0]) if nums else (None, None))
 
 
-def s_salaire(img, t, M):
+def s_but(img, t, M):
+    chip(img, "LE BUT DU MÉTIER", 330, prog(t, 0.0, 0.3))
+    emoji(img, M.emo, W // 2, 560, 170, prog(t, 0.2, 0.45), bob=8, t=t)
+    panel(img, (90, 720, W - 90, 1180), prog(t, 0.4, 0.4), outline=GOLD, glow=GOLD)
+    para(img, M.resume, 860, 52, WHITE, 820, t, 0.7, path=BOLD)
+
+
+def _taches(M):
+    q = re.sub(r"\s*\(.*?\)", "", first_sentence(M.info.get("quotidien", ""), 400)).rstrip(".…")
+    items = [x.strip() for x in re.split(r",| et ", q) if len(x.strip()) > 2]
+    return [x[0].upper() + x[1:] for x in items][:5]
+
+
+def s_taches(img, t, M):
+    chip(img, "AU QUOTIDIEN", 260, prog(t, 0.0, 0.3), bg=VIO, fg=WHITE)
+    words(img, "Ce que tu fais vraiment", 380, 60, WHITE, t, 0.15, per=0.08)
+    items = _taches(M)
+    if len(items) < 2:
+        panel(img, (90, 500, W - 90, 1100), prog(t, 0.5, 0.4))
+        para(img, first_sentence(M.info.get("quotidien", ""), 220), 620, 44, WHITE, 820, t, 0.7)
+        return
+    for i, it in enumerate(items):
+        y = 560 + i * 190
+        p = prog(t, 0.6 + i * 0.45, 0.4)
+        panel(img, (110, y - 72, W - 110, y + 72), p)
+        if p <= 0:
+            continue
+        lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay); al = int(255 * lin(p))
+        dx = int((1 - ease(p)) * 120 * (1 if i % 2 == 0 else -1))
+        d.ellipse((150 + dx, y - 32, 214 + dx, y + 32), fill=GREEN + (al,))
+        d.line((166 + dx, y, 178 + dx, y + 13, 199 + dx, y - 12), fill=WHITE + (al,), width=7)
+        fs_ = max(fit(it, BOLD, 42, 700, 26), 36)
+        lines = wrap(it, font(BOLD, fs_), 700)[:2]
+        for k, ln in enumerate(lines):
+            d.text((245 + dx, y + (k - (len(lines) - 1) / 2) * 42), ln, font=font(BOLD, fs_), fill=WHITE + (al,), anchor="lm")
+        img.alpha_composite(lay)
+
+
+def s_qualites(img, t, M):
+    words(img, "Les qualités qu'il faut", 420, 66, GOLD, t, 0.0, per=0.08)
+    quals = [clean(x) for x in M.info.get("qualites", [])][:3]
+    cols = [GOLD, VIO, (90, 190, 255)]
+    for i, qq in enumerate(quals):
+        sticker(img, qq, W // 2, 680 + i * 220, prog(t, 0.5 + i * 0.4, 0.4), rot=[-4, 3, -2][i], bg=cols[i], fg=BG,
+                size=fit(qq, BOLD, 64, 760, 36))
+    words(img, "Tu te reconnais ?", 1420, 54, WHITE, t, 2.3, per=0.08, path=MED)
+
+
+def s_salaire2(img, t, M):
     particles(img, t, 7, 30)
-    words(img, "Et côté salaire ?", 330, 78, WHITE, t, 0.0, per=0.1)
+    words(img, "Et côté salaire ?", 380, 78, WHITE, t, 0.0, per=0.1)
     s0 = M.sal[0][0]
     lo, hi = _range(s0)
     pc = prog(t, 0.6, 1.3)
@@ -234,83 +214,44 @@ def s_salaire(img, t, M):
         k = 1 - (1 - lin(pc)) ** 3
         a, b = int(lo * k), int(hi * k)
         num = f"{a:,}".replace(",", " ") + (" – " + f"{b:,}".replace(",", " ") if hi != lo else "") + " €"
-        pop_text(img, num, 620, fit(num, BOLD, 130, 980, 60), GOLD, min(1.0, pc * 3))
+        pop_text(img, ("Dès " if hi == lo else "") + num, 700, fit(num, BOLD, 130, 960, 60), GOLD, min(1.0, pc * 3))
         unit = "brut / mois" if "brut" in s0 else ("net / mois" if "net" in s0 else "par mois")
-        text(img, unit, 750, 46, WHITE, path=MED, p=prog(t, 1.0, 0.3))
-        # barre animée
-        lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay)
-        d.rounded_rectangle((140, 850, W - 140, 890), 20, fill=(40, 50, 90, 255))
-        d.rounded_rectangle((140, 850, 140 + int((W - 280) * min(1, hi / 6000) * k), 890), 20, fill=GOLD + (255,))
-        img.alpha_composite(lay)
+        text(img, unit + " en début de carrière", 840, 44, WHITE, path=MED, p=prog(t, 1.0, 0.3))
     else:
-        pop_text(img, s0, 640, fit(s0, BOLD, 90, 960, 40), GOLD, prog(t, 0.6, 0.4))
-    note = M.sal[0][1] if len(M.sal[0]) > 1 else ""
-    panel(img, (90, 990, W - 90, 1400), prog(t, 1.8, 0.4))
-    para(img, first_sentence(note, 170), 1100, 38, WHITE, 840, t, 2.0)
+        pop_text(img, s0, 700, fit(s0, BOLD, 90, 960, 40), GOLD, prog(t, 0.6, 0.4))
     src = M.sal[0][2] if len(M.sal[0]) > 2 else ""
     if src:
-        text(img, "Source : " + src, 1480, 32, GREY, path=REG, p=prog(t, 2.6, 0.3))
+        text(img, "Source : " + src, 1000, 32, GREY, path=REG, p=prog(t, 1.8, 0.3))
 
 
-def s_apres(img, t, M):
-    chip(img, "ET APRÈS ?", 300, prog(t, 0.0, 0.3), bg=VIO, fg=WHITE)
-    words(img, "Ton métier peut évoluer", 420, 60, WHITE, t, 0.15, per=0.08)
-    ev = clean(M.info.get("evol", ""))
-    items = [x.strip(" .") for x in re.split(r",|;", re.sub(r"\(.*?\)", "", ev)) if x.strip(" .")][:4]
-    for i, it in enumerate(items):
-        p = prog(t, 0.7 + i * 0.35, 0.35)
-        y = 600 + i * 200
-        panel(img, (110, y - 75, W - 110, y + 75), p)
-        if p > 0:
-            lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay); al = int(255 * lin(p))
-            d.ellipse((150, y - 30, 210, y + 30), fill=GOLD + (al,))
-            d.text((180, y), str(i + 1), font=font(BOLD, 34), fill=BG + (al,), anchor="mm")
-            it2 = it[0].upper() + it[1:]
-            d.text((240, y), it2, font=font(BOLD, fit(it2, BOLD, 42, 700, 26)), fill=WHITE + (al,), anchor="lm")
-            img.alpha_composite(lay)
-
-
-def s_conseil(img, t, M):
-    emoji(img, "💡", W // 2, 380, 170, prog(t, 0.0, 0.45), bob=8, t=t)
-    words(img, "Le conseil pour réussir", 580, 62, GOLD, t, 0.3, per=0.08)
-    panel(img, (90, 680, W - 90, 1250), prog(t, 0.6, 0.4), outline=GOLD, glow=GOLD)
-    adv = first_sentence(M.fiche[0].get("conseil", ""), 200)
-    text(img, "“", 760, 150, GOLD, p=prog(t, 0.8, 0.3))
-    para(img, adv, 880, 44, WHITE, 820, t, 0.9, path=BOLD)
-
-
-def s_cta(img, t, M):
+def s_fin(img, t, M):
     particles(img, t, 11, 34)
-    words(img, "Les écoles près de chez toi,", 380, 52, WHITE, t, 0.0, per=0.06, path=MED)
-    words(img, "tes chances d'admission,", 460, 52, WHITE, t, 0.3, per=0.06, path=MED)
-    words(img, "ta lettre de motivation…", 540, 52, WHITE, t, 0.6, per=0.06, path=MED)
-    pop_text(img, "Tout est sur", 720, 72, WHITE, prog(t, 1.2, 0.35))
-    pb = prog(t, 1.5, 0.4)
+    words(img, "Ce métier t'intéresse ?", 470, 72, WHITE, t, 0.0, per=0.1)
+    words(img, "Découvre comment", 640, 60, WHITE, t, 0.7, per=0.1, path=MED)
+    words(img, "en faire ton avenir.", 730, 60, GOLD, t, 1.0, per=0.1)
+    pb = prog(t, 1.8, 0.4)
     if pb > 0:
         lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay); a = int(255 * pb)
         f = font(BOLD, 110); w1, w2 = f.getlength("trouve"), f.getlength("tavoie"); x0 = W // 2 - (w1 + w2) // 2
         dy = (1 - ease(pb)) * 40
-        d.text((x0, 860 + dy), "trouve", font=f, fill=WHITE + (a,), anchor="lm")
-        d.text((x0 + w1, 860 + dy), "tavoie", font=f, fill=GOLD + (a,), anchor="lm")
+        d.text((x0, 940 + dy), "trouve", font=f, fill=WHITE + (a,), anchor="lm")
+        d.text((x0 + w1, 940 + dy), "tavoie", font=f, fill=GOLD + (a,), anchor="lm")
         img.alpha_composite(lay)
-    shine(img, (100, 780, W - 100, 940), t, 2.0, 0.7)
-    pulse = 1 + 0.04 * math.sin(t * 7) if t > 2.4 else 1
-    p = prog(t, 2.1, 0.35)
+    shine(img, (100, 860, W - 100, 1020), t, 2.3, 0.7)
+    pulse = 1 + 0.04 * math.sin(t * 7) if t > 2.7 else 1
+    p = prog(t, 2.4, 0.35)
     if p > 0:
         w, h = int(620 * pulse), int(140 * pulse)
         lay = Image.new("RGBA", img.size, (0, 0, 0, 0)); d = ImageDraw.Draw(lay); a = int(255 * p)
-        d.rounded_rectangle((W // 2 - w // 2, 1080 - h // 2, W // 2 + w // 2, 1080 + h // 2), h // 2, fill=PINK + (a,))
-        d.text((W // 2, 1080), "LIEN EN BIO", font=font(BOLD, int(60 * pulse)), fill=WHITE + (a,), anchor="mm")
+        d.rounded_rectangle((W // 2 - w // 2, 1160 - h // 2, W // 2 + w // 2, 1160 + h // 2), h // 2, fill=PINK + (a,))
+        d.text((W // 2, 1160), "LIEN EN BIO", font=font(BOLD, int(60 * pulse)), fill=WHITE + (a,), anchor="mm")
         img.alpha_composite(lay)
-    text(img, "1er chemin gratuit · 30 métiers", 1220, 40, GREY, path=MED, p=prog(t, 2.6, 0.35))
-    sticker(img, "Abonne-toi : 1 métier par jour", W // 2, 1400, prog(t, 3.0, 0.35), rot=-3, bg=GOLD, size=40, emo="🔔")
+    sticker(img, "Abonne-toi : 1 métier par jour", W // 2, 1360, prog(t, 3.0, 0.35), rot=-3, bg=GOLD, size=40, emo="🔔")
 
 
-SCENES = [("hook", s_hook, 4.0), ("metier", s_metier, 5.6), ("c0", lambda i, t, M: s_chemin(i, t, M, 0), 5.2),
-          ("c1", lambda i, t, M: s_chemin(i, t, M, 1), 5.2), ("c2", lambda i, t, M: s_chemin(i, t, M, 2), 5.2),
-          ("salaire", s_salaire, 5.0), ("apres", s_apres, 4.4), ("conseil", s_conseil, 4.6), ("cta", s_cta, 5.0)]
-IMPACTS = {"hook": [0.55, 0.9], "metier": [0.0], "c0": [0.15], "c1": [0.15], "c2": [0.15], "salaire": [0.6, 1.9],
-           "conseil": [0.0], "cta": [1.5]}
+SCENES = [("hook", s_hook, 3.6), ("but", s_but, 5.0), ("taches", s_taches, 6.4), ("qualites", s_qualites, 4.4),
+          ("salaire", s_salaire2, 4.4), ("fin", s_fin, 5.4)]
+IMPACTS = {"hook": [0.55, 0.9], "but": [0.2], "qualites": [0.5, 0.9, 1.3], "salaire": [0.6, 1.9], "fin": [1.8]}
 TOTAL = sum(d for _, _, d in SCENES)
 OFF = {}
 _o = 0
@@ -358,18 +299,12 @@ def build_audio(path):
     add(OFF["hook"] + 0.55, "boom", 0.9); add(OFF["hook"] + 0.9, "pop", 0.5)
     for nm, _, d in SCENES[1:]:
         add(OFF[nm] - 0.22, "swish", 0.6)
-    for k in range(3):
-        add(OFF["metier"] + 2.7 + k * 0.25, "pop", 0.35)
-    for c in ("c0", "c1", "c2"):
-        add(OFF[c] + 0.15, "boom", 0.45)
-        for j in range(4): add(OFF[c] + 0.6 + j * 0.22, "flip", 0.6)
-        add(OFF[c] + 1.6, "pop", 0.4); add(OFF[c] + 2.1, "tick", 1.0); add(OFF[c] + 2.45, "tick", 1.0)
-        add(OFF[c] + 3.0, "pop", 0.45)
+    add(OFF["but"] + 0.2, "pop", 0.45)
+    for k in range(5): add(OFF["taches"] + 0.6 + k * 0.45, "pop", 0.4)
+    for k in range(3): add(OFF["qualites"] + 0.5 + k * 0.4, "flip", 0.7)
     for k in range(18): add(OFF["salaire"] + 0.6 + k * 0.07, "tick", 0.8)
     add(OFF["salaire"] + 1.9, "boom", 0.5)
-    for k in range(4): add(OFF["apres"] + 0.7 + k * 0.35, "pop", 0.35)
-    add(OFF["conseil"] + 0.0, "pop", 0.5)
-    add(OFF["cta"] - 0.8, "riser", 0.6); add(OFF["cta"] + 1.5, "boom", 0.8); add(OFF["cta"] + 3.0, "pop", 0.45)
+    add(OFF["fin"] - 0.8, "riser", 0.6); add(OFF["fin"] + 1.8, "boom", 0.8); add(OFF["fin"] + 3.0, "pop", 0.45)
     pk = np.abs(S).max(); S = S / pk * 0.7
     d = (np.stack([S, S], 1) * 32767).astype(np.int16)
     with wave.open(path, "wb") as f:
@@ -378,7 +313,7 @@ def build_audio(path):
 
 def description(M):
     tags = "#parcoursup #orientation #metier #" + re.sub(r"[^a-z]", "", M.k) + " #lycee #etudes"
-    return f"Devenir {M.nom.lower()} : 3 chemins possibles 👀 {tags}"
+    return f"{M.nom} : le métier en 30 secondes {M.emo} {tags}"
 
 
 def render(key, outdir="out"):
