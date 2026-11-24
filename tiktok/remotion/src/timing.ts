@@ -12,7 +12,7 @@ export type SceneVoice = { segs: Seg[]; cues: number[]; lens: number[]; env: (nu
 
 const LEAD = [8, T + 4, T + 4, T + 4, T + 4, T + 4];
 const GAP = [4, 5, 8, 7, 6, 6];
-const TAIL = [42, 26, 34, 40, 56, 50];
+const TAIL = [34, 18, 24, 30, 44, 30];
 const MIN = [100, 90, 120, 100, 130, 120];
 
 export function mouthAt(v: SceneVoice, f: number): number {
@@ -48,7 +48,7 @@ export function timeline(metier: string, voice?: VoiceData | null) {
   const durs = scenes.map((s, i) => {
     const last = s.cues.length - 1;
     const endOfSpeech = s.cues[last] + s.lens[last];
-    const extra = i === 2 && m.aSavoir ? 60 : 0; // le temps de lire « Bon à savoir »
+    const extra = i === 2 && m.aSavoir ? 50 : 0; // le temps de lire « Bon à savoir »
     return Math.max(MIN[i], endOfSpeech + TAIL[i] + extra);
   });
   const starts: number[] = [];

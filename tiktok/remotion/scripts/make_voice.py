@@ -11,7 +11,7 @@ CACHE = os.path.expanduser("~/.cache/trouvetavoie")
 BASE = os.path.join(CACHE, "kokoro-multi-lang-v1_0")
 BLEND = os.path.join(CACHE, "kokoro-blend")
 PUCK, SIWIS, PART_PUCK = 18, 30, 0.65  # 65 % Puck (timbre) + 35 % Siwis (accent français)
-SPEED = 1.1
+SPEED = 1.15
 FPS = 30
 
 
