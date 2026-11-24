@@ -199,6 +199,82 @@
   "asv": {
    "nom": "Auxiliaire vétérinaire",
    "resume": "Assister le vétérinaire pendant les soins et les opérations, accueillir les propriétaires et prendre soin des animaux hospitalisés."
+  },
+  "ergo": {
+   "nom": "Ergothérapeute",
+   "resume": "Aider les personnes malades, âgées ou en situation de handicap à rester autonomes dans les gestes du quotidien : se laver, s’habiller, travailler, se déplacer."
+  },
+  "psychomot": {
+   "nom": "Psychomotricien",
+   "resume": "Aider enfants et adultes à mieux maîtriser leur corps, leurs gestes et leurs émotions, par le mouvement, le jeu et la relaxation."
+  },
+  "preparateur": {
+   "nom": "Préparateur en pharmacie",
+   "resume": "Délivrer les médicaments sur ordonnance, conseiller les clients et préparer certains traitements, sous la responsabilité du pharmacien."
+  },
+  "ambulancier": {
+   "nom": "Ambulancier",
+   "resume": "Transporter les malades et les blessés en ambulance, les installer, surveiller leur état et assurer les premiers gestes en cas d’urgence."
+  },
+  "techlabo": {
+   "nom": "Technicien de laboratoire médical",
+   "resume": "Réaliser les analyses de sang, d’urine ou de tissus qui permettent aux médecins de poser un diagnostic."
+  },
+  "douanier": {
+   "nom": "Douanier",
+   "resume": "Contrôler les marchandises et les voyageurs aux frontières, dans les ports et les aéroports, et lutter contre les trafics."
+  },
+  "controleur": {
+   "nom": "Contrôleur aérien",
+   "resume": "Guider les avions depuis la tour de contrôle ou un centre radar pour qu’ils décollent, volent et atterrissent en toute sécurité."
+  },
+  "maitrenageur": {
+   "nom": "Maître-nageur sauveteur",
+   "resume": "Surveiller les piscines et les plages, porter secours aux baigneurs et apprendre à nager aux enfants comme aux adultes."
+  },
+  "soigneur": {
+   "nom": "Soigneur animalier",
+   "resume": "Nourrir, soigner et observer les animaux d’un zoo ou d’un parc animalier, et entretenir leurs enclos."
+  },
+  "agriculteur": {
+   "nom": "Agriculteur",
+   "resume": "Cultiver la terre ou élever des animaux, et gérer ta propre exploitation comme une entreprise."
+  },
+  "conducteur": {
+   "nom": "Conducteur de travaux",
+   "resume": "Organiser et piloter les chantiers de construction : équipes, matériaux, budget et délais."
+  },
+  "evenementiel": {
+   "nom": "Chargé d’événementiel",
+   "resume": "Organiser des salons, des concerts, des séminaires ou des mariages, de l’idée jusqu’au jour J."
+  },
+  "uxdesigner": {
+   "nom": "UX/UI designer",
+   "resume": "Concevoir des applis et des sites faciles et agréables à utiliser, en partant des besoins des utilisateurs."
+  },
+  "photographe": {
+   "nom": "Photographe",
+   "resume": "Réaliser des photos pour des mariages, des marques, des magazines ou des entreprises, de la prise de vue jusqu’à la retouche."
+  },
+  "ingeson": {
+   "nom": "Ingénieur du son",
+   "resume": "Enregistrer, mixer et régler le son des concerts, des films, des émissions ou des podcasts."
+  },
+  "menuisier": {
+   "nom": "Menuisier",
+   "resume": "Fabriquer et poser des meubles, des portes, des fenêtres, des escaliers ou des cuisines en bois."
+  },
+  "boulanger": {
+   "nom": "Boulanger",
+   "resume": "Préparer et cuire chaque jour le pain et les viennoiseries, puis les vendre en boutique."
+  },
+  "paysagiste": {
+   "nom": "Paysagiste",
+   "resume": "Créer et entretenir des jardins, des parcs et des espaces verts : plantations, terrasses, arrosage, aménagements."
+  },
+  "eje": {
+   "nom": "Éducateur de jeunes enfants",
+   "resume": "Accompagner l’éveil et le développement des enfants de moins de 7 ans, en crèche, en multi-accueil ou à l’hôpital."
   }
  },
  "EXTRA": {
@@ -701,6 +777,215 @@
      "Sens du contact"
     ]
    }
+  },
+  "ergo": {
+   "m": {
+    "quotidien": "Évaluer ce que la personne peut faire seule, proposer des exercices et des activités adaptées, aménager son logement ou son poste de travail et conseiller sa famille, en lien avec les médecins et les kinés.",
+    "qualites": [
+     "Écoute",
+     "Créativité",
+     "Patience"
+    ],
+    "evol": "Cadre de santé, libéral, spécialisation (enfants, personnes âgées, ergonomie au travail)."
+   }
+  },
+  "psychomot": {
+   "m": {
+    "quotidien": "Observer comment l’enfant ou l’adulte bouge et ressent son corps, proposer des séances de jeux, de danse, de relaxation ou d’équilibre, et travailler avec les médecins, les psychologues et les familles.",
+    "qualites": [
+     "Écoute",
+     "Sens du contact",
+     "Créativité"
+    ],
+    "evol": "Libéral, spécialisation (bébés, personnes âgées, santé mentale), formateur."
+   }
+  },
+  "preparateur": {
+   "m": {
+    "quotidien": "Lire les ordonnances, délivrer et expliquer les médicaments, conseiller sur les produits de santé, gérer les stocks et préparer certaines pommades ou gélules.",
+    "qualites": [
+     "Rigueur",
+     "Sens du contact",
+     "Mémoire"
+    ],
+    "evol": "Préparateur hospitalier, responsable de rayon, technicien dans l’industrie pharmaceutique."
+   }
+  },
+  "ambulancier": {
+   "m": {
+    "quotidien": "Conduire l’ambulance, installer et rassurer les patients, surveiller leur état pendant le trajet, faire les premiers gestes d’urgence et désinfecter le véhicule.",
+    "qualites": [
+     "Sang-froid",
+     "Bienveillance",
+     "Résistance physique"
+    ],
+    "evol": "Ambulancier en SMUR, chef d’équipe, créer ta société d’ambulances."
+   }
+  },
+  "techlabo": {
+   "m": {
+    "quotidien": "Préparer les échantillons de sang ou d’urine, faire tourner les automates d’analyse, vérifier les résultats, réaliser des cultures de microbes et respecter des règles d’hygiène très strictes.",
+    "qualites": [
+     "Rigueur",
+     "Minutie",
+     "Goût des sciences"
+    ],
+    "evol": "Technicien spécialisé, cadre de santé, recherche, industrie pharmaceutique."
+   }
+  },
+  "douanier": {
+   "m": {
+    "quotidien": "Fouiller les véhicules, les bagages et les conteneurs, contrôler les documents, saisir les produits interdits (drogue, contrefaçons, tabac) et participer à des patrouilles.",
+    "qualites": [
+     "Sang-froid",
+     "Rigueur",
+     "Sens de l’observation"
+    ],
+    "evol": "Maître-chien, garde-côte, enquêteur, inspecteur."
+   }
+  },
+  "controleur": {
+   "m": {
+    "quotidien": "Suivre les avions sur l’écran radar, leur donner par radio, en anglais, les autorisations de décoller, de monter ou d’atterrir, et gérer les imprévus (météo, panne, urgence) avec une concentration totale.",
+    "qualites": [
+     "Sang-froid",
+     "Concentration",
+     "Anglais"
+    ],
+    "evol": "Contrôleur sur de plus gros aéroports, instructeur, chef de salle."
+   }
+  },
+  "maitrenageur": {
+   "m": {
+    "quotidien": "Surveiller les bassins, intervenir en cas de noyade, donner des cours de natation à des écoles et à des clubs, animer l’aquagym et vérifier la sécurité et la qualité de l’eau.",
+    "qualites": [
+     "Vigilance",
+     "Pédagogie",
+     "Condition physique"
+    ],
+    "evol": "Chef de bassin, directeur de piscine, entraîneur de natation."
+   }
+  },
+  "soigneur": {
+   "m": {
+    "quotidien": "Préparer les repas des animaux, nettoyer les enclos, observer leur comportement et leur santé, aider le vétérinaire pendant les soins et expliquer leur vie aux visiteurs.",
+    "qualites": [
+     "Amour des animaux",
+     "Patience",
+     "Résistance physique"
+    ],
+    "evol": "Soigneur référent d’une espèce, chef soigneur, animateur pédagogique."
+   }
+  },
+  "agriculteur": {
+   "m": {
+    "quotidien": "Semer, récolter, nourrir et soigner les animaux, conduire les engins agricoles, mais aussi gérer les comptes, vendre ta production et respecter les règles environnementales.",
+    "qualites": [
+     "Autonomie",
+     "Résistance physique",
+     "Sens de la gestion"
+    ],
+    "evol": "Agrandir ton exploitation, vente directe, agriculture bio, conseiller agricole."
+   }
+  },
+  "conducteur": {
+   "m": {
+    "quotidien": "Planifier le chantier, commander les matériaux, coordonner les équipes et les sous-traitants, contrôler la sécurité et la qualité, et suivre le budget avec le client.",
+    "qualites": [
+     "Organisation",
+     "Leadership",
+     "Sens des responsabilités"
+    ],
+    "evol": "Conducteur de travaux principal, directeur de travaux, créer ton entreprise."
+   }
+  },
+  "evenementiel": {
+   "m": {
+    "quotidien": "Trouver le lieu, négocier avec les prestataires (traiteur, son, déco), gérer le budget et le planning, coordonner les équipes le jour J et faire le bilan avec le client.",
+    "qualites": [
+     "Organisation",
+     "Réactivité",
+     "Aisance relationnelle"
+    ],
+    "evol": "Chef de projet événementiel, directeur d’agence, régisseur."
+   }
+  },
+  "uxdesigner": {
+   "m": {
+    "quotidien": "Interroger les utilisateurs, dessiner les parcours et les maquettes d’une appli sur Figma, tester les prototypes et travailler avec les développeurs pour améliorer le produit.",
+    "qualites": [
+     "Empathie",
+     "Créativité",
+     "Esprit d’analyse"
+    ],
+    "evol": "Lead designer, product designer, directeur artistique."
+   }
+  },
+  "photographe": {
+   "m": {
+    "quotidien": "Préparer les prises de vue, régler la lumière et l’appareil, diriger les personnes photographiées, retoucher les images sur ordinateur et trouver de nouveaux clients.",
+    "qualites": [
+     "Sens artistique",
+     "Créativité",
+     "Sens du contact"
+    ],
+    "evol": "Photographe spécialisé (mode, sport, reportage), directeur de la photo, ouvrir ton studio."
+   }
+  },
+  "ingeson": {
+   "m": {
+    "quotidien": "Installer les micros et la console, régler le son pendant un concert ou un tournage, enregistrer des musiciens en studio, puis mixer et nettoyer les pistes sur ordinateur.",
+    "qualites": [
+     "Oreille musicale",
+     "Rigueur technique",
+     "Patience"
+    ],
+    "evol": "Mixeur, ingénieur du son en studio, régisseur son, producteur."
+   }
+  },
+  "menuisier": {
+   "m": {
+    "quotidien": "Lire un plan, découper et assembler le bois avec des machines, poser des escaliers, des fenêtres ou des cuisines chez les clients, et soigner les finitions.",
+    "qualites": [
+     "Habileté manuelle",
+     "Précision",
+     "Créativité"
+    ],
+    "evol": "Chef d’atelier, ébéniste, créer ta propre entreprise."
+   }
+  },
+  "boulanger": {
+   "m": {
+    "quotidien": "Pétrir la pâte, la façonner, surveiller la fermentation et la cuisson du pain et des viennoiseries dès 3 ou 4 heures du matin, puis gérer la vente et les commandes.",
+    "qualites": [
+     "Endurance",
+     "Rigueur",
+     "Passion du produit"
+    ],
+    "evol": "Chef boulanger, ouvrir ta boulangerie, formateur."
+   }
+  },
+  "paysagiste": {
+   "m": {
+    "quotidien": "Planter et tailler, poser des dallages et des clôtures, installer l’arrosage, entretenir les espaces verts et, pour le concepteur, dessiner les plans des jardins.",
+    "qualites": [
+     "Goût de la nature",
+     "Résistance physique",
+     "Sens esthétique"
+    ],
+    "evol": "Chef d’équipe, conducteur de travaux paysagers, créer ton entreprise."
+   }
+  },
+  "eje": {
+   "m": {
+    "quotidien": "Organiser des activités d’éveil (jeux, musique, peinture), observer le développement de chaque enfant, accueillir et conseiller les parents et encadrer l’équipe d’auxiliaires.",
+    "qualites": [
+     "Patience",
+     "Créativité",
+     "Sens de l’observation"
+    ],
+    "evol": "Directeur de crèche, coordinateur petite enfance, protection de l’enfance."
+   }
   }
  },
  "SALAIRES": {
@@ -1051,6 +1336,329 @@
    [
     "À partir de 1 914 € brut/mois",
     "En clinique vétérinaire.",
+    "Onisep"
+   ]
+  ],
+  "ergo": [
+   [
+    "≈ 1 944 € brut/mois",
+    "Début de carrière à l’hôpital public, hors primes ; en libéral, tes revenus dépendent de ta patientèle.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 944 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 944 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Grille FPH 2026"
+   ]
+  ],
+  "psychomot": [
+   [
+    "≈ 1 944 € brut/mois",
+    "Début de carrière à l’hôpital public, hors primes ; en libéral, tes revenus dépendent de ta patientèle.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 944 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 944 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Grille FPH 2026"
+   ]
+  ],
+  "preparateur": [
+   [
+    "≈ 1 980 – 2 000 € brut/mois",
+    "Minimum conventionnel d’un préparateur diplômé en officine (35 h).",
+    "Convention collective de la pharmacie d’officine, FSPF"
+   ],
+   [
+    "≈ 1 980 – 2 000 € brut/mois",
+    "En officine ; à l’hôpital public, la grille de la fonction publique s’applique.",
+    "FSPF"
+   ],
+   [
+    "À partir de 1 980 € brut/mois",
+    "Plus dans l’industrie pharmaceutique selon le poste.",
+    "FSPF"
+   ]
+  ],
+  "ambulancier": [
+   [
+    "≈ 1 870 – 1 950 € brut/mois",
+    "Hors primes de nuit et de week-end, selon que tu travailles à l’hôpital ou dans le privé.",
+    "Onisep, convention collective du transport sanitaire"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Auxiliaire ambulancier, souvent au Smic au début.",
+    "Onisep"
+   ],
+   [
+    "≈ 1 870 – 1 950 € brut/mois",
+    "Une fois le diplôme d’État obtenu.",
+    "Onisep"
+   ]
+  ],
+  "techlabo": [
+   [
+    "≈ 1 944 € brut/mois",
+    "Début de carrière à l’hôpital public, hors primes ; le privé est proche.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 944 € brut/mois",
+    "Même métier, mêmes salaires.",
+    "Grille FPH 2026"
+   ],
+   [
+    "≈ 1 944 € brut/mois",
+    "Même métier, mêmes salaires.",
+    "Grille FPH 2026"
+   ]
+  ],
+  "douanier": [
+   [
+    "≈ 1 800 € brut/mois",
+    "Salaire de base hors primes à la prise de fonction ; les primes l’augmentent nettement.",
+    "douane.gouv.fr"
+   ],
+   [
+    "≈ 1 836 – 1 954 € brut/mois",
+    "Contrôleur débutant, hors primes, selon le grade et le lieu.",
+    "douane.gouv.fr"
+   ],
+   [
+    "Grille de catégorie A",
+    "Plus élevé qu’en catégories B et C, selon la grille des inspecteurs.",
+    "douane.gouv.fr"
+   ]
+  ],
+  "controleur": [
+   [
+    "À partir de 2 552 € brut/mois",
+    "Selon l’Onisep ; tu es payé dès l’entrée à l’ENAC, et beaucoup plus avec l’expérience.",
+    "Onisep"
+   ],
+   [
+    "Solde militaire",
+    "Selon ton grade dans l’armée de l’Air et de l’Espace.",
+    "Onisep"
+   ],
+   [
+    "Grille de technicien",
+    "Fonctionnaire de catégorie B de l’aviation civile.",
+    "ENAC"
+   ]
+  ],
+  "maitrenageur": [
+   [
+    "À partir de 1 888 € brut/mois",
+    "Souvent proche du Smic au début, plus en collectivité ou avec des cours particuliers.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 888 € brut/mois",
+    "Et tu es payé pendant l’apprentissage.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 888 € brut/mois",
+    "Plus en devenant entraîneur ou chef de bassin.",
+    "Onisep"
+   ]
+  ],
+  "soigneur": [
+   [
+    "À partir de 1 868 € brut/mois",
+    "Souvent proche du Smic au début.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Même métier, mêmes salaires au début.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Plus en responsable de secteur.",
+    "Onisep"
+   ]
+  ],
+  "agriculteur": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "En tant que salarié agricole. À ton compte, ton revenu dépend de ta filière et de la taille de l’exploitation.",
+    "Onisep, Insee"
+   ],
+   [
+    "Très variable",
+    "Un jeune installé gagne souvent entre 1 400 et 1 900 € nets par mois, selon la filière.",
+    "Insee, chambres d’agriculture"
+   ],
+   [
+    "Selon le poste",
+    "Ingénieur ou conseiller agricole salarié : rémunération de cadre.",
+    "Apec"
+   ]
+  ],
+  "conducteur": [
+   [
+    "≈ 1 800 – 2 200 € brut/mois",
+    "Technicien débutant après le BTS ; environ 2 500 € comme chef de chantier.",
+    "Onisep, centres de formation du BTP"
+   ],
+   [
+    "À partir de 2 500 € brut/mois",
+    "Chef de chantier débutant avec un bac +2 ou +3.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 900 – 3 500 € brut/mois",
+    "Ingénieur débutant : salaire médian au premier emploi de 39 000 € brut par an.",
+    "Enquête CGE 2026"
+   ]
+  ],
+  "evenementiel": [
+   [
+    "≈ 2 300 – 2 800 € brut/mois",
+    "Chargé d’événementiel avec 0 à 2 ans d’expérience (28 à 34 k€ par an), souvent après un bac +3 ou +5 ; un peu moins après un BTS.",
+    "Michael Page, étude de rémunérations 2026"
+   ],
+   [
+    "≈ 2 300 – 2 800 € brut/mois",
+    "Chargé d’événementiel débutant.",
+    "Michael Page, étude de rémunérations 2026"
+   ],
+   [
+    "≈ 2 300 – 2 800 € brut/mois",
+    "Au début, puis plus en chef de projet.",
+    "Michael Page, étude de rémunérations 2026"
+   ]
+  ],
+  "uxdesigner": [
+   [
+    "À partir de 2 200 € brut/mois",
+    "Salaire débutant d’un UI designer ; plus après un bac +5.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 200 € brut/mois",
+    "Même métier, mêmes salaires au début.",
+    "Onisep"
+   ],
+   [
+    "≈ 3 200 – 3 700 € brut/mois",
+    "UX designer avec 0 à 2 ans d’expérience (38 à 45 k€ par an).",
+    "Michael Page, étude de rémunérations 2026"
+   ]
+  ],
+  "photographe": [
+   [
+    "À partir de 1 900 € brut/mois",
+    "Pour un photographe salarié ; à ton compte, tes revenus dépendent de tes clients.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 900 € brut/mois",
+    "Même métier, mêmes revenus au début.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 900 € brut/mois",
+    "Plus en publicité ou au cinéma avec l’expérience.",
+    "Onisep"
+   ]
+  ],
+  "ingeson": [
+   [
+    "À partir de 2 600 € brut/mois",
+    "Pour un salarié en CDI ; beaucoup travaillent comme intermittents, avec des revenus variables.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 600 € brut/mois",
+    "Même métier, mêmes salaires.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 600 € brut/mois",
+    "Plus au cinéma ou dans les grands studios avec l’expérience.",
+    "Onisep"
+   ]
+  ],
+  "menuisier": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Débutant salarié ; plus avec l’expérience ou à ton compte.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus en menuiserie d’agencement haut de gamme.",
+    "Onisep"
+   ],
+   [
+    "≈ 1 800 – 2 200 € brut/mois",
+    "Technicien débutant après le BTS.",
+    "Centres de formation du BTP"
+   ]
+  ],
+  "boulanger": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Débutant salarié ; plus avec le travail de nuit et l’expérience.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "À ton compte, tes revenus dépendent de ta boutique.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus en devenant chef boulanger.",
+    "Onisep"
+   ]
+  ],
+  "paysagiste": [
+   [
+    "À partir de 1 900 € brut/mois",
+    "Technicien paysagiste débutant.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Ouvrier paysagiste débutant.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 080 € brut/mois",
+    "Paysagiste concepteur débutant.",
+    "Onisep"
+   ]
+  ],
+  "eje": [
+   [
+    "À partir de 1 945 € brut/mois",
+    "Débutant, selon l’employeur (public ou associatif).",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 945 € brut/mois",
+    "Et tu es payé pendant les 3 ans.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Comme auxiliaire de puériculture, puis environ 1 945 € comme EJE.",
     "Onisep"
    ]
   ]

@@ -23,7 +23,8 @@ ORDER = ["infirmier", "developpeur", "psychologue", "pilote", "kine", "commercia
          "orthophoniste", "mecanicien", "educateur", "militaire", "marketing", "aidesoignant", "avocat",
          "osteo", "datascientist", "coiffeur", "pnc", "notaire", "patissier", "cyber", "asv", "immobilier",
          "jeuxvideo", "manip", "estheticien", "banque", "monteur", "puericulture", "plombier", "dieteticien",
-         "rh", "opticien", "assistantsocial"]
+         "rh", "opticien", "assistantsocial",
+         "ergo", "psychomot", "preparateur", "ambulancier", "techlabo", "douanier", "controleur", "maitrenageur", "soigneur", "agriculteur", "conducteur", "evenementiel", "uxdesigner", "photographe", "ingeson", "menuisier", "boulanger", "paysagiste", "eje"]
 EMO = {"avocat": "⚖️", "infirmier": "🩺", "electricien": "⚡", "medecin": "👨‍⚕️", "ingenieur": "🛠️",
        "psychologue": "🧠", "sport": "🏋️", "kine": "💪", "commercial": "🤝", "comptable": "📊",
        "developpeur": "💻", "prof": "🍎", "veterinaire": "🐶", "policier": "🚓", "communitymanager": "📱",
@@ -33,7 +34,8 @@ EMO = {"avocat": "⚖️", "infirmier": "🩺", "electricien": "⚡", "medecin":
        "osteo": "🦴", "dieteticien": "🥗", "opticien": "👓", "manip": "🩻", "puericulture": "🍼",
        "assistantsocial": "🤝", "datascientist": "📊", "cyber": "🔐", "jeuxvideo": "🎮", "notaire": "📜",
        "banque": "🏦", "immobilier": "🏠", "rh": "🧑‍💼", "patissier": "🧁", "coiffeur": "💇", "estheticien": "💅",
-       "plombier": "🔧", "monteur": "🎬", "pnc": "🛫", "asv": "🐾"}
+       "plombier": "🔧", "monteur": "🎬", "pnc": "🛫", "asv": "🐾",
+       "ergo": "🦽", "psychomot": "🤸", "preparateur": "🧴", "ambulancier": "🚑", "techlabo": "🔬", "douanier": "🛃", "controleur": "🛬", "maitrenageur": "🏊", "soigneur": "🦒", "agriculteur": "🚜", "conducteur": "🏗️", "evenementiel": "🎉", "uxdesigner": "📲", "photographe": "📸", "ingeson": "🎧", "menuisier": "🪚", "boulanger": "🥖", "paysagiste": "🌳", "eje": "🧸"}
 PSL = {"P": ("Sur Parcoursup", (30, 150, 95)), "H": ("Hors Parcoursup", (130, 135, 150)),
        "A": ("Après la 3e / apprentissage", (90, 120, 210)), "X": ("Selon l'école", (200, 140, 40))}
 VIO = (130, 118, 255)
