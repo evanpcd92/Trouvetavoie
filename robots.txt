@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tiktok/
+
+Sitemap: https://trouvetavoie.pages.dev/sitemap.xml
