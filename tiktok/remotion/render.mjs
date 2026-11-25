@@ -47,17 +47,11 @@ execFileSync(
   { cwd: HERE, stdio: "inherit" },
 );
 
-const tag = nom
-  .normalize("NFD")
-  .replace(/[̀-ͯ]/g, "")
-  .replace(/[^A-Za-z]/g, "")
-  .toLowerCase();
-const desc = `${nom} : son but, son quotidien, les qualités qu'il faut et le salaire 💼
-Toutes les étapes pour y arriver sur trouvetavoie.pages.dev 🧭
-
-#orientation #parcoursup #metier #${tag} #lycee #bac #etudes #trouvetavoie
-`;
-fs.writeFileSync(path.join(outDir, `${base}_description.txt`), desc);
+// Description TikTok (accroche, but, salaire, qualités, hashtags)
+run("npx", ["tsx", "scripts/description.ts", key, path.join(outDir, `${base}_description.txt`)]);
+const desc = fs.readFileSync(path.join(outDir, `${base}_description.txt`), "utf8");
+// Miniature (couverture TikTok)
+run("npx", ["remotion", "still", "src/index.ts", "Miniature", path.join(outDir, `${base}_miniature.png`), `--props=${JSON.stringify({ metier: key })}`, "--log=error"]);
 
 // 3. Version légère (< 10 Mo) et image d'aperçu pour la page des vidéos
 run("npx", ["remotion", "ffmpeg", "-y", "-loglevel", "error", "-i", mp4, "-c:v", "libx264", "-preset", "slow", "-crf", "24", "-maxrate", "2000k", "-bufsize", "4000k", "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", path.join(outDir, `${base}_web.mp4`)]);
