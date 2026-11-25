@@ -329,6 +329,59 @@ select.inp{appearance:auto}
 .mcard b{display:block;font-size:16px;margin-bottom:4px}
 .mcard small{display:block;color:var(--mute);font-size:13.5px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .mempty{margin-top:24px;color:var(--mute)}
+/* ===== Mascotte ===== */
+.masc{display:block;overflow:visible;flex:none}
+.masc .m-body{animation:mBob 3.2s ease-in-out infinite}
+.masc .m-eyes{animation:mBlink 4.2s infinite;transform-origin:200px 188px}
+.masc .m-armR{transform-origin:282px 318px;transform:rotate(-12deg)}
+.masc .m-armL{transform-origin:118px 318px;transform:rotate(12deg)}
+.masc.wave .m-armR{animation:mWave 1.1s ease-in-out infinite}
+.masc.point .m-armR{transform:rotate(-95deg)}
+.masc.think .m-armL{transform:rotate(150deg)}
+.masc.cheer .m-armR{animation:mCheerR .8s ease-in-out infinite}
+.masc.cheer .m-armL{animation:mCheerL .8s ease-in-out infinite}
+.masc.cheer .m-body{animation:mHop .8s ease-in-out infinite}
+@keyframes mBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes mHop{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes mBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes mWave{0%,100%{transform:rotate(-138deg)}50%{transform:rotate(-165deg)}}
+@keyframes mCheerR{0%,100%{transform:rotate(-148deg)}50%{transform:rotate(-165deg)}}
+@keyframes mCheerL{0%,100%{transform:rotate(148deg)}50%{transform:rotate(165deg)}}
+@media (prefers-reduced-motion:reduce){.masc *{animation:none!important}}
+.mbub{position:relative;background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 16px;font-weight:600;font-size:15px;line-height:1.4;color:var(--ink);box-shadow:0 12px 30px rgba(14,22,48,.08)}
+.hero-m{position:relative;display:flex;flex-direction:column;align-items:center;padding-top:8px}
+.hero-m::before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#FFE59A 0%,#FFF4D1 55%,transparent 70%);top:110px;z-index:0}
+.hero-m .masc{position:relative;z-index:1}
+.hero-m .mbub{max-width:330px;margin-bottom:6px;z-index:2;text-align:center}
+.hero-m .mbub::after{content:"";position:absolute;left:50%;bottom:-9px;width:16px;height:16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.hero-m .float{z-index:3}
+.hero-m .float.a{right:0;top:150px}.hero-m .float.b{left:0;bottom:80px;top:auto}
+@media (max-width:960px){.hero-m{display:none}}
+.door .masc{margin-left:-6px!important;margin-top:-6px}
+.qz-m{display:flex;align-items:flex-end;gap:12px;margin:4px 0 18px}
+.qz-m .mbub{margin-bottom:22px}
+.qz-m .mbub::after{content:"";position:absolute;left:-9px;bottom:16px;width:16px;height:16px;background:#fff;border-left:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+.aside-m{display:flex;align-items:flex-end;gap:6px;margin-top:20px}
+.aside-m .mbub{font-size:14px;margin-bottom:18px;padding:10px 12px}
+.aside-m .mbub::after{content:"";position:absolute;left:-8px;bottom:14px;width:14px;height:14px;background:#fff;border-left:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg)}
+/* ===== Fiche métier ===== */
+.mhead{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:18px}
+.mh-ic{flex:none;width:84px;height:84px;border-radius:24px;background:#FFF4D1;display:grid;place-items:center;box-shadow:inset 0 0 0 1px #F5E2A6}
+.mh-ic img{width:52px;height:52px}
+.mh-t{flex:1 1 420px;min-width:0}
+.mh-t h1{font-size:42px;margin:4px 0 0;text-wrap:balance}
+.mh-t p{margin:8px 0 0;color:var(--ink2);font-size:17px}
+.mh-t .k{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-d)}
+.kfig{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:26px}
+.kfig>div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0}
+.kfig span{display:block;font-size:12.5px;color:var(--mute);margin-bottom:4px}
+.kfig b{font-family:Poppins,sans-serif;font-size:17px;line-height:1.3;display:block}
+.kfig>div:first-child{background:var(--navy);border-color:var(--navy)}
+.kfig>div:first-child span{color:#AAB3CF}.kfig>div:first-child b{color:#fff}
+@media (max-width:800px){.kfig{grid-template-columns:1fr 1fr}.mhead{gap:14px;align-items:flex-start}.mh-t{flex:1 1 0}.mh-t h1{font-size:30px}.mh-ic{width:56px;height:56px;border-radius:16px}.mh-ic img{width:34px;height:34px}.mhead .btn{width:100%}}
+.fiche .fsal{margin-top:16px}
+.fiche .fpour{margin:20px 0 0;padding-top:18px;border-top:1px dashed var(--line)}
+.fiche .fconseil{margin-top:18px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
@@ -358,7 +411,7 @@ select.inp{appearance:auto}
 <footer>
   <div class="wrap ft">
     <div><b style="color:var(--ink)">trouvetavoie</b> · un outil d'aide à la décision. Il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
-    <div>Sources : Parcoursup, Onisep, CNB, établissements · certaines données chiffrées sont en cours d'intégration <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
+    <div>Sources : Parcoursup, Onisep, CNB, établissements · certaines données chiffrées sont en cours d'intégration · icônes Twemoji (CC-BY 4.0) <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
     <div class="ftl"><a href="#a-propos">Notre histoire</a><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a><span>© 2026 trouvetavoie</span></div>
   </div>
 </footer>
@@ -1257,6 +1310,35 @@ function alertes(k,c,a){
 }
 
 
+// ===== MASCOTTE : lycéen en sweat jaune, logo boussole =====
+function mascotSVG(pose, h){
+  const w = Math.round(h*400/560), open = pose==='cheer';
+  const arm = (side) => { const x = side==='R'?282:118; return `<g class="m-arm${side}"><rect x="${x-23}" y="312" width="46" height="118" rx="23" fill="#FFC93C" stroke="#E8AE1C" stroke-width="3"/><rect x="${x-24}" y="410" width="48" height="16" rx="8" fill="#E8AE1C"/><circle cx="${x}" cy="444" r="24" fill="#F5C6A0"/>${pose==='point'&&side==='R'?`<rect x="${x-7}" y="448" width="14" height="34" rx="7" fill="#F5C6A0"/>`:''}</g>`; };
+  return `<svg class="masc ${pose}" viewBox="0 0 400 560" width="${w}" height="${h}" aria-hidden="true" focusable="false">
+<ellipse cx="200" cy="548" rx="110" ry="12" fill="rgba(14,22,48,.14)"/>
+<g class="m-body">
+<rect x="150" y="420" width="42" height="110" rx="18" fill="#2B3B6E"/><rect x="208" y="420" width="42" height="110" rx="18" fill="#2B3B6E"/>
+<path d="M140 522 h56 a14 14 0 0 1 0 26 h-62 a10 10 0 0 1 6 -26z" fill="#fff" stroke="#E4E7EF" stroke-width="2"/><path d="M204 522 h56 a10 10 0 0 1 6 26 h-62 a14 14 0 0 1 0 -26z" fill="#fff" stroke="#E4E7EF" stroke-width="2"/>
+<rect x="96" y="300" width="208" height="140" rx="40" fill="#0E1630"/>
+<path d="M120 318 Q200 286 280 318 L292 440 Q200 462 108 440 Z" fill="#FFC93C"/><path d="M108 430 Q200 452 292 430 L294 448 Q200 470 106 448 Z" fill="#E8AE1C"/>
+<path d="M152 392 h96 l12 40 h-120z" fill="#E8AE1C" opacity=".55"/>
+<path d="M138 318 L150 420" stroke="#0E1630" stroke-width="14" stroke-linecap="round"/><path d="M262 318 L250 420" stroke="#0E1630" stroke-width="14" stroke-linecap="round"/>
+<circle cx="200" cy="360" r="24" fill="#0E1630"/><circle cx="200" cy="360" r="15" fill="none" stroke="#FFC93C" stroke-width="4"/><polygon points="207,353 203,363 193,367 197,357" fill="#FFC93C"/>
+<path d="M184 312 v28" stroke="#fff" stroke-width="4" stroke-linecap="round"/><path d="M216 312 v28" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+${arm('L')}${arm('R')}
+<rect x="180" y="268" width="40" height="36" rx="12" fill="#E3A982"/>
+<path d="M112 300 Q200 340 288 300 Q290 326 200 336 Q110 326 112 300z" fill="#E8AE1C"/>
+<circle cx="98" cy="190" r="22" fill="#F5C6A0"/><circle cx="302" cy="190" r="22" fill="#F5C6A0"/><circle cx="200" cy="180" r="104" fill="#F5C6A0"/>
+<path d="M98 178 Q92 74 196 70 Q296 66 304 170 Q290 128 252 120 Q262 140 248 150 Q232 116 178 118 Q186 134 172 142 Q150 120 122 136 Q104 150 98 178z" fill="#3A2418"/><path d="M196 70 Q220 40 250 52 Q226 58 222 74z" fill="#3A2418"/>
+<path d="M138 ${pose==='cheer'||pose==='wave'?138:146} Q160 ${pose==='cheer'||pose==='wave'?126:134} 182 ${pose==='cheer'||pose==='wave'?136:144}" stroke="#3A2418" stroke-width="8" stroke-linecap="round" fill="none"/><path d="M218 ${pose==='cheer'||pose==='wave'?136:144} Q240 ${pose==='cheer'||pose==='wave'?126:134} 262 ${pose==='cheer'||pose==='wave'?138:146}" stroke="#3A2418" stroke-width="8" stroke-linecap="round" fill="none"/>
+<g class="m-eyes"><ellipse cx="160" cy="188" rx="22" ry="26" fill="#fff"/><circle cx="${pose==='think'?166:164}" cy="${pose==='think'?186:192}" r="13" fill="#0E1630"/><circle cx="169" cy="186" r="4.5" fill="#fff"/><ellipse cx="240" cy="188" rx="22" ry="26" fill="#fff"/><circle cx="${pose==='think'?246:244}" cy="${pose==='think'?186:192}" r="13" fill="#0E1630"/><circle cx="249" cy="186" r="4.5" fill="#fff"/></g>
+<ellipse cx="130" cy="226" rx="17" ry="10" fill="#F08A8A" opacity=".45"/><ellipse cx="270" cy="226" rx="17" ry="10" fill="#F08A8A" opacity=".45"/>
+${open?'<ellipse cx="200" cy="242" rx="22" ry="17" fill="#7A1F2B"/><ellipse cx="200" cy="252" rx="12" ry="6" fill="#E8667A"/>':pose==='think'?'<path d="M184 242 Q204 236 218 244" stroke="#7A1F2B" stroke-width="6" stroke-linecap="round" fill="none"/>':'<path d="M172 230 Q200 262 228 230 Z" fill="#7A1F2B"/>'}
+</g></svg>`;
+}
+function univDe(k){ let best=null,w=0; for(const d in DOM_BASE){ const v=DOM_BASE[d][k]||0; if(v>w){w=v;best=d;} } const u=UNIVERS.find(x=>x[1]===best); return u?u[0]:'Fiche métier'; }
+const QZ_TIPS = ['C’est parti ! Réponds avec ton envie, pas avec ce qu’on attend de toi.','Il n’y a pas de mauvaise réponse ici.','Pense à ce que tu fais vraiment quand tu as du temps libre.','Tu avances bien, continue !','Encore quelques questions et je te montre tes pistes.','Dernière ligne droite !'];
+
 const st = {chemin:0, ecType:'all', ecVille:'', ecF:'droit', qi:0, ans:[], tab:'msg', tone:'formel'};
 const app = document.getElementById('app');
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1274,17 +1356,14 @@ function home(){
       </form>
       <div class="err" id="err" role="status"></div>
       <div class="sugg">Populaires : ${['medecin','infirmier','developpeur','psychologue','avocat','kine'].filter(k=>METIERS[k]).map(k=>`<button class="chip" data-go="metier-${k}">${METIERS[k].nom}</button>`).join('')}<a class="chip chip-all" href="#metiers">Voir les ${Object.keys(METIERS).length} métiers ${IC.arrow}</a></div>
-      <a class="door" href="#quiz"><span class="door-ic">?</span><span><b>Tu ne sais pas encore ?</b><small>Fais le quiz d'orientation gratuit : des pistes adaptées à ton bac.</small></span>${IC.arrow}</a>
+      <a class="door" href="#quiz">${mascotSVG('think', 58)}<span><b>Tu ne sais pas encore ?</b><small>Fais le quiz d'orientation gratuit : des pistes adaptées à ton bac.</small></span>${IC.arrow}</a>
       <ul class="trust"><li>Données Parcoursup et Onisep</li><li>Quiz et chemin principal gratuits</li><li>Sans inscription</li></ul>
     </div>
-    <div class="mock fade" aria-hidden="true">
-      <div class="float a"><span class="dot" style="background:var(--green)"></span>3 parcours trouvés</div>
-      <div class="t">Pour devenir</div><h3>Avocat</h3>
-      <div class="mstep"><span class="n">1</span><div><b>Licence de droit</b><small>3 ans · via Parcoursup</small></div></div>
-      <div class="mstep"><span class="n">2</span><div><b>Master de droit</b><small>M1 pour l'examen, M2 avant le CAPA</small></div></div>
-      <div class="mstep"><span class="n">3</span><div><b>Examen CRFPA</b><small>Entrée en école d'avocats</small></div></div>
-      <div class="mstep"><span class="n">4</span><div><b>École d'avocats + CAPA</b><small>18 mois, dont 6 de stage</small></div></div>
-      <div class="float b"><span class="dot" style="background:var(--gold)"></span>Lettre de motivation prête</div>
+    <div class="hero-m fade" aria-hidden="true">
+      <div class="mbub">Salut ! Dis-moi quel métier te fait rêver, je te montre tous les chemins pour y arriver.</div>
+      ${mascotSVG('wave', 400)}
+      <div class="float a"><span class="dot" style="background:var(--green)"></span>${Object.keys(METIERS).length} métiers expliqués</div>
+      <div class="float b"><span class="dot" style="background:var(--gold)"></span>Quiz gratuit</div>
     </div>
   </div></section>
 
@@ -1361,8 +1440,16 @@ function metier(key){
   const c = m.chemins[st.chemin] || m.chemins[0];
   return `<div class="wrap page fade">
     <div class="crumb"><a href="#accueil">Accueil</a> / <a href="#metiers">Métiers</a> / ${m.nom}</div>
-    <div class="ptitle"><div><h1>Devenir ${m.nom.toLowerCase()}</h1><p>${m.resume}</p></div>
-      <a class="btn btn-o" href="#ecoles" data-f="${m.formation}">Voir les écoles ${IC.arrow}</a></div>
+    <div class="mhead">
+      <div class="mh-ic"><img src="img/metiers/${key}.svg" alt="" width="52" height="52"></div>
+      <div class="mh-t"><div class="k">${univDe(key)}</div><h1>Devenir ${m.nom.toLowerCase()}</h1><p>${m.resume}</p></div>
+      <a class="btn btn-o" href="#ecoles" data-f="${m.formation}">Voir les écoles ${IC.arrow}</a>
+    </div>
+    <div class="kfig">
+      ${SALAIRES[key]?`<div><span>Salaire de départ</span><b>${SALAIRES[key][0][0]}</b></div>`:''}
+      ${m.infos.slice(0,2).map(k=>`<div><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}
+      <div><span>Accès au chemin principal</span><b>${(PSLAB[(PSUP[key]||'P')[0]]||PSLAB.P)[0]}</b></div>
+    </div>
     <div class="tabs" role="tablist">${m.chemins.map((x,i)=>{const lk=!hasPlan()&&i>0;return `<button class="tab ${i===st.chemin?'on':''} ${lk?'lockd':''}" role="tab" aria-selected="${i===st.chemin}" data-ch="${i}">${lk?IC.lock+' ':''}Chemin ${i+1}${lk?'':' · '+x.nom}</button>`}).join('')}</div>
     <div class="lay">
       <div>
@@ -1373,11 +1460,11 @@ function metier(key){
       </div>`}
       </div>
       <aside class="card"><h3 style="font-size:17px;margin-bottom:6px">L'essentiel</h3>
-        ${m.infos.map(k=>`<div class="kv"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}
+        ${m.infos.slice(2).map(k=>`<div class="kv"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}
         ${EXTRA[key]?`<h3 style="font-size:15px;margin:18px 0 6px">Au quotidien</h3><p class="aside-p">${EXTRA[key].m.quotidien}</p>
         <h3 style="font-size:15px;margin:14px 0 6px">Qualités clés</h3><div class="qtags">${EXTRA[key].m.qualites.map(q=>`<span>${q}</span>`).join('')}</div>
         <h3 style="font-size:15px;margin:14px 0 6px">Évolutions possibles</h3><p class="aside-p">${EXTRA[key].m.evol}</p>`:''}
-        <div class="callout">Tu veux contacter une école ou préparer ta lettre ? L'assistant t'aide à rédiger.</div>
+        <div class="aside-m">${mascotSVG('point', 92)}<div class="mbub">Besoin d’écrire à une école ou de préparer ta lettre ? Je t’aide.</div></div>
         <a class="btn btn-p" href="#assistant" style="width:100%;margin-top:14px">Ouvrir l'assistant</a>
         <div class="note">Sources : ${m.sources}</div>
       </aside>
@@ -2010,6 +2097,7 @@ function quiz(){
     const det=c.voie==='gen'?' · '+c.spe.map(s=>SPE.find(x=>x[2]===s)[0]).join(', '):c.voie==='techno'&&a.techno!==undefined?' · '+Q.techno.o[a.techno][0]:'';
     return `<div class="wrap page fade"><div class="qz">
       <div class="crumb">Quiz · Résultats</div>
+      <div class="qz-m">${mascotSVG('cheer', 110)}<div class="mbub">Et voilà ! Voici les métiers qui te ressemblent. Clique sur un métier pour voir le chemin que je te conseille.</div></div>
       <h1>Les métiers qui te ressemblent</h1>
       <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${pl}${det}</b></p>
       ${top.map(([k,v],i)=>{const [ch,rs]=recoChemin(k,c,a);const al=alertes(k,c,a);const w=[...new Set((why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,2);
@@ -2035,6 +2123,7 @@ function quiz(){
   return `<div class="wrap page fade"><div class="qz">
     <div class="crumb">Quiz orientation · Question ${st.qi+1}</div>
     <div class="prog"><i style="width:${Math.min(95,st.qi/(f.length+(a.univers===undefined?1:0)+(a.voie===undefined?2:0))*100)}%"></i></div>
+    <div class="qz-m">${mascotSVG(st.qi===0?'wave':'idle', 96)}<div class="mbub">${QZ_TIPS[st.qi>=f.length-2?QZ_TIPS.length-1:Math.min(st.qi,QZ_TIPS.length-2)]}</div></div>
     <h1>${qTitle(id,a)}</h1>
     ${q.sub?`<p style="color:var(--ink2);margin:-12px 0 20px">${q.sub}</p>`:''}
     ${q.grid||multi?`<div class="og">${opts.map((o,i)=>`<button class="opt ${isOn(i)?'on':''}" data-o="${i}">${o[0]}${multi&&isOn(i)?' ✓':''}</button>`).join('')}</div>`:opts.map((o,i)=>`<button class="opt ${isOn(i)?'on':''}" data-o="${i}">${o[0]} ${IC.arrow}</button>`).join('')}
