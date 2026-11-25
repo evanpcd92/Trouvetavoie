@@ -259,6 +259,7 @@ details.exd{margin-top:18px}details.exd summary{cursor:pointer;font-weight:600;c
 .gift ol{margin:12px 0 16px;padding-left:22px;color:var(--ink2);display:grid;gap:6px}
 .acc{max-width:520px;margin:0 auto}.acc .inp{width:100%;margin-top:6px}.acc label{font-size:13px;font-weight:600;color:var(--ink2);display:block;margin-top:14px}
 .ok{color:var(--green);font-weight:600;font-size:14px;margin-top:8px}
+.lnk{background:none;border:0;padding:4px;color:var(--navy);text-decoration:underline;font:inherit;font-weight:600;cursor:pointer}
 .secure{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-top:12px}
 .og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .og .opt{margin-bottom:0;font-size:15px;padding:16px 18px}
@@ -2611,6 +2612,19 @@ function exemplePlan(){
   return `<div class="expl" aria-label="Exemple de plan Parcoursup pour un profil fictif"><span class="expl-tag">Exemple · profil fictif</span><div class="expl-in" aria-hidden="true">${html.replace(/ id="[^"]*"/g,'')}</div></div>`;
 }
 
+// ----- Nouveau mot de passe (lien reçu par e-mail) -----
+function nouveauMdp(){
+  return `<div class="wrap page fade"><div class="acc"><div class="crumb"><a href="#accueil">Accueil</a> / Nouveau mot de passe</div>
+    <h1 style="font-size:32px;margin:4px 0 6px">Choisis ton nouveau mot de passe</h1>
+    <p style="color:var(--ink2);margin:0 0 16px">Ce lien marche une seule fois, pendant 24 heures.</p>
+    <form class="card" id="nmf" novalidate>
+      <label for="nm1" style="margin-top:0">Nouveau mot de passe (8 caractères minimum)</label><input class="inp" id="nm1" type="password" autocomplete="new-password">
+      <label for="nm2">Retape-le</label><input class="inp" id="nm2" type="password" autocomplete="new-password">
+      <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:50px">Enregistrer et me connecter</button>
+      <div class="err" id="nmerr" role="status"></div>
+    </form></div></div>`;
+}
+
 // ----- Mon accès : connexion sur un autre appareil -----
 function connexion(){
   const head=`<div class="crumb"><a href="#accueil">Accueil</a> / Mon accès</div>`;
@@ -2627,8 +2641,15 @@ function connexion(){
       <label for="cpwd">Mot de passe</label><input class="inp" id="cpwd" type="password" autocomplete="current-password">
       <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:50px">Me connecter</button>
       <div class="err" id="cerr" role="status"></div>
-      <p class="note" style="margin-top:12px">Mot de passe oublié ? Écris-nous à ${ED.mail} depuis l’adresse utilisée pour l’achat.</p>
+      <p style="margin:14px 0 0;text-align:center"><button class="lnk" type="button" id="goubli">Mot de passe oublié ?</button></p>
     </form>
+    ${st.oubli?`<form class="card" id="of" novalidate style="margin-top:14px">
+      <h2 style="font-size:19px;margin:0 0 4px">Choisir un nouveau mot de passe</h2>
+      ${st.oubliOk?`<p class="ok" style="margin:6px 0 0">C’est noté. Si un achat existe avec cette adresse, tu vas recevoir un e-mail de ${ED.mail} avec un lien pour choisir un nouveau mot de passe, en général dans l’heure. Pense à regarder dans tes spams.</p>`:`<p style="color:var(--ink2);font-size:14px;margin:0">Entre l’e-mail utilisé pour l’achat : on t’envoie un lien par e-mail.</p>
+      <label for="omail">E-mail</label><input class="inp" id="omail" type="email" autocomplete="email" placeholder="toi@exemple.fr">
+      <button class="btn btn-p" type="submit" style="width:100%;margin-top:14px">Recevoir le lien</button>
+      <div class="err" id="oerr" role="status"></div>`}
+      <p class="note" style="margin-top:12px">Un souci ? Écris-nous à ${ED.mail}.</p></form>`:''}
     <p style="margin-top:16px;color:var(--ink2)">Pas encore d’accès ? <a href="#paiement">Voir les offres</a></p></div></div>`;
 }
 
@@ -2694,6 +2715,7 @@ function route(){
   let html, r='';
   if(!h.startsWith('metier-')) st.lockCh=0;
   if(h!=='paiement') st.gift=0;
+  if(h!=='connexion'){ st.oubli=0; st.oubliOk=0; }
   const G = '<div class="card" style="min-height:460px">'+'<div style="height:22px;width:60%;background:#E4E7EF;border-radius:8px;margin-bottom:18px"></div>'.repeat(1)+'<div style="height:90px;background:#EEF0F5;border-radius:14px;margin-bottom:14px"></div>'.repeat(4)+'</div>';
   if(h.startsWith('metier-')){ html = metier(h.slice(7)); r='metier'; }
   else if(h==='ecoles'){ html = hasPlan()? ecoles() : lockedPage('Écoles','Écoles et formations','Publiques et privées, prix selon le diplôme, chances d’admission.','Trouve les écoles qui te correspondent','Compare les établissements publics et privés près de chez toi, leurs prix et leurs chances d’admission.',G); r='ecoles'; }
@@ -2702,6 +2724,7 @@ function route(){
   else if(h==='metiers'){ html = metiersPage(); r='metier'; }
   else if(h==='paiement'){ html = paiement(); r='paiement'; }
   else if(h==='connexion'){ html = connexion(); r='connexion'; }
+  else if(h.startsWith('nouveau-mdp-')){ st.jeton=h.slice(12); html = nouveauMdp(); r='connexion'; }
   else if(h==='a-propos'){ html = histoire(); }
   else if(h==='comparer'){ html = comparer(); r='metier'; }
   else if(h==='calendrier'){ html = calendrier(); }
@@ -2782,6 +2805,18 @@ function bind(){
     if(!d.ok){err.textContent=d.error||'Impossible d’enregistrer le mot de passe. Réessaie.';return;}
     st.pwdOk=true; try{const sv=JSON.parse(localStorage.getItem('ttv_plan')||'{}');sv.pwd=true;localStorage.setItem('ttv_plan',JSON.stringify(sv));}catch(x){}
     pwf.outerHTML=`<p class="ok">✓ Mot de passe créé. ${st.gift?'Votre enfant peut se connecter dans « Mon accès » avec ':'Connecte-toi dans « Mon accès » avec '}${esc(st.mail||'ton e-mail')} et ce mot de passe.</p>`;});
+  const go=document.getElementById('goubli'); if(go) go.onclick=()=>{const cm=(document.getElementById('cmail')||{}).value||'';st.oubli=1;st.oubliOk=0;rerender(true);const c2=document.getElementById('cmail');if(c2)c2.value=cm;const o=document.getElementById('omail');if(o){o.value=cm;o.focus();}};
+  const of_=document.getElementById('of'); if(of_&&document.getElementById('omail')) of_.addEventListener('submit',async e=>{e.preventDefault();const err=document.getElementById('oerr'),btn=of_.querySelector('button');
+    const email=document.getElementById('omail').value.trim(); if(!email.includes('@')){err.textContent='Entre l’e-mail utilisé pour l’achat.';return;}
+    btn.disabled=true; const d=await api({action:'oubli',email}); btn.disabled=false;
+    if(!d.ok){err.textContent=d.error||'Ça n’a pas marché. Réessaie dans un instant.';return;} st.oubliOk=1; rerender(true);});
+  const nmf=document.getElementById('nmf'); if(nmf) nmf.addEventListener('submit',async e=>{e.preventDefault();const err=document.getElementById('nmerr'),btn=nmf.querySelector('button');
+    const a=document.getElementById('nm1').value,b=document.getElementById('nm2').value;
+    if(a.length<8){err.textContent='Choisis au moins 8 caractères.';return;} if(a!==b){err.textContent='Les deux mots de passe ne sont pas identiques.';return;}
+    btn.disabled=true; err.textContent=''; const d=await api({action:'reinit',token:st.jeton,password:a}); btn.disabled=false;
+    if(!d.ok){err.textContent=d.error||'Ça n’a pas marché. Réessaie.';return;}
+    try{localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,pwd:true}));}catch(x){}
+    st.paid=true;st.plan=d.plan;st.mail=d.email;st.pwdOk=true;st.sid=null;st.justIn=true;location.hash='connexion';});
   const lo=document.getElementById('logout'); if(lo) lo.onclick=()=>{try{localStorage.removeItem('ttv_plan');localStorage.removeItem('ttv_test');}catch(x){} st.paid=false;st.plan=null;st.mail='';st.sid=null;st.pwdOk=false;st.justIn=false;rerender();};
   document.querySelectorAll('[data-mo]').forEach(b=>b.onclick=()=>{readForm();st.mobj=b.dataset.mo;rerender(true);});
   if(document.getElementById('lf')){ const L=st.L;

@@ -21,6 +21,7 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 - `tools/pages-metiers.mjs` : génère les pages statiques `/metiers/<cle>/`, `/apres-bac/<bac>/`, `/calendrier-parcoursup-2027/`, `sitemap.xml`, `robots.txt`. À relancer après toute modification des données (`node tools/pages-metiers.mjs`).
 - `tools/ajouter-video.mjs <cle> <video.mp4> <miniature.png>` : ajoute la vidéo d'un métier sur sa fiche (`videos/<cle>.mp4` + `.jpg`, met à jour `VIDEOS`).
 - `functions/api/` : paiement (pas encore actif en vrai), `checkout.js` (POST : e-mail + mot de passe choisis à l'achat), `compte.js` (connexion sur un autre appareil : e-mail + mot de passe, empreinte PBKDF2 rangée dans les métadonnées du paiement Stripe, aucune base de données), `acces.js` (accès test du propriétaire : le code est dans la variable Cloudflare `ACCES_TEST`, jamais dans le site).
+- `functions/api/admin.js` : liste privée (clé `ADMIN_CLE`) des nouveaux achats et des demandes de mot de passe, lue par la tâche programmée des e-mails. Modèles d'e-mails : `tools/mails.md`.
 - Exemple de plan (profil fictif, `EX_QA`) affiché sur l'accueil, la page de paiement et la page parents.
 - Tests : servir le dossier (`python3 -m http.server 8123`) et vérifier avec Playwright qu'il n'y a aucune erreur JS, en version gratuite et en version payante.
 
@@ -30,6 +31,12 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 - **Essentiel (4,99 €)** : analyse complète du quiz, conseils et points de vigilance des fiches (coût, sélectivité), comparateur de métiers, métiers par bac.
 - **Complet (9,99 €)** : tout l'Essentiel + plan Parcoursup personnalisé (8 parties : objectif, parcours année par année, 3 pistes comparées, vœux ambitieux / réalistes / plan B, points d'attention, projet motivé, où candidater, calendrier + to-do, export PDF) + 5 lettres de motivation.
 - Paiement unique, pas d'abonnement. Le propriétaire trouvait qu'il y avait « trop de gratuit » : ne pas rendre gratuit ce qui est payant sans son accord.
+
+## E-mails (boîte du site : trouvetavoie2027@gmail.com, connectée à Claude)
+
+- Automatiques : bienvenue après un achat, lien « nouveau mot de passe ». Modèles dans `tools/mails.md`.
+- Messages reçus : Claude prépare seulement des **brouillons** ; le propriétaire relit et envoie lui-même.
+- Pour que ça marche : variable Cloudflare `ADMIN_CLE` + la même valeur enregistrée comme clé réseau de l'environnement Claude pour `trouvetavoie.pages.dev` (jamais écrite dans le dépôt ni dans le chat).
 
 ## Vidéos TikTok (« métier du jour »)
 

@@ -41,6 +41,29 @@ export async function onRequestPost({ request, env }) {
   let q;
   try { q = await request.json(); } catch (e) { return json({ ok: false, error: 'Requête invalide.' }, 400); }
   const password = String(q.password || '');
+
+  if (q.action === 'oubli') {
+    // « Mot de passe oublié » : on note la demande sur le paiement ; la tâche programmée envoie le lien par e-mail.
+    // Réponse identique qu'un achat existe ou non (on ne révèle pas qui a acheté).
+    const email = String(q.email || '').trim();
+    const rep = json({ ok: true });
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ ok: false, error: 'Entre une adresse e-mail valide.' }, 400);
+    const sessions = [];
+    for (const e of [...new Set([email, email.toLowerCase()])]) {
+      const p = new URLSearchParams({ 'customer_details[email]': e, status: 'complete', limit: '20' });
+      p.append('expand[]', 'data.payment_intent');
+      const r = await stripe(env, 'checkout/sessions?' + p.toString());
+      if (r.ok) sessions.push(...r.data.data.filter((s) => s.payment_status === 'paid' && s.payment_intent && s.payment_intent.id));
+    }
+    if (!sessions.length) return rep;
+    const pi = sessions[0].payment_intent, m = pi.metadata || {};
+    if (m.ttv_reset_at && Date.now() - Number(m.ttv_reset_at) < 10 * 60 * 1000) return rep; // pas plus d'une demande toutes les 10 min
+    const u = new URLSearchParams();
+    u.append('metadata[ttv_reset_at]', String(Date.now()));
+    await stripe(env, 'payment_intents/' + pi.id, u);
+    return rep;
+  }
+
   if (password.length < 8 || password.length > 200) return json({ ok: false, error: 'Le mot de passe doit faire au moins 8 caractères.' }, 400);
 
   if (q.action === 'creer') {
@@ -54,6 +77,35 @@ export async function onRequestPost({ request, env }) {
     const u = await stripe(env, 'payment_intents/' + pi, p);
     if (!u.ok) return json({ ok: false, error: 'Impossible d’enregistrer le mot de passe. Réessaie.' }, 502);
     return json({ ok: true, plan: planDe(s.data), email: (s.data.customer_details && s.data.customer_details.email) || '' });
+  }
+
+  if (q.action === 'reinit') {
+    // lien reçu par e-mail : jeton signé avec ADMIN_CLE, valable 24 h et une seule fois
+    const cle = env.ADMIN_CLE || '';
+    const [corps, sig] = String(q.token || '').split('.');
+    if (cle.length < 16 || !corps || !sig) return json({ ok: false, error: 'Lien invalide. Refais une demande.' }, 400);
+    const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(cle), { name: 'HMAC', hash: 'SHA-256' }, false, ['verify']);
+    const fromB64u = (s) => unb64(s.replace(/-/g, '+').replace(/_/g, '/') + '==='.slice((s.length + 3) % 4));
+    let t;
+    try {
+      if (!(await crypto.subtle.verify('HMAC', key, fromB64u(sig), new TextEncoder().encode(corps)))) throw 0;
+      t = JSON.parse(new TextDecoder().decode(fromB64u(corps)));
+    } catch (e) { return json({ ok: false, error: 'Lien invalide. Refais une demande.' }, 400); }
+    if (!t.e || !t.r || Date.now() > t.x) return json({ ok: false, error: 'Ce lien a expiré. Refais une demande.' }, 400);
+    const p = new URLSearchParams({ 'customer_details[email]': t.e, status: 'complete', limit: '20' });
+    p.append('expand[]', 'data.payment_intent');
+    const r = await stripe(env, 'checkout/sessions?' + p.toString());
+    const paid = r.ok ? r.data.data.filter((s) => s.payment_status === 'paid' && s.payment_intent && s.payment_intent.metadata) : [];
+    if (!paid.some((s) => s.payment_intent.metadata.ttv_reset_at === t.r)) return json({ ok: false, error: 'Ce lien a déjà servi. Refais une demande si besoin.' }, 400);
+    const h = await empreinte(password);
+    for (const s of paid) {
+      const u = new URLSearchParams();
+      u.append('metadata[ttv_pwd]', h);
+      u.append('metadata[ttv_reset_at]', '');
+      await stripe(env, 'payment_intents/' + s.payment_intent.id, u);
+    }
+    const plan = paid.some((s) => planDe(s) === 'complet') ? 'complet' : 'essentiel';
+    return json({ ok: true, plan, email: (paid[0].customer_details && paid[0].customer_details.email) || t.e });
   }
 
   if (q.action === 'connexion') {
