@@ -65,3 +65,20 @@ export const MiniHistoire: React.FC = () => (
     </div>
   </AbsoluteFill>
 );
+
+/** Image d'aperçu des liens partagés (Open Graph) : 1200×630 */
+export const OgImage: React.FC = () => (
+  <AbsoluteFill style={{ background: `radial-gradient(circle at 75% 45%, #24306A 0%, ${C.navy} 60%)`, fontFamily: TITLE, color: C.white, flexDirection: "row", alignItems: "center", padding: "0 70px" }}>
+    <div style={{ flex: 1 }}>
+      <Logo size={44} />
+      <div style={{ fontSize: 66, fontWeight: 800, lineHeight: 1.05, marginTop: 34 }}>
+        Choisis ton métier.<br />On te montre <span style={{ color: C.gold }}>tous les chemins</span>.
+      </div>
+      <div style={{ fontSize: 28, color: "#C3C9DD", marginTop: 24, fontWeight: 600 }}>69 métiers · études, écoles, salaires · quiz gratuit</div>
+    </div>
+    <div style={{ width: 330, height: 560, position: "relative", display: "grid", placeItems: "center" }}>
+      <div style={{ position: "absolute", width: 360, height: 360, borderRadius: "50%", background: "radial-gradient(circle, rgba(255,201,60,0.45) 0%, rgba(255,201,60,0.12) 60%, transparent 72%)", top: 60, width: 420, height: 420 }} />
+      <Mascot pose="wave" size={520} lookX={-0.4} />
+    </div>
+  </AbsoluteFill>
+);

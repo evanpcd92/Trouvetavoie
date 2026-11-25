@@ -1,6 +1,7 @@
 // Génère une page statique par métier (pour Google) à partir des données de index.html.
 // Usage : node tools/pages-metiers.mjs
-// Sortie : metiers/<cle>/index.html, metiers/index.html, sitemap.xml, robots.txt
+// Sortie : metiers/<cle>/index.html, metiers/index.html, apres-bac/<bac>/index.html,
+//          calendrier-parcoursup-2027/index.html, sitemap.xml, robots.txt
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,7 +26,13 @@ function read(name) {
   return Function(`return (${body});`)();
 }
 const METIERS = read("METIERS"), EXTRA = read("EXTRA"), SALAIRES = read("SALAIRES"), PSUP = read("PSUP"), PSLAB = read("PSLAB");
-const DOM_BASE = read("DOM_BASE"), UNIVERS = read("UNIVERS");
+const DOM_BASE = read("DOM_BASE"), UNIVERS = read("UNIVERS"), SPE = read("SPE");
+/** lit une question du quiz (ligne « id:{q:..., o:[...]} » de la constante Q) */
+function question(id) {
+  const m = src.match(new RegExp("\\n  " + id + ":(\\{q:.*\\}),?\\n"));
+  if (!m) throw new Error(`question introuvable : ${id}`);
+  return Function("SPE", `return (${m[1]});`)(SPE);
+}
 
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 const lower = (s) => s.charAt(0).toLowerCase() + s.slice(1);
@@ -95,6 +102,9 @@ function layout({ title, desc, url, body, jsonld }) {
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${url}">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="${SITE}/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230E1630'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23FFC93C' stroke-width='5'/%3E%3Cpolygon points='41,23 37,36 23,41 27,28' fill='%23FFC93C'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <style>${CSS}</style>
@@ -169,6 +179,77 @@ ${groups.map(([n, ks]) => `<section><h2>${esc(n)}</h2><div class="rel">${ks.map(
   return layout({ title: `Fiches métiers : études, salaires et formations | trouvetavoie`, desc: `${KEYS.length} fiches métiers pour les lycéens : études, salaire de départ et tous les chemins pour y arriver.`, url: `${SITE}/metiers/`, body });
 }
 
+// ---------- Pages « Que faire après ton bac ? » ----------
+const salaire = (k) => (SALAIRES[k] && SALAIRES[k][0] ? SALAIRES[k][0][0] : "");
+const liste = (w, n = 12) =>
+  Object.entries(w).filter(([k, v]) => v > 0 && METIERS[k]).sort((a, b) => b[1] - a[1] || METIERS[a[0]].nom.localeCompare(METIERS[b[0]].nom, "fr")).slice(0, n).map(([k]) => k);
+const carte = (k) => `<a href="/metiers/${k}/"><b>${esc(METIERS[k].nom)}</b><small style="display:block;font-weight:500;color:var(--mute);font-size:13px">${esc(salaire(k))}</small></a>`;
+const add = (into, w, f = 1) => { for (const [k, v] of Object.entries(w || {})) into[k] = (into[k] || 0) + v * f; return into; };
+
+const techno = question("techno"), pro = question("pro");
+const SOUS = { stmg: question("stmg"), sti2d: question("sti2d"), st2s: question("st2s") };
+const BACS = [];
+for (const [nom, w, id] of techno.o) {
+  const total = add({}, w, 3);
+  const groupes = [];
+  if (SOUS[id]) for (const [n2, w2] of SOUS[id].o) { add(total, w2); groupes.push([n2, liste(w2, 8)]); }
+  BACS.push({ id, titre: `Bac ${nom}`, intro: `Les métiers qui collent le mieux à un bac ${nom}, d’après les réponses de notre quiz d’orientation.`, top: liste(total), groupes, gTitre: SOUS[id] ? SOUS[id].q.replace(/ \?$/, "") : "" });
+}
+{
+  const total = {}; const groupes = [];
+  for (const [n, w] of SPE) { add(total, w); groupes.push([n, liste(w, 8)]); }
+  BACS.unshift({ id: "general", titre: "Bac général", intro: "Les métiers les plus accessibles avec un bac général, puis le détail spécialité par spécialité.", top: liste(total), groupes, gTitre: "Selon tes spécialités" });
+}
+{
+  const total = {}; const groupes = [];
+  for (const [n, w, id] of pro.o) { if (id === "pro-autre") continue; add(total, w); groupes.push([n, liste(w, 8)]); }
+  BACS.push({ id: "pro", titre: "Bac pro", intro: "Les métiers vers lesquels mène chaque domaine de bac professionnel, souvent en alternance.", top: liste(total), groupes, gTitre: "Selon le domaine de ton bac pro" });
+}
+function pageBac(b) {
+  const url = `${SITE}/apres-bac/${b.id}/`;
+  const body = `
+<div class="crumb"><a href="/">Accueil</a> / <a href="/apres-bac/">Après ton bac</a> / ${esc(b.titre)}</div>
+<div class="k">Orientation</div>
+<h1>Que faire après un ${esc(b.titre.replace(/^Bac /, "bac "))} ?</h1>
+<p class="lead">${esc(b.intro)}</p>
+<section><h2>Les métiers les plus adaptés</h2><div class="rel">${b.top.map(carte).join("")}</div></section>
+${b.groupes.filter((g) => g[1].length).map((g, i) => `${i === 0 && b.gTitre ? `<section><h2>${esc(b.gTitre)}</h2></section>` : ""}<section style="margin-top:18px"><h3 style="font-size:18px;margin-bottom:10px">${esc(g[0])}</h3><div class="rel">${g[1].map(carte).join("")}</div></section>`).join("\n")}
+<div class="cta" style="margin-top:34px"><a class="btn btn-g" href="/#quiz">Fais le quiz gratuit pour affiner</a><a class="btn btn-p" href="/apres-bac/">Les autres bacs</a></div>
+<p style="margin-top:28px;font-size:13.5px;color:var(--mute)">Ces pistes viennent des réponses de notre quiz d’orientation ; chaque fiche métier détaille les études, les écoles et le salaire avec leurs sources.</p>`;
+  return layout({ title: `Que faire après un ${b.titre.replace(/^Bac /, "bac ")} ? Les métiers et études possibles | trouvetavoie`, desc: `${b.intro} Salaires, études et tous les chemins pour y arriver.`, url, body });
+}
+function pageBacs() {
+  const body = `
+<div class="crumb"><a href="/">Accueil</a> / Après ton bac</div>
+<h1>Que faire après ton bac ?</h1>
+<p class="lead">Choisis ta série : on te montre les métiers les plus adaptés, avec leur salaire et leurs études.</p>
+<div class="rel">${BACS.map((b) => `<a href="/apres-bac/${b.id}/">🎓 ${esc(b.titre)}</a>`).join("")}</div>
+<div class="cta" style="margin-top:34px"><a class="btn btn-g" href="/#quiz">Fais le quiz d’orientation gratuit</a></div>`;
+  return layout({ title: "Que faire après ton bac ? Métiers par série | trouvetavoie", desc: "Les métiers adaptés à chaque bac : général, STMG, STI2D, ST2S, STL, STD2A, STHR, STAV et bac pro.", url: `${SITE}/apres-bac/`, body });
+}
+
+// ---------- Calendrier Parcoursup 2027 (calendrier officiel publié en octobre 2026) ----------
+const CAL = [
+  ["Jeudi 17 décembre 2026", "Ouverture du site et du catalogue des formations", "Consulte les formations, leurs attendus et leurs chiffres d’admission."],
+  ["Lundi 18 janvier 2027", "Inscription et début des vœux", "Crée ton dossier et commence à formuler tes vœux (jusqu’à 10 vœux et 20 sous-vœux)."],
+  ["Jeudi 11 mars 2027", "Dernier jour pour formuler tes vœux", "Après cette date, plus d’ajout de vœux en phase principale."],
+  ["Jeudi 1er avril 2027", "Dernier jour pour compléter ton dossier et confirmer tes vœux", "Projets de formation motivés, pièces demandées et confirmation de chaque vœu."],
+  ["À partir du 1er juin 2027", "Premières réponses des formations", "Réponds aux propositions dans les délais indiqués."],
+  ["Samedi 10 juillet 2027", "Fin de la phase principale", "Si tu n’as pas de proposition, la phase complémentaire reste ouverte."],
+  ["Jeudi 9 septembre 2027", "Fin de la phase complémentaire", "Pense aussi aux formations hors Parcoursup et à l’alternance."],
+];
+function pageCalendrier() {
+  const body = `
+<div class="crumb"><a href="/">Accueil</a> / Calendrier Parcoursup 2027</div>
+<div class="k">Parcoursup 2027</div>
+<h1>Calendrier Parcoursup 2027 : toutes les dates clés</h1>
+<p class="lead">Les dates officielles de la procédure, et ce que tu dois faire à chaque étape.</p>
+<ol class="steps" style="margin-top:20px">${CAL.map(([d, t, x]) => `<li><div><b>${esc(t)}</b><small style="display:block;color:var(--gold-d);font-weight:700">${esc(d)}</small><small>${esc(x)}</small></div></li>`).join("")}</ol>
+<p style="margin-top:24px;font-size:13.5px;color:var(--mute)">Source : calendrier officiel de la session 2027 publié sur parcoursup.gouv.fr. Vérifie toujours les dates sur le site officiel.</p>
+<div class="cta"><a class="btn btn-g" href="/#quiz">Pas d’idée de vœux ? Fais le quiz gratuit</a><a class="btn btn-p" href="/#calendrier">Le calendrier interactif</a></div>`;
+  return layout({ title: "Calendrier Parcoursup 2027 : les dates clés | trouvetavoie", desc: "Vœux du 18 janvier au 11 mars 2027, confirmation jusqu’au 1er avril, premières réponses le 1er juin : toutes les dates officielles de Parcoursup 2027.", url: `${SITE}/calendrier-parcoursup-2027/`, body });
+}
+
 const out = path.join(ROOT, "metiers");
 fs.mkdirSync(out, { recursive: true });
 for (const k of KEYS) {
@@ -176,12 +257,17 @@ for (const k of KEYS) {
   fs.writeFileSync(path.join(out, k, "index.html"), pageMetier(k));
 }
 fs.writeFileSync(path.join(out, "index.html"), pageIndex());
+const outB = path.join(ROOT, "apres-bac");
+for (const b of BACS) { fs.mkdirSync(path.join(outB, b.id), { recursive: true }); fs.writeFileSync(path.join(outB, b.id, "index.html"), pageBac(b)); }
+fs.writeFileSync(path.join(outB, "index.html"), pageBacs());
+fs.mkdirSync(path.join(ROOT, "calendrier-parcoursup-2027"), { recursive: true });
+fs.writeFileSync(path.join(ROOT, "calendrier-parcoursup-2027", "index.html"), pageCalendrier());
 const today = new Date().toISOString().slice(0, 10);
 fs.writeFileSync(
   path.join(ROOT, "sitemap.xml"),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-    [`${SITE}/`, `${SITE}/metiers/`, ...KEYS.map((k) => `${SITE}/metiers/${k}/`)].map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n") +
+    [`${SITE}/`, `${SITE}/metiers/`, ...KEYS.map((k) => `${SITE}/metiers/${k}/`), `${SITE}/apres-bac/`, ...BACS.map((b) => `${SITE}/apres-bac/${b.id}/`), `${SITE}/calendrier-parcoursup-2027/`].map((u) => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join("\n") +
     `\n</urlset>\n`,
 );
 fs.writeFileSync(path.join(ROOT, "robots.txt"), `User-agent: *\nAllow: /\nDisallow: /tiktok/\n\nSitemap: ${SITE}/sitemap.xml\n`);
-console.log(`${KEYS.length} pages métiers + index + sitemap.xml + robots.txt`);
+console.log(`${KEYS.length} pages métiers, ${BACS.length} pages « après ton bac », calendrier, sitemap.xml et robots.txt`);
