@@ -48,7 +48,6 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 ## À faire
 
 - Le propriétaire doit créer la variable `ACCES_TEST` sur Cloudflare (code choisi par lui, jamais écrit ici) pour retrouver son accès test.
-- Adresse e-mail de contact (`ED.mail`) encore vide : nécessaire pour « mot de passe oublié » et les mentions légales.
 
 - Quand le SIRET arrive : compléter les mentions légales et les CGV (SIRET, « TVA non applicable, art. 293 B du CGI », médiateur de la consommation), puis activer les vrais paiements.
 - Nouveau style de vidéo : le propriétaire doit envoyer un lien de vidéo modèle.

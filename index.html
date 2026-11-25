@@ -453,13 +453,13 @@ details.exd{margin-top:18px}details.exd summary{cursor:pointer;font-weight:600;c
 @media (max-width:760px){.sb{grid-template-columns:1fr 1fr}.sb b{font-size:32px}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.hero h1 em{background-size:100% 38%}}
 /* ===== Pied de page ===== */
-.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.fcols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:32px;padding-bottom:26px;border-bottom:1px solid var(--line);margin-bottom:22px}
 .fcols h4{font-family:Poppins,sans-serif;font-size:14px;color:var(--ink);margin:0 0 12px}
 .fcols a{display:block;color:var(--ink2);text-decoration:none;margin-bottom:8px;font-size:14.5px}.fcols a:hover{color:var(--ink)}
 .fbrand p{margin:10px 0 16px;color:var(--ink2);max-width:36ch}
 .tt{display:inline-flex!important;align-items:center;gap:8px;background:var(--navy);color:#fff!important;border-radius:12px;padding:10px 16px;font-weight:600;transition:transform .2s}
 .tt:hover{transform:translateY(-2px)}
-@media (max-width:760px){.fcols{grid-template-columns:1fr 1fr}.fbrand{grid-column:1/-1}}
+@media (max-width:760px){.fcols{grid-template-columns:1fr 1fr}.fbrand,.fcontact{grid-column:1/-1}}
 /* ===== Vidéos ===== */
 .vcard{background:var(--navy);border-radius:20px;padding:14px;margin:-4px -4px 18px;color:#fff}
 .vcard h3{font-size:15px;color:#fff;margin:2px 4px 10px;display:flex;align-items:center;gap:8px}
@@ -641,6 +641,7 @@ details.exd{margin-top:18px}details.exd summary{cursor:pointer;font-weight:600;c
       </div>
       <div><h4>Explorer</h4><a href="#metiers">Tous les métiers</a><a href="#quiz">Quiz d’orientation</a><a href="#ecoles">Écoles</a><a href="/metiers/">Fiches métiers</a><a href="/apres-bac/">Que faire après ton bac</a><a href="#comparer">Comparer deux métiers</a><a href="#calendrier">Calendrier Parcoursup 2027</a><a href="#paiement">Tarifs</a></div>
       <div><h4>trouvetavoie</h4><a href="#a-propos">Notre histoire</a><a href="#parents">Pour les parents</a><a href="#mentions">Mentions légales</a><a href="#cgv">CGV</a><a href="#confidentialite">Confidentialité</a></div>
+      <div class="fcontact"><h4>Contact</h4><p style="margin:0 0 6px;color:var(--ink2);font-size:14px">Une question, un souci d’accès ?</p><a href="mailto:trouvetavoie2027@gmail.com" style="font-weight:600;overflow-wrap:anywhere">trouvetavoie2027@gmail.com</a></div>
     </div>
     <div class="ft">
       <div>Un outil d'aide à la décision : il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
@@ -1672,6 +1673,7 @@ function parents(){
       <details class="exd"><summary>👀 Voir un exemple de plan</summary>${exemplePlan()}</details></div>
     <div class="quizb" style="margin-top:30px"><div><h2>Faites le quiz ensemble</h2><p>5 minutes pour découvrir des pistes adaptées à son bac et à ses envies.</p></div><a class="btn btn-g" href="#quiz">Lancer le quiz ${IC.arrow}</a></div>
     <p style="margin-top:22px"><a href="#paiement">Voir les offres</a> · <a href="#calendrier">Calendrier Parcoursup 2027</a> · <a href="#a-propos">Qui est derrière le site ?</a></p>
+    <p style="margin-top:8px;color:var(--ink2)">Une question avant d’acheter ? Écrivez-nous : <a href="mailto:${ED.mail}" style="font-weight:600">${ED.mail}</a></p>
   </div></div>`;
 }
 
@@ -2442,7 +2444,7 @@ const eur = n => n.toFixed(2).replace('.',',')+' €';
 const ED = { // ⚠ À compléter dès réception du SIRET
   nom:'[Nom de l’entrepreneur]', statut:'Entrepreneur individuel (micro-entreprise)',
   siret:'[SIRET en cours d’attribution]', adresse:'[Adresse de domiciliation]',
-  mail:'[adresse e-mail de contact]',
+  mail:'trouvetavoie2027@gmail.com',
   mediateur:'[Nom et site du médiateur de la consommation]'
 };
 const MAJ_LEGAL = '25 novembre 2026';
@@ -2584,6 +2586,7 @@ function paiement(){
           <button class="btn btn-p paybtn" type="submit">Payer ${eur(o.prix)}</button>
           <div class="err" id="perr" role="status"></div>
           <div class="secure" style="justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé par Stripe · aucune donnée bancaire sur trouvetavoie</div>
+          <p class="note" style="text-align:center;margin:8px 0 0">Une question ? <a href="mailto:${ED.mail}">${ED.mail}</a></p>
         </div>
         <details class="exd"><summary>👀 Voir un exemple de plan Parcoursup</summary>${exemplePlan()}</details>
       </div>
