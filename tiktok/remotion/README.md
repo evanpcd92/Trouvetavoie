@@ -17,4 +17,5 @@ Voix off : `render.mjs` écrit le texte (`src/script.ts`), puis `scripts/make_vo
 - Données : `../metiers.json` · ordre de rotation : `src/order.json`
 - Mascotte : `src/Mascot.tsx` · voix : `src/script.ts`, `scripts/make_voice.py` · scènes : `src/scenes.tsx` · montage : `src/Video.tsx`
 - Musique et bruitages synthétisés (libres de droits) : `python3 scripts/make_audio.py`
+- Vidéo « Parents » (Facebook, 1080×1350) : `npx tsx scripts/dump-parents.ts out/parents_texte.json && python3 scripts/make_voice.py out/parents_texte.json public/voice-parents && npx remotion render src/index.ts Parents out/trouvetavoie_parents.mp4`
 - Emojis Twemoji (CC-BY 4.0) · polices Poppins et Inter (OFL)

@@ -3,6 +3,7 @@ import { Composition, staticFile } from "remotion";
 import { MetierVideo, VideoProps } from "./Video";
 import { FPS, timeline, VoiceData } from "./timing";
 import { histoireTimeline, HistoireProps, HVoice, MonHistoire } from "./Histoire";
+import { MiniParents, ParentsProps, ParentsVideo, parentsTimeline, PVoice } from "./Parents";
 import { MiniHistoire, Miniature, MiniatureProps, OgImage } from "./Miniature";
 
 /** charge la voix générée par scripts/make_voice.py (public/voice/voice.json) si elle correspond au métier */
@@ -53,6 +54,28 @@ export const RemotionRoot: React.FC = () => (
       return { durationInFrames: histoireTimeline(voice).total, props: { ...props, voice } };
     }}
   />
+  <Composition
+    id="Parents"
+    component={ParentsVideo}
+    width={1080}
+    height={1350}
+    fps={FPS}
+    durationInFrames={parentsTimeline(null).total}
+    defaultProps={{ voice: null } as ParentsProps}
+    calculateMetadata={async ({ props }) => {
+      let voice: PVoice | null = (props.voice as PVoice | null) ?? null;
+      if (!voice) {
+        try {
+          const r = await fetch(staticFile("voice-parents/voice.json"));
+          if (r.ok) voice = (await r.json()) as PVoice;
+        } catch {
+          voice = null;
+        }
+      }
+      return { durationInFrames: parentsTimeline(voice).total, props: { ...props, voice } };
+    }}
+  />
+  <Composition id="MiniParents" component={MiniParents} width={1080} height={1350} fps={FPS} durationInFrames={1} />
   <Composition id="Miniature" component={Miniature} width={1080} height={1920} fps={FPS} durationInFrames={1} defaultProps={{ metier: "infirmier" } as MiniatureProps} />
   <Composition id="MiniHistoire" component={MiniHistoire} width={1080} height={1920} fps={FPS} durationInFrames={1} />
   <Composition id="OgImage" component={OgImage} width={1200} height={630} fps={FPS} durationInFrames={1} />

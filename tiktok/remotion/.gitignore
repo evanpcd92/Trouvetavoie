@@ -9,3 +9,4 @@ out
 # Voix off générée à chaque rendu
 public/voice
 public/voice-histoire
+public/voice-parents
