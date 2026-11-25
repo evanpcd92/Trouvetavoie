@@ -422,6 +422,41 @@ select.inp{appearance:auto}
 .tt{display:inline-flex!important;align-items:center;gap:8px;background:var(--navy);color:#fff!important;border-radius:12px;padding:10px 16px;font-weight:600;transition:transform .2s}
 .tt:hover{transform:translateY(-2px)}
 @media (max-width:760px){.fcols{grid-template-columns:1fr 1fr}.fbrand{grid-column:1/-1}}
+/* ===== Vidéos ===== */
+.vcard{background:var(--navy);border-radius:20px;padding:14px;margin:-4px -4px 18px;color:#fff}
+.vcard h3{font-size:15px;color:#fff;margin:2px 4px 10px;display:flex;align-items:center;gap:8px}
+.vcard h3 span{background:var(--gold);color:var(--navy);font-size:11px;font-weight:800;border-radius:6px;padding:2px 7px;letter-spacing:.04em}
+.vcard video,.story-v video,.vmodal video{display:block;width:100%;aspect-ratio:9/16;max-width:100%;border-radius:14px;background:#000;object-fit:cover}
+.vcard p{margin:10px 4px 2px;font-size:13px;color:#C3C9DD}
+.vbtn{height:38px;padding:0 14px;font-size:14px;margin-top:10px}
+.vmodal{position:fixed;inset:0;z-index:100;background:rgba(7,11,28,.82);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top)) 16px;animation:fadeIn .25s ease}
+.vmodal>div{width:min(380px,100%);position:relative;animation:pop .35s cubic-bezier(.2,1.3,.4,1)}
+.vmodal button{position:absolute;top:-14px;right:-14px;width:42px;height:42px;border-radius:50%;border:none;background:#fff;font-size:22px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.story-grid{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:32px;align-items:start}
+.story-v{margin:0;position:sticky;top:90px}
+.story-v figcaption{font-size:13.5px;color:var(--mute);text-align:center;margin-top:8px}
+@media (max-width:760px){.story-grid{grid-template-columns:1fr}.story-v{position:static;max-width:300px;margin:0 auto 10px;order:-1}}
+/* ===== Animations supplémentaires ===== */
+.hero{position:relative;overflow:hidden}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;z-index:0;pointer-events:none}
+.hero::before{width:420px;height:420px;background:#FFE59A;top:-120px;right:8%;animation:drift 14s ease-in-out infinite}
+.hero::after{width:360px;height:360px;background:#DCE5FF;bottom:-140px;left:-60px;animation:drift 18s ease-in-out infinite reverse}
+.hero .wrap{position:relative;z-index:1}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,30px)}}
+.st .n{animation:pop .5s cubic-bezier(.2,1.3,.4,1) both}
+.st:nth-child(2) .n{animation-delay:.12s}.st:nth-child(3) .n{animation-delay:.24s}.st:nth-child(4) .n{animation-delay:.36s}
+.st:not(:last-child)::before{transform-origin:top;animation:grow .7s .3s ease both}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.kfig>div{transition:transform .25s ease,box-shadow .25s ease}
+.kfig>div:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(14,22,48,.10)}
+.mh-ic{animation:pop .6s .1s cubic-bezier(.2,1.3,.4,1) both}
+.mh-ic img{animation:wob 4s 1s ease-in-out infinite}
+@keyframes wob{0%,100%{transform:rotate(0)}50%{transform:rotate(-8deg)}}
+.tab{transition:background .2s,color .2s}
+.qtags span{transition:transform .2s}.qtags span:hover{transform:translateY(-2px) rotate(-2deg)}
+.mcard:hover{box-shadow:0 14px 30px rgba(14,22,48,.10)}
+.prog i{transition:width .5s cubic-bezier(.2,.8,.2,1)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
@@ -1387,6 +1422,21 @@ ${arm('L')}${arm('R')}
 ${open?'<ellipse cx="200" cy="242" rx="22" ry="17" fill="#7A1F2B"/><ellipse cx="200" cy="252" rx="12" ry="6" fill="#E8667A"/>':pose==='think'?'<path d="M184 242 Q204 236 218 244" stroke="#7A1F2B" stroke-width="6" stroke-linecap="round" fill="none"/>':'<path d="M172 230 Q200 262 228 230 Z" fill="#7A1F2B"/>'}
 </g></svg>`;
 }
+// Métiers qui ont leur vidéo dans /videos (mis à jour par tools/ajouter-video.mjs)
+const VIDEOS = ['psychologue','ambulancier','comptable','medecin','ingenieur'];
+function videoCard(k){
+  return `<div class="vcard"><h3><span>VIDÉO</span>Le métier en 30 secondes</h3>
+    <video controls playsinline preload="none" poster="videos/${k}.jpg" src="videos/${k}.mp4"></video>
+    <p>But, quotidien, qualités et salaire, expliqués par notre mascotte.</p></div>`;
+}
+function ouvrirVideo(k){
+  const m=document.createElement('div'); m.className='vmodal'; m.setAttribute('role','dialog'); m.setAttribute('aria-label','Vidéo du métier');
+  m.innerHTML=`<div><video controls autoplay playsinline src="videos/${k}.mp4" poster="videos/${k}.jpg"></video><button aria-label="Fermer">×</button></div>`;
+  const close=()=>{ m.remove(); document.removeEventListener('keydown',esc); };
+  const esc=e=>{ if(e.key==='Escape') close(); };
+  m.addEventListener('click',e=>{ if(e.target===m||e.target.tagName==='BUTTON') close(); });
+  document.addEventListener('keydown',esc); document.body.appendChild(m); m.querySelector('button').focus();
+}
 function univDe(k){ let best=null,w=0; for(const d in DOM_BASE){ const v=DOM_BASE[d][k]||0; if(v>w){w=v;best=d;} } const u=UNIVERS.find(x=>x[1]===best); return u?u[0]:'Fiche métier'; }
 const QZ_TIPS = ['C’est parti ! Réponds avec ton envie, pas avec ce qu’on attend de toi.','Il n’y a pas de mauvaise réponse ici.','Pense à ce que tu fais vraiment quand tu as du temps libre.','Tu avances bien, continue !','Encore quelques questions et je te montre tes pistes.','Dernière ligne droite !'];
 
@@ -1517,7 +1567,7 @@ function metier(key){
         ${!hasPlan()?`<div class="callout" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>${m.chemins.length-1} autres chemins existent pour ce métier.</span><a class="btn btn-p" href="#paiement" style="height:40px">${IC.lock} Les débloquer</a></div>`:''}
       </div>`}
       </div>
-      <aside class="card"><h3 style="font-size:17px;margin-bottom:6px">L'essentiel</h3>
+      <aside class="card">${VIDEOS.includes(key)?videoCard(key):''}<h3 style="font-size:17px;margin-bottom:6px">L'essentiel</h3>
         ${m.infos.slice(2).map(k=>`<div class="kv"><span>${k[0]}</span><b>${k[1]}</b></div>`).join('')}
         ${EXTRA[key]?`<h3 style="font-size:15px;margin:18px 0 6px">Au quotidien</h3><p class="aside-p">${EXTRA[key].m.quotidien}</p>
         <h3 style="font-size:15px;margin:14px 0 6px">Qualités clés</h3><div class="qtags">${EXTRA[key].m.qualites.map(q=>`<span>${q}</span>`).join('')}</div>
@@ -2022,11 +2072,14 @@ function histoire(){
       <div class="story-k">Notre histoire</div>
       <h1>Le guide que j’aurais aimé avoir</h1>
       <p class="story-lead">trouvetavoie est né d’une orientation ratée : la mienne.</p>
+      <div class="story-grid">
       <div class="story-body">
         <p>J’étais en terminale STMG et je ne savais pas quoi faire après le bac. Parcoursup ne m’a pas aidé. J’ai cherché partout, sans jamais trouver de réponse claire à une question pourtant simple : qu’est-ce qui est fait pour moi ?</p>
         <p>Alors j’ai fait comme beaucoup d’élèves. J’ai mis des vœux un peu au hasard, dans des formations qui ne me plaisaient pas vraiment. Elles ne m’ont pas retenu non plus.</p>
         <p>Je me suis retrouvé dans une école privée payante, parce que c’était le seul choix qu’il me restait. Je ne m’y suis pas plu, et j’ai arrêté.</p>
         <p>Je me suis ensuite lancé à mon compte, avec un objectif : reprendre mes études, mais cette fois dans une voie que j’aurai vraiment choisie. Et c’est en construisant trouvetavoie que j’ai trouvé ce qui me plaît.</p>
+      </div>
+        <figure class="story-v"><video controls playsinline preload="none" poster="videos/mon-histoire.jpg" src="videos/mon-histoire.mp4"></video><figcaption>Mon histoire en 30 secondes</figcaption></figure>
       </div>
       <blockquote class="story-q">Personne ne devrait choisir son avenir au hasard, faute d’informations claires.</blockquote>
       <div class="story-body">
@@ -2167,7 +2220,7 @@ function quiz(){
         ${SALAIRES[k]?`<p style="margin:6px 0 0;font-size:14px">💶 <b>Salaire de départ :</b> ${SALAIRES[k][ch][0]}</p>`:''}
         ${al.map(x=>`<p style="margin:8px 0 0;font-size:13px;color:#9A3412">⚠ ${x}</p>`).join('')}
         <div class="bar2"><i style="width:${i===0?100:Math.min(92,Math.max(10,Math.round(v/Math.max(...top.map(x=>x[1]))*100)))}%"></i></div></div>
-        <a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Voir le chemin ${ch+1}</a></div></div>`}).join('')}
+        <div style="display:flex;flex-direction:column;align-items:stretch"><a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Voir le chemin ${ch+1}</a>${VIDEOS.includes(k)?`<button class="btn btn-o vbtn" type="button" data-video="${k}">▶ Vidéo 30 s</button>`:''}</div></div></div>`}).join('')}
       ${!top.length?`<div class="card"><h3 style="font-size:19px">Aucun de nos ${Object.keys(METIERS).length} métiers ne colle parfaitement</h3><p style="color:var(--ink2);font-size:15px;margin:6px 0 0">Avec ce que tu ne supportes pas et la durée d’études choisie, on préfère ne rien te proposer plutôt qu’un métier qui ne te correspond pas. On ajoute de nouveaux métiers chaque semaine. Tu peux aussi refaire le quiz en étant un peu plus souple.</p></div>`:''}
       ${more.length?`<p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
       <div class="sugg" style="margin:0">${more.map(([k])=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom}</a>`).join('')}</div>`:''}
@@ -2221,7 +2274,7 @@ function route(){
   animer();
 }
 function animer(){
-  const els = app.querySelectorAll('.sh, .g3>.card, .g4>.card, .founder, .quizb, .mgroup, .stats-b, .story-list li, .story-q');
+  const els = app.querySelectorAll('.sh, .g3>.card, .g4>.card, .founder, .quizb, .mgroup .mcard, .stats-b, .story-list li, .story-q, .kfig>div, .fiche, aside.card, .qz>.card, .story-v, .sc');
   const io = 'IntersectionObserver' in window ? new IntersectionObserver((ents)=>{ ents.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); compter(e.target); io.unobserve(e.target); } }); }, {threshold:.12}) : null;
   els.forEach((el,i)=>{ if(!io){ el.classList.add('in'); return; } el.classList.add('rv'); el.style.transitionDelay = (i%4)*90+'ms'; io.observe(el); });
 }
@@ -2246,6 +2299,7 @@ function bind(){
     else err.textContent = 'Ce métier arrive bientôt. Essaie par exemple médecin, ingénieur, psychologue ou développeur.';
   });
   const mf=document.getElementById('mf'); if(mf) mf.oninput=()=>{const q=norm(mf.value);let n=0;document.querySelectorAll('.mgroup').forEach(g=>{let c=0;g.querySelectorAll('.mcard').forEach(a=>{const ok=!q||a.dataset.s.includes(q);a.hidden=!ok;if(ok)c++;});g.hidden=!c;n+=c;});document.getElementById('mempty').hidden=n>0;};
+  document.querySelectorAll('[data-video]').forEach(b=>b.onclick=()=>ouvrirVideo(b.dataset.video));
   const am=document.getElementById('allm'); if(am) am.onclick=()=>{st.allm=1;rerender(true);};
   document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{st.chemin=0;location.hash=b.dataset.go;scrollTo(0,0);});
   document.querySelectorAll('[data-ch]').forEach(b=>b.onclick=()=>{const i=+b.dataset.ch;if(!hasPlan()&&i>0){st.lockCh=i;}else{st.lockCh=0;st.chemin=i;}rerender(true);});
