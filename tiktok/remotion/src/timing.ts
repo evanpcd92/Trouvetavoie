@@ -5,7 +5,12 @@ import { Seg, voiceScript } from "./script";
 export const FPS = 30;
 export const T = 14; // durée des transitions (images)
 
-export type VoiceData = { key: string; segs: Record<string, { dur: number; env: number[] }> };
+export type VoiceData = {
+  key: string;
+  /** une piste par scène, lue d'une traite (absent pour les anciennes voix) */
+  scenes?: { file: string; dur: number }[];
+  segs: Record<string, { dur: number; env: number[]; off?: number; scene?: number }>;
+};
 
 /** voix d'une scène : début (image locale), durée et enveloppe de chaque morceau */
 export type SceneVoice = { segs: Seg[]; cues: number[]; lens: number[]; env: (number[] | null)[] };
@@ -34,8 +39,16 @@ export function timeline(metier: string, voice?: VoiceData | null) {
   const scenes: SceneVoice[] = script.map((segs, i) => {
     let f = LEAD[i];
     const cues: number[] = [], lens: number[] = [], env: (number[] | null)[] = [];
+    const continuous = !!useVoice?.scenes;
     segs.forEach((s, j) => {
       const v = useVoice?.segs[s.id];
+      if (continuous && v && v.off !== undefined) {
+        // lecture d'une traite : chaque morceau tombe à sa place dans la piste de la scène
+        cues.push(LEAD[i] + Math.round(v.off * FPS));
+        lens.push(Math.max(1, Math.ceil(v.dur * FPS)));
+        env.push(v.env);
+        return;
+      }
       const dur = v ? v.dur : Math.max(0.6, s.text.split(" ").length * 0.32);
       const len = Math.ceil(dur * FPS);
       cues.push(f);

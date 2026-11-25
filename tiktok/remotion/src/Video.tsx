@@ -54,7 +54,13 @@ export const MetierVideo: React.FC<VideoProps> = ({ metier, voice }) => {
   return (
     <AbsoluteFill style={{ background: "#0E1630" }}>
       <Audio src={staticFile("audio/music.wav")} volume={musicVol} />
-      {hasVoice
+      {hasVoice && voice?.scenes
+        ? voice.scenes.map((sc, i) => (
+            <Sequence key={sc.file} from={starts[i] + scenes[i].cues[0]} durationInFrames={Math.ceil(sc.dur * 30) + 10} layout="none">
+              <Audio src={staticFile(`voice/${sc.file}`)} volume={1} />
+            </Sequence>
+          ))
+        : hasVoice
         ? clips.map((c) => (
             <Sequence key={c.id} from={c.at} durationInFrames={c.len + 10} layout="none">
               <Audio src={staticFile(`voice/${c.id}.wav`)} volume={1} />

@@ -10,7 +10,7 @@ MODEL_URL = "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/
 CACHE = os.path.expanduser("~/.cache/trouvetavoie")
 BASE = os.path.join(CACHE, "kokoro-multi-lang-v1_0")
 BLEND = os.path.join(CACHE, "kokoro-blend")
-PUCK, SIWIS, PART_PUCK = 18, 30, 0.65  # 65 % Puck (timbre) + 35 % Siwis (accent français)
+PUCK, SIWIS, PART_PUCK = 18, 30, 0.2  # 20 % Puck (timbre) + 80 % Siwis (accent français)
 SPEED = 1.15
 FPS = 30
 
@@ -82,17 +82,32 @@ def main(script_path, out_dir):
         if f.endswith(".wav"):
             os.remove(os.path.join(out_dir, f))
     script = json.load(open(script_path, encoding="utf-8"))
-    meta = {}
-    for scene in script["scenes"]:
+    meta, scenes = {}, []
+    for i, scene in enumerate(script["scenes"]):
+        # 1. chaque scène est lue d'une traite, pour une intonation naturelle
+        a = tts.generate(" ".join(seg["text"] for seg in scene), sid=0, speed=SPEED)
+        sr = a.sample_rate
+        x = polish(np.array(a.samples, dtype=np.float32), sr)
+        name = f"scene{i}.wav"
+        sf.write(os.path.join(out_dir, name), x, sr)
+        dur = len(x) / sr
+        env = envelope(x, sr)
+        scenes.append({"file": name, "dur": round(dur, 3)})
+        # 2. on mesure chaque morceau seul pour savoir où il tombe dans la lecture continue
+        alone = []
         for seg in scene:
-            a = tts.generate(seg["text"], sid=0, speed=SPEED)
-            x = polish(np.array(a.samples, dtype=np.float32), a.sample_rate)
-            sf.write(os.path.join(out_dir, seg["id"] + ".wav"), x, a.sample_rate)
-            meta[seg["id"]] = {"dur": round(len(x) / a.sample_rate, 3), "env": envelope(x, a.sample_rate), "text": seg["text"]}
-    json.dump({"key": script["key"], "segs": meta}, open(os.path.join(out_dir, "voice.json"), "w", encoding="utf-8"), ensure_ascii=False)
-    total = sum(m["dur"] for m in meta.values())
-    print(f"Voix générée : {len(meta)} morceaux, {total:.1f} s de parole")
-
+            y = polish(np.array(tts.generate(seg["text"], sid=0, speed=SPEED).samples, dtype=np.float32), sr)
+            alone.append(len(y) / sr)
+        k = dur / sum(alone)
+        off = 0.0
+        for seg, d in zip(scene, alone):
+            d2 = d * k
+            f0, f1 = int(off * FPS), int((off + d2) * FPS)
+            meta[seg["id"]] = {"scene": i, "off": round(off, 3), "dur": round(d2, 3), "env": env[f0:max(f0 + 1, f1)], "text": seg["text"]}
+            off += d2
+    json.dump({"key": script["key"], "scenes": scenes, "segs": meta}, open(os.path.join(out_dir, "voice.json"), "w", encoding="utf-8"), ensure_ascii=False)
+    total = sum(x["dur"] for x in scenes)
+    print(f"Voix générée : {len(scenes)} scènes lues d'une traite, {total:.1f} s de parole")
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])
