@@ -1685,6 +1685,7 @@ function planDonnees(){
       if(ps==='P'||ps==='X'){ let sc=selScore(f.sel)+(lvl===0?1:0)-(lvl===2?1:0); item.cat=(ri===0&&item.reco)?'rea':sc>=3?'amb':sc===2?'rea':'pb'; cand.push(item); } else hors.push(item); }); });
   R.more.slice(0,4).forEach(k=>{ const ch=METIERS[k].chemins[0], f=(EXTRA[k]&&EXTRA[k].c[0])||{}, ps=(PSUP[k]||'P')[0], t=(ch.steps[0][0].length<14&&ch.steps[1])?ch.steps[1][0]:ch.steps[0][0];
     if((ps==='P'||ps==='X')&&selScore(f.sel)===1&&!seen.has(t)){ seen.add(t); cand.push({k,i:0,t,ch:ch.nom,sel:f.sel||'',alt:f.alt||'',cat:'pb',ri:9}); } });
+  if(!cand.some(x=>x.cat==='amb')){ const up=cand.filter(x=>x.cat==='rea'&&!(x.ri===0&&x.reco)).sort((x,y)=>selScore(y.sel)-selScore(x.sel))[0]; if(up) up.cat='amb'; }
   const pick=cat=>cand.filter(x=>x.cat===cat).sort((x,y)=>(y.reco-x.reco)||(x.ri-y.ri)).slice(0,3);
   return {R,c,top:R.top.slice(0,3),amb:pick('amb'),rea:pick('rea'),pb:pick('pb'),hors:hors.slice(0,4)};
 }
