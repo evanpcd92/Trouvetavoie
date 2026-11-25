@@ -567,6 +567,9 @@ select.inp{appearance:auto}
 .pl-tab{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14.5px}
 .pl-tab th,.pl-tab td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 .pl-tab th{background:var(--bg);font-size:13px;color:var(--mute);font-weight:600}.pl-tab tr:last-child td{border-bottom:none}
+@media(max-width:640px){.tbx:has(.pl-tab){border:none;background:none}.pl-tab thead{display:none}.pl-tab,.pl-tab tbody,.pl-tab tr,.pl-tab td{display:block;width:100%}.pl-tab{border:none;background:none;border-radius:0}
+.pl-tab tr{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;padding:6px 0}.pl-tab td{border:none;padding:5px 14px;display:flex;gap:10px}
+.pl-tab td:first-child{font-size:16px;padding-top:8px}.pl-tab td:not(:first-child)::before{content:attr(data-l);flex:0 0 112px;color:var(--mute);font-size:13px}}
 .alert{background:#FFF7ED;border:1px solid #FED7AA;border-radius:14px;padding:12px 14px;margin-bottom:8px;font-size:14.5px;color:#7C2D12}
 .letter{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:var(--ink)}
 .letter i{color:var(--mute)}
@@ -1729,7 +1732,7 @@ function planParcoursup(){
 
   const reste=`
     ${sec(2,'Ton parcours année par année','Avec le chemin conseillé : '+chm.nom+'. '+rs0,`<ol class="yr">${yr.map((r,i)=>`<li class="${i===yr.length-1?'fin':''}"><span class="y">${r[0]}</span><div class="c"><b>${r[1]}</b><small>${r[2]}</small></div></li>`).join('')}</ol>`)}
-    ${sec(3,'Tes 3 pistes comparées','Le chemin le plus adapté à ton profil pour chaque métier.',`<div class="tbx"><table class="pl-tab"><thead><tr><th>Métier</th><th>Chemin conseillé</th><th>Durée</th><th>Coût</th><th>Salaire de départ</th></tr></thead><tbody>${d.top.map(k=>{const [ci]=recoChemin(k,c,a); const f=(EXTRA[k]&&EXTRA[k].c[ci])||{}; return `<tr><td><b>${METIERS[k].nom}</b></td><td>${METIERS[k].chemins[ci].nom}</td><td>${f.duree||'—'}</td><td>${f.cout||'—'}</td><td>${sal(k,ci)}</td></tr>`;}).join('')}</tbody></table></div>`)}
+    ${sec(3,'Tes 3 pistes comparées','Le chemin le plus adapté à ton profil pour chaque métier.',`<div class="tbx"><table class="pl-tab"><thead><tr><th>Métier</th><th>Chemin conseillé</th><th>Durée</th><th>Coût</th><th>Salaire de départ</th></tr></thead><tbody>${d.top.map(k=>{const [ci]=recoChemin(k,c,a); const f=(EXTRA[k]&&EXTRA[k].c[ci])||{}; return `<tr><td><b>${METIERS[k].nom}</b></td><td data-l="Chemin conseillé">${METIERS[k].chemins[ci].nom}</td><td data-l="Durée">${f.duree||'—'}</td><td data-l="Coût">${f.cout||'—'}</td><td data-l="Salaire de départ">${sal(k,ci)}</td></tr>`;}).join('')}</tbody></table></div>`)}
     ${sec(4,'Tes vœux conseillés','Un bon dossier mélange des vœux ambitieux, réalistes et au moins un plan B. Classement selon la sélectivité des formations et ton niveau.',`<div class="voeux">${col('v-amb','🚀 Ambitieux','Très demandés : tente ta chance',d.amb)}${col('v-rea','🎯 Réalistes','Adaptés à ton profil',d.rea)}${col('v-pb','🛟 Plan B','Plus accessibles, pour être sûr d’avoir une place',d.pb)}</div>
       ${d.hors.length?`<div class="voeux" style="grid-template-columns:1fr;margin-top:12px">${col('v-rea','📮 Hors Parcoursup : candidatures directes','Concours, dossiers ou apprentissage, avec leur propre calendrier',d.hors)}</div>`:''}`)}
     ${sec(5,'Tes points d’attention','Ce qu’il faut savoir avant de te lancer.',(al.length||vig.length)?[...al,...vig].slice(0,6).map(x=>`<div class="alert">⚠️ ${x}</div>`).join(''):'<div class="vitem">Rien de bloquant pour ton profil. 👍</div>')}
