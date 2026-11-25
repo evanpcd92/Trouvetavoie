@@ -212,8 +212,13 @@ function pageBac(b) {
 <div class="k">Orientation</div>
 <h1>Que faire après un ${esc(b.titre.replace(/^Bac /, "bac "))} ?</h1>
 <p class="lead">${esc(b.intro)}</p>
-<section><h2>Les métiers les plus adaptés</h2><div class="rel">${b.top.map(carte).join("")}</div></section>
+<section><h2>Les métiers les plus adaptés</h2><div class="rel">${b.top.slice(0, 3).map(carte).join("")}</div></section>
+<div id="lock" class="more" style="margin-top:22px;border-style:solid;background:#FFF4D1;border-color:#F5E2A6">🔒 <b>${b.top.length - 3} autres métiers</b>${b.groupes.some((g) => g[1].length) ? (b.id === "pro" ? " et le détail par domaine de bac pro" : " et le détail par spécialité") : ""} sont réservés à la version premium (paiement unique, sans abonnement).<div class="cta" style="margin-top:12px"><a class="btn btn-p" href="/#paiement">Débloquer dès 4,99 €</a></div></div>
+<div id="full" hidden>
+<section><div class="rel">${b.top.slice(3).map(carte).join("")}</div></section>
 ${b.groupes.filter((g) => g[1].length).map((g, i) => `${i === 0 && b.gTitre ? `<section><h2>${esc(b.gTitre)}</h2></section>` : ""}<section style="margin-top:18px"><h3 style="font-size:18px;margin-bottom:10px">${esc(g[0])}</h3><div class="rel">${g[1].map(carte).join("")}</div></section>`).join("\n")}
+</div>
+<script>try{var p=JSON.parse(localStorage.getItem("ttv_plan")||"null");if(localStorage.getItem("ttv_test")==="1"||(p&&p.plan)){document.getElementById("full").hidden=false;document.getElementById("lock").hidden=true;}}catch(e){}</script>
 <div class="cta" style="margin-top:34px"><a class="btn btn-g" href="/#quiz">Fais le quiz gratuit pour affiner</a><a class="btn btn-p" href="/apres-bac/">Les autres bacs</a></div>
 <p style="margin-top:28px;font-size:13.5px;color:var(--mute)">Ces pistes viennent des réponses de notre quiz d’orientation ; chaque fiche métier détaille les études, les écoles et le salaire avec leurs sources.</p>`;
   return layout({ title: `Que faire après un ${b.titre.replace(/^Bac /, "bac ")} ? Les métiers et études possibles | trouvetavoie`, desc: `${b.intro} Salaires, études et tous les chemins pour y arriver.`, url, body });
