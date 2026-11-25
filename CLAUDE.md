@@ -20,7 +20,8 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 - Données dans `index.html` : `METIERS`, `EXTRA`, `PSUP`, `SALAIRES`, `UNIVERS`, `Q` (quiz), `OFFERS` (prix), `CAL` (dates Parcoursup 2027), `VIDEOS` (métiers qui ont une vidéo).
 - `tools/pages-metiers.mjs` : génère les pages statiques `/metiers/<cle>/`, `/apres-bac/<bac>/`, `/calendrier-parcoursup-2027/`, `sitemap.xml`, `robots.txt`. À relancer après toute modification des données (`node tools/pages-metiers.mjs`).
 - `tools/ajouter-video.mjs <cle> <video.mp4> <miniature.png>` : ajoute la vidéo d'un métier sur sa fiche (`videos/<cle>.mp4` + `.jpg`, met à jour `VIDEOS`).
-- `functions/api/` : paiement (pas encore actif en vrai).
+- `functions/api/` : paiement (pas encore actif en vrai), `compte.js` (connexion sur un autre appareil : e-mail + mot de passe, empreinte PBKDF2 rangée dans les métadonnées du paiement Stripe, aucune base de données), `acces.js` (accès test du propriétaire : le code est dans la variable Cloudflare `ACCES_TEST`, jamais dans le site).
+- Exemple de plan (profil fictif, `EX_QA`) affiché sur l'accueil, la page de paiement et la page parents.
 - Tests : servir le dossier (`python3 -m http.server 8123`) et vérifier avec Playwright qu'il n'y a aucune erreur JS, en version gratuite et en version payante.
 
 ## Gratuit / payant
@@ -45,6 +46,9 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 - Micro-entreprise : dossier envoyé au guichet unique (INPI) le 25/11/2026, activité « exploitation de portails Internet ». **En attente du SIRET.**
 
 ## À faire
+
+- Le propriétaire doit créer la variable `ACCES_TEST` sur Cloudflare (code choisi par lui, jamais écrit ici) pour retrouver son accès test.
+- Adresse e-mail de contact (`ED.mail`) encore vide : nécessaire pour « mot de passe oublié » et les mentions légales.
 
 - Quand le SIRET arrive : compléter les mentions légales et les CGV (SIRET, « TVA non applicable, art. 293 B du CGI », médiateur de la consommation), puis activer les vrais paiements.
 - Nouveau style de vidéo : le propriétaire doit envoyer un lien de vidéo modèle.

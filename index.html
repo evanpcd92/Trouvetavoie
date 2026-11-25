@@ -233,6 +233,32 @@ select.inp{appearance:auto}
 .pm button{height:48px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:14px;cursor:pointer}
 .pm button.on{border-color:var(--navy);background:#F3F5FB}
 .sum .kv b{font-family:Poppins,sans-serif}
+.pt{font-size:40px;line-height:1.08;margin:4px 0 10px}.pt em{font-style:normal;background:linear-gradient(transparent 62%,var(--gold) 62%)}
+.psub{color:var(--ink2);margin:0 0 20px}
+.offer .one{margin:4px 0 0;color:var(--ink2);font-size:14px}
+.paybtn{width:100%;margin-top:14px;height:54px;font-size:17px}
+.paytot{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;font-weight:600}.paytot b{font-family:Poppins,sans-serif;font-size:22px}
+@media (max-width:900px){.pay .sum{display:none}}
+@media (max-width:600px){.pt{font-size:31px}.offer{padding:14px}.offer .pr{font-size:18px}}
+.expl{position:relative;height:440px;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#F6F7FB;margin-top:14px}
+.expl-in{transform:scale(.6);transform-origin:top left;width:166.7%;pointer-events:none;user-select:none;padding:14px 18px}
+.expl-in .wrap{padding:0!important;max-width:none}.expl-in .crumb,.expl-in .noprint{display:none!important}.expl-in .qz{max-width:none!important}
+.expl::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,#F6F7FB)}
+.expl-tag{position:absolute;top:10px;right:10px;z-index:2;background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px}
+details.exd{margin-top:18px}details.exd summary{cursor:pointer;font-weight:600;color:var(--navy)}
+.ppromo{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center;background:var(--navy);color:#fff;border-radius:26px;padding:30px;position:relative;overflow:hidden}
+.pp-t h2{color:#fff;font-size:30px;margin:8px 0 10px}.pp-t p{color:#D7DCEB;margin:0 0 14px}
+.ppromo .k{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.08em}
+.pp-t ul{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:7px}.pp-t li{color:#D7DCEB;padding-left:26px;position:relative}.pp-t li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
+.pp-t .acts2{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.pp-t small{display:block;color:#AAB3CF;margin-top:10px}
+.pp-t .btn-o{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.ppromo .expl{margin-top:0;border:0}.expl{color:var(--ink)}
+@media (max-width:860px){.ppromo{grid-template-columns:1fr;padding:24px 20px}.pp-t h2{font-size:25px}.ppromo .btn{width:100%}}
+.gift{border:2px solid var(--gold);background:#FFFBEF;margin-top:26px}
+.gift h2{font-size:26px;margin:6px 0 8px}.gift .k{color:var(--gold-d);font-size:12px;font-weight:700;letter-spacing:.08em}
+.gift ol{margin:12px 0 16px;padding-left:22px;color:var(--ink2);display:grid;gap:6px}
+.acc{max-width:520px;margin:0 auto}.acc .inp{width:100%;margin-top:6px}.acc label{font-size:13px;font-weight:600;color:var(--ink2);display:block;margin-top:14px}
+.ok{color:var(--green);font-weight:600;font-size:14px;margin-top:8px}
 .secure{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-top:12px}
 .og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .og .opt{margin-bottom:0;font-size:15px;padding:16px 18px}
@@ -596,6 +622,7 @@ select.inp{appearance:auto}
       <a href="#ecoles" data-r="ecoles">Écoles</a>
       <a href="#assistant" data-r="assistant">Lettres de motivation</a>
       <a href="#paiement" data-r="paiement">Tarifs</a>
+      <a href="#connexion" data-r="connexion">Mon accès</a>
     </nav>
     <div style="display:flex;gap:10px;align-items:center">
       <a class="btn btn-p hd-cta" href="#accueil" onclick="setTimeout(()=>document.getElementById('q')&&document.getElementById('q').focus(),50)">Commencer</a>
@@ -617,7 +644,7 @@ select.inp{appearance:auto}
     </div>
     <div class="ft">
       <div>Un outil d'aide à la décision : il ne garantit pas une admission et ne remplace pas un conseiller d'orientation.</div>
-      <div>Sources : Parcoursup, Onisep, CNB, établissements · certaines données chiffrées sont en cours d'intégration · icônes Twemoji (CC-BY 4.0) <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test')}catch(e){};st.plan=null;st.paid=false;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
+      <div>Sources : Parcoursup, Onisep, CNB, établissements · certaines données chiffrées sont en cours d'intégration · icônes Twemoji (CC-BY 4.0) <a href="#accueil" id="reset" style="display:none;margin-left:10px" onclick="try{localStorage.removeItem('ttv_test');localStorage.removeItem('ttv_plan')}catch(e){};st.plan=null;st.paid=false;st.sid=null;st.chemin=0;setTimeout(route,0)">Réinitialiser la démo</a></div>
       <div class="ftl"><span>© 2026 trouvetavoie</span></div>
     </div>
   </div>
@@ -1633,10 +1660,16 @@ function parents(){
       <div class="card"><h3>📊 Des informations sourcées</h3><p>Données officielles Parcoursup, fiches Onisep, grilles de salaires publiques et sites des établissements. Chaque chiffre indique sa source.</p></div>
       <div class="card"><h3>🆓 L’essentiel est gratuit</h3><p>Le quiz d’orientation et la découverte de chaque métier (vidéo, salaire, études du chemin principal) sont accessibles sans payer ni créer de compte.</p></div>
       <div class="card"><h3>💳 Un paiement unique</h3><p>${e.nom} à ${eur(e.prix)} ou ${c.nom} à ${eur(c.prix)}, sans abonnement ni renouvellement, valable jusqu’à la fin de Parcoursup 2027.</p></div>
-      <div class="card"><h3>🔒 Pas de pub, pas de revente</h3><p>Aucun compte à créer. Les réponses au quiz et les lettres restent dans le navigateur de votre enfant.</p></div>
-      <div class="card"><h3>👪 Pour les mineurs</h3><p>Lors du paiement, l’élève mineur confirme l’accord d’un parent. Vous pouvez aussi faire l’achat vous-même.</p></div>
+      <div class="card"><h3>🔒 Pas de pub, pas de revente</h3><p>Aucun compte obligatoire. Les réponses au quiz et les lettres restent dans le navigateur de votre enfant.</p></div>
+      <div class="card"><h3>👪 Pour les mineurs</h3><p>Vous pouvez faire l’achat vous-même : vous créez un mot de passe, et votre enfant se connecte sur son téléphone avec votre e-mail.</p></div>
       <div class="card"><h3>🧭 Un outil, pas une promesse</h3><p>trouvetavoie aide à décider : il ne garantit pas une admission et ne remplace pas un conseiller d’orientation.</p></div>
     </div>
+    <div class="card gift"><div class="k">🎁 À OFFRIR · ${eur(c.prix)}</div>
+      <h2>Offrez-lui son plan Parcoursup personnalisé</h2>
+      <p style="color:var(--ink2);margin:0">Construit à partir de ses réponses au quiz : des vœux ambitieux, réalistes et un plan B, les écoles où candidater, les dates à ne pas rater et 5 lettres de motivation.</p>
+      <ol><li>Vous payez ${eur(c.prix)}, une seule fois, sans abonnement.</li><li>Juste après le paiement, vous créez un mot de passe.</li><li>Votre enfant se connecte sur son téléphone (menu « Mon accès ») avec votre e-mail et ce mot de passe.</li></ol>
+      <a class="btn btn-g" href="#paiement" onclick="st.offer='complet';st.gift=1" style="width:100%;height:auto;min-height:52px;padding:12px 16px;flex-wrap:wrap;text-align:center">🎁 Offrir le plan à mon enfant <span style="white-space:nowrap">· ${eur(c.prix)}</span></a>
+      <details class="exd"><summary>👀 Voir un exemple de plan</summary>${exemplePlan()}</details></div>
     <div class="quizb" style="margin-top:30px"><div><h2>Faites le quiz ensemble</h2><p>5 minutes pour découvrir des pistes adaptées à son bac et à ses envies.</p></div><a class="btn btn-g" href="#quiz">Lancer le quiz ${IC.arrow}</a></div>
     <p style="margin-top:22px"><a href="#paiement">Voir les offres</a> · <a href="#calendrier">Calendrier Parcoursup 2027</a> · <a href="#a-propos">Qui est derrière le site ?</a></p>
   </div></div>`;
@@ -1801,6 +1834,16 @@ function home(){
     <div><b data-count="0" data-suffix=" €">0 €</b><span>pour faire le quiz</span></div>
     <div><b>2025</b><span>données officielles Parcoursup</span></div>
   </div></section>
+
+  <section class="blk" style="padding-bottom:0"><div class="wrap"><div class="ppromo">
+    <div class="pp-t"><div class="k">OFFRE COMPLET · 9,99 €</div>
+      <h2>Ton plan Parcoursup personnalisé, prêt à suivre</h2>
+      <p>Fais le quiz gratuit : à partir de tes réponses, on construit ton plan complet jusqu’aux résultats.</p>
+      <ul><li>Tes vœux classés : ambitieux, réalistes et plan B</li><li>Ton parcours année par année, jusqu’au premier salaire</li><li>Tes 3 pistes comparées : durée, coût, salaire</li><li>Où candidater, avec prix et taux d’accès</li><li>Ton calendrier et ta to-do list, en PDF</li><li>5 lettres de motivation personnalisées</li></ul>
+      <div class="acts2"><a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Obtenir mon plan · 9,99 €</a><a class="btn btn-o" href="#quiz">Faire le quiz gratuit</a></div>
+      <small>Paiement unique, sans abonnement. Parent ? <a href="#parents" style="color:var(--gold)">Offrez-le à votre enfant</a>.</small></div>
+    <div>${exemplePlan()}</div>
+  </div></div></section>
 
   <section class="blk" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
     <div class="sh"><div class="k">Comment ça marche</div><h2>De l'idée au dossier, en 3 étapes</h2></div>
@@ -2462,7 +2505,7 @@ function legal(k){
 <h2>3. Commande et paiement</h2>
 <p>Le paiement se fait par carte bancaire, Apple Pay ou Google Pay sur la page sécurisée de Stripe. trouvetavoie ne reçoit ni ne conserve aucune donnée bancaire. La commande est ferme une fois le paiement accepté. Un reçu est envoyé à l’adresse e-mail indiquée.</p>
 <h2>4. Accès</h2>
-<p>L’accès est ouvert dès la confirmation du paiement, sur le navigateur utilisé pour l’achat, et dure jusqu’au 31 août 2027 (fin de la procédure Parcoursup 2027). Si tu changes d’appareil ou effaces les données de ton navigateur, écris-nous avec l’e-mail utilisé lors de l’achat pour retrouver ton accès.</p>
+<p>L’accès est ouvert dès la confirmation du paiement et dure jusqu’au 31 août 2027 (fin de la procédure Parcoursup 2027). Juste après le paiement, tu peux créer un mot de passe : tu te connectes alors sur tous tes appareils (rubrique « Mon accès ») avec l’e-mail utilisé lors de l’achat. Un parent qui achète pour son enfant peut lui transmettre cet e-mail et ce mot de passe. En cas d’oubli, écris-nous avec l’e-mail utilisé lors de l’achat.</p>
 <h2>5. Droit de rétractation</h2>
 <p>Les offres sont des contenus numériques fournis immédiatement. Conformément à l’article L221-28 13° du Code de la consommation, en demandant l’accès immédiat au moment de l’achat, tu reconnais perdre ton droit de rétractation de 14 jours.</p>
 <p>Si le service ne fonctionne pas comme décrit et que nous ne parvenons pas à corriger le problème, nous te remboursons. Écris-nous à ${ED.mail}.</p>
@@ -2477,11 +2520,12 @@ function legal(k){
 
   confidentialite:['Politique de confidentialité',`
 <h2>En bref</h2>
-<p>Pas de compte, pas de publicité, pas de revente de données. Tes réponses au quiz et tes lettres restent dans ton navigateur : elles ne sont jamais envoyées sur nos serveurs.</p>
+<p>Pas de compte obligatoire, pas de publicité, pas de revente de données. Tes réponses au quiz et tes lettres restent dans ton navigateur : elles ne sont jamais envoyées sur nos serveurs.</p>
 <h2>Responsable du traitement</h2>
 <p>L’éditeur du site trouvetavoie (voir les mentions légales). Contact : ${ED.mail}.</p>
 <h2>Ce que nous traitons</h2>
 <p><b>Achat</b> : ton adresse e-mail et l’offre choisie, transmises à Stripe pour le paiement et l’envoi du reçu. Base légale : l’exécution du contrat. Conservation : 10 ans pour les pièces comptables, comme l’exige la loi.</p>
+<p><b>Mot de passe (facultatif)</b> : si tu crées un mot de passe pour te connecter sur un autre appareil, nous n’en gardons qu’une empreinte chiffrée (impossible à relire), rangée avec ton paiement chez Stripe. Base légale : l’exécution du contrat. Conservation : jusqu’à la fin de ton accès.</p>
 <p><b>Mesure d’audience</b> : Vercel Web Analytics compte les pages vues de façon anonyme, sans cookie et sans suivi d’un site à l’autre. Base légale : notre intérêt légitime à améliorer le site.</p>
 <p><b>Stockage local</b> : ton navigateur garde ton accès payant et tes réponses (localStorage). Ces données ne quittent pas ton appareil et tu peux les effacer à tout moment depuis les réglages de ton navigateur.</p>
 <p><b>Recherche d’écoles</b> : la page Écoles interroge directement le site public data.enseignementsup-recherche.gouv.fr. Ton adresse IP est donc visible par ce site, comme pour toute visite web.</p>
@@ -2500,41 +2544,87 @@ function legal(k){
   <div class="lgnav">${nav}</div>
   <article class="card legal"><h1>${t[0]}</h1><p class="note" style="margin-top:4px">Dernière mise à jour : ${MAJ_LEGAL}</p>${t[1]}</article></div>`;
 }
-function paiement(){
-  const o = OFFERS[st.offer||'complet'];
-  if(st.paid) return `<div class="wrap page fade"><div class="qz"><div class="card" style="text-align:center;padding:44px 28px">
+const OFFER_ONE = { complet:'Ton plan Parcoursup personnalisé + 5 lettres de motivation + tout l’Essentiel', essentiel:'Analyse du quiz, 3 chemins par métier, écoles, comparateur' };
+function pwdCard(){
+  if(!st.sid || st.pwdOk) return '';
+  return `<div class="card" style="margin-top:16px;text-align:left"><h3 style="font-size:18px;margin-bottom:4px">${st.gift?'Donnez l’accès à votre enfant':'Utilise ton accès sur un autre appareil'}</h3>
+    <p style="color:var(--ink2);font-size:14px;margin:0">${st.gift?'Créez un mot de passe : votre enfant se connectera sur son téléphone (menu « Mon accès ») avec ':'Crée un mot de passe : tu pourras te connecter sur ton téléphone ou ton ordinateur (menu « Mon accès ») avec '}<b>${esc(st.mail||'ton e-mail')}</b>${st.gift?' et ce mot de passe.':' et ce mot de passe.'}</p>
+    <form id="pwf" class="acc" style="margin:0;max-width:none" novalidate><label for="pwd1">Mot de passe (8 caractères minimum)</label><input class="inp" id="pwd1" type="password" autocomplete="new-password" minlength="8">
+    <button class="btn btn-p" type="submit" style="width:100%;margin-top:12px">Créer le mot de passe</button><div class="err" id="pwerr" role="status"></div></form></div>`;
+}
+function paye(){
+  const o = OFFERS[st.plan||st.offer||'complet'];
+  return `<div class="wrap page fade"><div class="qz"><div class="card" style="text-align:center;padding:40px 24px">
     <div class="ic" style="background:#E4F5EC;color:var(--green);margin:0 auto 18px;width:60px;height:60px;border-radius:50%"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5,12 10,17 19,7"/></svg></div>
     <h1 style="font-size:30px;margin-bottom:8px">Merci, c'est débloqué</h1>
     <p style="color:var(--ink2);margin:0 0 6px">${o.nom} · ${eur(o.prix)}</p>
-    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">${st.mail&&st.mail!=='test'?'Ton reçu est envoyé à '+esc(st.mail)+'.':''} Accès valable jusqu’au 31 août 2027 sur ce navigateur.</p>
-    <a class="btn btn-p" href="#assistant" id="golettre">Rédiger ma lettre</a>
+    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">${st.mail&&st.mail!=='test'?'Ton reçu est envoyé à '+esc(st.mail)+'. ':''}Accès valable jusqu’au 31 août 2027.</p>
+    ${st.plan==='complet'?`<a class="btn btn-p" href="#plan">🗺️ Voir mon plan Parcoursup</a>`:`<a class="btn btn-p" href="#quiz">Voir mon analyse</a>`}
     <a class="btn btn-o" href="#paiement" id="pback" style="margin-left:6px">Revenir aux offres</a>
-  </div></div></div>`;
+  </div>${pwdCard()}</div></div>`;
+}
+function paiement(){
+  if(st.paid) return paye();
+  const of = st.offer||'complet', o = OFFERS[of], g = st.gift;
   return `<div class="wrap page fade">
-    <div class="crumb"><a href="#accueil">Accueil</a> / Tarifs</div>
-    <div class="ptitle"><div><h1>Passe à la vitesse supérieure</h1><p>Paiement unique, sans abonnement. Tu choisis, tu paies, c'est débloqué. Parent ? <a href="#parents">Tout ce qu’il faut savoir</a>.</p></div></div>
+    <div class="crumb"><a href="#accueil">Accueil</a> / ${g?'Offrir le plan':'Tarifs'}</div>
+    <h1 class="pt">${g?'Offrez-lui un <em>vrai plan</em> pour Parcoursup':'Passe du « je sais pas » à un <em>vrai plan</em> Parcoursup'}</h1>
+    <p class="psub">${g?'Paiement unique, sans abonnement. Votre enfant se connecte ensuite sur son téléphone.':'Débloqué tout de suite. Paiement unique, sans abonnement.'} <a href="#connexion">Déjà acheté ? Se connecter</a></p>
     <form class="pay" id="pf" novalidate>
       <div>
-        ${Object.entries(OFFERS).map(([k,v])=>`<button type="button" class="offer ${(st.offer||'complet')===k?'on':''}" data-of="${k}"><span class="rd"></span><div><h3>${v.nom}${k==='complet'?' <span class="pill" style="font-size:11px;margin-left:6px">Recommandé</span>':''}</h3><ul>${v.items.map(i=>`<li>${i}</li>`).join('')}</ul></div><span class="pr">${eur(v.prix)}</span></button>`).join('')}
-        <div class="card" style="margin-top:8px">
-          <label for="pmail" style="font-size:13px;font-weight:600;color:var(--ink2)">E-mail pour recevoir ton accès</label>
-          <input class="inp" id="pmail" type="email" placeholder="toi@exemple.fr" style="width:100%;margin-top:6px" value="${esc(st.mail||'')}">
-          <div style="font-size:13px;font-weight:600;color:var(--ink2);margin-top:16px">Moyen de paiement</div>
-          <div class="pm" role="group" aria-label="Moyen de paiement">${[['cb','Carte bancaire'],['apple','Apple Pay'],['google','Google Pay']].map(p=>`<button type="button" class="${(st.pm||'cb')===p[0]?'on':''}" data-pm="${p[0]}">${p[1]}</button>`).join('')}</div>
-          <p class="note">Tu seras redirigé vers la page sécurisée de notre prestataire de paiement. Aucune donnée bancaire n'est saisie sur trouvetavoie.</p>
-          <label class="rtr"><input type="checkbox" id="prtr"><span>Je demande l’accès immédiat et je reconnais perdre mon droit de rétractation. J’accepte les <a href="#cgv" target="_blank">CGV</a>. Si j’ai moins de 18 ans, un parent est d’accord.</span></label>
+        ${['complet','essentiel'].map(k=>{const v=OFFERS[k], on=of===k; return `<button type="button" class="offer ${on?'on':''}" data-of="${k}"><span class="rd"></span><div><h3>${v.nom}${k==='complet'?' <span class="pill" style="font-size:11px;margin-left:6px">Recommandé</span>':''}</h3>${on?`<ul>${v.items.map(i=>`<li>${i}</li>`).join('')}</ul>`:`<p class="one">${OFFER_ONE[k]}</p>`}</div><span class="pr">${eur(v.prix)}</span></button>`}).join('')}
+        <div class="card" style="margin-top:4px">
+          <label for="pmail" style="font-size:13px;font-weight:600;color:var(--ink2)">${g?'Votre e-mail (reçu et accès de votre enfant)':'E-mail pour recevoir ton accès'}</label>
+          <input class="inp" id="pmail" type="email" autocomplete="email" placeholder="${g?'vous@exemple.fr':'toi@exemple.fr'}" style="width:100%;margin-top:6px" value="${esc(st.mail&&st.mail!=='test'?st.mail:'')}">
+          <div class="pm" role="group" aria-label="Moyen de paiement" style="margin-top:14px">${[['cb','Carte bancaire'],['apple','Apple Pay'],['google','Google Pay']].map(p=>`<button type="button" class="${(st.pm||'cb')===p[0]?'on':''}" data-pm="${p[0]}">${p[1]}</button>`).join('')}</div>
+          <label class="rtr"><input type="checkbox" id="prtr"><span>Je veux l’accès immédiat et renonce à mon droit de rétractation. J’accepte les <a href="#cgv" target="_blank">CGV</a>.${g?'':' Moins de 18 ans : un parent est d’accord.'}</span></label>
+          <div class="paytot"><span>Total · ${o.nom}</span><b>${eur(o.prix)}</b></div>
+          <button class="btn btn-p paybtn" type="submit">Payer ${eur(o.prix)}</button>
           <div class="err" id="perr" role="status"></div>
+          <div class="secure" style="justify-content:center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé par Stripe · aucune donnée bancaire sur trouvetavoie</div>
         </div>
+        <details class="exd"><summary>👀 Voir un exemple de plan Parcoursup</summary>${exemplePlan()}</details>
       </div>
       <aside class="card sum">
         <h3 style="font-size:17px;margin-bottom:6px">Récapitulatif</h3>
         <div class="kv"><span>${o.nom}</span><b>${eur(o.prix)}</b></div>
         <div class="kv"><span style="font-size:13px">TVA non applicable, art. 293 B du CGI</span><b></b></div>
         <div class="kv" style="font-size:17px"><span style="color:var(--ink);font-weight:600">Total</span><b>${eur(o.prix)}</b></div>
-        <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:52px">Payer ${eur(o.prix)}</button>
-        <div class="secure"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Paiement sécurisé par Stripe</div>
+        <p class="note" style="margin-top:10px">Paiement unique. Tu peux te connecter ensuite sur tous tes appareils avec ton e-mail et un mot de passe.</p>
       </aside>
     </form></div>`;
+}
+
+// ----- Exemple de plan (profil fictif, réponses de quiz réelles) -----
+const EX_QA = {"voie":0,"spe":[0,2],"spefav":1,"samedi":1,"contenus":10,"qualites":[0,4],"motiv":6,"univers":0,"follow":3,"nope":[5,6,7],"duree":2,"argent":1,"niveau":1};
+function exemplePlan(){
+  const sv=[st.qa,st.plan,st.paid];
+  let html='';
+  try{ st.qa=JSON.parse(JSON.stringify(EX_QA)); st.plan='complet'; st.paid=true; html=planParcoursup(); }catch(e){ html=''; }
+  finally{ st.qa=sv[0]; st.plan=sv[1]; st.paid=sv[2]; }
+  if(!html) return '';
+  return `<div class="expl" aria-label="Exemple de plan Parcoursup pour un profil fictif"><span class="expl-tag">Exemple · profil fictif</span><div class="expl-in" aria-hidden="true">${html.replace(/ id="[^"]*"/g,'')}</div></div>`;
+}
+
+// ----- Mon accès : connexion sur un autre appareil -----
+function connexion(){
+  const head=`<div class="crumb"><a href="#accueil">Accueil</a> / Mon accès</div>`;
+  if(st.paid && st.mail!=='test') return `<div class="wrap page fade"><div class="acc">${head}
+    <div class="card" style="text-align:center;padding:30px 22px"><h1 style="font-size:28px;margin-bottom:6px">${st.justIn?'C’est bon, tu es connecté':'Ton accès est ouvert'}</h1>
+    <p style="color:var(--ink2);margin:0 0 18px">${OFFERS[st.plan||'complet'].nom}${st.mail?' · '+esc(st.mail):''}</p>
+    ${st.plan==='complet'?`<a class="btn btn-p" href="#plan">🗺️ Voir mon plan Parcoursup</a>`:`<a class="btn btn-p" href="#quiz">Voir mon analyse</a>`}
+    <p style="margin:18px 0 0"><button class="btn btn-o" type="button" id="logout">Me déconnecter de cet appareil</button></p></div>${pwdCard()}</div></div>`;
+  return `<div class="wrap page fade"><div class="acc">${head}
+    <h1 style="font-size:32px;margin:4px 0 6px">Retrouver mon accès</h1>
+    <p style="color:var(--ink2);margin:0 0 16px">Tu as déjà payé, ou un parent t’a offert l’accès ? Connecte-toi avec l’e-mail utilisé pour l’achat et le mot de passe créé après le paiement.</p>
+    <form class="card" id="cf" novalidate>
+      <label for="cmail" style="margin-top:0">E-mail</label><input class="inp" id="cmail" type="email" autocomplete="email" placeholder="toi@exemple.fr">
+      <label for="cpwd">Mot de passe</label><input class="inp" id="cpwd" type="password" autocomplete="current-password">
+      <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:50px">Me connecter</button>
+      <div class="err" id="cerr" role="status"></div>
+      <p class="note" style="margin-top:12px">Mot de passe oublié, ou pas encore créé ? Écris-nous à ${ED.mail} depuis l’adresse utilisée pour l’achat.</p>
+    </form>
+    <p style="margin-top:16px;color:var(--ink2)">Pas encore d’accès ? <a href="#paiement">Voir les offres</a></p></div></div>`;
 }
 
 function quiz(){
@@ -2546,8 +2636,8 @@ function quiz(){
     const det=c.voie==='gen'?' · '+c.spe.map(s=>SPE.find(x=>x[2]===s)[0]).join(', '):c.voie==='techno'&&a.techno!==undefined?' · '+Q.techno.o[a.techno][0]:'';
     return `<div class="wrap page fade"><div class="qz">
       <div class="crumb">Quiz · Résultats</div>
-      <div class="qz-m">${mascotSVG('cheer', 110)}<div class="mbub">${hasPlan()?'Et voilà ! Voici les métiers qui te ressemblent. Clique sur un métier pour voir le chemin que je te conseille.':'Et voilà ! Voici les 3 métiers qui te ressemblent le plus. Je peux aussi te dire pourquoi, et comment y arriver.'}</div></div>
-      <h1>Les métiers qui te ressemblent</h1>
+      <div class="qz-m">${mascotSVG('cheer', 110)}<div class="mbub">${!top.length?'Hmm… aucun métier ne colle parfaitement à tes réponses. Regarde mon explication juste en dessous.':(top.length===1?'Et voilà ! Voici le métier qui te ressemble le plus.':'Et voilà ! Voici les '+top.length+' métiers qui te ressemblent le plus.')+(hasPlan()?' Clique dessus pour voir le chemin que je te conseille.':' Je peux aussi te dire pourquoi, et comment y arriver.')}</div></div>
+      <h1>${top.length===1?'Le métier qui te ressemble':'Les métiers qui te ressemblent'}</h1>
       <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${pl}${det}</b></p>
       ${top.map(([k,v],i)=>{const [ch,rs]=recoChemin(k,c,a);const al=alertes(k,c,a);const w=[...new Set((why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,2);
         return `<div class="card" style="margin-bottom:14px"><div class="res"><div style="flex:1">
@@ -2560,9 +2650,10 @@ function quiz(){
         <div class="bar2"><i style="width:${i===0?100:Math.min(92,Math.max(10,Math.round(v/Math.max(...top.map(x=>x[1]))*100)))}%"></i></div></div>
         <div style="display:flex;flex-direction:column;align-items:stretch"><a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${hasPlan()?ch:0}">${hasPlan()?'Voir le chemin '+(ch+1):'Voir le métier'}</a>${VIDEOS.includes(k)?`<button class="btn btn-o vbtn" type="button" data-video="${k}">▶ Vidéo 30 s</button>`:''}</div></div></div>`}).join('')}
       ${!top.length?`<div class="card"><h3 style="font-size:19px">Aucun de nos ${Object.keys(METIERS).length} métiers ne colle parfaitement</h3><p style="color:var(--ink2);font-size:15px;margin:6px 0 0">Avec ce que tu ne supportes pas et la durée d’études choisie, on préfère ne rien te proposer plutôt qu’un métier qui ne te correspond pas. On ajoute de nouveaux métiers chaque semaine. Tu peux aussi refaire le quiz en étant un peu plus souple.</p></div>`:''}
-      ${!hasPlan()&&top.length?`<div class="upsell"><div class="k">TON ANALYSE COMPLÈTE</div><h2>Découvre pourquoi ces métiers te ressemblent, et comment y arriver</h2>
-        <ul><li>Pourquoi chaque métier te correspond, d’après tes réponses</li><li>Le chemin conseillé selon ton bac, ton niveau et tes envies</li><li>Les alertes à connaître (durée d’études, spécialités, coût)</li>${more.length+R.longer.length?`<li>${more.length+R.longer.length} autres pistes adaptées à ton profil</li>`:''}<li>Avec l’offre Complet : ton plan Parcoursup personnalisé (vœux, écoles, dates)</li></ul>
-        <a class="btn btn-g" href="#paiement">Débloquer mon analyse dès 4,99 € ${IC.arrow}</a></div>`:''}
+      ${!hasPlan()&&top.length?`<div class="upsell"><div class="k">TON PLAN PARCOURSUP EST PRÊT À ÊTRE CONSTRUIT</div><h2>Découvre pourquoi ${top.length===1?'ce métier te ressemble':'ces métiers te ressemblent'}, et obtiens ton plan pour y arriver</h2>
+        <ul><li>Ton plan Parcoursup personnalisé : vœux ambitieux, réalistes et plan B, écoles, dates</li><li>Pourquoi chaque métier te correspond, d’après tes réponses</li><li>Le chemin conseillé selon ton bac, ton niveau et tes envies</li><li>Les alertes à connaître (durée d’études, spécialités, coût)</li>${more.length+R.longer.length?`<li>${more.length+R.longer.length} autres pistes adaptées à ton profil</li>`:''}<li>5 lettres de motivation personnalisées</li></ul>
+        <a class="btn btn-g" href="#paiement" onclick="st.offer='complet'">Obtenir mon plan Parcoursup · 9,99 € ${IC.arrow}</a>
+        <p style="margin:12px 0 0;font-size:14px;position:relative;z-index:1"><a href="#paiement" onclick="st.offer='essentiel'" style="color:#D7DCEB">ou seulement l’analyse du quiz · 4,99 €</a></p></div>`:''}
       ${hasPlan()&&top.length?`<a class="btn btn-g" href="#plan" style="margin:4px 0 8px">🗺️ Voir mon plan Parcoursup personnalisé</a>`:''}
       ${hasPlan()&&more.length?`<p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
       <div class="sugg" style="margin:0">${more.map(([k])=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom}</a>`).join('')}</div>`:''}
@@ -2597,6 +2688,7 @@ function route(){
   const h = location.hash.replace('#','') || 'accueil';
   let html, r='';
   if(!h.startsWith('metier-')) st.lockCh=0;
+  if(h!=='paiement') st.gift=0;
   const G = '<div class="card" style="min-height:460px">'+'<div style="height:22px;width:60%;background:#E4E7EF;border-radius:8px;margin-bottom:18px"></div>'.repeat(1)+'<div style="height:90px;background:#EEF0F5;border-radius:14px;margin-bottom:14px"></div>'.repeat(4)+'</div>';
   if(h.startsWith('metier-')){ html = metier(h.slice(7)); r='metier'; }
   else if(h==='ecoles'){ html = hasPlan()? ecoles() : lockedPage('Écoles','Écoles et formations','Publiques et privées, prix selon le diplôme, chances d’admission.','Trouve les écoles qui te correspondent','Compare les établissements publics et privés près de chez toi, leurs prix et leurs chances d’admission.',G); r='ecoles'; }
@@ -2604,6 +2696,7 @@ function route(){
   else if(h==='quiz'){ html = quiz(); r='quiz'; }
   else if(h==='metiers'){ html = metiersPage(); r='metier'; }
   else if(h==='paiement'){ html = paiement(); r='paiement'; }
+  else if(h==='connexion'){ html = connexion(); r='connexion'; }
   else if(h==='a-propos'){ html = histoire(); }
   else if(h==='comparer'){ html = comparer(); r='metier'; }
   else if(h==='calendrier'){ html = calendrier(); }
@@ -2666,9 +2759,24 @@ function bind(){
   const cp=document.getElementById('cp'); if(cp) cp.onclick=async()=>{const ok=document.getElementById('cpok');try{await navigator.clipboard.writeText(document.getElementById('txt').value);ok.textContent='Copié';}catch(e){document.getElementById('txt').select();ok.textContent='Sélectionné, fais Ctrl+C';}};
   document.querySelectorAll('[data-of]').forEach(b=>b.onclick=()=>{st.offer=b.dataset.of;rerender(true);});
   document.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{st.pm=b.dataset.pm;rerender(true);});
-  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}if(!document.getElementById('prtr').checked){document.getElementById('perr').textContent='Coche la case pour confirmer ta commande.';return;}const of=st.offer||'complet'; if(STRIPE_ON){ location.href='/api/checkout?plan='+of+'&email='+encodeURIComponent(m.value); return; } if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
+  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}if(!document.getElementById('prtr').checked){document.getElementById('perr').textContent='Coche la case pour confirmer ta commande.';return;}const of=st.offer||'complet'; try{ if(st.gift) sessionStorage.setItem('ttv_gift','1'); else sessionStorage.removeItem('ttv_gift'); }catch(x){} if(STRIPE_ON){ location.href='/api/checkout?plan='+of+'&email='+encodeURIComponent(m.value); return; } if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
   const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
+  const api=(body)=>fetch('/api/compte',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json()).catch(()=>({ok:false,error:'Connexion impossible. Vérifie ta connexion internet et réessaie.'}));
+  const cf=document.getElementById('cf'); if(cf) cf.addEventListener('submit',async e=>{e.preventDefault();const err=document.getElementById('cerr'),btn=cf.querySelector('button');
+    const email=document.getElementById('cmail').value.trim(), password=document.getElementById('cpwd').value;
+    if(!email.includes('@')){err.textContent='Entre l’e-mail utilisé pour l’achat.';return;} if(password.length<8){err.textContent='Le mot de passe fait au moins 8 caractères.';return;}
+    btn.disabled=true; err.textContent=''; const d=await api({action:'connexion',email,password}); btn.disabled=false;
+    if(!d.ok){err.textContent=d.error||'E-mail ou mot de passe incorrect.';return;}
+    try{localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,pwd:true}));}catch(x){}
+    st.paid=true;st.plan=d.plan;st.mail=d.email;st.pwdOk=true;st.sid=null;st.justIn=true;rerender();});
+  const pwf=document.getElementById('pwf'); if(pwf) pwf.addEventListener('submit',async e=>{e.preventDefault();const err=document.getElementById('pwerr'),btn=pwf.querySelector('button');
+    const password=document.getElementById('pwd1').value; if(password.length<8){err.textContent='Choisis au moins 8 caractères.';return;}
+    btn.disabled=true; err.textContent=''; const d=await api({action:'creer',session_id:st.sid,password}); btn.disabled=false;
+    if(!d.ok){err.textContent=d.error||'Impossible d’enregistrer le mot de passe. Réessaie.';return;}
+    st.pwdOk=true; try{const sv=JSON.parse(localStorage.getItem('ttv_plan')||'{}');sv.pwd=true;localStorage.setItem('ttv_plan',JSON.stringify(sv));}catch(x){}
+    pwf.outerHTML=`<p class="ok">✓ Mot de passe créé. ${st.gift?'Votre enfant peut se connecter dans « Mon accès » avec ':'Connecte-toi dans « Mon accès » avec '}${esc(st.mail||'ton e-mail')} et ce mot de passe.</p>`;});
+  const lo=document.getElementById('logout'); if(lo) lo.onclick=()=>{try{localStorage.removeItem('ttv_plan');localStorage.removeItem('ttv_test');}catch(x){} st.paid=false;st.plan=null;st.mail='';st.sid=null;st.pwdOk=false;st.justIn=false;rerender();};
   document.querySelectorAll('[data-mo]').forEach(b=>b.onclick=()=>{readForm();st.mobj=b.dataset.mo;rerender(true);});
   if(document.getElementById('lf')){ const L=st.L;
     const live=()=>{ if(st.ltxt!=null) return; const t=lettre(); const tx=document.getElementById('txt'); tx.value=t; document.getElementById('anbox').innerHTML=analyseHTML(t); };
@@ -2698,15 +2806,17 @@ function readForm(){
 const burger=document.getElementById('burger');
 burger.onclick=()=>{const n=document.getElementById('nav');n.classList.toggle('open');burger.setAttribute('aria-expanded',n.classList.contains('open'));};
 document.querySelector('nav.main a[data-r="metier"]').addEventListener('click',()=>{st.chemin=0;});
-// Accès test : ouvrir le site avec ?acces=evan2027 (désactiver avec ?acces=off)
+// Accès test : ?acces=<code> ; le code n'est PAS dans le site, il est vérifié par le serveur (variable ACCES_TEST sur Cloudflare). ?acces=off pour désactiver.
 (function(){try{const a=new URLSearchParams(location.search).get('acces');
-  if(a==='evan2027') localStorage.setItem('ttv_test','1');
   if(a==='off') localStorage.removeItem('ttv_test');
+  else if(a) fetch('/api/acces',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:a})}).then(r=>r.json()).then(d=>{
+      if(d.ok){ localStorage.setItem('ttv_test','1'); st.paid=true; st.plan='complet'; st.mail='test'; }
+      history.replaceState(null,'',location.pathname+location.hash); route(); }).catch(()=>{});
   if(localStorage.getItem('ttv_test')==='1'){st.paid=true;st.plan='complet';st.mail='test';}
-  try{ const sv=JSON.parse(localStorage.getItem('ttv_plan')||'null'); if(sv&&sv.plan){st.paid=true;st.plan=sv.plan;st.mail=sv.email||'';} }catch(e){}
+  try{ const sv=JSON.parse(localStorage.getItem('ttv_plan')||'null'); if(sv&&sv.plan){st.paid=true;st.plan=sv.plan;st.mail=sv.email||'';st.sid=sv.sid||null;st.pwdOk=!!sv.pwd;} }catch(e){}
   const sid=new URLSearchParams(location.search).get('session_id');
   if(sid){ fetch('/api/verify?session_id='+encodeURIComponent(sid)).then(r=>r.json()).then(d=>{
-      if(d.ok){ localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,sid})); st.paid=true; st.plan=d.plan; st.mail=d.email; }
+      if(d.ok){ localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,sid})); st.paid=true; st.plan=d.plan; st.mail=d.email; st.sid=sid; st.pwdOk=false; try{ st.gift=sessionStorage.getItem('ttv_gift')==='1'; }catch(x){} }
       history.replaceState(null,'',location.pathname+(location.hash||'#paiement')); route(); }).catch(()=>{}); }
 }catch(e){}})();
 addEventListener('hashchange',()=>{route();scrollTo(0,0);try{const r='/'+(location.hash.replace('#','')||'accueil');window.va('pageview',{route:r,path:r});}catch(e){}});
