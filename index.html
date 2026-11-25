@@ -1661,13 +1661,13 @@ function parents(){
       <div class="card"><h3>🆓 L’essentiel est gratuit</h3><p>Le quiz d’orientation et la découverte de chaque métier (vidéo, salaire, études du chemin principal) sont accessibles sans payer ni créer de compte.</p></div>
       <div class="card"><h3>💳 Un paiement unique</h3><p>${e.nom} à ${eur(e.prix)} ou ${c.nom} à ${eur(c.prix)}, sans abonnement ni renouvellement, valable jusqu’à la fin de Parcoursup 2027.</p></div>
       <div class="card"><h3>🔒 Pas de pub, pas de revente</h3><p>Aucun compte obligatoire. Les réponses au quiz et les lettres restent dans le navigateur de votre enfant.</p></div>
-      <div class="card"><h3>👪 Pour les mineurs</h3><p>Vous pouvez faire l’achat vous-même : vous créez un mot de passe, et votre enfant se connecte sur son téléphone avec votre e-mail.</p></div>
+      <div class="card"><h3>👪 Pour les mineurs</h3><p>Vous pouvez faire l’achat vous-même : vous choisissez un mot de passe, et votre enfant se connecte sur son téléphone avec votre e-mail.</p></div>
       <div class="card"><h3>🧭 Un outil, pas une promesse</h3><p>trouvetavoie aide à décider : il ne garantit pas une admission et ne remplace pas un conseiller d’orientation.</p></div>
     </div>
     <div class="card gift"><div class="k">🎁 À OFFRIR · ${eur(c.prix)}</div>
       <h2>Offrez-lui son plan Parcoursup personnalisé</h2>
       <p style="color:var(--ink2);margin:0">Construit à partir de ses réponses au quiz : des vœux ambitieux, réalistes et un plan B, les écoles où candidater, les dates à ne pas rater et 5 lettres de motivation.</p>
-      <ol><li>Vous payez ${eur(c.prix)}, une seule fois, sans abonnement.</li><li>Juste après le paiement, vous créez un mot de passe.</li><li>Votre enfant se connecte sur son téléphone (menu « Mon accès ») avec votre e-mail et ce mot de passe.</li></ol>
+      <ol><li>Vous payez ${eur(c.prix)}, une seule fois, sans abonnement.</li><li>Au moment de payer, vous choisissez un mot de passe.</li><li>Votre enfant se connecte sur son téléphone (menu « Mon accès ») avec votre e-mail et ce mot de passe.</li></ol>
       <a class="btn btn-g" href="#paiement" onclick="st.offer='complet';st.gift=1" style="width:100%;height:auto;min-height:52px;padding:12px 16px;flex-wrap:wrap;text-align:center">🎁 Offrir le plan à mon enfant <span style="white-space:nowrap">· ${eur(c.prix)}</span></a>
       <details class="exd"><summary>👀 Voir un exemple de plan</summary>${exemplePlan()}</details></div>
     <div class="quizb" style="margin-top:30px"><div><h2>Faites le quiz ensemble</h2><p>5 minutes pour découvrir des pistes adaptées à son bac et à ses envies.</p></div><a class="btn btn-g" href="#quiz">Lancer le quiz ${IC.arrow}</a></div>
@@ -2505,7 +2505,7 @@ function legal(k){
 <h2>3. Commande et paiement</h2>
 <p>Le paiement se fait par carte bancaire, Apple Pay ou Google Pay sur la page sécurisée de Stripe. trouvetavoie ne reçoit ni ne conserve aucune donnée bancaire. La commande est ferme une fois le paiement accepté. Un reçu est envoyé à l’adresse e-mail indiquée.</p>
 <h2>4. Accès</h2>
-<p>L’accès est ouvert dès la confirmation du paiement et dure jusqu’au 31 août 2027 (fin de la procédure Parcoursup 2027). Juste après le paiement, tu peux créer un mot de passe : tu te connectes alors sur tous tes appareils (rubrique « Mon accès ») avec l’e-mail utilisé lors de l’achat. Un parent qui achète pour son enfant peut lui transmettre cet e-mail et ce mot de passe. En cas d’oubli, écris-nous avec l’e-mail utilisé lors de l’achat.</p>
+<p>L’accès est ouvert dès la confirmation du paiement et dure jusqu’au 31 août 2027 (fin de la procédure Parcoursup 2027). Au moment de l’achat, tu choisis un mot de passe : tu te connectes ensuite sur tous tes appareils (rubrique « Mon accès ») avec l’e-mail utilisé lors de l’achat. Un parent qui achète pour son enfant peut lui transmettre cet e-mail et ce mot de passe. En cas d’oubli, écris-nous avec l’e-mail utilisé lors de l’achat.</p>
 <h2>5. Droit de rétractation</h2>
 <p>Les offres sont des contenus numériques fournis immédiatement. Conformément à l’article L221-28 13° du Code de la consommation, en demandant l’accès immédiat au moment de l’achat, tu reconnais perdre ton droit de rétractation de 14 jours.</p>
 <p>Si le service ne fonctionne pas comme décrit et que nous ne parvenons pas à corriger le problème, nous te remboursons. Écris-nous à ${ED.mail}.</p>
@@ -2525,7 +2525,7 @@ function legal(k){
 <p>L’éditeur du site trouvetavoie (voir les mentions légales). Contact : ${ED.mail}.</p>
 <h2>Ce que nous traitons</h2>
 <p><b>Achat</b> : ton adresse e-mail et l’offre choisie, transmises à Stripe pour le paiement et l’envoi du reçu. Base légale : l’exécution du contrat. Conservation : 10 ans pour les pièces comptables, comme l’exige la loi.</p>
-<p><b>Mot de passe (facultatif)</b> : si tu crées un mot de passe pour te connecter sur un autre appareil, nous n’en gardons qu’une empreinte chiffrée (impossible à relire), rangée avec ton paiement chez Stripe. Base légale : l’exécution du contrat. Conservation : jusqu’à la fin de ton accès.</p>
+<p><b>Mot de passe</b> : pour te connecter sur un autre appareil, tu choisis un mot de passe lors de l’achat. Nous n’en gardons qu’une empreinte chiffrée (impossible à relire), rangée avec ton paiement chez Stripe. Base légale : l’exécution du contrat. Conservation : jusqu’à la fin de ton accès.</p>
 <p><b>Mesure d’audience</b> : Vercel Web Analytics compte les pages vues de façon anonyme, sans cookie et sans suivi d’un site à l’autre. Base légale : notre intérêt légitime à améliorer le site.</p>
 <p><b>Stockage local</b> : ton navigateur garde ton accès payant et tes réponses (localStorage). Ces données ne quittent pas ton appareil et tu peux les effacer à tout moment depuis les réglages de ton navigateur.</p>
 <p><b>Recherche d’écoles</b> : la page Écoles interroge directement le site public data.enseignementsup-recherche.gouv.fr. Ton adresse IP est donc visible par ce site, comme pour toute visite web.</p>
@@ -2558,7 +2558,7 @@ function paye(){
     <div class="ic" style="background:#E4F5EC;color:var(--green);margin:0 auto 18px;width:60px;height:60px;border-radius:50%"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="5,12 10,17 19,7"/></svg></div>
     <h1 style="font-size:30px;margin-bottom:8px">Merci, c'est débloqué</h1>
     <p style="color:var(--ink2);margin:0 0 6px">${o.nom} · ${eur(o.prix)}</p>
-    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">${st.mail&&st.mail!=='test'?'Ton reçu est envoyé à '+esc(st.mail)+'. ':''}Accès valable jusqu’au 31 août 2027.</p>
+    <p style="color:var(--mute);font-size:14px;margin:0 0 22px">${st.mail&&st.mail!=='test'?'Ton reçu est envoyé à '+esc(st.mail)+'. ':''}Accès valable jusqu’au 31 août 2027.${st.pwdOk?(st.gift?'<br>Votre enfant se connecte dans « Mon accès » avec votre e-mail et votre mot de passe.':'<br>Sur un autre appareil : menu « Mon accès », avec ton e-mail et ton mot de passe.'):''}</p>
     ${st.plan==='complet'?`<a class="btn btn-p" href="#plan">🗺️ Voir mon plan Parcoursup</a>`:`<a class="btn btn-p" href="#quiz">Voir mon analyse</a>`}
     <a class="btn btn-o" href="#paiement" id="pback" style="margin-left:6px">Revenir aux offres</a>
   </div>${pwdCard()}</div></div>`;
@@ -2576,6 +2576,8 @@ function paiement(){
         <div class="card" style="margin-top:4px">
           <label for="pmail" style="font-size:13px;font-weight:600;color:var(--ink2)">${g?'Votre e-mail (reçu et accès de votre enfant)':'E-mail pour recevoir ton accès'}</label>
           <input class="inp" id="pmail" type="email" autocomplete="email" placeholder="${g?'vous@exemple.fr':'toi@exemple.fr'}" style="width:100%;margin-top:6px" value="${esc(st.mail&&st.mail!=='test'?st.mail:'')}">
+          <label for="ppwd" style="font-size:13px;font-weight:600;color:var(--ink2);display:block;margin-top:14px">${g?'Choisissez un mot de passe (votre enfant se connectera avec votre e-mail et ce mot de passe)':'Choisis un mot de passe (pour te connecter sur tes autres appareils)'}</label>
+          <input class="inp" id="ppwd" type="password" autocomplete="new-password" minlength="8" placeholder="8 caractères minimum" style="width:100%;margin-top:6px">
           <div class="pm" role="group" aria-label="Moyen de paiement" style="margin-top:14px">${[['cb','Carte bancaire'],['apple','Apple Pay'],['google','Google Pay']].map(p=>`<button type="button" class="${(st.pm||'cb')===p[0]?'on':''}" data-pm="${p[0]}">${p[1]}</button>`).join('')}</div>
           <label class="rtr"><input type="checkbox" id="prtr"><span>Je veux l’accès immédiat et renonce à mon droit de rétractation. J’accepte les <a href="#cgv" target="_blank">CGV</a>.${g?'':' Moins de 18 ans : un parent est d’accord.'}</span></label>
           <div class="paytot"><span>Total · ${o.nom}</span><b>${eur(o.prix)}</b></div>
@@ -2590,7 +2592,7 @@ function paiement(){
         <div class="kv"><span>${o.nom}</span><b>${eur(o.prix)}</b></div>
         <div class="kv"><span style="font-size:13px">TVA non applicable, art. 293 B du CGI</span><b></b></div>
         <div class="kv" style="font-size:17px"><span style="color:var(--ink);font-weight:600">Total</span><b>${eur(o.prix)}</b></div>
-        <p class="note" style="margin-top:10px">Paiement unique. Tu peux te connecter ensuite sur tous tes appareils avec ton e-mail et un mot de passe.</p>
+        <p class="note" style="margin-top:10px">Paiement unique. Avec ton e-mail et ton mot de passe, tu te connectes ensuite sur tous tes appareils.</p>
       </aside>
     </form></div>`;
 }
@@ -2616,13 +2618,13 @@ function connexion(){
     <p style="margin:18px 0 0"><button class="btn btn-o" type="button" id="logout">Me déconnecter de cet appareil</button></p></div>${pwdCard()}</div></div>`;
   return `<div class="wrap page fade"><div class="acc">${head}
     <h1 style="font-size:32px;margin:4px 0 6px">Retrouver mon accès</h1>
-    <p style="color:var(--ink2);margin:0 0 16px">Tu as déjà payé, ou un parent t’a offert l’accès ? Connecte-toi avec l’e-mail utilisé pour l’achat et le mot de passe créé après le paiement.</p>
+    <p style="color:var(--ink2);margin:0 0 16px">Tu as déjà payé, ou un parent t’a offert l’accès ? Connecte-toi avec l’e-mail utilisé pour l’achat et le mot de passe choisi lors de l’achat.</p>
     <form class="card" id="cf" novalidate>
       <label for="cmail" style="margin-top:0">E-mail</label><input class="inp" id="cmail" type="email" autocomplete="email" placeholder="toi@exemple.fr">
       <label for="cpwd">Mot de passe</label><input class="inp" id="cpwd" type="password" autocomplete="current-password">
       <button class="btn btn-p" type="submit" style="width:100%;margin-top:16px;height:50px">Me connecter</button>
       <div class="err" id="cerr" role="status"></div>
-      <p class="note" style="margin-top:12px">Mot de passe oublié, ou pas encore créé ? Écris-nous à ${ED.mail} depuis l’adresse utilisée pour l’achat.</p>
+      <p class="note" style="margin-top:12px">Mot de passe oublié ? Écris-nous à ${ED.mail} depuis l’adresse utilisée pour l’achat.</p>
     </form>
     <p style="margin-top:16px;color:var(--ink2)">Pas encore d’accès ? <a href="#paiement">Voir les offres</a></p></div></div>`;
 }
@@ -2759,7 +2761,8 @@ function bind(){
   const cp=document.getElementById('cp'); if(cp) cp.onclick=async()=>{const ok=document.getElementById('cpok');try{await navigator.clipboard.writeText(document.getElementById('txt').value);ok.textContent='Copié';}catch(e){document.getElementById('txt').select();ok.textContent='Sélectionné, fais Ctrl+C';}};
   document.querySelectorAll('[data-of]').forEach(b=>b.onclick=()=>{st.offer=b.dataset.of;rerender(true);});
   document.querySelectorAll('[data-pm]').forEach(b=>b.onclick=()=>{st.pm=b.dataset.pm;rerender(true);});
-  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}if(!document.getElementById('prtr').checked){document.getElementById('perr').textContent='Coche la case pour confirmer ta commande.';return;}const of=st.offer||'complet'; try{ if(st.gift) sessionStorage.setItem('ttv_gift','1'); else sessionStorage.removeItem('ttv_gift'); }catch(x){} if(STRIPE_ON){ location.href='/api/checkout?plan='+of+'&email='+encodeURIComponent(m.value); return; } if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
+  const pf=document.getElementById('pf'); if(pf) pf.addEventListener('submit',e=>{e.preventDefault();const m=document.getElementById('pmail');if(!m.value.includes('@')){document.getElementById('perr').textContent='Entre une adresse e-mail valide pour recevoir ton accès.';return;}const pw=document.getElementById('ppwd').value;if(pw.length<8){document.getElementById('perr').textContent='Choisis un mot de passe d’au moins 8 caractères.';return;}if(!document.getElementById('prtr').checked){document.getElementById('perr').textContent='Coche la case pour confirmer ta commande.';return;}const of=st.offer||'complet'; try{ if(st.gift) sessionStorage.setItem('ttv_gift','1'); else sessionStorage.removeItem('ttv_gift'); sessionStorage.setItem('ttv_pwd','1'); }catch(x){} if(STRIPE_ON){ const btn=pf.querySelector('.paybtn'); btn.disabled=true; btn.textContent='Redirection vers le paiement…';
+      fetch('/api/checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({plan:of,email:m.value.trim(),password:pw})}).then(r=>r.json()).catch(()=>({ok:false,error:'Connexion impossible. Vérifie ta connexion internet et réessaie.'})).then(d=>{ if(d.ok&&d.url){ location.href=d.url; return; } btn.disabled=false; btn.textContent='Payer '+eur(OFFERS[of].prix); document.getElementById('perr').textContent=d.error||'Le paiement n’a pas pu démarrer. Réessaie.'; }); return; } if(PAYLINKS[of]){ location.href=PAYLINKS[of]+(PAYLINKS[of].includes('?')?'&':'?')+'prefilled_email='+encodeURIComponent(m.value); return; } st.paid=true;st.mail=m.value;st.plan=of;rerender();scrollTo(0,0);});
   const pmail=document.getElementById('pmail'); if(pmail) pmail.oninput=()=>{st.mail=pmail.value;};
   const pb=document.getElementById('pback'); if(pb) pb.onclick=()=>{st.paid=false;};
   const api=(body)=>fetch('/api/compte',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(r=>r.json()).catch(()=>({ok:false,error:'Connexion impossible. Vérifie ta connexion internet et réessaie.'}));
@@ -2816,7 +2819,7 @@ document.querySelector('nav.main a[data-r="metier"]').addEventListener('click',(
   try{ const sv=JSON.parse(localStorage.getItem('ttv_plan')||'null'); if(sv&&sv.plan){st.paid=true;st.plan=sv.plan;st.mail=sv.email||'';st.sid=sv.sid||null;st.pwdOk=!!sv.pwd;} }catch(e){}
   const sid=new URLSearchParams(location.search).get('session_id');
   if(sid){ fetch('/api/verify?session_id='+encodeURIComponent(sid)).then(r=>r.json()).then(d=>{
-      if(d.ok){ localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,sid})); st.paid=true; st.plan=d.plan; st.mail=d.email; st.sid=sid; st.pwdOk=false; try{ st.gift=sessionStorage.getItem('ttv_gift')==='1'; }catch(x){} }
+      if(d.ok){ localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,sid})); st.paid=true; st.plan=d.plan; st.mail=d.email; st.sid=sid; st.pwdOk=false; try{ st.gift=sessionStorage.getItem('ttv_gift')==='1'; if(sessionStorage.getItem('ttv_pwd')==='1'){ st.pwdOk=true; localStorage.setItem('ttv_plan',JSON.stringify({plan:d.plan,email:d.email,sid,pwd:true})); } }catch(x){} }
       history.replaceState(null,'',location.pathname+(location.hash||'#paiement')); route(); }).catch(()=>{}); }
 }catch(e){}})();
 addEventListener('hashchange',()=>{route();scrollTo(0,0);try{const r='/'+(location.hash.replace('#','')||'accueil');window.va('pageview',{route:r,path:r});}catch(e){}});

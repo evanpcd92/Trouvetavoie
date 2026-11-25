@@ -20,7 +20,7 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 - Données dans `index.html` : `METIERS`, `EXTRA`, `PSUP`, `SALAIRES`, `UNIVERS`, `Q` (quiz), `OFFERS` (prix), `CAL` (dates Parcoursup 2027), `VIDEOS` (métiers qui ont une vidéo).
 - `tools/pages-metiers.mjs` : génère les pages statiques `/metiers/<cle>/`, `/apres-bac/<bac>/`, `/calendrier-parcoursup-2027/`, `sitemap.xml`, `robots.txt`. À relancer après toute modification des données (`node tools/pages-metiers.mjs`).
 - `tools/ajouter-video.mjs <cle> <video.mp4> <miniature.png>` : ajoute la vidéo d'un métier sur sa fiche (`videos/<cle>.mp4` + `.jpg`, met à jour `VIDEOS`).
-- `functions/api/` : paiement (pas encore actif en vrai), `compte.js` (connexion sur un autre appareil : e-mail + mot de passe, empreinte PBKDF2 rangée dans les métadonnées du paiement Stripe, aucune base de données), `acces.js` (accès test du propriétaire : le code est dans la variable Cloudflare `ACCES_TEST`, jamais dans le site).
+- `functions/api/` : paiement (pas encore actif en vrai), `checkout.js` (POST : e-mail + mot de passe choisis à l'achat), `compte.js` (connexion sur un autre appareil : e-mail + mot de passe, empreinte PBKDF2 rangée dans les métadonnées du paiement Stripe, aucune base de données), `acces.js` (accès test du propriétaire : le code est dans la variable Cloudflare `ACCES_TEST`, jamais dans le site).
 - Exemple de plan (profil fictif, `EX_QA`) affiché sur l'accueil, la page de paiement et la page parents.
 - Tests : servir le dossier (`python3 -m http.server 8123`) et vérifier avec Playwright qu'il n'y a aucune erreur JS, en version gratuite et en version payante.
 
