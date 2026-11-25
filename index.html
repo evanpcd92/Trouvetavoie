@@ -545,6 +545,36 @@ select.inp{appearance:auto}
 .todo li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px 12px 44px;position:relative;font-size:15px}
 .todo li::before{content:"";position:absolute;left:14px;top:13px;width:18px;height:18px;border:2px solid var(--gold-d);border-radius:5px}
 @media (max-width:760px){.voeux{grid-template-columns:1fr}.plan-goal{flex-direction:column;align-items:flex-start}}
+/* ===== Plan Parcoursup v2 ===== */
+.pl-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.pl-chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 22px}
+.pl-chips span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600}
+.pl-sec{margin-top:34px}
+.pl-sec>h2{display:flex;align-items:center;gap:10px;font-size:22px;margin:0 0 6px}
+.pl-sec>h2 .n{width:30px;height:30px;border-radius:9px;background:var(--gold);display:grid;place-items:center;font-size:15px;flex:none}
+.pl-sec>p.sub{color:var(--ink2);margin:0 0 14px}
+.pl-why{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pl-why span{background:rgba(255,255,255,.12);border-radius:999px;padding:5px 12px;font-size:13.5px;color:#fff}
+.pl-kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:16px}
+.pl-kpi div{background:rgba(255,255,255,.08);border-radius:14px;padding:10px 12px}.pl-kpi span{display:block;font-size:12px;color:#AAB3CF}.pl-kpi b{color:#fff;font-size:15px}
+.yr{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.yr li{display:grid;grid-template-columns:110px 1fr;gap:14px;position:relative;padding-bottom:18px}
+.yr li:not(:last-child)::after{content:"";position:absolute;left:118px;top:26px;bottom:0;width:2px;background:var(--line)}
+.yr .y{font-family:Poppins,sans-serif;font-weight:700;color:var(--gold-d);text-align:right;padding-top:2px}
+.yr .c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-left:16px}
+.yr .c b{display:block}.yr .c small{color:var(--mute)}
+.yr li.fin .c{background:#ECFDF3;border-color:#BBF7D0}
+.pl-tab{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:14.5px}
+.pl-tab th,.pl-tab td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.pl-tab th{background:var(--bg);font-size:13px;color:var(--mute);font-weight:600}.pl-tab tr:last-child td{border-bottom:none}
+.alert{background:#FFF7ED;border:1px solid #FED7AA;border-radius:14px;padding:12px 14px;margin-bottom:8px;font-size:14.5px;color:#7C2D12}
+.letter{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;font-family:Georgia,serif;font-size:16px;line-height:1.7;color:var(--ink)}
+.letter i{color:var(--mute)}
+.teaser{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 24px;margin-top:18px}
+.teaser ul{list-style:none;padding:0;margin:12px 0 18px;display:grid;gap:10px}
+.teaser li{display:flex;gap:10px;align-items:flex-start;font-size:15px}.teaser li b{display:block}
+@media (max-width:640px){.yr li{grid-template-columns:70px 1fr}.yr li:not(:last-child)::after{left:78px}.pl-kpi{grid-template-columns:1fr 1fr}}
+@media print{header,footer,.noprint,.vmodal{display:none!important}body{background:#fff}.wrap.page{padding:0}.pl-sec{break-inside:avoid}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
@@ -1652,7 +1682,7 @@ function planDonnees(){
     METIERS[k].chemins.forEach((ch,i)=>{ const f=(EXTRA[k]&&EXTRA[k].c[i])||{}; const ps=(PSUP[k]||'PPP')[i]; const t=(ch.steps[0][0].length<14&&ch.steps[1])?ch.steps[1][0]:ch.steps[0][0];
       const item={k,i,t,ch:ch.nom,sel:f.sel||'',alt:f.alt||'',conseil:f.conseil||'',reco:i===chC,ri};
       if(seen.has(t)) return; seen.add(t);
-      if(ps==='P'||ps==='X'){ let sc=selScore(f.sel)+(lvl===0?1:0)-(lvl===2?1:0); item.cat=sc>=3?'amb':sc===2?'rea':'pb'; cand.push(item); } else hors.push(item); }); });
+      if(ps==='P'||ps==='X'){ let sc=selScore(f.sel)+(lvl===0?1:0)-(lvl===2?1:0); item.cat=(ri===0&&item.reco)?'rea':sc>=3?'amb':sc===2?'rea':'pb'; cand.push(item); } else hors.push(item); }); });
   R.more.slice(0,4).forEach(k=>{ const ch=METIERS[k].chemins[0], f=(EXTRA[k]&&EXTRA[k].c[0])||{}, ps=(PSUP[k]||'P')[0], t=(ch.steps[0][0].length<14&&ch.steps[1])?ch.steps[1][0]:ch.steps[0][0];
     if((ps==='P'||ps==='X')&&selScore(f.sel)===1&&!seen.has(t)){ seen.add(t); cand.push({k,i:0,t,ch:ch.nom,sel:f.sel||'',alt:f.alt||'',cat:'pb',ri:9}); } });
   const pick=cat=>cand.filter(x=>x.cat===cat).sort((x,y)=>(y.reco-x.reco)||(x.ri-y.ri)).slice(0,3);
@@ -1663,34 +1693,71 @@ function planParcoursup(){
   if(!d) return `<div class="wrap page fade"><div class="qz"><div class="crumb"><a href="#accueil">Accueil</a> / Mon plan Parcoursup</div>
     <div class="qz-m">${mascotSVG('point',100)}<div class="mbub">Pour construire ton plan, j’ai besoin de te connaître : fais d’abord le quiz (5 minutes).</div></div>
     <a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div></div>`;
-  const k0=d.top[0], m0=METIERS[k0], [ch0,rs0]=recoChemin(k0,d.c,st.qa);
+  const a=st.qa, c=d.c, R=d.R;
+  const k0=d.top[0], m0=METIERS[k0], [ch0,rs0]=recoChemin(k0,c,a), chm=m0.chemins[ch0], f0=(EXTRA[k0]&&EXTRA[k0].c[ch0])||{};
+  const why=k=>[...new Set((R.why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,3);
+  const sal=(k,i)=>SALAIRES[k]?SALAIRES[k][i||0][0]:'—';
+  // profil
+  const pl={gen:'Bac général',techno:'Bac technologique',pro:'Bac professionnel',cap:'CAP',sup:'Réorientation'}[c.voie];
+  const spe=c.voie==='gen'?c.spe.map(x=>SPE.find(y=>y[2]===x)[0]):[];
+  const niv=['Résultats à consolider','Résultats corrects','Très bons résultats'][c.lvl];
+  const dur={2:'2 ans d’études max.',3:'Environ 3 ans d’études',5:'Jusqu’à 5 ans d’études',99:'Prêt(e) à faire de longues études'}[c.duree]||'';
+  const pay=['Alternance : pas une priorité','Alternance : un plus','Alternance : indispensable'][c.pay];
+  // parcours année par année
+  let y=2027; const yr=[];
+  chm.steps.forEach((s,i)=>{ const t=(s[1]||'').toLowerCase(); const n=/mois/.test(t)?1:parseInt((t.match(/\d+/)||[0])[0],10);
+    if(n>0){ yr.push([y===2027?'Rentrée 2027':y+'–'+(y+n),s[0],s[1]+(s[2]?' · '+s[2]:'')]); y+=n; } else if(i<chm.steps.length-1) yr.push(['Ensuite',s[0],s[2]||'']); });
+  const fin=chm.steps[chm.steps.length-1];
+  yr.push([y+'', 'Ton premier emploi : '+m0.nom.toLowerCase(), (parseInt(((fin[1]||'').match(/\d+/)||[0])[0],10)>0?'':(fin[2]?fin[2]+' · ':''))+'Salaire de départ : '+sal(k0,ch0)]);
+  // points d'attention
+  const al=[...new Set([].concat(...d.top.map(k=>alertes(k,c,a).map(x=>`<b>${METIERS[k].nom} :</b> ${x}`))))].slice(0,4);
+  const vig=(f0.moins||[]).map(x=>`<b>${chm.nom} :</b> ${x}`);
+  // projet motivé
+  const lm=LMET[k0]||['exercer ce métier',''];
+  const lettre=`Actuellement en terminale${c.voie==='gen'&&spe.length?' générale, avec les spécialités '+spe.join(' et ').toLowerCase():c.voie==='techno'?' '+(Q.techno.o[a.techno]||[''])[0]:''}, je souhaite devenir ${m0.nom.toLowerCase()} afin de ${lm[0]}. ${lm[1]} Intégrer cette formation est pour moi la première étape concrète de ce projet. <i>[Ajoute ici une expérience personnelle : stage, bénévolat, rencontre…]</i>`;
   const vitem=x=>`<div class="vitem"><b>${x.t}</b><small>Pour devenir ${METIERS[x.k].nom.toLowerCase()} · ${x.sel||'—'}${/oui|possible|souvent/i.test(x.alt)?' · alternance possible':''}</small></div>`;
-  const col=(cls,titre,sub,arr)=>`<div class="vcol ${cls}"><h3>${titre}</h3><p class="sub">${sub}</p>${arr.length?arr.map(vitem).join(''):'<div class="vitem"><small>Rien de particulier ici pour ton profil.</small></div>'}</div>`;
-  const today=new Date().toISOString().slice(0,10), dates=CAL.filter(x=>x[0]>=today).slice(0,4);
-  const conseils=[...new Set([...d.amb,...d.rea,...d.pb].filter(x=>x.conseil).map(x=>x.conseil))].slice(0,3);
-  const plan=`<div class="plan">
-    <div class="plan-goal"><img src="img/metiers/${k0}.svg" alt=""><div><div class="k" style="color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.08em">TON OBJECTIF N°1</div><h3>Devenir ${m0.nom.toLowerCase()}</h3><p>Chemin conseillé : <b style="color:#fff">${m0.chemins[ch0].nom}</b>. ${rs0}</p></div></div>
-    <h2>Tes vœux conseillés</h2>
-    <p style="color:var(--ink2);margin:-4px 0 14px">Un bon dossier mélange des vœux ambitieux, réalistes et au moins un plan B.</p>
-    <div class="voeux">${col('v-amb','🚀 Ambitieux','Très demandés : tente ta chance',d.amb)}${col('v-rea','🎯 Réalistes','Adaptés à ton profil',d.rea)}${col('v-pb','🛟 Plan B','Plus accessibles, pour être sûr d’avoir une place',d.pb)}</div>
-    ${d.hors.length?`<h2>Hors Parcoursup : candidatures directes</h2><div class="voeux" style="grid-template-columns:1fr">${col('v-rea','📮 À demander directement aux écoles','Concours, dossiers ou apprentissage, avec leur propre calendrier',d.hors)}</div>`:''}
-    <h2>Où candidater</h2>
-    <div style="display:flex;gap:10px;flex-wrap:wrap">${d.top.map(k=>`<a class="btn btn-o" href="#ecoles" data-f="${METIERS[k].formation}">🏫 ${FNAMES_ALL[METIERS[k].formation]||METIERS[k].nom}</a>`).join('')}</div>
-    <h2>Tes prochaines dates</h2>
-    <ol class="cal">${dates.map(x=>`<li><span class="dot"></span><div class="d">${x[1]}</div><h3>${x[2]}</h3><p>${x[4]}</p></li>`).join('')}</ol>
-    <h2>Ta to-do list</h2>
-    <ul class="todo">${[...conseils,'Rédige un projet de formation motivé pour chaque vœu (l’assistant t’aide).','Confirme tous tes vœux avant le 1er avril 2027.','Garde au moins un vœu plan B jusqu’au bout.'].map(x=>`<li>${x}</li>`).join('')}</ul>
-    <p class="note" style="margin-top:20px">Ce plan est une aide construite à partir de tes réponses : vérifie toujours les attendus de chaque formation sur Parcoursup.</p>
-  </div>`;
+  const col=(cls,titre,sub,arr)=>`<div class="vcol ${cls}"><h3>${titre}</h3><p class="sub">${sub}</p>${arr.length?arr.map(vitem).join(''):'<div class="vitem"><small>Pas de formation de ce type parmi tes pistes : concentre-toi sur les autres colonnes.</small></div>'}</div>`;
+  const today=new Date().toISOString().slice(0,10), dates=CAL.filter(x=>x[0]>=today).slice(0,5);
+  const conseils=[...new Set([f0.conseil,...[...d.amb,...d.rea,...d.pb].map(x=>x.conseil)].filter(Boolean))].slice(0,3);
+  const sec=(n,titre,sub,html)=>`<section class="pl-sec"><h2><span class="n">${n}</span>${titre}</h2>${sub?`<p class="sub">${sub}</p>`:''}${html}</section>`;
+
+  const objectif=`<div class="plan-goal" style="display:block"><div style="display:flex;gap:18px;align-items:center"><img src="img/metiers/${k0}.svg" alt=""><div><div class="k" style="color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.08em">TON OBJECTIF N°1 · MEILLEUR MATCH</div><h3>Devenir ${m0.nom.toLowerCase()}</h3><p>${m0.resume}</p></div></div>
+    ${why(k0).length?`<div class="pl-why">${why(k0).map(x=>`<span>✓ ${x.charAt(0).toUpperCase()+x.slice(1)}</span>`).join('')}</div>`:''}
+    <div class="pl-kpi"><div><span>Salaire de départ</span><b>${sal(k0,ch0)}</b></div><div><span>Études minimum</span><b>${MIN_ANS[k0]?MIN_ANS[k0]+' an'+(MIN_ANS[k0]>1?'s':''):'—'}</b></div><div><span>Chemin conseillé</span><b>${chm.nom}</b></div></div>
+    ${VIDEOS.includes(k0)?`<button class="btn btn-g vbtn noprint" type="button" data-video="${k0}" style="margin-top:14px">▶ Le métier en 30 secondes</button>`:''}</div>`;
+
+  const reste=`
+    ${sec(2,'Ton parcours année par année','Avec le chemin conseillé : '+chm.nom+'. '+rs0,`<ol class="yr">${yr.map((r,i)=>`<li class="${i===yr.length-1?'fin':''}"><span class="y">${r[0]}</span><div class="c"><b>${r[1]}</b><small>${r[2]}</small></div></li>`).join('')}</ol>`)}
+    ${sec(3,'Tes 3 pistes comparées','Le chemin le plus adapté à ton profil pour chaque métier.',`<div class="tbx"><table class="pl-tab"><thead><tr><th>Métier</th><th>Chemin conseillé</th><th>Durée</th><th>Coût</th><th>Salaire de départ</th></tr></thead><tbody>${d.top.map(k=>{const [ci]=recoChemin(k,c,a); const f=(EXTRA[k]&&EXTRA[k].c[ci])||{}; return `<tr><td><b>${METIERS[k].nom}</b></td><td>${METIERS[k].chemins[ci].nom}</td><td>${f.duree||'—'}</td><td>${f.cout||'—'}</td><td>${sal(k,ci)}</td></tr>`;}).join('')}</tbody></table></div>`)}
+    ${sec(4,'Tes vœux conseillés','Un bon dossier mélange des vœux ambitieux, réalistes et au moins un plan B. Classement selon la sélectivité des formations et ton niveau.',`<div class="voeux">${col('v-amb','🚀 Ambitieux','Très demandés : tente ta chance',d.amb)}${col('v-rea','🎯 Réalistes','Adaptés à ton profil',d.rea)}${col('v-pb','🛟 Plan B','Plus accessibles, pour être sûr d’avoir une place',d.pb)}</div>
+      ${d.hors.length?`<div class="voeux" style="grid-template-columns:1fr;margin-top:12px">${col('v-rea','📮 Hors Parcoursup : candidatures directes','Concours, dossiers ou apprentissage, avec leur propre calendrier',d.hors)}</div>`:''}`)}
+    ${sec(5,'Tes points d’attention','Ce qu’il faut savoir avant de te lancer.',(al.length||vig.length)?[...al,...vig].slice(0,6).map(x=>`<div class="alert">⚠️ ${x}</div>`).join(''):'<div class="vitem">Rien de bloquant pour ton profil. 👍</div>')}
+    ${sec(6,'Ton projet motivé, déjà commencé','Un premier paragraphe rédigé à partir de ton profil, à personnaliser pour chaque vœu.',`<div class="letter">${lettre}</div><a class="btn btn-o noprint" href="#assistant" style="margin-top:12px">✍️ Finir ma lettre avec l’assistant</a>`)}
+    ${sec(7,'Où candidater','Les formations publiques et privées, avec leurs prix et leurs taux d’accès.',`<div style="display:flex;gap:10px;flex-wrap:wrap">${d.top.map(k=>`<a class="btn btn-o" href="#ecoles" data-f="${METIERS[k].formation}">🏫 ${FNAMES_ALL[METIERS[k].formation]||METIERS[k].nom}</a>`).join('')}</div>`)}
+    ${sec(8,'Ton calendrier et ta to-do list','',`<ol class="cal">${dates.map(x=>`<li><span class="dot"></span><div class="d">${x[1]}</div><h3>${x[2]}</h3><p>${x[4]}</p></li>`).join('')}</ol>
+      <ul class="todo" style="margin-top:10px">${[...conseils,'Rédige un projet de formation motivé pour chaque vœu.','Confirme tous tes vœux avant le 1er avril 2027.','Garde au moins un vœu plan B jusqu’au bout.'].map(x=>`<li>${x}</li>`).join('')}</ul>`)}
+    <p class="note" style="margin-top:22px">Ce plan est une aide construite à partir de tes réponses au quiz et de nos fiches sourcées : vérifie toujours les attendus de chaque formation sur Parcoursup.</p>`;
+
   const complet=st.plan==='complet';
-  return `<div class="wrap page fade"><div class="qz" style="max-width:900px">
-    <div class="crumb"><a href="#accueil">Accueil</a> / <a href="#quiz">Quiz</a> / Mon plan Parcoursup</div>
-    <h1>Ton plan Parcoursup 2027</h1>
-    <p style="color:var(--ink2);margin:-12px 0 22px">Construit à partir de tes réponses au quiz : tes vœux, tes écoles et tes dates.</p>
-    ${complet?plan:`<div class="pw"><div class="ghost" aria-hidden="true">${plan}</div><div class="over"><div class="pwc"><span class="badge b-prem">${IC.lock} Offre Complet</span>
-      <h2>Ton plan Parcoursup personnalisé</h2><p>Tes vœux classés (ambitieux, réalistes, plan B), les écoles où candidater, tes dates et ta to-do list.</p>
-      <a class="btn btn-p" href="#paiement" onclick="st.offer='complet'" style="width:100%">Débloquer avec l’offre Complet · 9,99 €</a>
-      <p style="font-size:13px;color:var(--mute);margin:12px 0 0">Paiement unique, sans abonnement</p></div></div></div>`}
+  return `<div class="wrap page fade"><div class="qz plan" style="max-width:920px">
+    <div class="crumb noprint"><a href="#accueil">Accueil</a> / <a href="#quiz">Quiz</a> / Mon plan Parcoursup</div>
+    <div class="pl-head"><h1 style="margin:0">Ton plan Parcoursup 2027</h1>${complet?'<button class="btn btn-o noprint" type="button" onclick="window.print()">📄 Enregistrer en PDF</button>':''}</div>
+    <div class="pl-chips">${[pl,...spe,niv,dur,pay].filter(Boolean).map(x=>`<span>${x}</span>`).join('')}</div>
+    ${sec(1,'Ton objectif','',objectif)}
+    ${complet?reste:`<div class="teaser"><div class="k" style="color:var(--gold-d);font-size:12px;font-weight:700;letter-spacing:.08em">OFFRE COMPLET · 9,99 €</div>
+      <h2 style="font-size:24px;margin:6px 0 0">Ton plan complet est prêt. Débloque-le.</h2>
+      <ul>
+        <li>📅<div><b>Ton parcours année par année</b>De la rentrée 2027 jusqu’à ton premier salaire (${yr.length} étapes).</div></li>
+        <li>⚖️<div><b>Tes 3 pistes comparées</b>Chemin, durée, coût et salaire de ${d.top.map(k=>METIERS[k].nom).join(', ')}.</div></li>
+        <li>🎯<div><b>Tes vœux classés</b>${d.amb.length+d.rea.length+d.pb.length} vœux Parcoursup en ambitieux, réalistes et plan B${d.hors.length?', plus '+d.hors.length+' candidature'+(d.hors.length>1?'s':'')+' hors Parcoursup':''}.</div></li>
+        <li>⚠️<div><b>Tes points d’attention</b>${(al.length+vig.length)>1?(al.length+vig.length)+' choses':(al.length+vig.length)===1?'1 chose':'Les choses'} à savoir avant de te lancer.</div></li>
+        <li>✍️<div><b>Ton projet motivé, déjà commencé</b>Un premier paragraphe rédigé à partir de ton profil.</div></li>
+        <li>🏫<div><b>Où candidater</b>Les formations avec leurs prix et leurs taux d’accès.</div></li>
+        <li>✅<div><b>Ton calendrier et ta to-do list</b>Les dates à ne pas rater, en PDF à garder.</div></li>
+      </ul>
+      <a class="btn btn-p" href="#paiement" onclick="st.offer='complet'" style="width:100%">Débloquer mon plan · 9,99 €</a>
+      <p style="font-size:13px;color:var(--mute);margin:10px 0 0;text-align:center">Paiement unique, sans abonnement · inclut aussi tout l’Essentiel et 5 lettres de motivation</p></div>
+      <div class="pw" style="margin-top:16px"><div class="ghost" aria-hidden="true">${reste}</div></div>`}
   </div></div>`;
 }
 function univDe(k){ let best=null,w=0; for(const d in DOM_BASE){ const v=DOM_BASE[d][k]||0; if(v>w){w=v;best=d;} } const u=UNIVERS.find(x=>x[1]===best); return u?u[0]:'Fiche métier'; }
