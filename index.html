@@ -2423,7 +2423,7 @@ function assistant(){
 
 // Liens de paiement Stripe : colle ici les liens créés dans le tableau de bord Stripe
 const PAYLINKS = { essentiel: '', complet: '' };
-const STRIPE_ON = true; // paiement réel via /api/checkout (identifiants de prix dans les variables Vercel)
+const STRIPE_ON = true; // paiement réel via /api/checkout (identifiants de prix dans les variables Cloudflare)
 const OFFERS = {
   essentiel:{nom:'Essentiel', prix:4.99, items:['Ton analyse complète du quiz','Les 3 chemins pour chaque métier, avec conseils et points de vigilance','Écoles publiques et privées, prix et chances d’admission','Comparateur de métiers et métiers par bac','Messages aux écoles illimités','Accès jusqu’à la fin de Parcoursup 2027']},
   complet:{nom:'Complet', prix:9.99, items:['Tout l’Essentiel','Ton plan Parcoursup personnalisé (vœux, écoles, dates)','5 lettres de motivation personnalisées','Accès jusqu’à la fin de Parcoursup 2027']}
@@ -2448,7 +2448,7 @@ const ED = { // ⚠ À compléter dès réception du SIRET
   mail:'trouvetavoie2027@gmail.com',
   mediateur:'[Nom et site du médiateur de la consommation]'
 };
-const MAJ_LEGAL = '25 novembre 2026';
+const MAJ_LEGAL = '26 novembre 2026';
 function histoire(){
   return `<div class="wrap page fade">
     <article class="story">
@@ -2490,7 +2490,7 @@ function legal(k){
 <p>Le site trouvetavoie est édité par ${ED.nom}, ${ED.statut}.<br>SIRET : ${ED.siret}<br>Adresse : ${ED.adresse}<br>Contact : ${ED.mail}<br>Directeur de la publication : ${ED.nom}.</p>
 <p>TVA non applicable, article 293 B du Code général des impôts.</p>
 <h2>Hébergement</h2>
-<p>Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis · vercel.com</p>
+<p>Cloudflare, Inc. (service Cloudflare Pages), 101 Townsend St, San Francisco, CA 94107, États-Unis · cloudflare.com</p>
 <h2>Propriété intellectuelle</h2>
 <p>La structure du site, ses textes, son quiz, ses modèles de lettres et ses éléments graphiques sont protégés. Toute reproduction ou réutilisation, totale ou partielle, sans autorisation écrite est interdite.</p>
 <p>Les données sur les formations et les taux d’accès proviennent de la plateforme ouverte des données publiques de l’enseignement supérieur (jeu « Parcoursup », Licence Ouverte / Etalab). Les informations sur les métiers, les études et les salaires s’appuient sur Onisep, France Travail, l’Apec, l’Insee et les sites officiels des organismes concernés.</p>
@@ -2529,11 +2529,11 @@ function legal(k){
 <h2>Ce que nous traitons</h2>
 <p><b>Achat</b> : ton adresse e-mail et l’offre choisie, transmises à Stripe pour le paiement et l’envoi du reçu. Base légale : l’exécution du contrat. Conservation : 10 ans pour les pièces comptables, comme l’exige la loi.</p>
 <p><b>Mot de passe</b> : pour te connecter sur un autre appareil, tu choisis un mot de passe lors de l’achat. Nous n’en gardons qu’une empreinte chiffrée (impossible à relire), rangée avec ton paiement chez Stripe. Base légale : l’exécution du contrat. Conservation : jusqu’à la fin de ton accès.</p>
-<p><b>Mesure d’audience</b> : Vercel Web Analytics compte les pages vues de façon anonyme, sans cookie et sans suivi d’un site à l’autre. Base légale : notre intérêt légitime à améliorer le site.</p>
+<p><b>Mesure d’audience</b> : Cloudflare Web Analytics compte les visites de façon anonyme, sans cookie et sans suivi d’un site à l’autre. Base légale : notre intérêt légitime à améliorer le site.</p>
 <p><b>Stockage local</b> : ton navigateur garde ton accès payant et tes réponses (localStorage). Ces données ne quittent pas ton appareil et tu peux les effacer à tout moment depuis les réglages de ton navigateur.</p>
 <p><b>Recherche d’écoles</b> : la page Écoles interroge directement le site public data.enseignementsup-recherche.gouv.fr. Ton adresse IP est donc visible par ce site, comme pour toute visite web.</p>
 <h2>Destinataires</h2>
-<p>Stripe Payments Europe Ltd (paiement, Irlande) et Vercel Inc. (hébergement et mesure d’audience, États-Unis). Les transferts hors de l’Union européenne sont encadrés par des clauses contractuelles types et le cadre de protection des données UE–États-Unis.</p>
+<p>Stripe Payments Europe Ltd (paiement, Irlande) et Cloudflare, Inc. (hébergement et mesure d’audience, États-Unis). Les transferts hors de l’Union européenne sont encadrés par des clauses contractuelles types et le cadre de protection des données UE–États-Unis.</p>
 <h2>Utilisateurs mineurs</h2>
 <p>Le site s’adresse notamment aux lycéens. Nous ne demandons aucune information sur ton identité, ton âge ou ton lycée. Si tu as moins de 18 ans, un parent doit donner son accord avant un achat.</p>
 <h2>Tes droits</h2>
