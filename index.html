@@ -259,6 +259,7 @@ details.exd{margin-top:18px}details.exd summary{cursor:pointer;font-weight:600;c
 .gift ol{margin:12px 0 16px;padding-left:22px;color:var(--ink2);display:grid;gap:6px}
 .acc{max-width:520px;margin:0 auto}.acc .inp{width:100%;margin-top:6px}.acc label{font-size:13px;font-weight:600;color:var(--ink2);display:block;margin-top:14px}
 .ok{color:var(--green);font-weight:600;font-size:14px;margin-top:8px}
+.door.door-r{margin-top:10px;background:#EEF2FF;border-color:#C9D4FB}
 .lnk{background:none;border:0;padding:4px;color:var(--navy);text-decoration:underline;font:inherit;font-weight:600;cursor:pointer}
 .secure{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mute);margin-top:12px}
 .og{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -1754,7 +1755,10 @@ function planParcoursup(){
   const vig=(f0.moins||[]).map(x=>`<b>${chm.nom} :</b> ${x}`);
   // projet motivé
   const lm=LMET[k0]||['exercer ce métier',''];
-  const lettre=`Actuellement en terminale${c.voie==='gen'&&spe.length?' générale, avec les spécialités '+spe.join(' et ').toLowerCase():c.voie==='techno'?' '+(Q.techno.o[a.techno]||[''])[0]:''}, je souhaite devenir ${m0.nom.toLowerCase()} afin de ${lm[0]}. ${lm[1]} Intégrer cette formation est pour moi la première étape concrète de ce projet. <i>[Ajoute ici une expérience personnelle : stage, bénévolat, rencontre…]</i>`;
+  const debut = c.voie==='sup' ? 'Actuellement étudiant(e) dans l’enseignement supérieur, je souhaite me réorienter pour devenir '
+    : c.voie==='cap' ? 'Actuellement en CAP, je souhaite devenir '
+    : `Actuellement en terminale${c.voie==='gen'&&spe.length?' générale, avec les spécialités '+spe.join(' et ').toLowerCase():c.voie==='techno'?' '+(Q.techno.o[a.techno]||[''])[0]:c.voie==='pro'?' professionnelle':''}, je souhaite devenir `;
+  const lettre=`${debut}${m0.nom.toLowerCase()} afin de ${lm[0]}. ${lm[1]} Intégrer cette formation est pour moi la première étape concrète de ce projet. <i>[Ajoute ici une expérience personnelle : stage, bénévolat, rencontre…]</i>`;
   const vitem=x=>`<div class="vitem"><b>${x.t}</b><small>Pour devenir ${METIERS[x.k].nom.toLowerCase()} · ${x.sel||'—'}${/oui|possible|souvent/i.test(x.alt)?' · alternance possible':''}</small></div>`;
   const col=(cls,titre,sub,arr)=>`<div class="vcol ${cls}"><h3>${titre}</h3><p class="sub">${sub}</p>${arr.length?arr.map(vitem).join(''):'<div class="vitem"><small>Pas de formation de ce type parmi tes pistes : concentre-toi sur les autres colonnes.</small></div>'}</div>`;
   const today=new Date().toISOString().slice(0,10), dates=CAL.filter(x=>x[0]>=today).slice(0,5);
@@ -1821,6 +1825,7 @@ function home(){
       <div class="err" id="err" role="status"></div>
       <div class="sugg">Populaires : ${['medecin','infirmier','developpeur','psychologue','avocat','kine'].filter(k=>METIERS[k]).map(k=>`<button class="chip" data-go="metier-${k}">${METIERS[k].nom}</button>`).join('')}<a class="chip chip-all" href="#metiers">Voir les ${Object.keys(METIERS).length} métiers ${IC.arrow}</a></div>
       <a class="door" href="#quiz">${mascotSVG('think', 58)}<span><b>Tu ne sais pas encore ?</b><small>Fais le quiz d'orientation gratuit : des pistes adaptées à ton bac.</small></span>${IC.arrow}</a>
+      <a class="door door-r" href="#reorientation">${mascotSVG('point', 58)}<span><b>Tu veux te réorienter ?</b><small>Déjà dans le supérieur et pas à ta place ? Le quiz est aussi fait pour toi.</small></span>${IC.arrow}</a>
       <ul class="trust"><li>Données Parcoursup et Onisep</li><li>Quiz et chemin principal gratuits</li><li>Sans inscription</li></ul>
     </div>
     <div class="hero-m fade" aria-hidden="true">
@@ -2714,6 +2719,7 @@ function route(){
   const h = location.hash.replace('#','') || 'accueil';
   let html, r='';
   if(!h.startsWith('metier-')) st.lockCh=0;
+  if(h==='reorientation'){ st.qa={voie:Q.voie.o.findIndex(o=>o[2]==='sup')}; st.qi=1; st.qm=null; location.replace('#quiz'); return; }
   if(h!=='paiement') st.gift=0;
   if(h!=='connexion'){ st.oubli=0; st.oubliOk=0; }
   const G = '<div class="card" style="min-height:460px">'+'<div style="height:22px;width:60%;background:#E4E7EF;border-radius:8px;margin-bottom:18px"></div>'.repeat(1)+'<div style="height:90px;background:#EEF0F5;border-radius:14px;margin-bottom:14px"></div>'.repeat(4)+'</div>';
