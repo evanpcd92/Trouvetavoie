@@ -147,7 +147,7 @@ ${sal ? `<section><h2>Le salaire en début de carrière</h2><div class="sal"><b>
   <div class="card">
     <div class="ch-h"><h3>${esc(c0.nom)} <small style="font-weight:500;color:var(--mute);font-size:15px">· ${esc(c0.sous)}</small></h3><span class="ps${ps[1] === "ps-p" ? "" : " h"}">${esc(ps[0])}</span></div>
     <ol class="steps">${c0.steps.map(([t, d, x]) => `<li><div><b>${esc(t)}</b><small>${[d && d !== "—" ? esc(d) : "", x ? esc(x) : ""].filter(Boolean).join(" · ")}</small></div></li>`).join("")}</ol>
-    ${f0 ? `<div class="facts"><div><span>Durée totale</span>${esc(f0.duree)}</div><div><span>Coût</span>${esc(f0.cout)}</div><div><span>Alternance</span>${esc(f0.alt)}</div><div><span>Sélectivité</span>${esc(f0.sel)}</div></div>` : ""}
+    ${f0 ? `<div class="facts"><div><span>Durée totale</span>${esc(f0.duree)}</div><div><span>Alternance</span>${esc(f0.alt)}</div><div><span>Coût et sélectivité</span>🔒 Sur trouvetavoie</div></div>` : ""}
     ${autres.length ? `<div class="more">Il existe ${autres.length === 1 ? "un autre chemin" : `${autres.length} autres chemins`} pour devenir ${esc(nomMin)} : <b>${autres.map(esc).join("</b> et <b>")}</b>. Compare-les sur trouvetavoie, avec les écoles et tes chances d’admission.</div>` : ""}
   </div>
   <div class="cta"><a class="btn btn-p" href="/#metier-${k}">Voir tous les chemins</a><a class="btn btn-g" href="/#quiz">Pas sûr ? Fais le quiz gratuit</a></div>

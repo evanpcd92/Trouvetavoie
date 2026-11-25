@@ -519,6 +519,32 @@ select.inp{appearance:auto}
 .share-m img{width:min(300px,100%);border-radius:16px;display:block;margin:0 auto;box-shadow:0 20px 50px rgba(0,0,0,.4)}
 .share-m .acts2{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
 .share-m .acts2 a,.share-m .acts2 button{position:static;width:auto;height:auto;border-radius:12px;font-size:15px;box-shadow:none}
+/* ===== Contenus premium ===== */
+.lkv{display:inline-flex;align-items:center;gap:6px;color:var(--gold-d)!important;font-size:13.5px}
+.lkbox{margin-top:16px;border:1.5px dashed #F5E2A6;background:#FFFBEF;border-radius:14px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:14.5px}
+.lkbox b{display:block}
+.upsell{background:var(--navy);color:#fff;border-radius:24px;padding:26px 26px 24px;margin:8px 0 18px;position:relative;overflow:hidden}
+.upsell::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(255,201,60,.35),transparent 70%);right:-80px;top:-90px}
+.upsell h2{font-size:24px;margin:8px 0 10px;color:#fff}
+.upsell ul{margin:0 0 18px;padding:0;list-style:none;display:grid;gap:8px}
+.upsell li{color:#D7DCEB;padding-left:26px;position:relative}
+.upsell li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:800}
+.upsell .k{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.08em}
+/* ===== Plan Parcoursup ===== */
+.plan h2{font-size:22px;margin:30px 0 12px}
+.plan-goal{background:var(--navy);color:#fff;border-radius:22px;padding:22px 24px;display:flex;gap:18px;align-items:center}
+.plan-goal img{width:64px;height:64px;flex:none;background:#FFF4D1;border-radius:18px;padding:10px}
+.plan-goal h3{color:#fff;font-size:22px;margin:2px 0 4px}.plan-goal p{margin:0;color:#C3C9DD;font-size:15px}
+.voeux{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.vcol{border-radius:18px;padding:16px;border:1px solid var(--line);background:#fff}
+.vcol h3{font-size:16px;margin:0 0 4px}.vcol .sub{font-size:13px;color:var(--mute);margin:0 0 10px}
+.vcol.v-amb{border-top:5px solid #E8436A}.vcol.v-rea{border-top:5px solid var(--gold)}.vcol.v-pb{border-top:5px solid var(--green)}
+.vitem{background:var(--bg);border-radius:12px;padding:10px 12px;margin-top:8px;font-size:14px}
+.vitem b{display:block;font-size:14.5px}.vitem small{color:var(--mute)}
+.todo{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.todo li{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px 12px 44px;position:relative;font-size:15px}
+.todo li::before{content:"";position:absolute;left:14px;top:13px;width:18px;height:18px;border:2px solid var(--gold-d);border-radius:5px}
+@media (max-width:760px){.voeux{grid-template-columns:1fr}.plan-goal{flex-direction:column;align-items:flex-start}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
@@ -1572,7 +1598,7 @@ function parents(){
     <p class="lead" style="max-width:none">trouvetavoie l’aide à choisir un métier et à comprendre tous les chemins pour y arriver : études, écoles, coûts et chances d’admission, expliqués simplement.</p>
     <div class="par-g">
       <div class="card"><h3>📊 Des informations sourcées</h3><p>Données officielles Parcoursup, fiches Onisep, grilles de salaires publiques et sites des établissements. Chaque chiffre indique sa source.</p></div>
-      <div class="card"><h3>🆓 L’essentiel est gratuit</h3><p>Le quiz d’orientation et le chemin principal de chaque métier sont accessibles sans payer ni créer de compte.</p></div>
+      <div class="card"><h3>🆓 L’essentiel est gratuit</h3><p>Le quiz d’orientation et la découverte de chaque métier (vidéo, salaire, études du chemin principal) sont accessibles sans payer ni créer de compte.</p></div>
       <div class="card"><h3>💳 Un paiement unique</h3><p>${e.nom} à ${eur(e.prix)} ou ${c.nom} à ${eur(c.prix)}, sans abonnement ni renouvellement, valable jusqu’à la fin de Parcoursup 2027.</p></div>
       <div class="card"><h3>🔒 Pas de pub, pas de revente</h3><p>Aucun compte à créer. Les réponses au quiz et les lettres restent dans le navigateur de votre enfant.</p></div>
       <div class="card"><h3>👪 Pour les mineurs</h3><p>Lors du paiement, l’élève mineur confirme l’accord d’un parent. Vous pouvez aussi faire l’achat vous-même.</p></div>
@@ -1614,6 +1640,58 @@ async function partagerResultat(){
   m.addEventListener('click',e=>{ if(e.target===m||e.target.classList.contains('x')) close(); });
   document.body.appendChild(m);
   const sb=m.querySelector('#shr'); if(sb) sb.onclick=()=>navigator.share({files:[file],title:'Mon résultat trouvetavoie',text:'Les métiers qui me ressemblent, selon trouvetavoie. Et toi ?'}).catch(()=>{});
+}
+// ----- Plan Parcoursup personnalisé (offre Complet), construit à partir des réponses au quiz -----
+function planDonnees(){
+  const a=st.qa; if(!a||a.niveau===undefined) return null;
+  let R; try{ R=resultats(a); }catch(e){ return null; } if(!R.top.length) return null;
+  const c=R.c, lvl=c.lvl;
+  const selScore=t=>/très|concours/i.test(t||'')?3:/sélectif|sélection/i.test(t||'')?2:1;
+  const cand=[], hors=[], seen=new Set();
+  R.top.slice(0,3).forEach((k,ri)=>{ const [chC]=recoChemin(k,c,a);
+    METIERS[k].chemins.forEach((ch,i)=>{ const f=(EXTRA[k]&&EXTRA[k].c[i])||{}; const ps=(PSUP[k]||'PPP')[i]; const t=(ch.steps[0][0].length<14&&ch.steps[1])?ch.steps[1][0]:ch.steps[0][0];
+      const item={k,i,t,ch:ch.nom,sel:f.sel||'',alt:f.alt||'',conseil:f.conseil||'',reco:i===chC,ri};
+      if(seen.has(t)) return; seen.add(t);
+      if(ps==='P'||ps==='X'){ let sc=selScore(f.sel)+(lvl===0?1:0)-(lvl===2?1:0); item.cat=sc>=3?'amb':sc===2?'rea':'pb'; cand.push(item); } else hors.push(item); }); });
+  R.more.slice(0,4).forEach(k=>{ const ch=METIERS[k].chemins[0], f=(EXTRA[k]&&EXTRA[k].c[0])||{}, ps=(PSUP[k]||'P')[0], t=(ch.steps[0][0].length<14&&ch.steps[1])?ch.steps[1][0]:ch.steps[0][0];
+    if((ps==='P'||ps==='X')&&selScore(f.sel)===1&&!seen.has(t)){ seen.add(t); cand.push({k,i:0,t,ch:ch.nom,sel:f.sel||'',alt:f.alt||'',cat:'pb',ri:9}); } });
+  const pick=cat=>cand.filter(x=>x.cat===cat).sort((x,y)=>(y.reco-x.reco)||(x.ri-y.ri)).slice(0,3);
+  return {R,c,top:R.top.slice(0,3),amb:pick('amb'),rea:pick('rea'),pb:pick('pb'),hors:hors.slice(0,4)};
+}
+function planParcoursup(){
+  const d=planDonnees();
+  if(!d) return `<div class="wrap page fade"><div class="qz"><div class="crumb"><a href="#accueil">Accueil</a> / Mon plan Parcoursup</div>
+    <div class="qz-m">${mascotSVG('point',100)}<div class="mbub">Pour construire ton plan, j’ai besoin de te connaître : fais d’abord le quiz (5 minutes).</div></div>
+    <a class="btn btn-g" href="#quiz">Faire le quiz ${IC.arrow}</a></div></div>`;
+  const k0=d.top[0], m0=METIERS[k0], [ch0,rs0]=recoChemin(k0,d.c,st.qa);
+  const vitem=x=>`<div class="vitem"><b>${x.t}</b><small>Pour devenir ${METIERS[x.k].nom.toLowerCase()} · ${x.sel||'—'}${/oui|possible|souvent/i.test(x.alt)?' · alternance possible':''}</small></div>`;
+  const col=(cls,titre,sub,arr)=>`<div class="vcol ${cls}"><h3>${titre}</h3><p class="sub">${sub}</p>${arr.length?arr.map(vitem).join(''):'<div class="vitem"><small>Rien de particulier ici pour ton profil.</small></div>'}</div>`;
+  const today=new Date().toISOString().slice(0,10), dates=CAL.filter(x=>x[0]>=today).slice(0,4);
+  const conseils=[...new Set([...d.amb,...d.rea,...d.pb].filter(x=>x.conseil).map(x=>x.conseil))].slice(0,3);
+  const plan=`<div class="plan">
+    <div class="plan-goal"><img src="img/metiers/${k0}.svg" alt=""><div><div class="k" style="color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.08em">TON OBJECTIF N°1</div><h3>Devenir ${m0.nom.toLowerCase()}</h3><p>Chemin conseillé : <b style="color:#fff">${m0.chemins[ch0].nom}</b>. ${rs0}</p></div></div>
+    <h2>Tes vœux conseillés</h2>
+    <p style="color:var(--ink2);margin:-4px 0 14px">Un bon dossier mélange des vœux ambitieux, réalistes et au moins un plan B.</p>
+    <div class="voeux">${col('v-amb','🚀 Ambitieux','Très demandés : tente ta chance',d.amb)}${col('v-rea','🎯 Réalistes','Adaptés à ton profil',d.rea)}${col('v-pb','🛟 Plan B','Plus accessibles, pour être sûr d’avoir une place',d.pb)}</div>
+    ${d.hors.length?`<h2>Hors Parcoursup : candidatures directes</h2><div class="voeux" style="grid-template-columns:1fr">${col('v-rea','📮 À demander directement aux écoles','Concours, dossiers ou apprentissage, avec leur propre calendrier',d.hors)}</div>`:''}
+    <h2>Où candidater</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">${d.top.map(k=>`<a class="btn btn-o" href="#ecoles" data-f="${METIERS[k].formation}">🏫 ${FNAMES_ALL[METIERS[k].formation]||METIERS[k].nom}</a>`).join('')}</div>
+    <h2>Tes prochaines dates</h2>
+    <ol class="cal">${dates.map(x=>`<li><span class="dot"></span><div class="d">${x[1]}</div><h3>${x[2]}</h3><p>${x[4]}</p></li>`).join('')}</ol>
+    <h2>Ta to-do list</h2>
+    <ul class="todo">${[...conseils,'Rédige un projet de formation motivé pour chaque vœu (l’assistant t’aide).','Confirme tous tes vœux avant le 1er avril 2027.','Garde au moins un vœu plan B jusqu’au bout.'].map(x=>`<li>${x}</li>`).join('')}</ul>
+    <p class="note" style="margin-top:20px">Ce plan est une aide construite à partir de tes réponses : vérifie toujours les attendus de chaque formation sur Parcoursup.</p>
+  </div>`;
+  const complet=st.plan==='complet';
+  return `<div class="wrap page fade"><div class="qz" style="max-width:900px">
+    <div class="crumb"><a href="#accueil">Accueil</a> / <a href="#quiz">Quiz</a> / Mon plan Parcoursup</div>
+    <h1>Ton plan Parcoursup 2027</h1>
+    <p style="color:var(--ink2);margin:-12px 0 22px">Construit à partir de tes réponses au quiz : tes vœux, tes écoles et tes dates.</p>
+    ${complet?plan:`<div class="pw"><div class="ghost" aria-hidden="true">${plan}</div><div class="over"><div class="pwc"><span class="badge b-prem">${IC.lock} Offre Complet</span>
+      <h2>Ton plan Parcoursup personnalisé</h2><p>Tes vœux classés (ambitieux, réalistes, plan B), les écoles où candidater, tes dates et ta to-do list.</p>
+      <a class="btn btn-p" href="#paiement" onclick="st.offer='complet'" style="width:100%">Débloquer avec l’offre Complet · 9,99 €</a>
+      <p style="font-size:13px;color:var(--mute);margin:12px 0 0">Paiement unique, sans abonnement</p></div></div></div>`}
+  </div></div>`;
 }
 function univDe(k){ let best=null,w=0; for(const d in DOM_BASE){ const v=DOM_BASE[d][k]||0; if(v>w){w=v;best=d;} } const u=UNIVERS.find(x=>x[1]===best); return u?u[0]:'Fiche métier'; }
 const QZ_TIPS = ['C’est parti ! Réponds avec ton envie, pas avec ce qu’on attend de toi.','Il n’y a pas de mauvaise réponse ici.','Pense à ce que tu fais vraiment quand tu as du temps libre.','Tu avances bien, continue !','Encore quelques questions et je te montre tes pistes.','Dernière ligne droite !'];
@@ -1710,19 +1788,20 @@ function metiersPage(){
 }
 function fiche(key,i){
   const f=(EXTRA[key]||{c:[]}).c[i]; if(!f) return '';
+  const P=hasPlan(), LK='<span class="lkv">🔒 Premium</span>';
   return `<div class="fiche">
     ${PSUP[key]?`<div class="psb ${PSLAB[PSUP[key][i]][1]}">${PSLAB[PSUP[key][i]][0]}</div>`:''}
     <div class="fgrid">
       <div class="ftile"><span>Durée totale</span><b>${f.duree}</b></div>
-      <div class="ftile"><span>Coût</span><b>${f.cout}</b></div>
+      <div class="ftile"><span>Coût</span><b>${P?f.cout:LK}</b></div>
       <div class="ftile"><span>Alternance</span><b>${f.alt}</b></div>
-      <div class="ftile"><span>Sélectivité</span><b>${f.sel}</b></div>
+      <div class="ftile"><span>Sélectivité</span><b>${P?f.sel:LK}</b></div>
     </div>
     ${SALAIRES[key]?`<div class="fsal"><span>💶 Salaire en début de carrière</span><b>${SALAIRES[key][i][0]}</b><p>${SALAIRES[key][i][1]}${SALAIRES[key][i][2]?` <i>Source : ${SALAIRES[key][i][2]}.</i>`:''}</p></div>`:''}
     <p class="fpour"><b>Pour qui ?</b> ${f.pour}</p>
     <div class="fpm"><div><h4>Les points forts</h4><ul>${f.plus.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-      <div><h4>Points de vigilance</h4><ul class="neg">${f.moins.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
-    <div class="fconseil"><b>Notre conseil</b> ${f.conseil}</div>
+      <div><h4>Points de vigilance</h4>${P?`<ul class="neg">${f.moins.map(x=>`<li>${x}</li>`).join('')}</ul>`:`<p style="margin:0;font-size:14px">${LK} ${f.moins.length} point${f.moins.length>1?'s':''} à connaître avant de te lancer</p>`}</div></div>
+    ${P?`<div class="fconseil"><b>Notre conseil</b> ${f.conseil}</div>`:`<div class="lkbox"><div><b>🔒 Coût, sélectivité, points de vigilance et notre conseil</b>Tout ce qu’il faut savoir avant de mettre ce vœu sur Parcoursup.</div><a class="btn btn-p" href="#paiement" style="height:40px">Débloquer dès 4,99 €</a></div>`}
   </div>`;
 }
 function metier(key){
@@ -2229,15 +2308,15 @@ function assistant(){
 const PAYLINKS = { essentiel: '', complet: '' };
 const STRIPE_ON = true; // paiement réel via /api/checkout (identifiants de prix dans les variables Vercel)
 const OFFERS = {
-  essentiel:{nom:'Essentiel', prix:4.99, items:['Les 3 chemins pour chaque métier','Écoles publiques et privées, prix et chances d’admission','Comparateur de métiers et métiers par bac','Messages aux écoles illimités','Accès jusqu’à la fin de Parcoursup 2027']},
-  complet:{nom:'Complet', prix:9.99, items:['Tout l’Essentiel','5 lettres de motivation personnalisées','Accès jusqu’à la fin de Parcoursup 2027']}
+  essentiel:{nom:'Essentiel', prix:4.99, items:['Ton analyse complète du quiz','Les 3 chemins pour chaque métier, avec conseils et points de vigilance','Écoles publiques et privées, prix et chances d’admission','Comparateur de métiers et métiers par bac','Messages aux écoles illimités','Accès jusqu’à la fin de Parcoursup 2027']},
+  complet:{nom:'Complet', prix:9.99, items:['Tout l’Essentiel','Ton plan Parcoursup personnalisé (vœux, écoles, dates)','5 lettres de motivation personnalisées','Accès jusqu’à la fin de Parcoursup 2027']}
 };
 const hasPlan = () => !!st.plan;
 function paywall(title, desc, ghost){
   return `<div class="pw"><div class="ghost" aria-hidden="true">${ghost}</div>
     <div class="over"><div class="pwc"><span class="badge b-prem">${IC.lock} Premium</span>
       <h2>${title}</h2><p>${desc}</p>
-      <ul><li>Les 3 chemins pour chaque métier</li><li>Écoles, prix selon le diplôme et chances d’admission</li><li>Comparateur complet et métiers par bac</li><li>Messages aux écoles et aide aux lettres</li></ul>
+      <ul><li>Ton analyse complète du quiz</li><li>Les 3 chemins pour chaque métier, avec conseils</li><li>Écoles, prix selon le diplôme et chances d’admission</li><li>Comparateur complet et métiers par bac</li><li>Avec l’offre Complet : ton plan Parcoursup</li></ul>
       <a class="btn btn-p" href="#paiement" style="width:100%">Débloquer dès 4,99 €</a>
       <p style="font-size:13px;color:var(--mute);margin:12px 0 0">Paiement unique, sans abonnement</p></div></div></div>`;
 }
@@ -2307,7 +2386,7 @@ function legal(k){
 <h2>1. Objet</h2>
 <p>Les présentes conditions encadrent la vente des offres payantes du site trouvetavoie (l’éditeur est indiqué dans les mentions légales). Tout achat implique leur acceptation.</p>
 <h2>2. Offres et prix</h2>
-<p><b>Essentiel — 4,99 €</b> : les 3 chemins détaillés pour chaque métier, les écoles publiques et privées avec prix et chances d’admission, le comparateur de métiers complet, la liste complète des métiers par bac et les messages aux écoles.<br><b>Complet — 9,99 €</b> : tout l’Essentiel, plus les lettres de motivation personnalisées.<br>Le quiz d’orientation et le chemin principal de chaque métier restent gratuits.</p>
+<p><b>Essentiel — 4,99 €</b> : l’analyse complète des résultats du quiz, les 3 chemins détaillés pour chaque métier (coût, sélectivité, points de vigilance et conseils), les écoles publiques et privées avec prix et chances d’admission, le comparateur de métiers complet, la liste complète des métiers par bac et les messages aux écoles.<br><b>Complet — 9,99 €</b> : tout l’Essentiel, plus le plan Parcoursup personnalisé et les lettres de motivation personnalisées.<br>Le quiz d’orientation (avec les 3 métiers proposés) et la découverte de chaque métier (vidéo, salaire, étapes du chemin principal) restent gratuits.</p>
 <p>Prix en euros, toutes taxes comprises. TVA non applicable, article 293 B du CGI. Il s’agit d’un paiement unique, sans abonnement ni renouvellement automatique.</p>
 <h2>3. Commande et paiement</h2>
 <p>Le paiement se fait par carte bancaire, Apple Pay ou Google Pay sur la page sécurisée de Stripe. trouvetavoie ne reçoit ni ne conserve aucune donnée bancaire. La commande est ferme une fois le paiement accepté. Un reçu est envoyé à l’adresse e-mail indiquée.</p>
@@ -2396,23 +2475,27 @@ function quiz(){
     const det=c.voie==='gen'?' · '+c.spe.map(s=>SPE.find(x=>x[2]===s)[0]).join(', '):c.voie==='techno'&&a.techno!==undefined?' · '+Q.techno.o[a.techno][0]:'';
     return `<div class="wrap page fade"><div class="qz">
       <div class="crumb">Quiz · Résultats</div>
-      <div class="qz-m">${mascotSVG('cheer', 110)}<div class="mbub">Et voilà ! Voici les métiers qui te ressemblent. Clique sur un métier pour voir le chemin que je te conseille.</div></div>
+      <div class="qz-m">${mascotSVG('cheer', 110)}<div class="mbub">${hasPlan()?'Et voilà ! Voici les métiers qui te ressemblent. Clique sur un métier pour voir le chemin que je te conseille.':'Et voilà ! Voici les 3 métiers qui te ressemblent le plus. Je peux aussi te dire pourquoi, et comment y arriver.'}</div></div>
       <h1>Les métiers qui te ressemblent</h1>
       <p style="color:var(--ink2);margin:-12px 0 22px">Ton profil : <b>${pl}${det}</b></p>
       ${top.map(([k,v],i)=>{const [ch,rs]=recoChemin(k,c,a);const al=alertes(k,c,a);const w=[...new Set((why[k]||[]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]))].slice(0,2);
         return `<div class="card" style="margin-bottom:14px"><div class="res"><div style="flex:1">
         <h3 style="font-size:19px">${METIERS[k].nom}${i===0?' <span class="pill" style="margin-left:8px;font-size:12px">Meilleur match</span>':''}</h3>
         <p style="margin:4px 0 0;color:var(--ink2);font-size:14px">${METIERS[k].resume}</p>
-        ${w.length?`<p style="margin:10px 0 0;font-size:14px"><b>Pourquoi :</b> ${w.join(' et ')}.</p>`:''}
-        <p style="margin:8px 0 0;font-size:14px;color:var(--gold-d);font-weight:500">Chemin conseillé : ${METIERS[k].chemins[ch].nom}. ${rs}</p>
-        ${SALAIRES[k]?`<p style="margin:6px 0 0;font-size:14px">💶 <b>Salaire de départ :</b> ${SALAIRES[k][ch][0]}</p>`:''}
-        ${al.map(x=>`<p style="margin:8px 0 0;font-size:13px;color:#9A3412">⚠ ${x}</p>`).join('')}
+        ${hasPlan()?`${w.length?`<p style="margin:10px 0 0;font-size:14px"><b>Pourquoi :</b> ${w.join(' et ')}.</p>`:''}
+        <p style="margin:8px 0 0;font-size:14px;color:var(--gold-d);font-weight:500">Chemin conseillé : ${METIERS[k].chemins[ch].nom}. ${rs}</p>`:''}
+        ${SALAIRES[k]?`<p style="margin:6px 0 0;font-size:14px">💶 <b>Salaire de départ :</b> ${SALAIRES[k][hasPlan()?ch:0][0]}</p>`:''}
+        ${hasPlan()?al.map(x=>`<p style="margin:8px 0 0;font-size:13px;color:#9A3412">⚠ ${x}</p>`).join(''):(al.length||w.length?`<p style="margin:8px 0 0;font-size:13.5px" class="lkv">🔒 Pourquoi ce métier, ton chemin conseillé${al.length?' et '+al.length+' alerte'+(al.length>1?'s':''):''}</p>`:'')}
         <div class="bar2"><i style="width:${i===0?100:Math.min(92,Math.max(10,Math.round(v/Math.max(...top.map(x=>x[1]))*100)))}%"></i></div></div>
-        <div style="display:flex;flex-direction:column;align-items:stretch"><a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${ch}">Voir le chemin ${ch+1}</a>${VIDEOS.includes(k)?`<button class="btn btn-o vbtn" type="button" data-video="${k}">▶ Vidéo 30 s</button>`:''}</div></div></div>`}).join('')}
+        <div style="display:flex;flex-direction:column;align-items:stretch"><a class="btn ${i===0?'btn-p':'btn-o'}" href="#metier-${k}" data-chs="${hasPlan()?ch:0}">${hasPlan()?'Voir le chemin '+(ch+1):'Voir le métier'}</a>${VIDEOS.includes(k)?`<button class="btn btn-o vbtn" type="button" data-video="${k}">▶ Vidéo 30 s</button>`:''}</div></div></div>`}).join('')}
       ${!top.length?`<div class="card"><h3 style="font-size:19px">Aucun de nos ${Object.keys(METIERS).length} métiers ne colle parfaitement</h3><p style="color:var(--ink2);font-size:15px;margin:6px 0 0">Avec ce que tu ne supportes pas et la durée d’études choisie, on préfère ne rien te proposer plutôt qu’un métier qui ne te correspond pas. On ajoute de nouveaux métiers chaque semaine. Tu peux aussi refaire le quiz en étant un peu plus souple.</p></div>`:''}
-      ${more.length?`<p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
+      ${!hasPlan()&&top.length?`<div class="upsell"><div class="k">TON ANALYSE COMPLÈTE</div><h2>Découvre pourquoi ces métiers te ressemblent, et comment y arriver</h2>
+        <ul><li>Pourquoi chaque métier te correspond, d’après tes réponses</li><li>Le chemin conseillé selon ton bac, ton niveau et tes envies</li><li>Les alertes à connaître (durée d’études, spécialités, coût)</li>${more.length+R.longer.length?`<li>${more.length+R.longer.length} autres pistes adaptées à ton profil</li>`:''}<li>Avec l’offre Complet : ton plan Parcoursup personnalisé (vœux, écoles, dates)</li></ul>
+        <a class="btn btn-g" href="#paiement">Débloquer mon analyse dès 4,99 € ${IC.arrow}</a></div>`:''}
+      ${hasPlan()&&top.length?`<a class="btn btn-g" href="#plan" style="margin:4px 0 8px">🗺️ Voir mon plan Parcoursup personnalisé</a>`:''}
+      ${hasPlan()&&more.length?`<p style="margin:22px 0 10px;font-weight:600">D’autres pistes à explorer</p>
       <div class="sugg" style="margin:0">${more.map(([k])=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom}</a>`).join('')}</div>`:''}
-      ${R.longer.length?`<p style="margin:22px 0 10px;font-weight:600">Si tu es prêt(e) à faire des études plus longues</p>
+      ${hasPlan()&&R.longer.length?`<p style="margin:22px 0 10px;font-weight:600">Si tu es prêt(e) à faire des études plus longues</p>
       <div class="sugg" style="margin:0">${R.longer.map(k=>`<a class="chip" href="#metier-${k}" data-chs="${recoChemin(k,c,a)[0]}">${METIERS[k].nom} · ${MIN_ANS[k]} ans min.</a>`).join('')}</div>`:''}
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px">${R.top.length?'<button class="btn btn-g" id="shareres" type="button">📸 Partager mon résultat</button>':''}<button class="btn btn-o" id="rq">Refaire le quiz</button></div>
     </div></div>`;
@@ -2453,6 +2536,7 @@ function route(){
   else if(h==='a-propos'){ html = histoire(); }
   else if(h==='comparer'){ html = comparer(); r='metier'; }
   else if(h==='calendrier'){ html = calendrier(); }
+  else if(h==='plan'){ html = planParcoursup(); r='quiz'; }
   else if(h==='parents'){ html = parents(); }
   else if(['mentions','cgv','confidentialite'].includes(h)){ html = legal(h); }
   else html = home();
