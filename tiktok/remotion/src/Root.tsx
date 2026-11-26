@@ -3,6 +3,7 @@ import { Composition, staticFile } from "remotion";
 import { MetierVideo, VideoProps } from "./Video";
 import { FPS, timeline, VoiceData } from "./timing";
 import { histoireTimeline, HistoireProps, HVoice, MonHistoire } from "./Histoire";
+import { MiniReorientation, ReoProps, ReorientationVideo, reoTimeline, RVoice } from "./Reorientation";
 import { MiniParents, ParentsProps, ParentsVideo, parentsTimeline, PVoice } from "./Parents";
 import { MiniHistoire, Miniature, MiniatureProps, OgImage } from "./Miniature";
 
@@ -75,6 +76,28 @@ export const RemotionRoot: React.FC = () => (
       return { durationInFrames: parentsTimeline(voice).total, props: { ...props, voice } };
     }}
   />
+  <Composition
+    id="Reorientation"
+    component={ReorientationVideo}
+    width={1080}
+    height={1920}
+    fps={FPS}
+    durationInFrames={reoTimeline(null).total}
+    defaultProps={{ voice: null } as ReoProps}
+    calculateMetadata={async ({ props }) => {
+      let voice: RVoice | null = (props.voice as RVoice | null) ?? null;
+      if (!voice) {
+        try {
+          const r = await fetch(staticFile("voice-reorientation/voice.json"));
+          if (r.ok) voice = (await r.json()) as RVoice;
+        } catch {
+          voice = null;
+        }
+      }
+      return { durationInFrames: reoTimeline(voice).total, props: { ...props, voice } };
+    }}
+  />
+  <Composition id="MiniReorientation" component={MiniReorientation} width={1080} height={1920} fps={FPS} durationInFrames={1} />
   <Composition id="MiniParents" component={MiniParents} width={1080} height={1350} fps={FPS} durationInFrames={1} />
   <Composition id="Miniature" component={Miniature} width={1080} height={1920} fps={FPS} durationInFrames={1} defaultProps={{ metier: "infirmier" } as MiniatureProps} />
   <Composition id="MiniHistoire" component={MiniHistoire} width={1080} height={1920} fps={FPS} durationInFrames={1} />
