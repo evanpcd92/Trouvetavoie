@@ -49,7 +49,8 @@ def nettoie(x, sr):
             "deesser=i=0.35",
             "acompressor=threshold=-20dB:ratio=3:attack=6:release=90:makeup=2",
             f"atempo={TEMPO}",
-            "silenceremove=start_periods=1:start_threshold=-45dB:stop_periods=1:stop_threshold=-45dB:stop_silence=0.08",
+            # coupe seulement le silence au début et à la fin (jamais au milieu des phrases)
+            "silenceremove=start_periods=1:start_threshold=-45dB", "areverse", "silenceremove=start_periods=1:start_threshold=-45dB", "areverse",
             "loudnorm=I=-16:TP=-1.5:LRA=7",
         ])
         subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", a, "-af", chain, "-ar", str(sr), b], check=True)

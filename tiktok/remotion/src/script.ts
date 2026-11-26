@@ -71,7 +71,7 @@ export function voiceScript(m: MetierProps): Seg[][] {
   const nom = speakable(m.nom);
   return [
     [
-      { id: "s0_0", text: "Yo ! Le métier du jour, c'est…" },
+      { id: "s0_0", text: "Le métier du jour, c'est…" },
       { id: "s0_1", text: `${nom} !` },
     ],
     [
