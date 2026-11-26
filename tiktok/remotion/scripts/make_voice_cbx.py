@@ -61,6 +61,49 @@ def nettoie(x, sr):
     return y
 
 
+def debuts(scene, words, dur):
+    """début (en s) de chaque morceau de la scène : on aligne le texte attendu sur les mots entendus
+    (alignement mot à mot, robuste aux mots mal reconnus), sinon au prorata du texte"""
+    exp = [(w, j) for j, seg in enumerate(scene) for w in norm_words(seg["text"])]
+    heard = [(t, k) for k, w in enumerate(words) for t in norm_words(w.word)]
+    first = [next(n for n, (_, j) in enumerate(exp) if j == jj) if any(j == jj for _, j in exp) else 0 for jj in range(len(scene))]
+    if not words or not heard:
+        tot = max(1, len(exp))
+        return [f / tot * dur for f in first]
+    R, H = [w for w, _ in exp], [t for t, _ in heard]
+    n, m = len(R), len(H)
+    D = [[0] * (m + 1) for _ in range(n + 1)]
+    for i in range(n + 1):
+        D[i][0] = i
+    for j in range(m + 1):
+        D[0][j] = j
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            D[i][j] = min(D[i - 1][j] + 1, D[i][j - 1] + 1, D[i - 1][j - 1] + (R[i - 1] != H[j - 1]))
+    # pour chaque mot attendu, l'indice du premier mot entendu qui lui correspond
+    pos = [m] * n
+    i, j = n, m
+    while i > 0 and j > 0:
+        # mot identique : on l'aligne ; sinon on préfère « mot entendu en trop » à « mot mal entendu »,
+        # pour qu'un mot mal reconnu (nom de métier) soit rattaché à son premier morceau entendu
+        if R[i - 1] == H[j - 1] and D[i][j] == D[i - 1][j - 1]:
+            pos[i - 1] = j - 1; i -= 1; j -= 1
+        elif D[i][j] == D[i][j - 1] + 1:
+            pos[i - 1] = j - 1; j -= 1
+        elif D[i][j] == D[i - 1][j - 1] + 1:
+            pos[i - 1] = j - 1; i -= 1; j -= 1
+        else:
+            pos[i - 1] = j; i -= 1
+    out = []
+    for jj, f in enumerate(first):
+        if f == 0:
+            out.append(0.0)
+            continue
+        h = min(m - 1, pos[f])
+        out.append(max(0.0, words[heard[h][1]].start - 0.04))
+    return out
+
+
 def envelope(x, sr):
     hop = sr // FPS
     n = int(np.ceil(len(x) / hop))
@@ -104,17 +147,7 @@ def main(script_path, out_dir):
         dur = len(y) / sr
         env = envelope(y, sr)
         scenes.append({"file": name, "dur": round(dur, 3)})
-        # repère où commence chaque morceau grâce aux mots reconnus (sinon, au prorata du texte)
-        counts = [len(norm_words(seg["text"])) for seg in scene]
-        total = max(1, sum(counts))
-        starts, acc = [], 0
-        for c in counts:
-            if words:
-                idx = min(len(words) - 1, int(round(acc / total * len(words))))
-                starts.append(0.0 if acc == 0 else max(0.0, words[idx].start - 0.05))
-            else:
-                starts.append(acc / total * dur)
-            acc += c
+        starts = debuts(scene, words, dur)
         for j, seg in enumerate(scene):
             off = starts[j]
             end = starts[j + 1] if j + 1 < len(scene) else dur
