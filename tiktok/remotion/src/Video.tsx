@@ -1,9 +1,10 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
-import { slide } from "@remotion/transitions/slide";
-import { wipe } from "@remotion/transitions/wipe";
-import { fade } from "@remotion/transitions/fade";
+import { cube } from "@remotion/transitions/cube";
+import { iris } from "@remotion/transitions/iris";
+import { pushCut } from "@remotion/transitions/push-cut";
+import { clockWipe } from "@remotion/transitions/clock-wipe";
 import { But, Hook, Outro, Quotidien, Qualites, SalaireScene } from "./scenes";
 import { T, timeline, VoiceData } from "./timing";
 import { Progress } from "./ui";
@@ -36,18 +37,28 @@ export const MetierVideo: React.FC<VideoProps> = ({ metier, voice }) => {
   const s = scenes;
   const sfx: [string, number, number][] = [
     ["whoosh", 0, 0.35],
+    ["pop", 2, 0.4],
+    ["whoosh", starts[0] + s[0].cues[1] - 8, 0.35],
     ["boom", starts[0] + s[0].cues[1] - 1, 0.75],
+    ["ding", starts[0] + s[0].cues[1] + 2, 0.4],
     ["pop", starts[0] + s[0].cues[1] + s[0].lens[1] + 4, 0.45],
     ["whoosh", starts[1] - 2, 0.5],
+    ["whoosh", starts[1] + s[1].cues[1] - 14, 0.35],
+    ["boom", starts[1] + s[1].cues[1] - 2, 0.45],
     ["whoosh", starts[2] - 2, 0.5],
     ...m.quotidien.map((_, i) => ["pop", starts[2] + s[2].cues[i + 1] - 3, 0.5] as [string, number, number]),
     ["whoosh", starts[3] - 2, 0.5],
     ...m.qualites.map((_, i) => ["ding", starts[3] + s[3].cues[i + 1] - 2, 0.22] as [string, number, number]),
     ...m.qualites.map((_, i) => ["pop", starts[3] + s[3].cues[i + 1] - 2, 0.4] as [string, number, number]),
+    ...m.qualites.map((_, i) => ["boom", starts[3] + s[3].cues[i + 1] - 2, 0.25] as [string, number, number]),
     ["whoosh", starts[4] - 2, 0.5],
-    ["cash", starts[4] + s[4].cues[1] + Math.min(60, Math.max(30, s[4].lens[1] - 10)) - 2, 0.55],
+    ["whoosh", starts[4] + s[4].cues[0] + 2, 0.3],
+    ["cash", starts[4] + s[4].cues[1] + Math.min(48, Math.max(26, s[4].lens[1] - 16)) + 6, 0.6],
+    ["boom", starts[4] + s[4].cues[1] + Math.min(48, Math.max(26, s[4].lens[1] - 16)) + 8, 0.4],
     ["whoosh", starts[5] - 2, 0.5],
-    ["ding", starts[5] + s[5].cues[1], 0.4],
+    ["whoosh", starts[5] + s[5].cues[1] - 10, 0.35],
+    ["ding", starts[5] + s[5].cues[1] + 6, 0.45],
+    ["boom", starts[5] + s[5].cues[1] + 6, 0.3],
     ["pop", starts[5] + s[5].cues[2] + 8, 0.4],
   ];
 
@@ -76,23 +87,23 @@ export const MetierVideo: React.FC<VideoProps> = ({ metier, voice }) => {
         <TransitionSeries.Sequence durationInFrames={durs[0]}>
           <Hook m={m} v={s[0]} />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={slide({ direction: "from-bottom" })} timing={linearTiming({ durationInFrames: T })} />
+        <TransitionSeries.Transition presentation={pushCut({ flashColor: "#FFC93C", flashOpacity: 0.9 })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[1]}>
           <But m={m} v={s[1]} />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={wipe({ direction: "from-right" })} timing={linearTiming({ durationInFrames: T })} />
+        <TransitionSeries.Transition presentation={cube({ direction: "from-right" })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[2]}>
           <Quotidien m={m} v={s[2]} />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={slide({ direction: "from-right" })} timing={linearTiming({ durationInFrames: T })} />
+        <TransitionSeries.Transition presentation={iris({ width: 1080, height: 1920 })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[3]}>
           <Qualites m={m} v={s[3]} />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={wipe({ direction: "from-bottom" })} timing={linearTiming({ durationInFrames: T })} />
+        <TransitionSeries.Transition presentation={cube({ direction: "from-bottom" })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[4]}>
           <SalaireScene m={m} v={s[4]} />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Transition presentation={fade()} timing={linearTiming({ durationInFrames: T })} />
+        <TransitionSeries.Transition presentation={clockWipe({ width: 1080, height: 1920 })} timing={linearTiming({ durationInFrames: T })} />
         <TransitionSeries.Sequence durationInFrames={durs[5]}>
           <Outro m={m} v={s[5]} />
         </TransitionSeries.Sequence>
