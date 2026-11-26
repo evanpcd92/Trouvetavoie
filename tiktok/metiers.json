@@ -275,6 +275,66 @@
   "eje": {
    "nom": "Éducateur de jeunes enfants",
    "resume": "Accompagner l’éveil et le développement des enfants de moins de 7 ans, en crèche, en multi-accueil ou à l’hôpital."
+  },
+  "magistrat": {
+   "nom": "Magistrat (juge ou procureur)",
+   "resume": "Rendre la justice : juger les affaires au tribunal ou, comme procureur, défendre l’intérêt de la société et diriger les enquêtes."
+  },
+  "juriste": {
+   "nom": "Juriste d’entreprise",
+   "resume": "Conseiller une entreprise sur ses droits et ses obligations : rédiger les contrats, éviter les litiges et la défendre en cas de conflit."
+  },
+  "podologue": {
+   "nom": "Pédicure-podologue",
+   "resume": "Soigner les pieds : traiter les douleurs, les ongles et la peau, et fabriquer des semelles sur mesure pour bien marcher ou courir."
+  },
+  "orthoptiste": {
+   "nom": "Orthoptiste",
+   "resume": "Examiner et rééduquer la vision : dépister les troubles des yeux chez l’enfant, assister l’ophtalmologiste et faire travailler les yeux qui ne voient pas bien ensemble."
+  },
+  "aes": {
+   "nom": "Accompagnant éducatif et social (AES)",
+   "resume": "Aider au quotidien les personnes âgées, malades ou en situation de handicap : la toilette, les repas, les sorties, et leur tenir compagnie."
+  },
+  "profsecond": {
+   "nom": "Professeur de collège et de lycée",
+   "resume": "Enseigner une matière que tu aimes (maths, français, histoire, anglais, SVT…) à des élèves de la 6e à la terminale, et les aider à progresser."
+  },
+  "animateur": {
+   "nom": "Animateur socioculturel",
+   "resume": "Organiser des activités pour les enfants, les jeunes ou les adultes : jeux, sorties, ateliers et séjours, en centre de loisirs, en colonie ou en maison de quartier."
+  },
+  "archiint": {
+   "nom": "Architecte d’intérieur",
+   "resume": "Imaginer et transformer les espaces intérieurs (appartements, boutiques, bureaux, restaurants) en choisissant les volumes, la lumière, les matériaux et le mobilier."
+  },
+  "chargecom": {
+   "nom": "Chargé de communication",
+   "resume": "Faire connaître une entreprise, une marque ou une mairie : écrire les messages, gérer les réseaux sociaux, organiser des événements et travailler avec les journalistes."
+  },
+  "anim3d": {
+   "nom": "Animateur 2D/3D",
+   "resume": "Donner vie à des personnages et des objets dessinés ou modélisés, pour les dessins animés, les films, les jeux vidéo ou la publicité."
+  },
+  "reseaux": {
+   "nom": "Administrateur réseaux",
+   "resume": "Installer et faire fonctionner les réseaux informatiques d’une entreprise (serveurs, wifi, accès internet, sauvegardes), pour que tout le monde puisse travailler sans panne."
+  },
+  "maintenance": {
+   "nom": "Technicien de maintenance industrielle",
+   "resume": "Entretenir et réparer les machines des usines pour que la production ne s’arrête jamais : mécanique, électricité et automatismes."
+  },
+  "aeronautique": {
+   "nom": "Mécanicien d’avion",
+   "resume": "Contrôler, entretenir et réparer les avions et les hélicoptères pour qu’ils volent en toute sécurité."
+  },
+  "logistique": {
+   "nom": "Responsable logistique",
+   "resume": "Organiser le stockage et le transport des marchandises pour qu’elles arrivent au bon endroit, au bon moment et au meilleur coût."
+  },
+  "styliste": {
+   "nom": "Styliste",
+   "resume": "Imaginer les vêtements et les accessoires des prochaines collections : chercher les tendances, dessiner les modèles et choisir les tissus et les couleurs."
   }
  },
  "EXTRA": {
@@ -986,6 +1046,171 @@
     ],
     "evol": "Directeur de crèche, coordinateur petite enfance, protection de l’enfance."
    }
+  },
+  "magistrat": {
+   "m": {
+    "quotidien": "Étudier les dossiers, mener les audiences et rendre des décisions. Le procureur dirige les enquêtes avec la police et décide des poursuites. Il y a beaucoup de lecture et d’écriture, et des permanences parfois le soir ou le week-end.",
+    "qualites": [
+     "Sens de la justice",
+     "Rigueur",
+     "Sang-froid"
+    ],
+    "evol": "Juge des enfants, juge d’instruction, procureur, président de tribunal, conseiller à la Cour de cassation."
+   }
+  },
+  "juriste": {
+   "m": {
+    "quotidien": "Rédiger et relire les contrats, répondre aux questions juridiques des autres services, suivre les changements de la loi et gérer les litiges avec les avocats.",
+    "qualites": [
+     "Rigueur",
+     "Esprit d’analyse",
+     "Aisance à l’écrit"
+    ],
+    "evol": "Responsable juridique, directeur juridique, ou avocat après l’examen du barreau."
+   }
+  },
+  "podologue": {
+   "m": {
+    "quotidien": "Examiner les pieds et la façon de marcher, soigner les cors, les ongles incarnés et les petites plaies, et fabriquer des semelles orthopédiques. Tu reçois des sportifs, des enfants, des personnes âgées ou diabétiques.",
+    "qualites": [
+     "Minutie",
+     "Contact humain",
+     "Habileté manuelle"
+    ],
+    "evol": "Podologie du sport, ouverture de ton propre cabinet, spécialisation (diabète, enfants)."
+   }
+  },
+  "orthoptiste": {
+   "m": {
+    "quotidien": "Faire des bilans de la vue, mesurer la correction des lunettes, réaliser des examens pour l’ophtalmologiste et proposer des exercices de rééducation aux enfants comme aux adultes.",
+    "qualites": [
+     "Patience",
+     "Précision",
+     "Pédagogie"
+    ],
+    "evol": "Travail aux côtés d’un ophtalmologiste, cabinet à ton compte, spécialisation (basse vision, enfants)."
+   }
+  },
+  "aes": {
+   "m": {
+    "quotidien": "Aider une personne à se lever, se laver, s’habiller et manger, l’accompagner dans ses sorties et ses activités, et lui tenir compagnie. Tu travailles en équipe avec les soignants et les éducateurs.",
+    "qualites": [
+     "Bienveillance",
+     "Patience",
+     "Endurance"
+    ],
+    "evol": "Aide-soignant, moniteur-éducateur, éducateur spécialisé avec de l’expérience."
+   }
+  },
+  "profsecond": {
+   "m": {
+    "quotidien": "Préparer tes cours, enseigner devant des classes de 25 à 35 élèves, corriger les copies, suivre les élèves et rencontrer les parents. Tu fais environ 18 heures de cours par semaine, en plus de la préparation.",
+    "qualites": [
+     "Pédagogie",
+     "Patience",
+     "Autorité bienveillante"
+    ],
+    "evol": "Professeur principal, formateur, agrégé, chef d’établissement, inspecteur."
+   }
+  },
+  "animateur": {
+   "m": {
+    "quotidien": "Imaginer et préparer des activités, encadrer un groupe d’enfants ou de jeunes en toute sécurité, organiser des sorties et des séjours, et échanger avec les familles.",
+    "qualites": [
+     "Énergie",
+     "Créativité",
+     "Sens des responsabilités"
+    ],
+    "evol": "Directeur d’accueil de loisirs, coordinateur jeunesse, responsable de structure."
+   }
+  },
+  "archiint": {
+   "m": {
+    "quotidien": "Rencontrer le client, dessiner des plans et des vues en 3D, choisir les matériaux, les couleurs et le mobilier, préparer les devis puis suivre le chantier avec les artisans.",
+    "qualites": [
+     "Créativité",
+     "Sens de l’espace",
+     "Organisation"
+    ],
+    "evol": "Chef de projet en agence, création de ta propre agence, spécialisation (boutiques, hôtellerie)."
+   }
+  },
+  "chargecom": {
+   "m": {
+    "quotidien": "Rédiger des articles, des posts et des communiqués, créer des visuels avec les graphistes, mettre à jour le site, organiser des événements et répondre aux journalistes.",
+    "qualites": [
+     "Aisance à l’écrit",
+     "Créativité",
+     "Organisation"
+    ],
+    "evol": "Responsable communication, directeur de la communication, attaché de presse."
+   }
+  },
+  "anim3d": {
+   "m": {
+    "quotidien": "Dessiner ou modéliser des personnages, préparer leurs mouvements image par image, travailler sur des logiciels 3D et suivre les indications du réalisateur, au sein d’une grande équipe.",
+    "qualites": [
+     "Créativité",
+     "Patience",
+     "Sens de l’observation"
+    ],
+    "evol": "Animateur principal, superviseur d’animation, réalisateur, ou spécialisation (effets spéciaux, jeux vidéo)."
+   }
+  },
+  "reseaux": {
+   "m": {
+    "quotidien": "Installer et configurer les serveurs et le matériel réseau, vérifier que tout fonctionne, régler les pannes, gérer les comptes et les sauvegardes, et protéger le réseau contre les attaques.",
+    "qualites": [
+     "Logique",
+     "Rigueur",
+     "Calme en cas de panne"
+    ],
+    "evol": "Ingénieur systèmes et réseaux, architecte réseau, responsable informatique, cybersécurité."
+   }
+  },
+  "maintenance": {
+   "m": {
+    "quotidien": "Faire les contrôles réguliers des machines, trouver l’origine d’une panne, réparer vite pour relancer la production et proposer des améliorations. Tu travailles en équipe, parfois en horaires décalés.",
+    "qualites": [
+     "Logique",
+     "Habileté manuelle",
+     "Réactivité"
+    ],
+    "evol": "Chef d’équipe maintenance, responsable maintenance, ingénieur après une poursuite d’études."
+   }
+  },
+  "aeronautique": {
+   "m": {
+    "quotidien": "Inspecter les avions avant et après les vols, changer les pièces usées, chercher l’origine des pannes et remplir les documents de contrôle. Tout est vérifié et signé, car la sécurité passe avant tout.",
+    "qualites": [
+     "Rigueur",
+     "Habileté manuelle",
+     "Sens des responsabilités"
+    ],
+    "evol": "Technicien certifié (licence de maintenance Part-66), chef d’équipe, contrôleur qualité."
+   }
+  },
+  "logistique": {
+   "m": {
+    "quotidien": "Organiser les stocks et les livraisons, planifier le travail des équipes en entrepôt, suivre les délais, les coûts et les erreurs, et trouver des solutions quand un camion est en retard.",
+    "qualites": [
+     "Organisation",
+     "Réactivité",
+     "Sens du management"
+    ],
+    "evol": "Directeur logistique, responsable supply chain, directeur d’entrepôt."
+   }
+  },
+  "styliste": {
+   "m": {
+    "quotidien": "Faire des recherches sur les tendances, dessiner les modèles à la main ou sur ordinateur, choisir les tissus et suivre la fabrication des prototypes avec le modéliste, jusqu’au défilé ou à la mise en vente.",
+    "qualites": [
+     "Créativité",
+     "Curiosité",
+     "Sens du détail"
+    ],
+    "evol": "Styliste principal, directeur artistique, création de ta propre marque."
+   }
   }
  },
  "SALAIRES": {
@@ -1659,6 +1884,261 @@
    [
     "À partir de 1 867 € brut/mois",
     "Comme auxiliaire de puériculture, puis environ 1 945 € comme EJE.",
+    "Onisep"
+   ]
+  ],
+  "magistrat": [
+   [
+    "À partir de ≈ 2 300 € brut/mois",
+    "Magistrat débutant, hors primes (elles sont importantes). Pendant l’ENM, environ 2 160 € brut comme auditeur de justice.",
+    "Onisep"
+   ],
+   [
+    "À partir de ≈ 2 300 € brut/mois",
+    "Même grille pour tous les magistrats.",
+    "Onisep"
+   ],
+   [
+    "À partir de ≈ 2 300 € brut/mois",
+    "Une fois magistrat. Avant, tu es payé comme greffier.",
+    "Onisep"
+   ]
+  ],
+  "juriste": [
+   [
+    "À partir de 3 300 € brut/mois",
+    "Juriste débutant à bac+5, selon l’entreprise et la région.",
+    "Onisep"
+   ],
+   [
+    "À partir de 3 300 € brut/mois",
+    "Même métier ; les profils bilingues sont recherchés.",
+    "Onisep"
+   ],
+   [
+    "À partir de 3 300 € brut/mois",
+    "Une fois juriste à bac+5. Après le BUT, tu commences comme assistant juridique, moins payé.",
+    "Onisep"
+   ]
+  ],
+  "podologue": [
+   [
+    "À partir de 1 945 € brut/mois",
+    "Salarié à l’hôpital public. La plupart des podologues sont à leur compte : il faut 3 à 4 ans pour se constituer une clientèle.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 945 € brut/mois",
+    "Même diplôme, mêmes revenus.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 945 € brut/mois",
+    "Même diplôme, mêmes revenus.",
+    "Onisep"
+   ]
+  ],
+  "orthoptiste": [
+   [
+    "À partir de 1 890 € brut/mois",
+    "Salarié à l’hôpital public. Plus de 6 orthoptistes sur 10 travaillent à leur compte, avec des revenus plus élevés en moyenne.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 890 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 890 € brut/mois",
+    "Même diplôme, mêmes salaires.",
+    "Onisep"
+   ]
+  ],
+  "aes": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Débutant, dans la fonction publique. Plus avec les primes de nuit et de week-end.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Et tu es payé pendant l’apprentissage.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Même diplôme, même salaire.",
+    "Onisep"
+   ]
+  ],
+  "profsecond": [
+   [
+    "≈ 2 170 € brut/mois",
+    "Professeur certifié l’année de sa titularisation, hors primes. Pendant la formation : environ 1 400 € net, puis 1 800 € net.",
+    "Onisep"
+   ],
+   [
+    "À partir de ≈ 2 170 € brut/mois",
+    "Les agrégés sont mieux payés que les certifiés et ont moins d’heures de cours.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 170 € brut/mois",
+    "Même grille que les professeurs certifiés.",
+    "Onisep"
+   ]
+  ],
+  "animateur": [
+   [
+    "À partir de 1 867 € brut/mois",
+    "Débutant, souvent dans une association ou une mairie.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Plus avec des responsabilités de coordination.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 867 € brut/mois",
+    "Et tu es payé pendant l’apprentissage.",
+    "Onisep"
+   ]
+  ],
+  "archiint": [
+   [
+    "À partir de 2 300 € brut/mois",
+    "Débutant en agence, à bac+4 ou +5. Variable si tu es à ton compte.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 300 € brut/mois",
+    "Même métier, mêmes salaires au début.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 300 € brut/mois",
+    "Une fois architecte d’intérieur. Comme agenceur après le BTS, tu commences un peu moins haut.",
+    "Onisep"
+   ]
+  ],
+  "chargecom": [
+   [
+    "À partir de 2 000 € brut/mois",
+    "Débutant, selon l’employeur.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 000 € brut/mois",
+    "Plus avec un bac+5 et dans une grande entreprise.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 000 € brut/mois",
+    "Une fois chargé de communication.",
+    "Onisep"
+   ]
+  ],
+  "anim3d": [
+   [
+    "À partir de 2 200 € brut/mois",
+    "Débutant en studio ; beaucoup d’animateurs sont intermittents et payés par projet.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 200 € brut/mois",
+    "Même métier, mêmes salaires au début.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 200 € brut/mois",
+    "Une fois animateur. Les profils web débutent dans d’autres métiers du numérique.",
+    "Onisep"
+   ]
+  ],
+  "reseaux": [
+   [
+    "À partir de 2 750 € brut/mois",
+    "Administrateur réseaux débutant. Après le BTS, tu commences souvent comme technicien support, moins payé.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 750 € brut/mois",
+    "Administrateur réseaux débutant.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 750 € brut/mois",
+    "Plus en tant qu’ingénieur, avec l’expérience.",
+    "Onisep"
+   ]
+  ],
+  "maintenance": [
+   [
+    "À partir de 2 000 € brut/mois",
+    "Débutant, hors primes (les primes d’équipe peuvent s’ajouter).",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 000 € brut/mois",
+    "Plus en évoluant vers l’encadrement.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 000 € brut/mois",
+    "Une fois technicien, après le BTS.",
+    "Onisep"
+   ]
+  ],
+  "aeronautique": [
+   [
+    "À partir de 1 868 € brut/mois",
+    "Débutant, plus avec les primes et la licence de maintenance.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Même métier, mêmes salaires au début.",
+    "Onisep"
+   ],
+   [
+    "À partir de 1 868 € brut/mois",
+    "Salaire civil ; dans l’armée, il dépend de ton grade.",
+    "Onisep"
+   ]
+  ],
+  "logistique": [
+   [
+    "≈ 2 100 – 2 500 € brut/mois",
+    "Technicien logistique débutant à bac+2, hors primes.",
+    "Onisep"
+   ],
+   [
+    "≈ 2 100 – 2 500 € brut/mois",
+    "Technicien logistique débutant, puis plus en tant que responsable.",
+    "Onisep"
+   ],
+   [
+    "À partir de 3 000 € brut/mois",
+    "Manager logistique débutant à bac+5, hors primes.",
+    "Onisep"
+   ]
+  ],
+  "styliste": [
+   [
+    "À partir de 2 500 € brut/mois",
+    "Styliste débutant ; on commence souvent comme assistant styliste, un peu moins payé.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 500 € brut/mois",
+    "Une fois styliste.",
+    "Onisep"
+   ],
+   [
+    "À partir de 2 500 € brut/mois",
+    "Même métier, mêmes salaires au début.",
     "Onisep"
    ]
   ]

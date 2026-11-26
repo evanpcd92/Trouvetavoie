@@ -24,7 +24,7 @@ ORDER = ["infirmier", "developpeur", "psychologue", "pilote", "kine", "commercia
          "osteo", "datascientist", "coiffeur", "pnc", "notaire", "patissier", "cyber", "asv", "immobilier",
          "jeuxvideo", "manip", "estheticien", "banque", "monteur", "puericulture", "plombier", "dieteticien",
          "rh", "opticien", "assistantsocial",
-         "ergo", "psychomot", "preparateur", "ambulancier", "techlabo", "douanier", "controleur", "maitrenageur", "soigneur", "agriculteur", "conducteur", "evenementiel", "uxdesigner", "photographe", "ingeson", "menuisier", "boulanger", "paysagiste", "eje"]
+         "ergo", "psychomot", "preparateur", "ambulancier", "techlabo", "douanier", "controleur", "maitrenageur", "soigneur", "agriculteur", "conducteur", "evenementiel", "uxdesigner", "photographe", "ingeson", "menuisier", "boulanger", "paysagiste", "eje", "magistrat", "juriste", "podologue", "orthoptiste", "aes", "profsecond", "animateur", "archiint", "chargecom", "anim3d", "reseaux", "maintenance", "aeronautique", "logistique", "styliste"]
 EMO = {"avocat": "⚖️", "infirmier": "🩺", "electricien": "⚡", "medecin": "👨‍⚕️", "ingenieur": "🛠️",
        "psychologue": "🧠", "sport": "🏋️", "kine": "💪", "commercial": "🤝", "comptable": "📊",
        "developpeur": "💻", "prof": "🍎", "veterinaire": "🐶", "policier": "🚓", "communitymanager": "📱",
@@ -35,7 +35,7 @@ EMO = {"avocat": "⚖️", "infirmier": "🩺", "electricien": "⚡", "medecin":
        "assistantsocial": "🤝", "datascientist": "📊", "cyber": "🔐", "jeuxvideo": "🎮", "notaire": "📜",
        "banque": "🏦", "immobilier": "🏠", "rh": "🧑‍💼", "patissier": "🧁", "coiffeur": "💇", "estheticien": "💅",
        "plombier": "🔧", "monteur": "🎬", "pnc": "🛫", "asv": "🐾",
-       "ergo": "🦽", "psychomot": "🤸", "preparateur": "🧴", "ambulancier": "🚑", "techlabo": "🔬", "douanier": "🛃", "controleur": "🛬", "maitrenageur": "🏊", "soigneur": "🦒", "agriculteur": "🚜", "conducteur": "🏗️", "evenementiel": "🎉", "uxdesigner": "📲", "photographe": "📸", "ingeson": "🎧", "menuisier": "🪚", "boulanger": "🥖", "paysagiste": "🌳", "eje": "🧸"}
+       "ergo": "🦽", "psychomot": "🤸", "preparateur": "🧴", "ambulancier": "🚑", "techlabo": "🔬", "douanier": "🛃", "controleur": "🛬", "maitrenageur": "🏊", "soigneur": "🦒", "agriculteur": "🚜", "conducteur": "🏗️", "evenementiel": "🎉", "uxdesigner": "📲", "photographe": "📸", "ingeson": "🎧", "menuisier": "🪚", "boulanger": "🥖", "paysagiste": "🌳", "eje": "🧸", "magistrat": "🧑‍⚖️", "juriste": "📑", "podologue": "🦶", "orthoptiste": "👁️", "aes": "🧓", "profsecond": "📚", "animateur": "⛺", "archiint": "🛋️", "chargecom": "📣", "anim3d": "🎞️", "reseaux": "🌐", "maintenance": "⚙️", "aeronautique": "🛩️", "logistique": "📦", "styliste": "👗"}
 PSL = {"P": ("Sur Parcoursup", (30, 150, 95)), "H": ("Hors Parcoursup", (130, 135, 150)),
        "A": ("Après la 3e / apprentissage", (90, 120, 210)), "X": ("Selon l'école", (200, 140, 40))}
 VIO = (130, 118, 255)

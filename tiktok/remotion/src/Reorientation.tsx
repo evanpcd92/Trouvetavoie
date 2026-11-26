@@ -175,7 +175,7 @@ const S3: React.FC<{ v: RVoice | null; len: number }> = ({ v, len }) => {
     <Scene i={3} v={v} len={len} pose="cheer" accent={C.gold} accent2={C.pink}>
       <div style={{ marginTop: 28, transform: `scale(${logo})`, transformOrigin: "left center" }}><Logo size={64} /></div>
       <div style={{ display: "flex", alignItems: "center", gap: 24, marginTop: 24, background: "rgba(255,255,255,0.1)", border: `3px solid ${C.gold}`, borderRadius: 28, padding: "10px 30px", width: 620, transform: `translateX(${(1 - tile) * -700}px)` }}>
-        <div style={{ fontFamily: TITLE, fontWeight: 800, fontSize: 84, color: C.gold }}><Count to={69} at={LEAD + 4} /></div>
+        <div style={{ fontFamily: TITLE, fontWeight: 800, fontSize: 84, color: C.gold }}><Count to={84} at={LEAD + 4} /></div>
         <div style={{ fontFamily: TITLE, fontWeight: 700, fontSize: 46 }}>métiers expliqués</div>
       </div>
       <Card style={{ marginTop: 22, width: 850, padding: "22px 30px" }}>

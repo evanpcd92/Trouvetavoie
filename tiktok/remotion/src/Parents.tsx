@@ -11,8 +11,8 @@ import { Background, BODY, C, Floaters, Logo, TITLE, useIn, Words } from "./ui";
 import { PARENTS } from "./parents-texte";
 
 export { PARENTS };
-export const NB_METIERS = 69;
-export const NB_CHEMINS = 207;
+export const NB_METIERS = 84;
+export const NB_CHEMINS = 252;
 
 // texte affiché à l'écran (plus court que le texte lu)
 const SOUS_TITRES = [
@@ -189,7 +189,7 @@ const S4: React.FC<{ v: PVoice | null; len: number }> = ({ v, len }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const price = spring({ frame: frame - (LEAD + 2), fps, config: { damping: 8, mass: 0.7 } });
-  const ticks = ["Sans abonnement", "Sans publicité", "Sans compte à créer"];
+  const ticks = ["Sans abonnement", "Sans publicité", "Sur tous vos appareils"];
   return (
     <Scene i={4} v={v} len={len} pose="cheer" accent={C.gold} accent2={C.pink}>
       <Card style={{ marginTop: 44, display: "inline-block", alignSelf: "flex-start", width: 680, textAlign: "center", padding: "36px 32px", transform: `scale(${price}) rotate(-3deg)` }}>

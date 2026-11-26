@@ -51,6 +51,7 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 
 - 25/11/2026 : publication du plan Parcoursup détaillé, de l'analyse payante, du comparateur, des pages par bac, du calendrier, des favoris et de la page parents.
 - 26/11/2026 : publication de « Mon accès » (e-mail + mot de passe choisis à l'achat, mot de passe oublié), du bloc plan Parcoursup sur l'accueil, de l'exemple de plan, de « Offrir le plan à mon enfant », de la page de paiement raccourcie et de l'adresse de contact. Variables Cloudflare `ADMIN_CLE` et `ACCES_TEST` créées par le propriétaire.
+- 26/11/2026 : 15 nouveaux métiers (69 → 84) : magistrat, juriste d’entreprise, pédicure-podologue, orthoptiste, accompagnant éducatif et social, professeur de collège et lycée, animateur socioculturel, architecte d’intérieur, chargé de communication, animateur 2D/3D, administrateur réseaux, technicien de maintenance industrielle, mécanicien d’avion, responsable logistique, styliste. Salaires : fiches Onisep. Entrée « réorientation » sur l’accueil (`#reorientation`).
 - Micro-entreprise : dossier envoyé au guichet unique (INPI) le 25/11/2026, activité « exploitation de portails Internet ». **En attente du SIRET.**
 
 ## À faire

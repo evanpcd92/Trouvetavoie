@@ -151,7 +151,7 @@ const S4: React.FC<{ v: HVoice | null; len: number }> = ({ v, len }) => {
   const { fps } = useVideoConfig();
   const logo = spring({ frame: frame - (LEAD + 4), fps, config: { damping: 10 } });
   const flash = interpolate(frame, [LEAD + 4, LEAD + 7, LEAD + 16], [0, 0.4, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const chips = ["69 métiers", "Tous les chemins", "Quiz gratuit"];
+  const chips = ["84 métiers", "Tous les chemins", "Quiz gratuit"];
   return (
     <Scene i={4} v={v} len={len} pose="cheer" accent={C.gold} accent2={C.blue}>
       <div style={{ marginTop: 60, transform: `scale(${logo})` }}><Logo size={76} /></div>
