@@ -38,7 +38,28 @@ try {
 }
 const scriptJson = path.join(outDir, `${base}_texte.json`);
 run("npx", ["tsx", "scripts/dump-script.ts", key, scriptJson]);
-run("python3", ["scripts/make_voice.py", scriptJson, path.join(HERE, "public/voice")]);
+
+// Voix naturelle (Chatterbox, voix « E3 énergique ») dans un environnement Python à part.
+// S'il ne peut pas être installé, on garde l'ancienne voix (Kokoro) pour que la vidéo sorte quand même.
+const VENV = path.join(process.env.HOME || "/root", ".cache/trouvetavoie/cbx");
+const PY = path.join(VENV, "bin/python");
+const envHF = { ...process.env, HF_HUB_DISABLE_XET: "1", TRANSFORMERS_VERBOSITY: "error" };
+function voixNaturelle() {
+  try {
+    if (!fs.existsSync(PY)) {
+      console.log("Installation de la voix naturelle (une seule fois, quelques minutes)…");
+      run("python3", ["-m", "venv", VENV]);
+      run(PY, ["-m", "pip", "install", "-q", "--upgrade", "pip"]);
+      run(PY, ["-m", "pip", "install", "-q", "chatterbox-tts", "setuptools<81", "faster-whisper", "soundfile"]);
+    }
+    run(PY, ["scripts/make_voice_cbx.py", scriptJson, path.join(HERE, "public/voice")], { env: envHF });
+    return true;
+  } catch (e) {
+    console.log("Voix naturelle indisponible, ancienne voix utilisée :", e.message);
+    return false;
+  }
+}
+if (!voixNaturelle()) run("python3", ["scripts/make_voice.py", scriptJson, path.join(HERE, "public/voice")]);
 
 // 2. Vidéo
 execFileSync(
@@ -46,6 +67,12 @@ execFileSync(
   ["remotion", "render", "src/index.ts", "MetierDuJour", mp4, `--props=${JSON.stringify({ metier: key })}`, "--codec=h264", "--crf=18", "--log=error"],
   { cwd: HERE, stdio: "inherit" },
 );
+// Mixage final : volume régulier, au niveau des vidéos TikTok (-14 LUFS), sans toucher à l'image
+{
+  const tmp = mp4.replace(/\.mp4$/, "_mix.mp4");
+  run("npx", ["remotion", "ffmpeg", "-y", "-loglevel", "error", "-i", mp4, "-c:v", "copy", "-af", "loudnorm=I=-14:TP=-1.5:LRA=9", "-ar", "48000", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", tmp]);
+  fs.renameSync(tmp, mp4);
+}
 
 // Description TikTok (accroche, but, salaire, qualités, hashtags)
 run("npx", ["tsx", "scripts/description.ts", key, path.join(outDir, `${base}_description.txt`)]);
