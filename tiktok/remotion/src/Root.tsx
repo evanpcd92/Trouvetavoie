@@ -6,6 +6,7 @@ import { histoireTimeline, HistoireProps, HVoice, MonHistoire } from "./Histoire
 import { MiniReorientation, ReoProps, ReorientationVideo, reoTimeline, RVoice } from "./Reorientation";
 import { MiniParents, ParentsProps, ParentsVideo, parentsTimeline, PVoice } from "./Parents";
 import { MiniHistoire, Miniature, MiniatureProps, OgImage } from "./Miniature";
+import { MiniPresentation, PresentationVideo, PresProps, presTimeline, PVoice as PresVoice } from "./Presentation";
 
 /** charge la voix générée par scripts/make_voice.py (public/voice/voice.json) si elle correspond au métier */
 async function loadVoice(metier: string): Promise<VoiceData | null> {
@@ -97,6 +98,28 @@ export const RemotionRoot: React.FC = () => (
       return { durationInFrames: reoTimeline(voice).total, props: { ...props, voice } };
     }}
   />
+  <Composition
+    id="Presentation"
+    component={PresentationVideo}
+    width={1080}
+    height={1920}
+    fps={FPS}
+    durationInFrames={presTimeline(null).total}
+    defaultProps={{ voice: null } as PresProps}
+    calculateMetadata={async ({ props }) => {
+      let voice: PresVoice | null = (props.voice as PresVoice | null) ?? null;
+      if (!voice) {
+        try {
+          const r = await fetch(staticFile("voice-presentation/voice.json"));
+          if (r.ok) voice = (await r.json()) as PresVoice;
+        } catch {
+          voice = null;
+        }
+      }
+      return { durationInFrames: presTimeline(voice).total, props: { ...props, voice } };
+    }}
+  />
+  <Composition id="MiniPresentation" component={MiniPresentation} width={1080} height={1920} fps={FPS} durationInFrames={1} />
   <Composition id="MiniReorientation" component={MiniReorientation} width={1080} height={1920} fps={FPS} durationInFrames={1} />
   <Composition id="MiniParents" component={MiniParents} width={1080} height={1350} fps={FPS} durationInFrames={1} />
   <Composition id="Miniature" component={Miniature} width={1080} height={1920} fps={FPS} durationInFrames={1} defaultProps={{ metier: "infirmier" } as MiniatureProps} />
