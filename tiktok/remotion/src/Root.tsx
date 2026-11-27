@@ -6,6 +6,7 @@ import { histoireTimeline, HistoireProps, HVoice, MonHistoire } from "./Histoire
 import { MiniReorientation, ReoProps, ReorientationVideo, reoTimeline, RVoice } from "./Reorientation";
 import { MiniParents, ParentsProps, ParentsVideo, parentsTimeline, PVoice } from "./Parents";
 import { MiniHistoire, Miniature, MiniatureProps, OgImage } from "./Miniature";
+import { H2Props, H2Voice, Histoire2Video, histoire2Timeline, MiniHistoire2 } from "./Histoire2";
 import { MiniPresentation, PresentationVideo, PresProps, presTimeline, PVoice as PresVoice } from "./Presentation";
 
 /** charge la voix générée par scripts/make_voice.py (public/voice/voice.json) si elle correspond au métier */
@@ -120,6 +121,28 @@ export const RemotionRoot: React.FC = () => (
     }}
   />
   <Composition id="MiniPresentation" component={MiniPresentation} width={1080} height={1920} fps={FPS} durationInFrames={1} />
+  <Composition
+    id="Histoire2"
+    component={Histoire2Video}
+    width={1080}
+    height={1920}
+    fps={FPS}
+    durationInFrames={histoire2Timeline(null).total}
+    defaultProps={{ voice: null } as H2Props}
+    calculateMetadata={async ({ props }) => {
+      let voice: H2Voice | null = (props.voice as H2Voice | null) ?? null;
+      if (!voice) {
+        try {
+          const r = await fetch(staticFile("voice-histoire2/voice.json"));
+          if (r.ok) voice = (await r.json()) as H2Voice;
+        } catch {
+          voice = null;
+        }
+      }
+      return { durationInFrames: histoire2Timeline(voice).total, props: { ...props, voice } };
+    }}
+  />
+  <Composition id="MiniHistoire2" component={MiniHistoire2} width={1080} height={1920} fps={FPS} durationInFrames={1} />
   <Composition id="MiniReorientation" component={MiniReorientation} width={1080} height={1920} fps={FPS} durationInFrames={1} />
   <Composition id="MiniParents" component={MiniParents} width={1080} height={1350} fps={FPS} durationInFrames={1} />
   <Composition id="Miniature" component={Miniature} width={1080} height={1920} fps={FPS} durationInFrames={1} defaultProps={{ metier: "infirmier" } as MiniatureProps} />
