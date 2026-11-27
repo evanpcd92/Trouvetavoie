@@ -13,7 +13,7 @@ from chatterbox.mtl_tts import ChatterboxMultilingualTTS
 from faster_whisper import WhisperModel
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-REF = os.path.join(HERE, "voix", "reference.wav")
+REF = os.environ.get("VOIX_REF") or os.path.join(HERE, "voix", "reference.wav")  # voix/reference-homme.wav pour la version homme
 EXAGGERATION, CFG, TEMPERATURE, TEMPO = 0.75, 0.35, 0.75, 1.04  # réglages « E3 énergique »
 FPS = 30
 PRISES = 4

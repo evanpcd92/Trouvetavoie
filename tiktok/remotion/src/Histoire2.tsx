@@ -1,4 +1,4 @@
-// « Mon histoire » v2 (TikTok, 1080×1920) : l'histoire du fondateur, racontée par la narratrice, en motion design.
+// « Mon histoire » v2 (TikTok, 1080×1920) : l'histoire du fondateur, racontée à la 1re personne, en motion design.
 // Zones laissées libres pour TikTok : en haut (~170 px), en bas (légende, ~380 px) et à droite (boutons, ~150 px).
 import React from "react";
 import { AbsoluteFill, Audio, Easing, interpolate, random, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
@@ -32,12 +32,18 @@ export function histoire2Timeline(v?: H2Voice | null) {
 type SP = { v: H2Voice | null; len: number };
 const at = (len: number, r: number) => LEAD + Math.round(len * r);
 
-/** la mascotte représente le fondateur ; elle ne parle pas (c'est la narratrice qui raconte) */
+/** la mascotte, c'est le fondateur : elle parle avec la voix (bouche calée sur la piste de la scène) */
+const VoixCtx = React.createContext<{ v: H2Voice | null; i: number }>({ v: null, i: 0 });
 const Lui: React.FC<{ pose: Pose; x?: number; size?: number; delay?: number; look?: number; seed?: number }> = ({ pose, x = 40, size = 380, delay = 4, look = 0.6, seed = 0 }) => {
   const p = useIn(delay, 13);
+  const frame = useCurrentFrame();
+  const { v, i } = React.useContext(VoixCtx);
+  const e = v?.segs[`h${i}`]?.env;
+  const k = frame - LEAD;
+  const mouth = e && k >= 0 && k < e.length ? e[k] : 0;
   return (
     <div style={{ position: "absolute", left: x, top: BOTTOM - size, transform: `translateY(${(1 - p) * 520}px)` }}>
-      <Mascot pose={pose} size={size} lookX={look} seed={seed} />
+      <Mascot pose={pose} size={size} lookX={look} seed={seed} mouth={mouth} />
     </div>
   );
 };
@@ -136,7 +142,7 @@ const S1: React.FC<SP> = ({ len }) => {
   );
 };
 
-/* ---------- 2. Il cherche partout ---------- */
+/* ---------- 2. Je cherche partout ---------- */
 const S2: React.FC<SP> = ({ len }) => {
   const frame = useCurrentFrame();
   const q = "quoi faire après le bac ?";
@@ -146,7 +152,7 @@ const S2: React.FC<SP> = ({ len }) => {
     <AbsoluteFill>
       <Background accent={C.mint} accent2={C.blue} />
       <Chapitre n={2} label="Perdu" color={C.mint} />
-      <Title text="Il a cherché partout…" hl={["partout…"]} at={LEAD} size={84} top={270} />
+      <Title text="J'ai cherché partout…" hl={["partout…"]} at={LEAD} size={84} top={270} />
       <Card style={{ left: 70, right: 150, top: 450, padding: "22px 28px", display: "flex", alignItems: "center", gap: 18, borderRadius: 999 }}>
         <span style={{ fontSize: 44 }}>🔍</span>
         <span style={{ fontFamily: BODY, fontWeight: 600, fontSize: 40 }}>{q.slice(0, typed)}<span style={{ opacity: frame % 20 < 10 ? 1 : 0 }}>|</span></span>
@@ -232,7 +238,7 @@ const S3: React.FC<SP> = ({ len }) => {
   );
 };
 
-/* ---------- 4. L'école payante, puis il arrête ---------- */
+/* ---------- 4. L'école payante, puis j'arrête ---------- */
 const S4: React.FC<SP> = ({ len }) => {
   const frame = useCurrentFrame();
   const roll = interpolate(frame, [LEAD, at(len, 0.45)], [0, 1], { ...clamp, easing: Easing.out(Easing.quad) });
@@ -263,7 +269,7 @@ const S4: React.FC<SP> = ({ len }) => {
         {half(-1)}
         {half(1)}
       </div>
-      <div style={{ position: "absolute", left: 70, top: 1290, fontFamily: TITLE, fontWeight: 800, fontSize: 84, color: C.white, opacity: tear, transform: `translateY(${(1 - tear) * 60}px)` }}>Il a <span style={{ color: C.gold }}>arrêté</span>.</div>
+      <div style={{ position: "absolute", left: 70, top: 1290, fontFamily: TITLE, fontWeight: 800, fontSize: 84, color: C.white, opacity: tear, transform: `translateY(${(1 - tear) * 60}px)` }}>J'ai <span style={{ color: C.gold }}>arrêté</span>.</div>
       <Lui pose={frame < at(len, 0.55) ? "idle" : "think"} x={640} size={320} look={-0.6} />
     </AbsoluteFill>
   );
@@ -278,14 +284,14 @@ const S5: React.FC<SP> = ({ len }) => {
     <AbsoluteFill>
       <Background accent={C.mint} accent2={C.gold} />
       <Chapitre n={5} label="Rebondir" color={C.mint} />
-      <Title text="Il a rebondi." hl={["rebondi."]} at={LEAD} size={96} top={270} />
+      <Title text="J'ai rebondi." hl={["rebondi."]} at={LEAD} size={96} top={270} />
       <svg width={800} height={380} viewBox="-20 -20 800 360" style={{ position: "absolute", left: 70, top: 460, overflow: "visible" }}>
         <path d={path} fill="none" stroke="rgba(255,255,255,0.15)" strokeWidth={14} strokeLinecap="round" />
         <path d={path} fill="none" stroke={C.gold} strokeWidth={14} strokeLinecap="round" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - draw} />
         {draw > 0.97 ? <polygon points="760,10 720,0 744,40" fill={C.gold} transform="rotate(-10 760 10)" /> : null}
       </svg>
-      <Chip at={at(len, 0.12)} text="🚀 Sa propre activité" from="left" size={44} style={{ left: 70, top: 900 }} />
-      <Chip at={at(len, 0.5)} text="📚 Reprendre ses études" bg={C.mint} from="left" size={44} style={{ left: 70, top: 1030 }} />
+      <Chip at={at(len, 0.12)} text="🚀 Ma propre activité" from="left" size={44} style={{ left: 70, top: 900 }} />
+      <Chip at={at(len, 0.5)} text="📚 Reprendre mes études" bg={C.mint} from="left" size={44} style={{ left: 70, top: 1030 }} />
       <Chip at={at(len, 0.8)} text="✓ En choisissant vraiment" bg={C.gold} from="left" size={44} style={{ left: 70, top: 1160 }} />
       <Burst at={at(len, 0.8) + 4} x={520} y={1210} n={14} len={220} />
       <Lui pose={frame > at(len, 0.8) ? "cheer" : "idle"} x={660} size={300} look={-0.6} />
@@ -313,7 +319,7 @@ const S6: React.FC<SP> = ({ len }) => {
       </div>
       <Burst at={land} x={135} y={265} n={14} len={200} />
       <Confetti at={land} x={135} y={265} n={40} spread={600} />
-      <Title text="Alors il a créé trouvetavoie" hl={["trouvetavoie"]} at={LEAD + 4} size={70} top={360} />
+      <Title text="Alors j'ai créé trouvetavoie" hl={["trouvetavoie"]} at={LEAD + 4} size={70} top={360} />
       <div style={{ position: "absolute", inset: 0, perspective: 1500 }}>
         <Phone src="accueil" width={360} scroll={interpolate(frame, [at(len, 0.35), at(len, 1)], [0, 1400], { ...clamp, easing: Easing.inOut(Easing.cubic) })} glare={interpolate(frame, [at(len, 0.3), at(len, 0.55)], [0, 1], clamp)} style={{ left: 560, top: 560 + (1 - phone) * 1200, transform: `rotateY(-16deg) rotateX(4deg)` }} />
       </div>
@@ -397,7 +403,9 @@ export const Histoire2Video: React.FC<H2Props> = ({ voice }) => {
       <TransitionSeries>
         {S.flatMap((Comp, i) => [
           <TransitionSeries.Sequence key={`s${i}`} durationInFrames={durs[i]}>
-            <Comp v={v} len={lens[i]} />
+            <VoixCtx.Provider value={{ v, i }}>
+              <Comp v={v} len={lens[i]} />
+            </VoixCtx.Provider>
           </TransitionSeries.Sequence>,
           ...(i < S.length - 1 ? [<TransitionSeries.Transition key={`t${i}`} presentation={tr[i]} timing={linearTiming({ durationInFrames: T })} />] : []),
         ])}
@@ -409,9 +417,9 @@ export const Histoire2Video: React.FC<H2Props> = ({ voice }) => {
 /** Miniature TikTok de « Mon histoire » v2 : 1080×1920 */
 export const MiniHistoire2: React.FC = () => (
   <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 38%, #3A2350 0%, ${C.navy} 60%, #070B1C 100%)`, fontFamily: TITLE, color: C.white }}>
-    <div style={{ position: "absolute", left: 70, top: 220, background: C.gold, color: C.navy, fontWeight: 800, fontSize: 42, padding: "12px 30px", borderRadius: 999, letterSpacing: 1.5 }}>L'HISTOIRE DE TROUVETAVOIE</div>
+    <div style={{ position: "absolute", left: 70, top: 220, background: C.gold, color: C.navy, fontWeight: 800, fontSize: 42, padding: "12px 30px", borderRadius: 999, letterSpacing: 1.5 }}>MON HISTOIRE</div>
     <div style={{ position: "absolute", left: 70, right: 130, top: 330, fontSize: 104, fontWeight: 800, lineHeight: 1.03, textShadow: "0 10px 40px rgba(0,0,0,0.5)" }}>
-      VŒUX AU HASARD, <span style={{ color: C.pink }}>REFUSÉ.</span> ALORS IL A CRÉÉ <span style={{ color: C.gold }}>SA VOIE.</span>
+      VŒUX AU HASARD, <span style={{ color: C.pink }}>REFUSÉ.</span> ALORS J'AI CRÉÉ <span style={{ color: C.gold }}>MA VOIE.</span>
     </div>
     <div style={{ position: "absolute", left: 120, top: 980, border: `10px solid ${C.pink}`, color: C.pink, borderRadius: 22, padding: "8px 30px", fontWeight: 800, fontSize: 96, letterSpacing: 3, background: "rgba(255,255,255,0.96)", transform: "rotate(-12deg)" }}>REFUSÉ</div>
     <div style={{ position: "absolute", left: 560, top: 1120 }}><Mascot pose="point" size={420} lookX={-0.6} /></div>
