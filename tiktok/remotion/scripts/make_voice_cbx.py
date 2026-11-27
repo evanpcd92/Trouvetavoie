@@ -22,6 +22,12 @@ torch.set_num_threads(os.cpu_count() or 4)
 
 
 def norm_words(s):
+    # les chiffres entendus (« 88 ») sont écrits en lettres, pour être comparés au texte (« quatre-vingt-quatre »)
+    try:
+        from num2words import num2words
+        s = re.sub(r"\d+", lambda m: " " + num2words(int(m.group()), lang="fr") + " ", s)
+    except Exception:
+        pass
     s = unicodedata.normalize("NFD", s.lower())
     s = "".join(c for c in s if unicodedata.category(c) != "Mn")
     return re.findall(r"[a-z0-9]+", s.replace("-", "").replace("'", " ").replace("’", " "))

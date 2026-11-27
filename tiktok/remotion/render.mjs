@@ -50,7 +50,7 @@ function voixNaturelle() {
       console.log("Installation de la voix naturelle (une seule fois, quelques minutes)…");
       run("python3", ["-m", "venv", VENV]);
       run(PY, ["-m", "pip", "install", "-q", "--upgrade", "pip"]);
-      run(PY, ["-m", "pip", "install", "-q", "chatterbox-tts", "setuptools<81", "faster-whisper", "soundfile"]);
+      run(PY, ["-m", "pip", "install", "-q", "chatterbox-tts", "setuptools<81", "faster-whisper", "soundfile", "num2words"]);
     }
     run(PY, ["scripts/make_voice_cbx.py", scriptJson, path.join(HERE, "public/voice")], { env: envHF });
     return true;

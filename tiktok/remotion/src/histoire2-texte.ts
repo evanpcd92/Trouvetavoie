@@ -8,6 +8,6 @@ export const HISTOIRE2 = [
   "Alors il a mis des vœux au hasard. Résultat : refusé.",
   "Il s'est retrouvé dans une école payante, parce que c'était son seul choix. Il n'aimait pas. Il a arrêté.",
   "Il a lancé sa propre activité, et aujourd'hui, il veut reprendre ses études. Mais cette fois, en choisissant vraiment.",
-  "Alors il a créé trouve ta voie : le guide qu'il aurait aimé avoir. Quatre-vingt-quatre métiers, tous les chemins pour y arriver, et un quiz gratuit.",
+  "Alors il a créé trouve ta voie : le guide qu'il aurait aimé avoir. Plus de quatre-vingts métiers, tous les chemins pour y arriver, et un test d'orientation gratuit.",
   "Toi, choisis ta voie. Ne la subis pas. Le lien est dans la bio !",
 ];
