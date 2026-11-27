@@ -43,7 +43,10 @@ Le propriétaire écrit en français, souvent en langage oral (dictée). Répond
 - Projet Remotion dans `tiktok/remotion` (`node render.mjs` choisit le métier du jour et produit mp4, miniature, description).
 - Format : 30–40 s, verticale, pro et animée, avec la mascotte (un élève) et des effets sonores.
 - Contenu : activité, but, quotidien, qualités, salaire. **Jamais le parcours d'études.**
-- Voix : Kokoro (sherpa-onnx < 2), mélange 20 % Puck / 80 % Siwis, vitesse 1,15, lue en continu par scène. Le propriétaire veut une voix jeune, naturelle, **sans accent**.
+- Voix (choisie le 26/11/2026, « E3 énergique ») : Chatterbox multilingue (licence MIT) dans `~/.cache/trouvetavoie/cbx`, script `scripts/make_voice_cbx.py`, référence `voix/reference.wav`. Plusieurs prises par scène, vérifiées par reconnaissance vocale (faster-whisper), son nettoyé, calage mot à mot. Si Chatterbox ne s'installe pas, `render.mjs` repasse sur l'ancienne voix Kokoro. Le propriétaire veut une voix de femme naturelle, **pas de « Yo »**, il parle « comme un humain lambda ».
+- Montage (26/11/2026) : style motion design (carte mystère, karaoké, compteurs à rouleaux, transitions 3D), fichiers `src/scenes.tsx` et `src/fx.tsx`. Vidéo de présentation du site : composition `Presentation`.
+- Réseau nécessaire pour la voix : huggingface.co et ses serveurs de fichiers (autorisés sur l'environnement « Trouvetavoie »).
+- Rappel quotidien vers 17 h pour poster le TikTok (tâche programmée « Rappel TikTok »).
 - Une tâche programmée envoie chaque matin (7 h 39, heure de Paris) la vidéo, la miniature et la description, l'ajoute à la galerie et sur la fiche du métier.
 - TikTok : @trouvetavoie.com
 
