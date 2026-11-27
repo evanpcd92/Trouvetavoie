@@ -2,8 +2,8 @@
 // Uniquement des faits racontés par le fondateur : terminale STMG, Parcoursup ne l'a pas aidé, vœux au hasard refusés,
 // école payante par défaut puis abandon, activité lancée, envie de reprendre ses études, création du site.
 export const HISTOIRE2 = [
-  "Laisse-moi te raconter comment trouve ta voie est né.",
-  "J'étais en terminale STMG. Et Parcoursup, franchement, ça ne m'a pas aidé.",
+  "Laisse-moi te raconter comment j'ai créé trouve ta voie.",
+  "J'étais en terminale S.T.M.G. Et Parcoursup, franchement, ça ne m'a pas aidé.",
   "Je ne savais pas quoi faire. J'ai cherché partout, et je n'ai rien trouvé de clair.",
   "Alors j'ai mis des vœux au hasard. Résultat : refusé.",
   "Je me suis retrouvé dans une école payante, parce que c'était mon seul choix. Je n'aimais pas. J'ai arrêté.",
